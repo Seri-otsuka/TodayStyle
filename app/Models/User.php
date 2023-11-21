@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'area',
+        'temperature', 
     ];
 
     /**
@@ -41,4 +43,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    //Userテーブルに対してfashonテーブル
+   public function fashons()
+   {
+        return $this->hasMany(Fashon::class);    
+   }
+   
+   //categoryテーブルに関して
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
 }
