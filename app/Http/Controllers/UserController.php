@@ -7,4 +7,9 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     //
+    public function index(User $user)
+    {
+        return $user->get();
+    }
+
 }
