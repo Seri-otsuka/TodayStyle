@@ -1,3 +1,81 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+/* 吹き出し本体の背景色用 */
+.sample-border-balloon {
+  position: relative;
+  display: inline-block;
+  background: #fff;
+  border-radius: 30px;
+  padding: 16px;
+  font-weight: bold;
+  color: #000;
+  border: 4px solid #d5d5d5;
+  box-sizing: border-box;
+}
+
+/* 吹き出しのしっぽ：本体の背景色用 */
+.sample-border-balloon:before {
+  content: "";
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 12px solid transparent;
+  border-top: 12px solid #fff;
+  z-index: 2;
+}
+
+/* 吹き出しのしっぽ：枠線の色用 */
+.sample-border-balloon:after {
+  content: "";
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 14px solid transparent;
+  border-top: 14px solid #d5d5d5;
+  z-index: 1;
+}
+
+
+
+
+.btn-social-square {
+  display: inline-block;
+  text-decoration: none;
+  width: 50px;
+  margin:2px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 23px;
+  color:white;
+  border-radius: 12px;
+  text-align: center;
+  overflow: hidden;
+  font-weight: bold;
+  transition: .3s;
+}
+.btn-social-square i {
+  line-height:50px;
+}
+.btn-social-square:hover {
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+}
+.btn-social-square--twitter {
+  background: #22b8ff;
+}
+.btn-social-square--facebook {
+  background: #6680d8;
+}
+.btn-social-square--hatebu {
+  background: #49a8fb;
+}
+.btn-social-square--pocket {
+  background: #ff6d82;
+}
+.btn-social-square--feedly {
+  background: #7bda72;
+}

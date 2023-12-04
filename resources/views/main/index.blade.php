@@ -3,7 +3,9 @@
         <head>
             <meta charset="utf-8">
             <title>メインページ</title>
-    
+            
+            <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+            
             <!-- Fonts -->
             <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
             <link rel="stylesheet" href="{{ 'css/app.css' }}">
@@ -46,5 +48,38 @@
                 
             </div>
              <div class="center">こんにちは</div>
+             <!--ここからしたにコード書いてね～！-->
+             
+               <!--twitter-->
+            <a class="btn-social-square btn-social-square--twitter">
+                <i class="fa fa-twitter"></i>
+            </a>
+            <!--facebook-->
+            <a class="btn-social-square btn-social-square--facebook">
+                 <i class="fa fa-facebook"></i>
+            </a>
+            <!--はてぶ-->
+            <a class="btn-social-square btn-social-square--hatebu">
+                 B!
+            </a>
+            <!--pocket-->
+            <a class="btn-social-square btn-social-square--pocket">
+                 <i class="fa fa-get-pocket"></i>
+            </a>
+            <!--feedly-->
+            <a class="btn-social-square btn-social-square--feedly">
+                <i class="fa fa-rss"></i>
+            </a>
+
+            <!--ワンポイントアドバイス-->
+            <div class="sample-border-balloon">
+                <p><font size="5">ワンポイントアドバイス</font></p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+
+             
+<svg class="fill-cyan-500 hover:fill-cyan-700">
+  <!-- ... -->
+</svg>
         </body>
     </html>
