@@ -3,9 +3,6 @@
         <head>
             <meta charset="utf-8">
             <title>メインページ</title>
-            
-            <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-            
             <!-- Fonts -->
             <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
             <link rel="stylesheet" href="{{ 'css/app.css' }}">
@@ -18,7 +15,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div class="ml-80">{{ Auth::user()->name }}</div>
+                            <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -52,23 +49,28 @@
              
                <!--twitter-->
             <a class="btn-social-square btn-social-square--twitter">
-                <i class="fa fa-twitter"></i>
+               <i class= "fa fa-twitter"></i>
+               zozotown
             </a>
             <!--facebook-->
             <a class="btn-social-square btn-social-square--facebook">
                  <i class="fa fa-facebook"></i>
+                 S
             </a>
             <!--はてぶ-->
             <a class="btn-social-square btn-social-square--hatebu">
-                 B!
+                 
             </a>
             <!--pocket-->
             <a class="btn-social-square btn-social-square--pocket">
                  <i class="fa fa-get-pocket"></i>
+                 GRL
+                 
             </a>
             <!--feedly-->
             <a class="btn-social-square btn-social-square--feedly">
                 <i class="fa fa-rss"></i>
+                MONO
             </a>
 
             <!--ワンポイントアドバイス-->

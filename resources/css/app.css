@@ -79,3 +79,15 @@
 .btn-social-square--feedly {
   background: #7bda72;
 }
+
+
+@import "utf-8";
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    color: #333;
+    font-size: 1.6rem;
+}
