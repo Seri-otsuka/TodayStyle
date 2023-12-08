@@ -20,6 +20,9 @@ Route::get('/', function () {
 
 Route::get('/main', function () {
     return view('main.index');});
+/*とりあえずお試しのルーティング(服選ぶページ)*/    
+Route::get('/register2', function () {
+    return view('auth.register2');});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
