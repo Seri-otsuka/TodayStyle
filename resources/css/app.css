@@ -82,3 +82,8 @@ body > div {
   -webkit-transform: translateY(-5px);
   transform: translateY(-5px);
 }
+
+/*dropdown用 flex-endで右寄せ でも反映されて無さそう？*/
+.dropdown{
+  justify-content: flex-end;
+}

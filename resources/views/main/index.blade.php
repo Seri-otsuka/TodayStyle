@@ -11,7 +11,7 @@
         <body class="antialiased">
             
              <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6 dropdown" style="margin-left:900px;">
+            <div class="hidden sm:flex sm:items-center sm:ml-6 dropdown" style="margin-left:90%;">
                 <!--ここからのやつはcomponentから持ってきてます-->
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -72,7 +72,7 @@
                 </div>
             </body>
              
-            <!--アイコン-->
+            <!--ショップアイコン-->
             <center>
                 <div>
 	                <!--zozotown-->
