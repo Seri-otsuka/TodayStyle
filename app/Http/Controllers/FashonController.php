@@ -19,7 +19,7 @@ class FashonController extends Controller
         }
         return back();
     }
-  //解除
+   //解除
     public function destroy($categoryId) {
         $user = \Auth::user();
         if ($user->is_fashon($categoryId)) {
