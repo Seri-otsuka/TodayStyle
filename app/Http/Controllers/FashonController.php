@@ -15,7 +15,7 @@ class FashonController extends Controller
       public function store($categoryID) {
         $user = \Auth::user();
         if (!$user->is_fashon($categoryId)) {
-            $user->fashon_articles()->attach($categoryId);
+            $user->fashon_categories()->attach($categoryId);
         }
         return back();
     }

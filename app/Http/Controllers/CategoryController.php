@@ -10,7 +10,7 @@ class CategoryController extends Controller
     public function category(Category $category, User $user)
     {
         
-        return view('categories.index')->with([
+        return view('main.index')->with([
             'users' => $user,
  	     //データを呼び出す
             'categories' => $category->get()]);
@@ -24,7 +24,7 @@ class CategoryController extends Controller
         $category->user_id = \Auth::id();
         
         //画像
-        $category_image = $request->file('image');
+        //$category_image = $request->file('image');
         if($category_image){
 	    //Cloudinaryを使用して画像をアップロード
             $image_url = Cloudinary::upload(($article_image)->getRealPath())->getSecurePath();
