@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class areas extends Model
 {
     use HasFactory;
+    
+    //ユーザーに対して1:1
+      public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

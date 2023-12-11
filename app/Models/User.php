@@ -56,4 +56,9 @@ class User extends Authenticatable
         return $this->hasMany(Category::class);
     }
 
+    //areaに対して
+     public function areas()
+    {
+        return $this->belongsTo(Areas::class);
+    }
 }

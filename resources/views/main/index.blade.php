@@ -16,7 +16,10 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                    {{--
                             <div>{{ Auth::user()->name }}</div>
+                    --}}
+                    <div>テストユーザー</div>
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -42,10 +45,10 @@
                     </x-slot>
                 </x-dropdown>
             </div>
-             <div class="center">こんにちは</div>
              <!--ここからしたにコード書いてね～！-->
+             
             <!--日付-->
-            <font size="6"> 
+            <font size="7"> 
                 <div id="current_date">
                     <script>
                         //今日の日付データを変数に格納
@@ -61,39 +64,84 @@
                         var week_ja= new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri","Sat");
 
                         //年・月・日・曜日を書き出す
-                    document.write(year+"/"+month+"/"+day+" ("+week_ja[week]+")");
+                    document.write("　　"+year+"　"+month+"/"+day+" 　("+week_ja[week]+")");
                     </script>
                 </div>
             </font size>
-            
-            <!---天気表示-->
+
+            <!---天気表示(黒おび)-->
+            <div class="weather_box"></div>
+
+            <!---選んだ服のアイコン-->
             <body>
-                <div class="first">
-                </div>
+                <table align="center" cellspacing="500">
+                    <tr>
+                        <td class="clothes_box1"></td>
+                        <td class="clothes_box1"></td>
+                    </tr>
+                    <tr>
+                        <td class="clothes_box1"></td>
+                        <td class="clothes_box1"></td>
+                    </tr>
+                </table>
             </body>
-             
-            <!--ショップアイコン-->
+
+            <!--かご-->
             <center>
                 <div>
-	                <!--zozotown-->
-                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/zozotown_tyfmb8.png" class="btn-social-square" />
-                    <!--SHEIN-->
-                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/SHEIN_w77ctw.png" class="img-list__item btn-social-square" />
-                    <!--GRL-->
-                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/GRL_mji91c.png" class="img-list__item btn-social-square" />
-                    <!--MONO-MART-->
-                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/MONO-MART_f41ttj.jpg" class="img-list__item btn-social-square" />
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%94_xwtyed.png"/   width=150px height=150px;>
                 </div>
+            </center>
+
+            <!---shop icon-->
+            <center>
+                <div>
+                    <button onclick="location.href='https://zozo.jp/'">
+	                    <!--zozotown-->
+                        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/zozotown_tyfmb8.png" class="btn-social-square" />
+                    </button>
+                    <button onclick="location.href='https://jp.shein.com/category-picks.html?url_from=jpgooglebrandshein_shein02_srsa_LJP_category_20230128&cid=19616340873&setid=148607672587&adid=646447699347&pf=GOOGLE&gad_source=1&gclid=Cj0KCQiA4NWrBhD-ARIsAFCKwWt3_edjfdt-I4BF_kUW8z2lLsDCpFr9S8YLMrB3R5nUZvK2N7W9BpAaArYJEALw_wcB'">
+	                    <!--SHEIN-->
+                        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/SHEIN_w77ctw.png" class="btn-social-square" />
+                    </button>
+                    <button onclick="location.href='https://www.grail.bz/'">
+                        <!--GRL-->
+                        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/GRL_mji91c.png" class="btn-social-square" />
+	                </button>
+	                <button onclick="location.href='https://www.mono-mart.jp/'">
+	                    <!--MONO-MART-->
+                        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/MONO-MART_f41ttj.jpg" class="btn-social-square" />
+                    </button>
+                </div>
+            </center>
 
 
 
             <!--ワンポイントアドバイス-->
-                <div class="balloon2-right">
-                    <p><font size="5">ワンポイントアドバイス</font></p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-            </center>
-            
+            <table align="center">
+                <tr>
+                    <td>
+ 	                    <div class="kaiwa-text-left">
+		                    <center>
+			                    <p class="kaiwa-text ">
+				                    <font size="5">
+				                        ワンポイントアドバイス
+				                    </font>
+			                    </p> 
+			                    <p class="kaiwa-text">
+			                        Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+			                    </p>
+		                    </center>
+	                </td>
+                    <td>
+	                    <div class="kaiwa">
+ 	                        <figure class="kaiwa-img-right">
+		                        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
+ 		                    </figure>
+	                    </div>
+                    </td>
+                </tr>
+            </table>        
 
 <svg class="fill-cyan-500 hover:fill-cyan-700">
   <!-- ... -->

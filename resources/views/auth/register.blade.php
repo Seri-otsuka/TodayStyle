@@ -41,11 +41,10 @@
 
         <!-- area -->
         <div class="mt-4">
-        <div>
-            <x-input-label for="name" :value="__('お住いの地域')" />
-            <x-text-input id="area" class="block mt-1 w-full" type="text" name="area" :value="old('area')" required autofocus autocomplete="area" />
-            <x-input-error :messages="$errors->get('area')" class="mt-2" />
-        </div>
+            <div>
+            <x-input-label for="id" :value="__('お住いの地域')" />
+            
+            </div>
         </div>
         
         <!--temperature暑がりは0寒がりは1でデータベースに格納-->
@@ -54,19 +53,24 @@
             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                  <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
         <div class="flex items-center ps-3">
-            <input id="horizontal-list-radio-license" type="radio" value="0" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-            <label for="horizontal-list-radio-license" class="w-full py-3 ms-2 text-sm font-medium text-gray-700 dark:text-gray-300">暑がり</label>
+            <input id="radio-1" type="radio" value="0" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+            <label for="radio-1" class="w-full py-3 ms-2 text-sm font-medium text-gray-700 dark:text-gray-300">暑がり</label>
         </div>
                  </li>
         <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
             <div class="flex items-center ps-3">
-                <input id="horizontal-list-radio-id" type="radio" value="1" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                <label for="horizontal-list-radio-id" class="w-full py-3 ms-2 text-sm font-medium text-gray-700 dark:text-gray-300">寒がり</label>
+                <input id="radio-2" type="radio" value="1" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                <label for="radio-2" class="w-full py-3 ms-2 text-sm font-medium text-gray-700 dark:text-gray-300">寒がり</label>
             </div>
             </ul>
+            @if($value == 0){
+                $
+            }
         </div>
         <!--ここにif関数で0か1を判断してtemperatureテーブルに格納して判断する-->
         <!--if関数で判断するより、input内で判断した方がいいかも-->
+        
+        
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('すでに登録していますか？') }}
