@@ -7,21 +7,25 @@ table {
   border-spacing: 100px;
 }
 
-/* 天気表示画面の黒いラベル*/
+/* 天気表示画面の黒おび*/
 body {
   background-color: #d5d5d5;
+  width: 1400px;
+  height:2000px;
 }
 .weather_box {
-  width: max;
-  height: 200px;
+  width: 1400px;
+  height: 275px;
   background: #000000;
+  color: #2196F3;
 }
+
 
 
 /* 選んだ服のアイコンの枠 */
 .clothes_box1 {
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   background: #ffffff;
   border-radius: 20px;
 }
@@ -110,4 +114,18 @@ p.kaiwa-text:last-child {
 /*dropdown用 flex-endで右寄せ でも反映されて無さそう？*/
 .dropdown{
   justify-content: flex-end;
+}
+
+/* p184参考書より コンテンツの最大表示幅 */
+.wrapper{
+  max-width: 1100px;  /* 横幅最大1100px */
+  margin: 0 auto;     /* 中央に配置する指定 */
+  padding: 0 4%;      /* スマートフォン向け余白の指定 */
+}
+
+/* p208参考 天気、気温、湿度、不快指数表示用 */
+.weather-contents{
+  display: flex;                   /* flexboxの指定 */
+  justify-content: space-between;  /*               */
+  margin-bottom: 50px;    /* 下にmarginを50px取得 */
 }

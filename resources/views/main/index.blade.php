@@ -48,33 +48,54 @@
              <!--ここからしたにコード書いてね～！-->
              
             <!--日付-->
-            <font size="7"> 
-                <div id="current_date">
-                    <script>
-                        //今日の日付データを変数に格納
-                        //変数は"today"とする
-                        var today=new Date(); 
-        
-                        //年・月・日・曜日を取得
-                        var year = today.getFullYear();
-                        var month = today.getMonth()+1;
-                        var week = today.getDay();
-                        var day = today.getDate();
+            <center>
+                <font size="7"> 
+                    <div id="current_date">
+                        <script>
+                            //今日の日付データを変数に格納
+                            //変数は"today"とする
+                            var today=new Date(); 
+            
+                            //年・月・日・曜日を取得
+                            var year = today.getFullYear();
+                            var month = today.getMonth()+1;
+                            var week = today.getDay();
+                            var day = today.getDate();
+    
+                            var week_ja= new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri","Sat");
 
-                        var week_ja= new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri","Sat");
-
-                        //年・月・日・曜日を書き出す
-                    document.write("　　"+year+"　"+month+"/"+day+" 　("+week_ja[week]+")");
-                    </script>
-                </div>
-            </font size>
+                            //年・月・日・曜日を書き出す
+                            document.write("　　　　　"+year+"　"+month+"/"+day+" 　("+week_ja[week]+")　　　　　　　　　　　　　　　　　　");
+                        </script>
+                    </div>
+                </font size>
+            </center>
 
             <!---天気表示(黒おび)-->
-            <div class="weather_box"></div>
+            <center>
+                <div class="weather_box wrapper weather-contents">
+                    <p>
+                        <big>
+                            あたしの名前は小池百合子。私は女帝。
+                        </Big>
+                    </p>
+                    <p>
+                        温度
+                    </p>
+                    <p>
+                        湿度
+                    </p>
+                </div>
+            </center>
+            
+            <!--温度・湿度の表示-->
+            
+            
+            <!--不快指数の表示-->
 
             <!---選んだ服のアイコン-->
             <body>
-                <table align="center" cellspacing="500">
+                <table align="center" cellspacing="100">
                     <tr>
                         <td class="clothes_box1"></td>
                         <td class="clothes_box1"></td>
