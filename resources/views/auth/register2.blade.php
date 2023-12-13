@@ -24,38 +24,38 @@
                 </a>
             </div>
             <!--入力ブロックの範囲-->
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-gray-300 shadow-md overflow-hidden sm:rounded-lg">
+            <div class="w-full sm:max-w-xl mt-6 px-6 py-4 bg-gray-300 shadow-md overflow-hidden sm:rounded-lg">
                  <form method="POST" action="{{ route('register') }}">
                  @csrf
                      <!-- アイコン-->
                      <!--ノースリーブ-->
-                    <div class="flex">
+                    <div class="flex justify-center items-center gap-2">
                     <div class="mt-4 focus:border-indigo-500 focus:ring-indigo-500 ">
-                        <img class="w-24 rounded-md bg-white" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0294_ziqwci.png">
+                        <img class="w-16 rounded-md bg-white" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0294_ziqwci.png">
                         <x-input-label class="mx-7" for="email" :value="__('ノースリーブ')" />
                     </div>
                     
                     <!--スカート-->
                     <div class="mt-4 focus:border-indigo-500 focus:ring-indigo-500 ">
-                        <img class="w-24 rounded-md bg-white" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701305492/icon_R_0295_tdbsc2.png">
+                        <img class="w-16 rounded-md bg-white" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701305492/icon_R_0295_tdbsc2.png">
                         <x-input-label class="mx-7" for="email" :value="__('スカート')" />
                     </div>
                     
                     <!--半袖-->
                     <div class="mt-4 focus:border-indigo-500 focus:ring-indigo-500 ">
-                        <img class="w-24 rounded-md bg-white" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/T%E3%82%B7%E3%83%A3%E3%83%84%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B39_zsyouc.png">
+                        <img class="w-16 rounded-md bg-white" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/T%E3%82%B7%E3%83%A3%E3%83%84%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B39_zsyouc.png">
                         <x-input-label class="mx-7" for="email" :value="__('半袖')" />
                     </div>
                     
                      <!--長袖-->
                     <div class="mt-4 focus:border-indigo-500 focus:ring-indigo-500 ">
-                        <img class="w-24 rounded-md bg-white" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%E3%83%AD%E3%83%B3%E3%82%B0T%E3%82%B7%E3%83%A3%E3%83%84%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B32_tall3d.png">
+                        <img class="w-16 rounded-md bg-white" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%E3%83%AD%E3%83%B3%E3%82%B0T%E3%82%B7%E3%83%A3%E3%83%84%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B32_tall3d.png">
                         <x-input-label class="mx-7" for="email" :value="__('長袖')" />
                     </div>
                     
                      <!--シャツ-->
                     <div class="mt-4 focus:border-indigo-500 focus:ring-indigo-500 ">
-                        <img class="w-24 rounded-md bg-white" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/Y%E3%82%B7%E3%83%A3%E3%83%84%E3%81%AE%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%E7%B4%A0%E6%9D%905_scezds.png">
+                        <img class="w-16 rounded-md bg-white" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/Y%E3%82%B7%E3%83%A3%E3%83%84%E3%81%AE%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%E7%B4%A0%E6%9D%905_scezds.png">
                         <x-input-label class="mx-7" for="email" :value="__('シャツ')" />
                     </div>
                     </div>
