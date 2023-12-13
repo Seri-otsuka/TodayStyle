@@ -7,12 +7,18 @@ table {
   border-spacing: 100px;
 }
 
-/* 天気表示画面の黒おび*/
-body {
-  background-color: #d5d5d5;
+/* 背景画面 */
+.WebpageColor_box {
   width: 1400px;
-  height:2000px;
+  height: 2200px;
+  background: #d5d5d5;
 }
+body {
+  background-color: #ffffff;
+}
+
+
+/* 天気表示画面の黒おび*/
 .weather_box {
   width: 1400px;
   height: 275px;
@@ -118,7 +124,7 @@ p.kaiwa-text:last-child {
 
 /* p184参考書より コンテンツの最大表示幅 */
 .wrapper{
-  max-width: 1100px;  /* 横幅最大1100px */
+  max-width: 1400px;  /* 横幅最大1100px */
   margin: 0 auto;     /* 中央に配置する指定 */
   padding: 0 4%;      /* スマートフォン向け余白の指定 */
 }

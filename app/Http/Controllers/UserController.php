@@ -28,5 +28,14 @@ class UserController extends Controller
     return view('users.show')
         ->with('user', $user);  
    }
+   
+    public function area(Area $area,User $user)
+    {
+        return view('auth.register')->with([
+            'users' => $user,
+            
+            //データを呼び出す
+            $area = Area::get()]);
+    }
 
 }

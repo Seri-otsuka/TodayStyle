@@ -9,17 +9,24 @@ use App\Models\User;
 
 class AreasController extends Controller
 {
-    
+     public function area(Area $area,User $user)
+    {
+        return view('auth.register')->with([
+            'users' => $user,
+            
+            //データを呼び出す
+            $area = Area::get()]);
+    }
     
     //とりあえずページにデータを全件引き渡す
-    public function area(Area $area,User $user)
+   /*** public function area(Area $area,User $user)
     {
         return view('auth.register')->with([
             'users' => $user,
             
             //データを呼び出す
             'areas' => $area->get()]);
-    }
+    }***/
     /**
      * Display a listing of the resource.
      *

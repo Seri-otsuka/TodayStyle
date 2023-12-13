@@ -47,122 +47,124 @@
             </div>
              <!--ここからしたにコード書いてね～！-->
              
-            <!--日付-->
             <center>
-                <font size="7"> 
-                    <div id="current_date">
-                        <script>
-                            //今日の日付データを変数に格納
-                            //変数は"today"とする
-                            var today=new Date(); 
+                <div class="WebpageColor_box">
+             
+                    <!--日付-->
+                    <font size="7"> 
+                        <div id="current_date">
+                            <script>
+                                //今日の日付データを変数に格納
+                                //変数は"today"とする
+                                var today=new Date(); 
             
-                            //年・月・日・曜日を取得
-                            var year = today.getFullYear();
-                            var month = today.getMonth()+1;
-                            var week = today.getDay();
-                            var day = today.getDate();
+                                //年・月・日・曜日を取得
+                                var year = today.getFullYear();
+                                var month = today.getMonth()+1;
+                                var week = today.getDay();
+                                var day = today.getDate();
+
+                                var week_ja= new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri","Sat");
+
+                                //年・月・日・曜日を書き出す
+                                document.write("　　　　　"+year+"　"+month+"/"+day+" 　("+week_ja[week]+")　　　　　　　　　　　　　　　　　　");
+                            </script>
+                        </div>
+                    </font size>
+
+
+                    <!---天気表示(黒おび)-->
+                        <div class="weather_box wrapper weather-contents">
+                            <p>
+                                <big>
+                                    天気
+                                </big>
+                            </p>
+                            <p>
+                                温度
+                            </p>
+                                <p>
+                                湿度
+                            </p>
+                        </div>
+                    
+                    <!--温度・湿度の表示-->
+            
+            
+                    <!--不快指数の表示-->
     
-                            var week_ja= new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri","Sat");
+                    <!---選んだ服のアイコン-->
+                    <body>
+                        <table align="center" cellspacing="100">
+                            <tr>
+                                <td class="clothes_box1"></td>
+                                <td class="clothes_box1"></td>
+                            </tr>
+                            <tr>
+                                <td class="clothes_box1"></td>
+                                <td class="clothes_box1"></td>
+                            </tr>
+                        </table>
+                    </body>
 
-                            //年・月・日・曜日を書き出す
-                            document.write("　　　　　"+year+"　"+month+"/"+day+" 　("+week_ja[week]+")　　　　　　　　　　　　　　　　　　");
-                        </script>
-                    </div>
-                </font size>
+                    <!--かご-->
+                    <center>
+                        <div>
+                            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%94_xwtyed.png"/   width=150px height=150px;>
+                        </div>
+                    </center>
+    
+                    <!---shop icon-->
+                    <center>
+                        <div>
+                           <button onclick="location.href='https://zozo.jp/'">
+	                            <!--zozotown-->
+                             <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/zozotown_tyfmb8.png" class="btn-social-square" />
+                            </button>
+                            <button onclick="location.href='https://jp.shein.com/category-picks.html?url_from=jpgooglebrandshein_shein02_srsa_LJP_category_20230128&cid=19616340873&setid=148607672587&adid=646447699347&pf=GOOGLE&gad_source=1&gclid=Cj0KCQiA4NWrBhD-ARIsAFCKwWt3_edjfdt-I4BF_kUW8z2lLsDCpFr9S8YLMrB3R5nUZvK2N7W9BpAaArYJEALw_wcB'">
+	                            <!--SHEIN-->
+                             <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/SHEIN_w77ctw.png" class="btn-social-square" />
+                            </button>
+                            <button onclick="location.href='https://www.grail.bz/'">
+                                <!--GRL-->
+                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/GRL_mji91c.png" class="btn-social-square" />
+	                        </button>
+	                         <button onclick="location.href='https://www.mono-mart.jp/'">
+	                            <!--MONO-MART-->
+                             <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/MONO-MART_f41ttj.jpg" class="btn-social-square" />
+                            </button>
+                        </div>
+                    </center>
+
+
+
+                    <!--ワンポイントアドバイス-->
+                    <table align="center">
+                        <tr>
+                            <td>
+ 	                            <div class="kaiwa-text-left">
+	    	                        <center>
+	        		                    <p class="kaiwa-text ">
+	        			                    <font size="5">
+	       			                            ワンポイントアドバイス
+		    		                        </font>
+		    	                        </p> 
+		    	                        <p class="kaiwa-text">
+		    	                            Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+		    	                        </p>
+		                             </center>
+	                        </td>
+                             <td>
+    	                        <div class="kaiwa">
+ 	                               <figure class="kaiwa-img-right">
+	       	                            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
+ 	    	                        </figure>
+	                             </div>
+                             </td>
+                        </tr>
+                    </table>
+                 </div>
             </center>
-
-            <!---天気表示(黒おび)-->
-            <center>
-                <div class="weather_box wrapper weather-contents">
-                    <p>
-                        <big>
-                            あたしの名前は小池百合子。私は女帝。
-                        </Big>
-                    </p>
-                    <p>
-                        温度
-                    </p>
-                    <p>
-                        湿度
-                    </p>
-                </div>
-            </center>
-            
-            <!--温度・湿度の表示-->
-            
-            
-            <!--不快指数の表示-->
-
-            <!---選んだ服のアイコン-->
-            <body>
-                <table align="center" cellspacing="100">
-                    <tr>
-                        <td class="clothes_box1"></td>
-                        <td class="clothes_box1"></td>
-                    </tr>
-                    <tr>
-                        <td class="clothes_box1"></td>
-                        <td class="clothes_box1"></td>
-                    </tr>
-                </table>
-            </body>
-
-            <!--かご-->
-            <center>
-                <div>
-                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%94_xwtyed.png"/   width=150px height=150px;>
-                </div>
-            </center>
-
-            <!---shop icon-->
-            <center>
-                <div>
-                    <button onclick="location.href='https://zozo.jp/'">
-	                    <!--zozotown-->
-                        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/zozotown_tyfmb8.png" class="btn-social-square" />
-                    </button>
-                    <button onclick="location.href='https://jp.shein.com/category-picks.html?url_from=jpgooglebrandshein_shein02_srsa_LJP_category_20230128&cid=19616340873&setid=148607672587&adid=646447699347&pf=GOOGLE&gad_source=1&gclid=Cj0KCQiA4NWrBhD-ARIsAFCKwWt3_edjfdt-I4BF_kUW8z2lLsDCpFr9S8YLMrB3R5nUZvK2N7W9BpAaArYJEALw_wcB'">
-	                    <!--SHEIN-->
-                        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/SHEIN_w77ctw.png" class="btn-social-square" />
-                    </button>
-                    <button onclick="location.href='https://www.grail.bz/'">
-                        <!--GRL-->
-                        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/GRL_mji91c.png" class="btn-social-square" />
-	                </button>
-	                <button onclick="location.href='https://www.mono-mart.jp/'">
-	                    <!--MONO-MART-->
-                        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/MONO-MART_f41ttj.jpg" class="btn-social-square" />
-                    </button>
-                </div>
-            </center>
-
-
-
-            <!--ワンポイントアドバイス-->
-            <table align="center">
-                <tr>
-                    <td>
- 	                    <div class="kaiwa-text-left">
-		                    <center>
-			                    <p class="kaiwa-text ">
-				                    <font size="5">
-				                        ワンポイントアドバイス
-				                    </font>
-			                    </p> 
-			                    <p class="kaiwa-text">
-			                        Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-			                    </p>
-		                    </center>
-	                </td>
-                    <td>
-	                    <div class="kaiwa">
- 	                        <figure class="kaiwa-img-right">
-		                        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
- 		                    </figure>
-	                    </div>
-                    </td>
-                </tr>
-            </table>        
 
 <svg class="fill-cyan-500 hover:fill-cyan-700">
   <!-- ... -->
