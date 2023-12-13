@@ -37,4 +37,9 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/users/{id}', [UsersController::class,'show'])->name('UserProfole');
 
+/*新規登録画面*/    
+Route::get('/register', [AreaController::class, 'area'])->name('Areaview');
+/*メイン画面*/    
+Route::get('/main', [UserController::class, 'area'])->name('Areaview');
+
 require __DIR__.'/auth.php';
