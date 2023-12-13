@@ -31,7 +31,7 @@
                      <!--ノースリーブ-->
                     <div class="flex justify-center items-center gap-2">
                     <div class="mt-4 focus:border-indigo-500 focus:ring-indigo-500 ">
-                        <img class="w-16 rounded-md bg-white" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0294_ziqwci.png">
+                        <img class="w-16 rounded-md bg-white" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701305492/icon_R_0295_tdbsc2.png">
                         <x-input-label class="mx-7" for="email" :value="__('ノースリーブ')" />
                     </div>
                     
