@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::get('/main', function () {
     return view('main.index');});
+    
 /*とりあえずお試しのルーティング(服選ぶページ)*/    
 Route::get('/register2', function () {
     return view('auth.register2');});
@@ -33,5 +34,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/users/{id}', [UsersController::class,'show'])->name('UserProfole');
+
+/*新規登録画面*/    
+Route::get('/register', [AreaController::class, 'area'])->name('Areaview');
+/*メイン画面--いったんコメントアウトします*/    
+//Route::get('/main', [UserController::class, 'area'])->name('Areaview');
 
 require __DIR__.'/auth.php';

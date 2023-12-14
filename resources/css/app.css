@@ -2,71 +2,54 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* 天気表示画面の黒いラベル*/
+table {
+  border-collapse: separate;
+  border-spacing: 100px;
+}
+
+* { 
+    margin: 0px; 
+    padding: 0px; 
+}
+
+
+/* 背景画面 */
+.WebpageColor_box {
+  width: 1400px;
+  height: 2200px;
+  background: #d5d5d5;
+}
 body {
-  background-color: #d5d5d5;
-}
-body > div {
-  /*背景色を見せるために、幅と高さを指定*/
-  margin: 0px; 
-  width: max;
-  height: 150px;
-}
-.first {
-  /*firstというクラスの要素の背景を青色にする*/   
-  background-color: black;
+  background-color: #ffffff;
 }
 
-/* 吹き出し*/
-.balloon2-right {
-  position: relative;
-  display: inline-block;
-  margin: 1.5em 15px 1.5em 0;
-  padding: 7px 10px;
-  min-width: 120px;
-  max-width: 100%;
-  color: #555;
-  font-size: 16px;
-  background: #FFF;
-  border: solid 3px #d5d5d5;
-  box-sizing: border-box;
-  border-radius: 10px;
+
+/* 天気表示画面の黒おび*/
+.weather_box {
+  width: 1400px;
+  height: 275px;
+  background: #000000;
+  color: #2196F3;
 }
 
-.balloon2-right:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: -24px;
-  margin-top: -12px;
-  border: 12px solid transparent;
-  border-left: 12px solid #FFF;
-  z-index: 2;
-}
 
-.balloon2-right:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: -30px;
-  margin-top: -14px;
-  border: 14px solid transparent;
-  border-left: 14px solid #d5d5d5;
-  z-index: 1;
-}
 
-.balloon2-right p {
-  margin: 0;
-  padding: 0;
+/* 選んだ服のアイコンの枠 */
+.clothes_box1 {
+  width: 500px;
+  height: 500px;
+  background: #ffffff;
+  border-radius: 20px;
 }
-
 
 /* shopのアイコン */
 .btn-social-square {
-  width: 80px;
+  display: inline-block;
+  text-decoration: none;
+  width: 100px;
   margin:2px;
-  height: 80px;
-  line-height: 80px;
+  height: 100px;
+  line-height: 50px;
   font-size: 23px;
   color:white;
   border-radius: 12px;
@@ -76,9 +59,99 @@ body > div {
   transition: .3s;
 }
 .btn-social-square i {
-  line-height:80px;
+  line-height:50px;
 }
 .btn-social-square:hover {
   -webkit-transform: translateY(-5px);
   transform: translateY(-5px);
+}
+
+/* 吹き出し ＆　悲壮犬 */
+/* 全体のスタイル */
+.kaiwa {
+  margin-bottom: 25px;
+}
+/* 右画像 */
+.kaiwa-img-right {
+  margin: 0;
+  float: right;
+  width: 100px;
+  height: 100px;
+  margin-left: -70px;
+}
+.kaiwa figure img {
+  width: 100%;
+  height: 100%;
+}
+/* 右からの吹き出しテキスト */
+.kaiwa-text-left {
+  position: relative;
+  margin-right: 80px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  margin-left: 12%;
+  float: right;
+}
+p.kaiwa-text {
+  margin: 0 0 10px;
+}
+p.kaiwa-text:last-child {
+  margin-bottom: 0;
+}
+/* 右の三角形を作る */
+.kaiwa-text-left:before {
+  position: absolute;
+  content: '';
+  border: 10px solid transparent;
+  top: 15px;
+  right: -20px;
+}
+.kaiwa-text-left:after {
+  position: absolute;
+  content: '';
+  border: 10px solid transparent;
+  border-left: 10px solid #ffffff;
+  top: 15px;
+  right: -19px;
+}
+/* 回り込み解除 */
+.kaiwa:after,.kaiwa:before {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+
+/*dropdown用 flex-endで右寄せ でも反映されて無さそう？*/
+.dropdown{
+  justify-content: flex-end;
+}
+
+/* p184参考書より コンテンツの最大表示幅 */
+.wrapper{
+  max-width: 1400px;  /* 横幅最大1100px */
+  margin: 0 auto;     /* 中央に配置する指定 */
+}
+
+/* p208参考 天気、気温、湿度、不快指数表示用 横並び */
+.weather-contents{
+  display: flex;                   /* flexboxの指定 */
+  justify-content: space-between;  /*               */
+  /*margin-bottom: 50px;*/    	/* 下にmarginを50px取得 */
+}
+
+/* !天気関連 要素ごとに余白を開ける */
+.weather-social{
+    /* margin-left: 10%; */
+    /* margin-right: 5%; */
+    margin: 10% 0% 10%;
+    width: 200px;
+}
+
+.weather-social-text{
+	position: relative;
+	color: white;
+	font-family: arial;
+	margin: 10% 10% 10%
 }
