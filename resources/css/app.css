@@ -7,6 +7,12 @@ table {
   border-spacing: 100px;
 }
 
+* { 
+    margin: 0px; 
+    padding: 0px; 
+}
+
+
 /* 背景画面 */
 .WebpageColor_box {
   width: 1400px;
@@ -126,12 +132,26 @@ p.kaiwa-text:last-child {
 .wrapper{
   max-width: 1400px;  /* 横幅最大1100px */
   margin: 0 auto;     /* 中央に配置する指定 */
-  padding: 0 4%;      /* スマートフォン向け余白の指定 */
 }
 
-/* p208参考 天気、気温、湿度、不快指数表示用 */
+/* p208参考 天気、気温、湿度、不快指数表示用 横並び */
 .weather-contents{
   display: flex;                   /* flexboxの指定 */
   justify-content: space-between;  /*               */
-  margin-bottom: 50px;    /* 下にmarginを50px取得 */
+  /*margin-bottom: 50px;*/    	/* 下にmarginを50px取得 */
+}
+
+/* !天気関連 要素ごとに余白を開ける */
+.weather-social{
+    /* margin-left: 10%; */
+    /* margin-right: 5%; */
+    margin: 10% 0% 10%;
+    width: 200px;
+}
+
+.weather-social-text{
+	position: relative;
+	color: white;
+	font-family: arial;
+	margin: 10% 10% 10%
 }
