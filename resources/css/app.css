@@ -21,11 +21,8 @@ table {
   height: 2500px;
   background: #d5d5d5;
 }
-body {
-  background-color: #ffffff;
-}
 
-Hiritu {
+.Hiritu {
   zoom: 0.7;
   -moz-transform: scale(0.7);
 }
