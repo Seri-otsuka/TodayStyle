@@ -63,9 +63,6 @@
                 <label for="radio-2" class="w-full py-3 ms-2 text-sm font-medium text-gray-700 dark:text-gray-300">寒がり</label>
             </div>
             </ul>
-            @if($value == 0){
-                $
-            }
         </div>
         <!--ここにif関数で0か1を判断してtemperatureテーブルに格納して判断する-->
         <!--if関数で判断するより、input内で判断した方がいいかも-->

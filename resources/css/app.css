@@ -1,26 +1,33 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import url('https://fonts.cdnfonts.com/css/hattori-hanzo');
 
 table {
   border-collapse: separate;
   border-spacing: 100px;
 }
 
+/* 上の余白消す */
 * { 
     margin: 0px; 
     padding: 0px; 
 }
 
 
-/* 背景画面 */
+/* 画面の色・比率 */
 .WebpageColor_box {
   width: 1400px;
-  height: 2200px;
+  height: 2500px;
   background: #d5d5d5;
 }
 body {
   background-color: #ffffff;
+}
+
+Hiritu {
+  zoom: 0.7;
+  -moz-transform: scale(0.7);
 }
 
 
@@ -46,9 +53,9 @@ body {
 .btn-social-square {
   display: inline-block;
   text-decoration: none;
-  width: 100px;
+  width: 200px;
   margin:2px;
-  height: 100px;
+  height: 200px;
   line-height: 50px;
   font-size: 23px;
   color:white;
@@ -75,8 +82,8 @@ body {
 .kaiwa-img-right {
   margin: 0;
   float: right;
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
   margin-left: -70px;
 }
 .kaiwa figure img {
@@ -137,7 +144,7 @@ p.kaiwa-text:last-child {
 /* p208参考 天気、気温、湿度、不快指数表示用 横並び */
 .weather-contents{
   display: flex;                   /* flexboxの指定 */
-  justify-content: space-between;  /*               */
+  justify-content: space-around;  /*               */
   /*margin-bottom: 50px;*/    	/* 下にmarginを50px取得 */
 }
 
@@ -145,13 +152,14 @@ p.kaiwa-text:last-child {
 .weather-social{
     /* margin-left: 10%; */
     /* margin-right: 5%; */
-    margin: 10% 0% 10%;
+    margin: 20% 0% 10%;
     width: 200px;
 }
 
 .weather-social-text{
 	position: relative;
 	color: white;
-	font-family: arial;
-	margin: 10% 10% 10%
+	font-family: 'Hattori Hanzo', serif;
+	margin: 6% 0% 10%;
+	font-size: 730%;
 }
