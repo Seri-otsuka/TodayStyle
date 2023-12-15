@@ -47,7 +47,7 @@
             </div>
              <!--ここからしたにコード書いてね～！-->
             
-            <body background="o0490034114445555931.gif"> 
+            <body background=""  class="Hiritu"> 
             　　　　　　　
                 <center>
                     <div class="WebpageColor_box">
@@ -76,19 +76,20 @@
                     
                     
                         <!---天気表示（黒おび）-->
-                            <div class="weather_box wrapper weather-contents">
-                                <p>
-                                    <big>
-                                        天気
-                                    </big>
-                                </p>
-                                <p>
-                                    温度
-                                </p>
-                                    <p>
-                                    湿度
-                                </p>
-                            </div>
+                        <div class="weather_box wrapper weather-contents">
+                            <p>
+                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" class="weather-social" />
+                            </p>
+                            <p class="weather-social-text">
+                                32℃
+                            </p>
+                            <p class="weather-social-text">
+                                10%
+                            </p>
+			                <p>
+			                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" class="weather-social" class="weather-social"/>
+			                </p>
+                        </div>
                         
                         <!--温度・湿度の表示-->
                     

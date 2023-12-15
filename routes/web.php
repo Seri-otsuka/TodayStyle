@@ -25,6 +25,11 @@ Route::get('/main', function () {
 Route::get('/register2', function () {
     return view('auth.register2');});
 
+//新規登録入力情報の確認ページ
+Route::get('/check', function () {
+    return view('auth.check');});
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
