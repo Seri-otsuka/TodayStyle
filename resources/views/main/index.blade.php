@@ -47,14 +47,14 @@
             </div>
              <!--ここからしたにコード書いてね～！-->
             
-            <body background=""  class="Hiritu"> 
+            <div  class="Hiritu"> 
             　　　　　　　
                 <center>
                     <div class="WebpageColor_box">
                     
                         <!--日付-->
                         <font size="7"> 
-                            <div id="current_date">
+                            <div id="current_date" style="font-family: ravie,fantasy; margin-right: 50%;">
                                 <script>
                                     //今日の日付データを変数に格納
                                     //変数は"today"とする
@@ -74,14 +74,13 @@
                             </div>
                         </font size>
                     
-                    
                         <!---天気表示（黒おび）-->
                         <div class="weather_box wrapper weather-contents">
                             <p>
                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" class="weather-social" />
                             </p>
                             <p class="weather-social-text">
-                                32℃
+                                32°C
                             </p>
                             <p class="weather-social-text">
                                 10%
@@ -90,7 +89,48 @@
 			                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" class="weather-social" class="weather-social"/>
 			                </p>
                         </div>
+                                                
+                                                <!---天気表示（黒おび）-->
+                        <div class="weather_box wrapper weather-contents">
+                            <script>
+                                    let lat = 35.6785;
+                                    let long = 139.6823;
                         
+                                    const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&current=temperature_2m,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
+                                    
+                                    fetch(apiUrl)
+                                    .then(response => {
+                                        return response.json();
+                                    })
+                                    .then(data =>{
+                                        const jsonData = data;
+                                        const weather = jsonData.current.weather_code;
+                                        const temperature = jsonData.current.temperature_2m;
+                        
+                                        if(weather === 0){
+                                          document.write("晴れです"+ temperature + "℃です");
+                                            
+                        
+                                        }
+                                        
+                                        else{
+                                          document.write("晴れです"+ temperature + "℃です");
+                                        }
+                        
+                                        
+                                    })
+                                    .catch(error => {
+                                        console.error('データ取得に失敗しました',error)
+                                    });
+                          </script>
+                            <p>
+                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" class="weather-social" />
+                            <p>
+                            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" class="weather-social" class="weather-social"/>
+                            </p>
+                         
+                        </div>
+
                         <!--温度・湿度の表示-->
                     
                     
@@ -148,12 +188,14 @@
                                      <div class="kaiwa-text-left">
                                         <center>
                     	                    <p class="kaiwa-text ">
-                    		                    <font size="5">
+                    		                    <font size="6">
                        	                            ワンポイントアドバイス
                     	                        </font>
                                             </p> 
                                             <p class="kaiwa-text">
-                                                Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                                <font size="4">
+                                                    Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                                </font>
                                             </p>
                                          </center>
                                 </td>
