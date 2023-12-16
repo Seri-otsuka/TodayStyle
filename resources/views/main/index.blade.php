@@ -16,10 +16,9 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                    {{--
+                            <!--現在ログインしているユーザーの名前が表示されるようになっている-->
                             <div>{{ Auth::user()->name }}</div>
-                    --}}
-                    <div>テストユーザー</div>
+                  <!--  <div>テストユーザー</div> -->
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -88,47 +87,37 @@
 			                <p>
 			                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" class="weather-social" class="weather-social"/>
 			                </p>
-                        </div>
-                                                
-                                                <!---天気表示（黒おび）-->
-                        <div class="weather_box wrapper weather-contents">
-                            <script>
-                                    let lat = 35.6785;
-                                    let long = 139.6823;
-                        
-                                    const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&current=temperature_2m,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
+			                <script>
+                                let lat = 35.6785;
+                                let long = 139.6823;
+                                
+                          
+                                const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&current=temperature_2m,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
+                                
+                                fetch(apiUrl)
+                                .then(response => {
+                                    return response.json();
+                                })
+                                .then(data =>{
+                                    const jsonData = data;
+                                    const weather = jsonData.current.weather_code;
+                                    const temperature = jsonData.current.temperature_2m;
+                          
+                                    if(weather === 0){
+                                      sampleweather.innerHTML = "☀　"+ temperature + "℃";
+                          
+                                    }
                                     
-                                    fetch(apiUrl)
-                                    .then(response => {
-                                        return response.json();
-                                    })
-                                    .then(data =>{
-                                        const jsonData = data;
-                                        const weather = jsonData.current.weather_code;
-                                        const temperature = jsonData.current.temperature_2m;
-                        
-                                        if(weather === 0){
-                                          document.write("晴れです"+ temperature + "℃です");
-                                            
-                        
-                                        }
-                                        
-                                        else{
-                                          document.write("晴れです"+ temperature + "℃です");
-                                        }
-                        
-                                        
-                                    })
-                                    .catch(error => {
-                                        console.error('データ取得に失敗しました',error)
-                                    });
-                          </script>
-                            <p>
-                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" class="weather-social" />
-                            <p>
-                            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" class="weather-social" class="weather-social"/>
-                            </p>
-                         
+                                    else{
+                                      sampleweather.innerHTML = "☂　"+ temperature + "℃";
+                                    }
+                          
+                                    
+                                })
+                                .catch(error => {
+                                    console.error('データ取得に失敗しました',error)
+                                });
+                            </script>
                         </div>
 
                         <!--温度・湿度の表示-->
@@ -178,7 +167,6 @@
                                 </button>
                             </div>
                         </center>
-                    
                     
                     
                         <!--ワンポイントアドバイス-->

@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/top', function () {
+    return view('toppage');
+});
+
 Route::get('/main', function () {
     return view('main.index');});
     
