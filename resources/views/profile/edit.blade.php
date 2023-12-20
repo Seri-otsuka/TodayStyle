@@ -15,13 +15,51 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-gray-300">
-          <div>
                 <a href="/">
-                    <center class="mt-6">
+                    <center class="my-6">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
                     </center>
                 </a>
-            </div>
+                 <!-- Settings Dropdown -->
+                <div class="hidden sm:flex sm:items-center dropdown">
+                    <!--ここからのやつはcomponentから持ってきてます-->
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                <!--現在ログインしているユーザーの名前が表示されるようになっている-->
+                                <div>{{ Auth::user()->name }}</div>
+                      <!--  <div>テストユーザー</div> -->
+                                <div class="ml-1">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </x-slot>
+                        <x-slot name="content">
+                             <x-dropdown-link :href="route('main')">
+                                {{ __('メインページ') }}
+                            </x-dropdown-link>
+                            
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('プロフィール') }}
+                            </x-dropdown-link>
+    
+                            <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+    
+                                <x-dropdown-link :href="route('logout')"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                    {{ __('ログアウト') }}
+                                </x-dropdown-link>
+                            </form>
+                        </x-slot>
+                    </x-dropdown>
+                </div>
+          <div>
+        </div>
             <!-- Page Content -->
             <main>
                 <div class="py-12">

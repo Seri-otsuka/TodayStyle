@@ -42,8 +42,13 @@
         <!-- area -->
         <div class="mt-4">
             <div>
-            <x-input-label for="id" :value="__('お住いの地域')" />
-            
+            <x-input-label for="area_id" :value="__('お住いの地域')" />
+                <select type="text" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" name="area_id" required>
+                    <option disabled style='display:none;' @if (empty($user->area_id)) selected @endif>選択してください</option>
+                    @foreach($areas as $area)
+                        <option value="{{ $area->id }}" @if (isset($user->area_id) && ($user->area_id === $area->id)) selected @endif>{{ $area->name }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         
@@ -72,9 +77,11 @@
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('すでに登録していますか？') }}
             </a>
-
+            
+            
             <x-primary-button class="ml-4">
-                {{ __('Register') }}
+                <a href="/register2">
+                {{ __('次へ') }}
             </x-primary-button>
         </div>
     </form>

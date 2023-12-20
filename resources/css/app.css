@@ -9,16 +9,16 @@ table {
 }
 
 /* 上の余白消す */
-* { 
-    margin: 0px; 
-    padding: 0px; 
+body { 
+  margin: 0;
+  padding:0; 
 }
 
 
 /* 画面の色・比率 */
 .WebpageColor_box {
   width: 1400px;
-  height: 2500px;
+  height: 2700px;
   background: #d5d5d5;
 }
 
@@ -129,7 +129,7 @@ p.kaiwa-text:last-child {
 
 /*dropdown用 flex-endで右寄せ でも反映されて無さそう？*/
 .dropdown{
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 /* p184参考書より コンテンツの最大表示幅 */
@@ -157,6 +157,14 @@ p.kaiwa-text:last-child {
 	position: relative;
 	color: white;
 	font-family: 'Hattori Hanzo', serif;
-	margin: 6% 0% 10%;
-	font-size: 730%;
+	/*margin: 6% 0% 10%;*/
+	font-size: 500%;
+}
+
+/* 日付とドロップダウンの場所調整 */
+.header-contents{
+  width: 1400px;  /*  縦横比 */
+  height: 100px;  /*         */
+  display: flex;                   /* flexboxの指定 */
+  justify-content: space-between;  /*               */
 }

@@ -9,9 +9,20 @@ class areas extends Model
 {
     use HasFactory;
     
+    //書いたクラス内、継承されるクラス内で使用可能(グローバス変数みたいなもん)
+    protected $fillable = [
+        'name',
+        ];
+    
+    
+    //usersテーブルに対してのリレーション
+    public function users()
+    {
+        return $this->hasMany(user::class,'area_id', 'id');    
+    }
     //ユーザーに対して1:1
-      public function user()
+     /* public function user()
     {
         return $this->belongsTo(User::class);
-    }
+    }*/
 }

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\areas;
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +21,13 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        //全件渡すregisterにareasテーブルにデータを
+        $areas = areas::all();
+        
+        return view('auth.register')
+            ->with([
+                'areas' => $areas,
+            ]);
     }
 
     /**
@@ -30,12 +37,13 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        
+        $areas = areas::all();
+        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'area' => ['required', 'string', 'max:50'],
-            'temperature' => ['required', 'int', 'max:11'],
             
         ]);
 
@@ -43,7 +51,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'area' => $request->area,
+            'area_id' => $request->area,
             'temperature' => $request->temperature,
         ]);
 
@@ -51,6 +59,9 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME) 
+            ->with([
+                'areas' => $areas,
+            ]);;
     }
 }
