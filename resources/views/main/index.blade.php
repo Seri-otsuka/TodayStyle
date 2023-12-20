@@ -18,6 +18,7 @@
             　　　　　　　
                 <center>
                     <div class="WebpageColor_box">
+                        <!-- ヘッダー部 -->
                         <div class="header-contents">
                             <!--日付-->
                             <font size="7"> 
@@ -42,14 +43,15 @@
                             </font size>
                             
                             <!-- 現在の天気・温度表示用 表示分けないなら一個でいいかも -->
-                            <p id="sampleweather" class="weather-social-text">
+                            <p id="sampleweather" style="position: relative;font-family: 'Hattori Hanzo', serif;font-size: 500%;">
                              
                             </p>
-                            <p id="sampletera" class="weather-social-text">
+                            <p id="sampletera" style="position: relative;font-family: 'Hattori Hanzo', serif;font-size: 500%;">
                                 
                             </p>
                             
-                            <!-- Settings Dropdown -->
+                            <!-- Settings Dropdown 
+                                 メニュー表示用    -->
                             <div class="hidden sm:flex sm:items-center sm:ml-6 dropdown" style="margin-right: 2%;">
                                 <!--ここからのやつはcomponentから持ってきてます-->
                                 <x-dropdown align="right" width="48">
@@ -83,19 +85,40 @@
                                     </x-slot>
                                 </x-dropdown>
                             </div>
+                            
                         </div>
+                        
                         <!---天気表示（黒おび）-->
-                        <div class="weather_box wrapper weather-contents">
+                        <div class="weather_box wrapper weather-contents weather-social-text">
                             
                             <!-- 都道府県表示用 -->
-                            <div style="font-size: 300%;font-family: monospace;color: white;">
+                            <div>
                                 兵庫県
                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" style="max-width: 70%">
                             </div>
                             <!---お天気アイコン-->
 				            <div>
-        	      			    <p>
-                                    <img id="click_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" class="weather-social"/>
+				                朝
+                                <img id="click_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 160px;"/>
+                            	<!-- 湿度 -->
+                            	<p>
+                            	    10%
+                            	</p>
+				            </div>
+				            <div>
+				                昼
+                                <img id="noon_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 160px;"/>
+                                <!-- 湿度 -->
+                                <p>
+                                    10%
+                                </p>
+				            </div>
+				            <div>
+                            	 夜
+                                <img id="night_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 160px;"/>
+                            	<!-- 湿度 -->
+                            	<p>
+                            	    20%
                             	</p>
 				            </div>
 			    	        <script>
@@ -118,14 +141,8 @@
                 				}
 			                </script>
 			                
-			                
-			                
-			                
-
-
-
                             
-                            <!---環境指数-->
+                            <!---不快指数-->
                             <div>
                                 <p>
                                     <img id="click_KankyouSisuu" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png" class="weather-social" />

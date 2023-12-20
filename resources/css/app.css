@@ -154,11 +154,9 @@ p.kaiwa-text:last-child {
 }
 
 .weather-social-text{
-	position: relative;
+	font-size: 250%;
+	font-family: 'Hattori Hanzo',monospace;
 	color: white;
-	font-family: 'Hattori Hanzo', serif;
-	/*margin: 6% 0% 10%;*/
-	font-size: 500%;
 }
 
 /* 日付とドロップダウンの場所調整 */
