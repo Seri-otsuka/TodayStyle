@@ -14,16 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
-Route::get('/top', function () {
+Route::get('/', function () {
     return view('toppage');
 });
 
 Route::get('/main', function () {
-    return view('main.index');});
+    return view('main.index');})->name('main');
     
 /*とりあえずお試しのルーティング(服選ぶページ)*/    
 Route::get('/register2', function () {

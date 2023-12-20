@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'area',
+        'area_id',
         'temperature', 
     ];
 
@@ -59,6 +59,6 @@ class User extends Authenticatable
     //areaに対して
      public function areas()
     {
-        return $this->belongsTo(Areas::class);
+        return $this->belongsTo(areas::class);
     }
 }

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->integer('temperature');
             $table->foreignId('area_id')->constrained('areas')->onDelete('cascade');
+            $table->foreignId('area_finely_id')->constrained('areas_finely')->onDelete('cascade');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();

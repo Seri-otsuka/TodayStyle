@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('areas', function (Blueprint $table) {
+        Schema::create('areas_finely', function (Blueprint $table) {
             $table->id();
-            $table->string('name',50);
+            $table->foreignId('area_id')->constrained('areas')->onDelete('cascade');
+            $table->string('name',100);
             $table->string('path');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('areas');
+        Schema::dropIfExists('areas_finely');
     }
 };
