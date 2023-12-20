@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('area_id')->constrained('areas')->onDelete('cascade');
             $table->string('name',100);
+            $table->integer('latitude'); //緯度
+            $table->integer('longitude'); //経度
             $table->string('path');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
