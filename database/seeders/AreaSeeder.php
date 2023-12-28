@@ -131,22 +131,6 @@ class AreaSeeder extends Seeder
          ]);
          
      DB::table('areas')->insert([
-            'name' => '山梨県',
-            'path' => '',
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-            'deleted_at' => null,
-         ]);
-         
-     DB::table('areas')->insert([
-            'name' => '長野県',
-            'path' => '',
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-            'deleted_at' => null,
-         ]);
-         
-     DB::table('areas')->insert([
             'name' => '新潟県',
             'path' => '',
             'created_at' => new DateTime(),
@@ -154,7 +138,7 @@ class AreaSeeder extends Seeder
             'deleted_at' => null,
          ]);
          
-     DB::table('areas')->insert([
+    DB::table('areas')->insert([
             'name' => '富山県',
             'path' => '',
             'created_at' => new DateTime(),
@@ -172,6 +156,22 @@ class AreaSeeder extends Seeder
          
      DB::table('areas')->insert([
             'name' => '福井県',
+            'path' => '',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            'deleted_at' => null,
+         ]);
+         
+     DB::table('areas')->insert([
+            'name' => '山梨県',
+            'path' => '',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            'deleted_at' => null,
+         ]);
+         
+     DB::table('areas')->insert([
+            'name' => '長野県',
             'path' => '',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
@@ -267,7 +267,7 @@ class AreaSeeder extends Seeder
          ]);
          
      DB::table('areas')->insert([
-            'name' => '島根県',
+            'name' => '岡山県',
             'path' => '',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
@@ -275,7 +275,7 @@ class AreaSeeder extends Seeder
          ]);
          
      DB::table('areas')->insert([
-            'name' => '岡山県',
+            'name' => '島根県',
             'path' => '',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
@@ -372,7 +372,7 @@ class AreaSeeder extends Seeder
          ]);
          
      DB::table('areas')->insert([
-            'name' => '宮城県',
+            'name' => '宮崎県',
             'path' => '',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
