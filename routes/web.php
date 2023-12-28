@@ -25,6 +25,12 @@ Route::get('/', function () {
 Route::get('/main', function () {
     return view('main.index');})->name('main');
     
+Route::get('/coordination', function () {
+    return view('main.coordination');})->name('coordination');
+    
+Route::get('/goout', function () {
+    return view('main.goout');})->name('goout');
+    
 /*とりあえずお試しのルーティング(服選ぶページ)*/    
 Route::get('/register2', function () {
     return view('auth.register2');});

@@ -58,6 +58,7 @@
                                     <x-slot name="trigger">
                                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                             <!--現在ログインしているユーザーの名前が表示されるようになっている-->
+                                            <div>メニュー</div>
                                             {{--<div>{{ Auth::user()->name }}</div>--}}
                                   <!--  <div>テストユーザー</div> -->
                                             <div class="ml-1">
@@ -270,8 +271,33 @@
                                 </td>
                                  <td>
                                     <div class="kaiwa">
+                                        <a
+                                            x-data=""
+                                            x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
+                                        >
                                         <figure class="kaiwa-img-right">
                                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
+                                            </a>
+                                              <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
+                                                <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+                                                    @csrf
+                                                    @method('delete')
+                                                    
+                                                    
+                                                    <h2 class="text-2xl font-medium text-gray-900">
+                                                        {{ __('悲壮犬とは？') }}
+                                                    </h2>
+                                                    <div class="flex justify-between">
+                                                        <img class="w-2" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
+                                                    <div class="text-lg font-medium text-gray-900">名前：悲壮犬</div>
+                                                    </div>
+                                                    <div class="mt-6 flex justify-end">
+                                                        <x-secondary-button x-on:click="$dispatch('close')">
+                                                            {{ __('戻る') }}
+                                                        </x-secondary-button>
+                                                    </div>
+                                                </form>
+                                            </x-modal>
                                          </figure>
                                      </div>
                                  </td>
