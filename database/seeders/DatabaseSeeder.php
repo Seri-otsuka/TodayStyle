@@ -18,14 +18,27 @@ class DatabaseSeeder extends Seeder
     {
         
         //ここにはuser
-        //北海道北部にお住いのテストユーザーさん暑がり
+        //北海道の旭川にお住いのテストユーザー1さん暑がり
         DB::table('users')->insert([
-            'name' => 'テストユーザー',
-            'email' => 'test@gmail',
-            'password' => bcrypt('password'),
+            'name' => 'テストユーザー1',
+            'email' => 'test1@gmail',
+            'password' => bcrypt('password1'),
+            'temperature' => '0',
             'area_id' => '1',
             'area_finely_id' => '1',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            'deleted_at' => null,
+        ]);
+        
+        //青森の弘前にお住まいのテストユーザー2さん寒がり
+         DB::table('users')->insert([
+            'name' => 'テストユーザー2',
+            'email' => 'test2@gmail',
+            'password' => bcrypt('password2'),
             'temperature' => '1',
+            'area_id' => '2',
+            'area_finely_id' => '5',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'deleted_at' => null,
