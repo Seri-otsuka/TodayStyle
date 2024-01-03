@@ -142,7 +142,7 @@
                 				}
 			                </script>
 			                
-                            
+			                
                             <!---不快指数-->
                             <div>
                                 <p>
@@ -205,20 +205,51 @@
                             </script>
                         </div>
 
-                    
+                        <!--戻るボタン-->
+                        <div class="test01"　>
+                            <button onclick="">
+                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" width=150px height=150px; />
+                            </button>
+                        </div>
+
                         <!---選んだ服のアイコン-->
-                        <body>
-                            <table align="center" cellspacing="100">
-                                <tr>
-                                    <td class="clothes_box1"></td>
-                                    <td class="clothes_box1"></td>
-                                </tr>
-                                <tr>
-                                    <td class="clothes_box1"></td>
-                                    <td class="clothes_box1"></td>
-                                </tr>
-                            </table>
-                        </body>
+            			<font size="6">
+                            <body>
+                                <table align="center"  border="1">
+            				        <tr>
+                                        <td>　　　　</td>
+            				            <td>トップス</td>
+                                        <td>　　　　</td>
+            				　          <td>ボトムス</td>
+            				            <td>　　　　</td>
+                                    </tr>			
+                                    <tr>
+            				　          <td>　　　</td>
+            				            <td class="clothes_box1"></td>
+            				            <td>　　　　</td>
+                                        <td class="clothes_box1"></td>
+            				            <td>　　　</td>
+                                    </tr>
+            			        </table>
+            
+            			       <table align="center"  border="1">
+                    				<tr>
+                                        <td>　　　　</td>
+                    				    <td>アウター</td>
+                                        <td>　　　　</td>
+                    				　  <td>お出かけ</td>
+                    				    <td>　　　　</td>
+                                    </tr>			
+                                    <tr>
+                    				    <td>　　　</td>
+                    				    <td class="clothes_box1"></td>
+                    				    <td>　　　</td>
+                                        <td class="clothes_box1"></td>
+                    				    <td>　　　</td>
+                                    </tr>
+                    			</table>
+                            </body>
+            			</font>
                     
                         <!--かご-->
                         <center>
