@@ -19,15 +19,17 @@ class AreaSeeder extends Seeder
         
          DB::table('areas')->insert([
             'name' => '北海道',
-            'path' => 'https://res.cloudinary.com/dlfimibcq/image/upload/v1703860391/hokkaidou_far9ys.png',
+            'path' => 'https://res.cloudinary.com/dlfimibcq/image/upload/v1704285180/%E7%84%A1%E9%A1%8C18_20231231162348_ebavhj.png',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'deleted_at' => null,
         ]);
-	
+        
+    
+	//都道府県の番号変更待ち
 	 DB::table('areas')->insert([
             'name' => '青森県',
-            'path' => 'https://res.cloudinary.com/dlfimibcq/image/upload/v1703860718/aomori_qowgux.png',
+            'path' => '',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'deleted_at' => null,

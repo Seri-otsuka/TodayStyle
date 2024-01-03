@@ -18,7 +18,7 @@ body {
 /* 画面の色・比率 */
 .WebpageColor_box {
   width: 1400px;
-  height: 2700px;
+  height: 3100px;
   background: #d5d5d5;
 }
 
@@ -36,7 +36,10 @@ body {
   color: #2196F3;
 }
 
-
+/* 戻るボタンを右寄せするcss*/
+.test01 {
+	text-align: right;
+}
 
 /* 選んだ服のアイコンの枠 */
 .clothes_box1 {
@@ -45,6 +48,7 @@ body {
   background: #ffffff;
   border-radius: 20px;
 }
+
 
 /* shopのアイコン */
 .btn-social-square {

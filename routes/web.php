@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,8 +23,10 @@ Route::get('/', function () {
     return view('toppage');
 });
 
-Route::get('/main', function () {
-    return view('main.index');})->name('main');
+/*Route::get('/main', function () {
+    return view('main.index');})->name('main');*/
+    
+Route::get('/main',[CategoryController::class,'category'])->name('main');
     
 Route::get('/coordination', function () {
     return view('main.coordination');})->name('coordination');
