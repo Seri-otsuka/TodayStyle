@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use DateTime;
 
 class Area_finelySeeder extends Seeder
 {
@@ -428,13 +430,13 @@ class Area_finelySeeder extends Seeder
             'deleted_at' => null,
         ]);
         
-        //福井はまだでーたがないので保留
+        //福井
          DB::table('areas_finely')->insert([
             'area_id' => '18',
             'name' => '福井',
             'latitude' => '36.0657060123763',
             'longitude' => '136.220521174451',
-            'path' => '',
+            'path' => 'https://res.cloudinary.com/dlfimibcq/image/upload/v1704459595/%E7%A6%8F%E4%BA%95%E4%B8%8A_aq341g.png',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'deleted_at' => null,
@@ -445,7 +447,7 @@ class Area_finelySeeder extends Seeder
             'name' => '若狭',
             'latitude' => '35.5510577404354',
             'longitude' => '135.909067119202',
-            'path' => '',
+            'path' => 'https://res.cloudinary.com/dlfimibcq/image/upload/v1704459595/%E7%A6%8F%E4%BA%95%E4%B8%8B_k9p7dy.png',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'deleted_at' => null,
