@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FashonController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,8 @@ Route::get('/', function () {
 /*Route::get('/main', function () {
     return view('main.index');})->name('main');*/
     
-Route::get('/main',[CategoryController::class,'category'])->name('main');
+//Route::get('/main',[CategoryController::class,'category'])->name('main');
+//Route::get('/main/{user}',[FashonController::class,'fashon'])->name('main.fashon');
     
 Route::get('/coordination', function () {
     return view('main.coordination');})->name('coordination');
@@ -34,11 +36,11 @@ Route::get('/coordination', function () {
 Route::get('/goout', function () {
     return view('main.goout');})->name('goout');
     
-/*とりあえずお試しのルーティング(服選ぶページ)*/    
+/*とりあえずお試しのルーティング(服選ぶページ)このページはのちに消える*/    
 Route::get('/register2', function () {
     return view('auth.register2');});
 
-//新規登録入力情報の確認ページ
+//新規登録入力情報の確認ページこのページも後々消える
 Route::get('/check', function () {
     return view('auth.check');});
 
@@ -48,6 +50,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/main/{user}',[FashonController::class,'fashon'])->name('main.fashon');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
