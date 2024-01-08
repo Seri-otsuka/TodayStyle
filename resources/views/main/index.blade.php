@@ -219,6 +219,7 @@
             				        <tr>
                                         <td>　　　　</td>
             				            <td>トップス</td>
+            				            <div>{{ Auth::user()->name }}</div>
                                         <td>　　　　</td>
             				　          <td>ボトムス</td>
             				            <td>　　　　</td>
@@ -279,6 +280,7 @@
                                 </button>
                             </div>
                         </center>
+                        <div></div>
                     
                     
                         <!--ワンポイントアドバイス-->

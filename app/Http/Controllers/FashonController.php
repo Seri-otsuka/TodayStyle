@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Fashon;
+use App\Models\User;
+use App\Models\Category;
 
 class FashonController extends Controller
 {
         //
      public function fashon(Fashon $fashon)
     {
-        return $fashon->get();
+        return view('main.index')->with([
+             'fashons' => $fashon
+            ]);
     }
      //登録
       public function store($categoryID) {
