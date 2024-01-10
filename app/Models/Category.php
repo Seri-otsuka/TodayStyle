@@ -9,10 +9,18 @@ class Category extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'name',
+        'genre',
+        'image_true',
+        'image_false',
+    ];
+    
      public function user()
     {
         return $this->belongsTo(User::class);
     }
+    
 		public function fashon()
     {
         return $this->belongsTo(Fashon::class);

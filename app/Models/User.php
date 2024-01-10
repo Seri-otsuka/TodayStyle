@@ -50,6 +50,16 @@ class User extends Authenticatable
         return $this->hasMany(Fashon::class);    
    }
    
+   public function fashon_categories()
+   {
+       return $this->belongsToMany(Category::class, 'fashons', 'user_id', 'category_id');
+   }
+   
+   public function is_fashon($CategoryId)
+   {
+        return $this->fashons()->where('category_id', $categoryId)->exists();
+   }
+   
    //categoryテーブルに関して
     public function categories()
     {
@@ -61,4 +71,16 @@ class User extends Authenticatable
     {
         return $this->belongsTo(areas::class);
     }
+    
+    //areas_finely対して
+    public function areas_finely()
+    {
+        return $this->belongsTo(areas_finely::class);
+    }
+    
+    public function category_users()
+    {
+        return $this->belongsToMany(Fashon::class, 'goods', 'user_id', 'article_id');
+    }
+    
 }

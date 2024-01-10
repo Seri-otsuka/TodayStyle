@@ -9,15 +9,20 @@ class Fashon extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'user_id',
+        'category_id',
+    ];
     
-    //ファッションはカテゴリーに対して多く存在する
-    public function categories()
-    {
-        return $this->hasMany(Category::class);
-    }
     
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
+    }
+    
+    //ファッションはカテゴリーに対して多く存在する
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

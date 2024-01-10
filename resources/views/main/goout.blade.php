@@ -434,48 +434,54 @@ p.kaiwa-text:last-child {
                         </font size>
 
 
-			<!-- 現在の天気・温度表示用 表示分けないなら一個でいいかも -->
-                            <p id="sampleweather" style="position: relative;font-family: 'Hattori Hanzo', serif;font-size: 500%;">
-                             
-                            </p>
-                            <p id="sampletera" style="position: relative;font-family: 'Hattori Hanzo', serif;font-size: 500%;">
-                                
-                            </p>
+			                <!-- 現在の天気・温度表示用 表示分けないなら一個でいいかも -->
+                        <p id="sampleweather" style="position: relative;font-family: 'Hattori Hanzo', serif;font-size: 500%;">
+                        jfaff
+                        </p>
                     
                         <!---天気表示（黒おび）-->
                         <div class="weather_box wrapper weather-contents">
 
-			<!-- 都道府県表示用 -->
+			                  <!-- 都道府県表示用 -->
                             <div>
-                                兵庫県
+                              兵庫県
                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" style="max-width: 70%">
                             </div>
-
-				<!---お天気アイコン-->
-				<div>
-				                朝
-                                <img id="click_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 160px;"/>
+                            
+                            <!---お天気アイコン-->
+				                    <div id="morning_OTENKI" >
+				                      朝
+                              <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 120px;"/>
                             	<!-- 湿度 -->
-                            	<p>
-                            	    10%
+                            	<p id="temperature_morning" style="margin: -2% 0% -10%;">
+                            	    5°C
                             	</p>
-				            </div>
-				            <div>
-				                昼
-                                <img id="noon_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 160px;"/>
-                                <!-- 湿度 -->
-                                <p>
-                                    10%
-                                </p>
-				            </div>
-				            <div>
-                            	 夜
-                                <img id="night_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 160px;"/>
+                            	<p id="rainypercent_morning">
+                            	    💧10% 　<!-- 半角,全角空白で位置調整 -->
+                            	</p>
+				                    </div>
+				                    <div>
+				                      昼
+                              <img id="noon_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 120px;"/>
+                              <!-- 湿度 -->
+                              <p id="temperature_noon" style="margin: -2% 0% -10%;">
+                          	    5°C
+                          	  </p>
+                              <p id="rainypercent_noon" style="margin: -14% 0% -10%;">
+                                  10%
+                              </p>
+				                    </div>
+				                    <div>
+                            	夜
+                              <img id="night_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 120px;"/>
                             	<!-- 湿度 -->
-                            	<p>
+                            	<p id="temperature_night" style="margin: -2% 0% -10%;">
+                            	    5°C
+                            	</p>
+                            	<p id="rainypercent_night" style="margin: -14% 0% -10%;">
                             	    20%
                             	</p>
-				</div>
+				                    </div>
 			    	<script>
 					var click = 0;
 					var OTENKI = [

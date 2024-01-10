@@ -46,9 +46,7 @@
                             <p id="sampleweather" style="position: relative;font-family: 'Hattori Hanzo', serif;font-size: 500%;">
                              
                             </p>
-                            <p id="sampletera" style="position: relative;font-family: 'Hattori Hanzo', serif;font-size: 500%;">
-                                
-                            </p>
+                           
                             
                             <!-- Settings Dropdown 
                                  メニュー表示用    -->
@@ -98,31 +96,40 @@
                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" style="max-width: 70%">
                             </div>
                             <!---お天気アイコン-->
-				            <div>
+				            <div id="morning_OTENKI" >
 				                朝
-                                <img id="click_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 160px;"/>
+                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 120px;"/>
                             	<!-- 湿度 -->
-                            	<p>
-                            	    10%
+                            	<p id="temperature_morning" style="margin: -2% 0% -10%;">
+                            	    5°C
+                            	</p>
+                            	<p id="rainypercent_morning">
+                            	    💧10% 　<!-- 半角,全角空白で位置調整 -->
                             	</p>
 				            </div>
 				            <div>
 				                昼
-                                <img id="noon_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 160px;"/>
+                                <img id="noon_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 120px;"/>
                                 <!-- 湿度 -->
-                                <p>
+                                <p id="temperature_noon" style="margin: -2% 0% -10%;">
+                            	    5°C
+                            	</p>
+                                <p id="rainypercent_noon" style="margin: -14% 0% -10%;">
                                     10%
                                 </p>
 				            </div>
 				            <div>
                             	 夜
-                                <img id="night_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 160px;"/>
+                                <img id="night_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 120px;"/>
                             	<!-- 湿度 -->
-                            	<p>
+                            	<p id="temperature_night" style="margin: -2% 0% -10%;">
+                            	    5°C
+                            	</p>
+                            	<p id="rainypercent_night" style="margin: -14% 0% -10%;">
                             	    20%
                             	</p>
 				            </div>
-			    	        <script>
+			    	        <!--<script>
 					            var click = 0;
 				                var OTENKI = [
                                     /* 曇りのち晴れ */
@@ -140,16 +147,16 @@
                 					click++;
                 					this.src = OTENKI[click%OTENKI.length];
                 				}
-			                </script>
+			                </script>-->
 			                
 			                
                             <!---不快指数-->
-                            <div>
+                            <div id="hukaiSisuu" class="weather-social">
                                 <p>
-                                    <img id="click_KankyouSisuu" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png" class="weather-social" />
+                                    <img  src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png"  />
                                 </p>
                             </div>
-            			    <script>
+            			    <!---<script>
                 				var click = 0;
                 				var KankyouSisuu = [
                                     /* 最高 */
@@ -167,42 +174,118 @@
                 					click++;
                 					this.src = KankyouSisuu[click%KankyouSisuu.length];
                 				}
-                			</script>
+                			</script>--->
 	
 	
 	
 			                
-			                <script>
-                                let lat = 35.6785;
-                                let long = 139.6823;
-                                
-                          
-                                const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&current=temperature_2m,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
-                                
-                                fetch(apiUrl)
-                                .then(response => {
-                                    return response.json();
-                                })
-                                .then(data =>{
-                                    const jsonData = data;
-                                    const weather = jsonData.current.weather_code;
-                                    const temperature = jsonData.current.temperature_2m;
-                          
-                                    if(weather === 0){
-                                      sampleweather.innerHTML = "☀　"+ temperature + "℃";
-                          
-                                    }
-                                    
-                                    else{
-                                      sampleweather.innerHTML = "☂　"+ temperature + "℃";
-                                    }
-                          
-                                    
-                                })
-                                .catch(error => {
-                                    console.error('データ取得に失敗しました',error)
-                                });
-                            </script>
+  <script>
+
+    let lat = 35.6785;
+    let long = 139.6823;
+    
+    /*
+     URL:'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
+   
+    現在の気温
+    現在の天気コード
+    現在の湿度
+    時間毎の天気コード
+    時間毎の降水確率
+    時間毎の気温
+
+    */
+    const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+long+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
+
+    fetch(apiUrl)
+    .then(response => {
+        return response.json();
+    })
+    .then(data =>{
+        const jsonData = data;
+        const weather = jsonData.current.weather_code;                                        
+        const temperature = jsonData.current.temperature_2m;                                  //現在の気温
+        const probability = Array.from(jsonData.hourly.precipitation_probability);            //時間毎の降水確率  
+        const temperature2 = Array.from(jsonData.hourly.temperature_2m);                      //時間毎の気温 
+        const weather2 = Array.from(jsonData.hourly.weather_code);                            //時間毎のの天気コード
+        const humidity = jsonData.current.relative_humidity_2m;                                      //現在の湿度                             
+        const fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;   //不快指数
+        
+       
+        
+        //天気コード分岐
+            //晴れ
+            if(weather === 0 || weather === 1){
+              sampleweather.innerHTML = "☀"+temperature + "℃";
+  
+            }
+            //曇り
+            else if(weather === 2 || weather === 3){
+              sampleweather.innerHTML =  "☁"+temperature + "℃";
+            }
+            //雨
+            else if(weather === 69 || weather === 84  ){
+              sampleweather.innerHTML =  "☂"+temperature + "℃";
+            }
+            else{
+              sampleweather.innerHTML = "★"+temperature + "℃";
+            }
+
+  
+            
+
+        //降水確率（平均を出力　24時間分の合計÷24）
+        let psum =  probability.reduce(function(acc ,cur){
+            return acc + cur;
+        });
+        //不快指数分岐
+        //寒い
+            if(fukai <= 54){
+           
+              hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'>";
+  
+            }
+            //肌寒い
+            else if(fukai >= 55 && fukai <= 65 ){
+                console.log("肌寒い　"+ fukai);
+            }
+            //快い
+            else if(fukai >= 65 && fukai <= 75 ){
+                console.log("快い　"+ fukai);
+            }
+            //暑い
+            else if(fukai >= 75 && fukai <= 85 ){
+                console.log("暑い　"+ fukai);
+            }
+            //暑くてたまらない
+            else if(fukai >= 86){
+                console.log("暑くてたまらない　"+ fukai);
+            }
+            
+            
+            
+
+        //出力
+        //console.log(probability);
+       // morning_OTENKI.innerHTML = "<img src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'>";
+    
+    
+    
+        console.log("昼の気温は"+temperature2[13]+"℃です");
+        console.log("夜の気温は"+temperature2[19]+"℃です");
+        console.log("降水確率は"+probability[7]"％です");
+        console.log("降水確率は"+probability[13]"％です");
+        console.log("降水確率は"+probability[19]"％です");
+
+        
+    })
+    
+    
+    .catch(error => {
+        console.error('データ取得に失敗しました',error)
+    });
+</script>		
+
                         </div>
 
                         <!--戻るボタン-->
@@ -219,7 +302,6 @@
             				        <tr>
                                         <td>　　　　</td>
             				            <td>トップス</td>
-            				            <div>{{ Auth::user()->name }}</div>
                                         <td>　　　　</td>
             				　          <td>ボトムス</td>
             				            <td>　　　　</td>
@@ -294,7 +376,7 @@
                        	                            ワンポイントアドバイス
                     	                        </font>
                                             </p> 
-                                            <p class="kaiwa-text">
+                                            <p id="advice" class="kaiwa-text">
                                                 <font size="4">
                                                     温度が急激に下がっています。マフラーや手袋があると良いでしょう。 カイロがあるとより安心です。
                                                     <!-- Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.-->
@@ -343,4 +425,4 @@
   <!-- ... -->
 </svg>
         </body>
-    </html>
+    </html> 
