@@ -43,7 +43,8 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed','digits_between:8,12','alpha_num', Rules\Password::defaults()],
+            //一応半角英数字のヴァリデーション入れてるけど、もともと半角英数字でしか入力できないようになってる。
             
         ]);
 

@@ -9,7 +9,13 @@ use App\Models\Category;
 
 class FashonController extends Controller
 {
-        //
+    
+    public function fashon(Fashon $fashon)
+    {   
+        return $fashon0>get();
+    }
+    //とりあえずコメントアウトしときます。
+        /*
      public function fashon(Fashon $fashon)
     {
         return view('main.index')->with([
@@ -32,4 +38,5 @@ class FashonController extends Controller
         }
         return back();
     }
+    */
 }

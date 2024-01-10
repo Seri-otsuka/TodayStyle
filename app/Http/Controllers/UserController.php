@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Imge;
+use App\Models\Category;
+
 
 class UserController extends Controller
 {
@@ -37,5 +40,5 @@ class UserController extends Controller
             //データを呼び出す
             $area = Area::get()]);
     }
-
+    
 }

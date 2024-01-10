@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FashonController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,7 @@ Route::get('/', function () {
 /*Route::get('/main', function () {
     return view('main.index');})->name('main');*/
     
-//Route::get('/main',[CategoryController::class,'category'])->name('main');
+Route::get('/main',[CategoryController::class,'fashon_categories'])->name('main');
 //Route::get('/main/{user}',[FashonController::class,'fashon'])->name('main.fashon');
     
 Route::get('/coordination', function () {
@@ -50,7 +51,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/main/{user}',[FashonController::class,'fashon'])->name('main.fashon');
+   // Route::get('/main/{user}',[FashonController::class,'fashon'])->name('main.fashon');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
