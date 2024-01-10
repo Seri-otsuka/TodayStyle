@@ -67,15 +67,15 @@ class User extends Authenticatable
     }
 
     //areaに対して
-     public function areas()
+     public function area()
     {
-        return $this->belongsTo(areas::class);
+        return $this->belongsTo(Area::class);
     }
     
     //areas_finely対して
     public function areas_finely()
     {
-        return $this->belongsTo(areas_finely::class);
+        return $this->belongsTo(Area_finely::class);
     }
     
     public function category_users()

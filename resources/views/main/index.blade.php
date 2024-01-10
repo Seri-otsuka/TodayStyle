@@ -15,7 +15,7 @@
              <!--ここからしたにコード書いてね～！-->
             
             <div  class="Hiritu"> 
-            　　　　　　　
+            　　
                 <center>
                     <div class="WebpageColor_box">
                         <!-- ヘッダー部 -->
@@ -92,8 +92,9 @@
                             
                             <!-- 都道府県表示用 -->
                             <div>
-                                兵庫県
-                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" style="max-width: 70%">
+                                {{ $area->name }}
+                                <!--↓↓サイズ調整お願いします-->
+                                <img src="{{ $area->path}}" style="max-width: 70%">
                             </div>
                             <!---お天気アイコン-->
 				            <div id="morning_OTENKI" >
@@ -294,6 +295,7 @@
                                  <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" width=150px height=150px; />
                             </button>
                         </div>
+                        
 
                         <!---選んだ服のアイコン-->
             			<font size="6">
