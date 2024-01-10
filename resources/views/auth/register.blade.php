@@ -1,35 +1,10 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <!--全体の背景の範囲-->
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-300">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-    <div class="w-full sm:max-w-xl mt-6 px-6 py-4 bg-gray-300 shadow-md overflow-hidden sm:rounded-lg">
+<x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('ニックネーム')" />
+            <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
@@ -78,7 +53,7 @@
                         <option value="{{ $area->id }}" @if (isset($user->area_id) && ($user->area_id === $area->id)) selected @endif>{{ $area->name }}</option>
                     @endforeach
                 </select>
-         </div>
+            </div>
             <div class="flex flex-row">
                 <img
               class="m-6 w-8/12 h-8/12 rounded-lg shadow-xl"
@@ -92,6 +67,7 @@
                     @endforeach
                 </select>
             </div>
+            
         </div>
         
         <!--temperature暑がりは0寒がりは1でデータベースに格納-->
@@ -112,9 +88,10 @@
             </ul>
         </div>
         
-        <div class="mt-6">
         <div class="flex flex-col  items-center pt-6 sm:pt-0 bg-gray-300">
+            
             <!--入力ブロックの範囲-->
+            <div class="w-full sm:max-w-xl mt-6 px-6 py-4 bg-gray-300 shadow-md overflow-hidden sm:rounded-lg">
                  <form method="POST" action="{{ route('register') }}">
                      <!-- アイコン-->
                      <!--一段目-->
@@ -162,16 +139,60 @@
                             </x-modal>
                          </figure>
                          <x-input-label class="" for="email" :value="__('キャミ')" />
-                         </center>
+                        </div>
+                        
+                        
+                         <div>
+                         <center>
+                        <a
+                            x-data=""
+                            x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
+                        >
+                        <figure class="w-16 rounded-md bg-white pointer-events-auto indigo-500">
+                               <img class="w-16 rounded-md bg-white pointer-events-auto indigo-500" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0294_ziqwci.png">
+                            </a>
+                              <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
+                                <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+                                    @csrf
+                                    @method('delete')
+                                    
+                                    <!--ここから中身の内容-->
+                                   <div class="flex items-center justify-center w-full">
+                                    <label for="dropzone-file" class="flex mt-6 ml-2 justify-center h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                            </svg>
+                                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">クリックして画像をアップロードしてください</span> 
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                        </div>
+                                        <input id="dropzone-file" type="file" class="hidden" />
+                                    </label>
+                                </div> 
+                                    <div class="mt-6 mb-2 flex justify-end mr-2">
+                                        <x-secondary-button x-on:click="$dispatch('close')">
+                                            {{ __('登録') }}
+                                        </x-secondary-button>
+                                        <div class="ml-2"></div>
+                                        
+                                        <x-secondary-button x-on:click="$dispatch('close')">
+                                            {{ __('戻る') }}
+                                        </x-secondary-button>
+                                    </div>
+                                </form>
+                            </x-modal>
+                         </figure>
+                         <x-input-label class="" for="email" :value="__('ノースリーブ')" />
                         </div>
                     
                      <!--ノースリーブ-->
-                    <div class="mt-4 focus:border-indigo-500 focus:ring-indigo-500 ">
+                   {{-- <div class="mt-4 focus:border-indigo-500 focus:ring-indigo-500 ">
                         <center>
                         <img class="w-16 rounded-md bg-white " src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0294_ziqwci.png">
                         <x-input-label class="" for="email" :value="__('ノースリーブ')" />
                         </center>
                     </div>
+                    --}}
                     
                     
                     <!--半袖-->
@@ -288,7 +309,6 @@
                 </form>
             </div>
         </div>
-    </div>
         <!--ここにif関数で0か1を判断してtemperatureテーブルに格納して判断する-->
         <!--if関数で判断するより、input内で判断した方がいいかも-->
         
@@ -304,9 +324,4 @@
             </x-primary-button>
         </div>
     </form>
-     </form>
-     </div>
-            </div>
-        </div>
-    </body>
-</html>
+</x-guest-layout>

@@ -39,6 +39,7 @@ class RegisteredUserController extends Controller
     {
         
         $areas = areas::all();
+        $areas_finely = areas_finely::all();
         
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -53,6 +54,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'area_id' => $request->area,
+            'area_finely_id' => $request->areas_finely,
             'temperature' => $request->temperature,
         ]);
 
@@ -63,6 +65,7 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::HOME) 
             ->with([
                 'areas' => $areas,
-            ]);;
+                'areas_finely' => $areas_finely,
+            ]);
     }
 }
