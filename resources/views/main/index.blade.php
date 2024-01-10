@@ -298,6 +298,7 @@
                         <!---選んだ服のアイコン-->
             			<font size="6">
                             <body>
+                                <div>{{ Auth::user()->area_finely_id->name }}</div>
                                 <table align="center"  border="1">
             				        <tr>
                                         <td>　　　　</td>
