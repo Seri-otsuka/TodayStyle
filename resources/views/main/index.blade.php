@@ -401,17 +401,19 @@ console.error('データ取得に失敗しました',error)
                         <a href="{{ route('goout') }}">
                         <div class="test01"　>
                             <button onclick="">
-                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" width=150px height=150px; />
+                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704939146/bag1_giuxki.png" width=150px height=150px; />
                             </button>
                         </div>
                         </a>
                         
-                         
+                        <!--とりあえず取得できたので貼ってます-->
+                         <div>{{ $finelyarea->name }}</div>
+                         <div>{{ $finelyarea->latitude }}</div><!--緯度-->
+                         <div>{{ $finelyarea->longitude }}</div><!--経度-->
                         <!---選んだ服のアイコン-->
 
             			<font size="6">
                             <body>
-                                <div>{{ Auth::user()->area_finely_id->name }}</div>
                                 <table align="center"  border="1">
             				        <tr>
                                         <td>　　　　</td>

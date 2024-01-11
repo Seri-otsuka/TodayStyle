@@ -73,9 +73,9 @@ class User extends Authenticatable
     }
     
     //areas_finely対して
-    public function area_finely()
+    public function finelyarea()
     {
-        return $this->belongsTo(Area_finely::class);//黄色の文字はモデルの名前
+        return $this->belongsTo(Finelyarea::class);//黄色の文字はモデルの名前
     }
     
     //保留

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Imge;
+use App\Models\Iamge;
 use App\Models\Area;
 use App\Models\Category;
-use App\Models\Area_finely;
+use App\Models\Finelyarea;
 
 
 class UserController extends Controller
@@ -57,11 +57,11 @@ class UserController extends Controller
     public function todouhuken()
     {
         $login_users_area = \Auth::user()->area;
-        $login_users_area_finely = \Auth::user()->areas_finely;
+        $login_users_finelyarea = \Auth::user()->finelyarea;
         
         return view('main.index')->with([
             'area' => $login_users_area,
-            'area_finely' => $login_users_area_finely,
+            'finelyarea' => $login_users_finelyarea,
             ]);
     }
 }

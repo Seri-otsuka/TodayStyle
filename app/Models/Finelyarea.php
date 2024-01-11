@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Area_finely extends Model
+class Finelyarea extends Model
 {
     use HasFactory;
     
@@ -21,6 +21,6 @@ class Area_finely extends Model
     //usersテーブルに対してのリレーション
     public function users()
     {
-        return $this->hasMany(User::class,'area_finely_id', 'id');    
+        return $this->hasMany(User::class,'finelyarea_id', 'id');    
     }
 }
