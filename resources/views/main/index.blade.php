@@ -179,11 +179,11 @@
                 			</script>--->
 <script>
 
-let lat = 35.6785;
-let long = 139.6823;
+let lat = 35.67;
+let long = 139.68;
 
 /*
- URL:'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
+URL:'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
 
 現在の気温
 現在の天気コード
@@ -197,186 +197,198 @@ const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitud
 
 fetch(apiUrl)
 .then(response => {
-    return response.json();
+return response.json();
 })
 .then(data =>{
-    const jsonData = data;
-    const weather = jsonData.current.weather_code;                                        
-    const temperature = jsonData.current.temperature_2m;                                  //現在の気温
-    const probability = Array.from(jsonData.hourly.precipitation_probability);            //時間毎の降水確率  
-    const temperature2 = Array.from(jsonData.hourly.temperature_2m);                      //時間毎の気温 
-    const weather2 = Array.from(jsonData.hourly.weather_code);                            //時間毎のの天気コード
-    const humidity = jsonData.current.relative_humidity_2m;                                      //現在の湿度                             
-    const fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;   //不快指数
-    
+const jsonData = data;
+const weather = jsonData.current.weather_code;                                        
+const temperature = jsonData.current.temperature_2m;                                  //現在の気温
+const probability = Array.from(jsonData.hourly.precipitation_probability);            //時間毎の降水確率  
+const temperature2 = Array.from(jsonData.hourly.temperature_2m);                      //時間毎の気温 
+const weather2 = Array.from(jsonData.hourly.weather_code);                            //時間毎のの天気コード
+const humidity = jsonData.current.relative_humidity_2m;                                      //現在の湿度                             
+const fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;   //不快指数
+
+
+
+//天気コード分岐
+    //晴れ
+    if(weather === 0 || weather === 1){
+      sampleweather.innerHTML = "☀"+temperature + "℃";
+
+    }
+    //一部くもり
+    else if(weather === 2){
+        sampleweather.innerHTML = "🌤のち曇り"+temperature + "℃";
+    }
+    //曇り
+    else if(weather === 3){
+      sampleweather.innerHTML =  "☁ "+temperature + "℃";
+    }
+    //雨
+    else if(weather === 69 || weather === 84  ){
+      sampleweather.innerHTML =  "☂"+temperature + "℃";
+    }
+    else{
+      sampleweather.innerHTML = "★"+temperature + "℃";
+    }
+
+//不快指数分岐
+//寒い
+    if(fukai <= 54){
    
+        hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'>";
+
+    }
+    //肌寒い
+    else if(fukai >= 55 && fukai <= 65 ){
+        hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E7%B5%90%E6%A7%8B%E3%81%84%E3%81%84_h8tsks.png'>";
+    }
+    //快い
+    else if(fukai > 65 && fukai <= 75 ){
+        hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png'>";
+    }
+        //暑い
+    else if(fukai > 75 && fukai <= 85 ){
+        hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png'>";
+    }
+    //暑くてたまらない
+    else if(fukai >= 86){
+        hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png'>";
+    }
     
-    //天気コード分岐
-        //晴れ
-        if(weather === 0 || weather === 1){
-          sampleweather.innerHTML = "☀"+temperature + "℃";
+    //↓朝・昼・夜の天気の画像を表示
+        //朝の天気
+        //晴れ（快晴）
+        if(weather2[7] === 0 ){
+          morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
 
         }
-        //一部くもり
-        else if(weather === 2){
-            sampleweather.innerHTML = "🌤のち曇り　"+temperature + "℃";
+        //曇りのち晴れ（晴れだけど雲がでてる）
+        else if(weather2[7] === 1){
+            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
         }
+        //晴れのち曇り(一部曇り)
+        else if(weather2[7] === 2){
+            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+        }
+
         //曇り
-        else if(weather === 3){
-          sampleweather.innerHTML =  "☁　"+temperature + "℃";
+        else if( weather2[7] === 3){
+            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+            //morning_OTENKI.innerHTML =   "<img src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png'>";
         }
+
+
         //雨
-        else if(weather === 69 || weather === 84  ){
-          sampleweather.innerHTML =  "☂　"+temperature + "℃";
+        else if(weather2[7] <= 99  ){
+            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
         }
+
+        //不明
         else{
-          sampleweather.innerHTML = "★　"+temperature + "℃";
+            morning_OTENKI.innerHTML = "★";
         }
+
+        //朝7時の気温出力
+        temperature_noon.innerHTML =  temperature2[7] + "℃";
+        //朝7時の降水確率を出力
+        rainypercent_noon.innerHTML  =  probability[7] + "％";
+
+        console.log(temperature2[7]+"　　"+probability[7]+"です")
+        console.log(temperature2[13]+"　　"+probability[13]+"です")
+        console.log(temperature2[19]+"　　"+probability[19]+"です")
+
 
 
         
-
-    //降水確率（平均を出力　24時間分の合計÷24）
-    let psum =  probability.reduce(function(acc ,cur){
-        return acc + cur;
-    });
-    //不快指数分岐
-    //寒い
-        if(fukai <= 54){
-       
-            hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'>";
-
-        }
-        //肌寒い
-        else if(fukai >= 55 && fukai <= 65 ){
-            hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E7%B5%90%E6%A7%8B%E3%81%84%E3%81%84_h8tsks.png'>";
-        }
-        //快い
-        else if(fukai > 65 && fukai <= 75 ){
-            hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png'>";
-        }
-            //暑い
-        else if(fukai > 75 && fukai <= 85 ){
-            hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png'>";
-        }
-        //暑くてたまらない
-        else if(fukai >= 86){
-            hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png'>";
-        }
         
-        //↓朝・昼・夜の天気の画像を表示
-            //朝の天気
-            //晴れ（快晴）
-            if(weather2[7] === 0 ){
-              morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-  
-            }
-            //曇りのち晴れ（晴れだけど雲がでてる）
-            else if(weather2[7] === 1){
-                morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-            }
-            //晴れのち曇り(一部曇り)
-            else if(weather2[7] === 2){
-                morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-            }
+        //昼の天気
+        //晴れ（快晴）
+        if(weather2[13] === 0 ){
+            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
 
-            //曇り
-            else if( weather2[7] === 3){
-                morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                //morning_OTENKI.innerHTML =   "<img src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png'>";
-            }
+        }
+        //曇りのち晴れ（晴れだけど雲がでてる）
+        else if(weather2[13] === 1){
+            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+        }
+        //晴れのち曇り(一部曇り)
+        else if(weather2[13] === 2){
+            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+        }
+
+        //曇り
+        else if( weather2[13] === 3){
+            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+        }
 
 
-            //雨
-            else if(weather2[7] <= 99  ){
-                morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-            }
+        //雨
+        else if(weather2[13] <= 99  ){
+            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+        }
 
-            //不明
-            else{
-                morning_OTENKI.innerHTML = "★"+temperature + "℃";
-            }
-            
-            
-            //昼の天気
-        
-            //晴れ（快晴）
-            if(weather2[13] === 0 ){
-                noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
-  
-            }
-            //曇りのち晴れ（晴れだけど雲がでてる）
-            else if(weather2[13] === 1){
-                noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-            }
-            //晴れのち曇り(一部曇り)
-            else if(weather2[13] === 2){
-                noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-            }
-
-            //曇り
-            else if( weather2[13] === 3){
-                noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-            }
-
-
-            //雨
-            else if(weather2[13] <= 99  ){
-                noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-            }
-
-            //不明
-            else{
-                noon_OTENKI.innerHTML = "★"+temperature + "℃";
-            }
+        //不明
+        else{
+            noon_OTENKI.innerHTML = "★";
+        }
+        //昼13時の気温出力
+        temperature_noon.innerHTML =  temperature2[13] + "℃";
+        //昼13時の降水確率を出力
+        rainypercent_noon.innerHTML  =  probability[13] + "％";
 
 
 
-        //夜の天気
-                    //晴れ（快晴）
-            if(weather2[19] === 0 ){
-                night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
-  
-            }
-            //曇りのち晴れ（晴れだけど雲がでてる）
-            else if(weather2[19] === 1){
-                night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-            }
-            //晴れのち曇り(一部曇り)
-            else if(weather2[19] === 2){
-                night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-            }
 
-            //曇り
-            else if( weather2[19] === 3){
-                night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-            }
+    //夜の天気
+                //晴れ（快晴）
+        if(weather2[19] === 0 ){
+            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
 
+        }
+        //曇りのち晴れ（晴れだけど雲がでてる）
+        else if(weather2[19] === 1){
+            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+        }
+        //晴れのち曇り(一部曇り)
+        else if(weather2[19] === 2){
+            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+        }
 
-            //雨
-            else if(weather2[19] <= 99  ){
-                night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-            }
-
-            //不明
-            else{
-                night_OTENKI.innerHTML = "★"+temperature + "℃";
-            }
+        //曇り
+        else if( weather2[19] === 3){
+            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+        }
 
 
-            console.log(weather2[7]);
-            console.log(weather2[13]);
-            console.log(weather2[19]);
-            
+        //雨
+        else if(weather2[19] <= 99  ){
+            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+        }
+
+        //不明
+        else{
+            night_OTENKI.innerHTML = "★";
+        }
+        //夜19時の気温出力
+        temperature_night.innerHTML =  temperature2[19] + "℃";
+        //夜19時の降水確率を出力
+        rainypercent_night.innerHTML  =  probability[19] + "％";
+
+
+
+
 
 
 })
 
 
 .catch(error => {
-    console.error('データ取得に失敗しました',error)
+console.error('データ取得に失敗しました',error)
 });
 </script>		
+
 
 	
 	
@@ -525,4 +537,5 @@ fetch(apiUrl)
   <!-- ... -->
 </svg>
         </body>
+        
     </html> 

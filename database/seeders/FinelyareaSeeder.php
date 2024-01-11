@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use DateTime;
 
-class Area_finelySeeder extends Seeder
+class FinelyareaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,7 +17,7 @@ class Area_finelySeeder extends Seeder
     public function run()
     {
         //北海道
-	    DB::table('areas_finely')->insert([
+	    DB::table('finelyarea')->insert([
             'area_id' => '1',
             'name' => '旭川',
             'latitude' => '43.7578582199552',
@@ -430,7 +430,7 @@ class Area_finelySeeder extends Seeder
             'deleted_at' => null,
         ]);
         
-        //福井
+        //福井はまだでーたがないので保留
          DB::table('areas_finely')->insert([
             'area_id' => '18',
             'name' => '福井',
