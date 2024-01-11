@@ -23,4 +23,9 @@ class Image extends Model
     {
         return $this->hasMany(User::class);
     }
+    
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
