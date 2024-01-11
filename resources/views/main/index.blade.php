@@ -408,45 +408,47 @@ console.error('データ取得に失敗しました',error)
                         
                          
                         <!---選んだ服のアイコン-->
-                        <font size="6">
-                        <body>
-                            <table align="center"  border="1">
-				                <tr>
-                                    <td>　　　　</td>
-				                    <td>トップス</td>
-                                    <td>　　　　</td>
-				　     <td>ボトムス<td>
-				                    <td>　　　　</td>
-                                </tr>
-				                <tr>
-				                    <td>　　　</td>
-                				  <td class="clothes_box1"></td>
-                				  <td>　　　</td>
-                                  <td class="clothes_box1"></td>
-				                    <td>　　　</td>
-				            </table>
-                                  
 
-			                <table align="center"  border="1">
-				                <tr>
-                                    <td>　　　　</td>
-				                    <td>アウター</td>
-                                    <td>　　　　</td>
-				　     <td>お出かけ<td>
-				                     <td>　　　　</td>
-                                </tr>			
-                                <tr>
-                				　<td>　　　</td>
-                				  <td class="clothes_box1"></td>
-                				  <td>　　　</td>
-                                  <td class="clothes_box1"></td>
-				                    <td>　　　</td>
-                                </tr>
-			                 </table>
-                        </body>
-			            </font>
-                        
-                        <!--かご-->
+            			<font size="6">
+                            <body>
+                                <div>{{ Auth::user()->area_finely_id->name }}</div>
+                                <table align="center"  border="1">
+            				        <tr>
+                                        <td>　　　　</td>
+            				            <td>トップス</td>
+                                        <td>　　　　</td>
+            				　          <td>ボトムス</td>
+            				            <td>　　　　</td>
+                                    </tr>			
+                                    <tr>
+            				　          <td>　　　</td>
+            				            <td class="clothes_box1"></td>
+            				            <td>　　　　</td>
+                                        <td class="clothes_box1"></td>
+            				            <td>　　　</td>
+                                    </tr>
+            			        </table>
+            
+            			       <table align="center"  border="1">
+                    				<tr>
+                                        <td>　　　　</td>
+                    				    <td>アウター</td>
+                                        <td>　　　　</td>
+                    				　  <td>お出かけ</td>
+                    				    <td>　　　　</td>
+                                    </tr>			
+                                    <tr>
+                    				    <td>　　　</td>
+                    				    <td class="clothes_box1"></td>
+                    				    <td>　　　</td>
+                                        <td class="clothes_box1"></td>
+                    				    <td>　　　</td>
+                                    </tr>
+                    			</table>
+                            </body>
+            			</font>
+                    
+  <!--かご-->
                         <center>
                             <div>
                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%94_xwtyed.png"/   width=150px height=150px;>

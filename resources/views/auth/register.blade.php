@@ -76,10 +76,10 @@
               src="{{ $area->path }}"
               alt="Woman workcationing on the beach"
             />
-                <select type="text" class="mt-64 mb-auto border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" name="area_id" required>
+                <select type="text" class="mt-64 mb-auto border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" name="area_finely_id" required>
                     <option disabled style='display:none;' @if (empty($user->area_id)) selected @endif>1</option>
-                    @foreach($areas as $area)
-                        <option value="{{ $area->id }}" @if (isset($user->area_id) && ($user->area_id === $area->id)) selected @endif>{{ $area->name }}</option>
+                    @foreach($areas_finely as $area_finely)
+                        <option value="{{ $area_finely->id }}" @if (isset($user->area_id) && ($user->area_finely_id === $area_finely->id)) selected @endif>{{ $area_finely->id }}</option>
                     @endforeach
                 </select>
             </div>

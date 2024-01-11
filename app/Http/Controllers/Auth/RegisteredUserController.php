@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
-use App\Models\Area;
+
+use App\Models\areas;
+use App\Models\areas_finely;
 
 class RegisteredUserController extends Controller
 {
@@ -27,6 +29,7 @@ class RegisteredUserController extends Controller
         return view('auth.register')
             ->with([
                 'areas' => $areas,
+                'areas_finely' => $areas_finely,
             ]);
     }
 
@@ -39,7 +42,9 @@ class RegisteredUserController extends Controller
     {
         
         $areas = areas::all();
+        $areas_finely =areas_finely::all();
         
+        //バリデーション
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
@@ -63,6 +68,7 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::HOME) 
             ->with([
                 'areas' => $areas,
-            ]);;
+                'areas_finely' => $areas_finely,
+            ]);
     }
 }
