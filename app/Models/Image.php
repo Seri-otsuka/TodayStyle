@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Imge extends Model
+class Image extends Model
 {
     use HasFactory;
     
@@ -17,6 +17,11 @@ class Imge extends Model
     public function categories()
     {
         return $this->hasMany(Category::class);
+    }
+    
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
     
     public function users()
