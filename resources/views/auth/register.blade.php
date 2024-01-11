@@ -4,7 +4,16 @@
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <div style="display: flex; justify-content: flex-start;" class="text-gray-700 font-medium text-sm">
+            <p class="text-gray-700">
+                お名前
+            </p>
+            <p class="text-gray-500">
+                　※本名の入力はお控えください
+            </p>  
+            </div>
+            
+            <!-- <x-input-label for="name" :value="__('Name')" /> -->
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
@@ -18,9 +27,16 @@
 
         <!-- Password -->
         <div class="mt-4">
-            <div class="flex flex-col">
-                <label class="font-medium text-sm text-gray-700" for="password" :value="__('パスワード')" />
-                <x-input-label for="password" :value="__('※8~12文字の半角英数字')" />
+            <div style="display: flex;justify-content: flex-start;" class="font-medium text-sm">
+                <p class="text-gray-700">
+                    パスワード
+                </p>
+                <p class="text-gray-500">
+                    　※8~12文字の半角英数字 
+                    　<!---テキスト表示でごり押し 先頭に全角スペースを書いて位置調整しています -->
+                </p>
+                <!--<x-input-label class="font-medium text-sm text-gray-700" for="password" :value="__('パスワード')" />
+                <x-input-label for="password" :value="__('※8~12文字の半角英数字')" />-->
             </div>
             
 
@@ -57,7 +73,7 @@
             <div class="flex flex-row">
                 <img
               class="m-6 w-8/12 h-8/12 rounded-lg shadow-xl"
-              src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704450028/%E5%8C%97%E6%B5%B7%E9%81%93%E5%85%A8%E4%BD%93_hrcsg1.png"
+              src="{{ $area->path }}"
               alt="Woman workcationing on the beach"
             />
                 <select type="text" class="mt-64 mb-auto border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" name="area_id" required>

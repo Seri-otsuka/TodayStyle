@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Imge;
+use App\Models\Area;
 use App\Models\Category;
+use App\Models\Area_finely;
 
 
 class UserController extends Controller
@@ -35,6 +37,16 @@ class UserController extends Controller
     public function area(Area $area,User $user)
     {
         return view('auth.register')->with([
+            'users' => $user,
+            
+            //データを呼び出す
+            $area = Area::get()]);
+    }
+    
+    //gooutページにareaテーブルのデータ全件渡す
+    public function goout(Area $area,User $user)
+    {
+        return view('main.goout')->with([
             'users' => $user,
             
             //データを呼び出す

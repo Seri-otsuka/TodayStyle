@@ -571,25 +571,22 @@ p.kaiwa-text:last-child {
                             </script>
                         </div>
 <!--戻るボタン-->
+<a href="{{ route('main') }}">
 <div class="test01"　>
 <button onclick="">
                                  <img src="kkrn_icon_modoru_16.png" width=150px height=150px;　style="margin: 75% 0% 300%;"/>
                                 </button>
+</a>
 </div>
 
     <!---都道府県選択-->
 <form>
 <div class="cp_ipselect">
 <select  name=”item” class="cp_sl06" required>
-<option value="" hidden disabled selected></option>
-<option value="item1">北海道</option>
-<option value="item2">青森県</option>
-<option value="item3">岩手県</option>
-<option value="item4">宮城県</option>
-<option value="item5">秋田県</option>
-<option value="item6">山形県</option>
-<option value="item7">福島県</option>
-<option value="item8">茨城県</option>
+ <option disabled style='display:none;' @if (empty($user->area_id)) selected @endif>選択してください</option>
+  @foreach($areas as $area)
+      <option value="{{ $area->id }}" @if (isset($user->area_id) && ($user->area_id === $area->id)) selected @endif>{{ $area->name }}</option>
+  @endforeach
 </select>
 <span class="cp_sl06_highlight"></span>
 <span class="cp_sl06_selectbar"></span>
@@ -628,24 +625,28 @@ p.kaiwa-text:last-child {
 </li>
 </ul>
 </details>
-</font size>               
+</font size>
+
+
+
+            
                         <!---選んだ服のアイコン-->
-			<font size="6">
+                        <font size="6">
                         <body>
                             <table align="center"  border="1">
 				<tr>
                                     <td>　　　　</td>
 				    <td>トップス</td>
                                     <td>　　　　</td>
-				　     <td>ボトムス</td>
-				     <td>　　　　</td>
+				　  <td>ボトムス</td>
+				    <td>　　　　</td>
                                 </tr>			
                                 <tr>
 				　<td>　　　</td>
 				  <td class="clothes_box1"></td>
 				  <td>　　　　</td>
                                   <td class="clothes_box1"></td>
-				　<td><input class="suitcase" type="image" id="image"src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" style="margin: 0% 0% 300%;"/></td>
+				　<td>　　　</td>
                                 </tr>
 			    </table>
 
@@ -654,12 +655,13 @@ p.kaiwa-text:last-child {
                                     <td>　　　　</td>
 				    <td>アウター</td>
                                     <td>　　　　</td>
+                    <a href="{{ route('coordination') }}">
 				　     <td>お出かけ</td>
-				     <td>　　　　</td>
+				     <td>　　　　</td></a>
                                 </tr>			
                                 <tr>
 				　<td>　　　</td>
-				  <td class="clothes_box1"></td>
+				  <td class="clothes_box1"><img src="kkrn_icon_modoru_16.png"/><a href="{{ route('coordination') }}">まるごとリンク</a></td>
 				  <td>　　　</td>
                                   <td class="clothes_box1"></td>
 				　<td>　　　</td>
@@ -667,6 +669,7 @@ p.kaiwa-text:last-child {
 			    </table>
                         </body>
 			</font>
+                    
                     
                         <!--かご-->
                         <center>

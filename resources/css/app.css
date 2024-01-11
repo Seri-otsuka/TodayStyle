@@ -9,7 +9,7 @@ table {
 }
 
 /* 上の余白消す */
-body { 
+* { 
   margin: 0;
   padding:0; 
 }

@@ -73,11 +73,12 @@ class User extends Authenticatable
     }
     
     //areas_finely対して
-    public function areas_finely()
+    public function area_finely()
     {
-        return $this->belongsTo(Area_finely::class);
+        return $this->belongsTo(Area_finely::class);//黄色の文字はモデルの名前
     }
     
+    //保留
     public function category_users()
     {
         return $this->belongsToMany(Fashon::class, 'goods', 'user_id', 'article_id');
