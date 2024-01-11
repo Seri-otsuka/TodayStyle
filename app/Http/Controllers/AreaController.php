@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\areas;
+use App\Models\Area;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 
-class AreasController extends Controller
+class AreaController extends Controller
 {
      public function area(Area $area,User $user)
     {
@@ -31,12 +31,7 @@ class AreasController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
+     *
     /**
      * Show the form for creating a new resource.
      *

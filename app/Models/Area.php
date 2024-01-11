@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class areas extends Model
+class Area extends Model
 {
     use HasFactory;
     
@@ -18,7 +18,7 @@ class areas extends Model
     //usersテーブルに対してのリレーション
     public function users()
     {
-        return $this->hasMany(user::class,'area_id', 'id');    
+        return $this->hasMany(User::class,'area_id', 'id');    
     }
     //ユーザーに対して1:1
      /* public function user()

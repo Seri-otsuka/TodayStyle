@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+
 use App\Models\areas;
 use App\Models\areas_finely;
 
@@ -23,8 +24,7 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         //全件渡すregisterにareasテーブルにデータを
-        $areas = areas::all();
-        $areas_finely = areas_finely::all();
+        $areas = Area::all();
         
         return view('auth.register')
             ->with([

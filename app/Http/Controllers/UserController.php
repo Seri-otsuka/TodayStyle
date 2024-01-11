@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Imge;
+use App\Models\Area;
 use App\Models\Category;
+use App\Models\Area_finely;
 
 
 class UserController extends Controller
@@ -41,4 +43,25 @@ class UserController extends Controller
             $area = Area::get()]);
     }
     
+    //gooutページにareaテーブルのデータ全件渡す
+    public function goout(Area $area,User $user)
+    {
+        return view('main.goout')->with([
+            'users' => $user,
+            
+            //データを呼び出す
+            $area = Area::get()]);
+    }
+    
+    //ログインユーザーのお住いの地域の表示メソッド
+    public function todouhuken()
+    {
+        $login_users_area = \Auth::user()->area;
+        $login_users_area_finely = \Auth::user()->areas_finely;
+        
+        return view('main.index')->with([
+            'area' => $login_users_area,
+            'area_finely' => $login_users_area_finely,
+            ]);
+    }
 }
