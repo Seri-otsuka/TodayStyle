@@ -1,14 +1,18 @@
  <!DOCTYPE html>
+    <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+        <head>
+            <meta charset="utf-8">
+            <title>コーディネートルーム</title>
+            <!-- Fonts -->
+            <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="{{ 'css/app.css' }}">
+            @vite(['resources/css/app.css', 'resources/js/app.js'])
+        
+        </head> 
  
- <html lang="ja">
-    <head>
-		<meta charset="UTF-8">
-		<title>コーディネートルーム</title>
-		<meta name="description" content="">
-		
-	</head>
 	
 <center>
+    
 <div class="WebpageColor_box1">
     <!---コーディネート枠-->
     <div class="coo_box">
@@ -327,11 +331,11 @@
 </center>
 
 <script>
-    let lat = 35.6785;   //緯度
-    let long = 139.6823; //経度
+let lat  = {{$finelyarea -> latitude}};
+let long = {{$finelyarea -> longitude}};
         
     //open-meteoからURLを取得
-    const apiUrl = ' https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
+    const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+long+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
             
           
           //fetch処理でurlからjson形式で情報を取得

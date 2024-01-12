@@ -4,454 +4,105 @@
             <meta charset="utf-8">
             <title>メインページ</title>
            <meta name="description" content="">
+           <!-- Fonts -->
+            <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="{{ 'css/app.css' }}">
+            @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-<style>
-
-/* 上の余白消す */
-* { 
-    margin: 0px; 
-    padding: 0px; 
-}
-
-
-/* 画面の色・比率 */
-.WebpageColor_box {
-  width: 1400px;
-  height: 3300px;
-  background: #d5d5d5;
-}
-
-.Hiritu {
-  zoom: 0.7;
-  -moz-transform: scale(0.7);
-}
-
-
-/* 天気表示画面の黒おび*/
-.weather_box {
-  width: 1400px;
-  height: 275px;
-  background: #000000;
-  color: #2196F3;
-}
-
-/* 戻るボタンを右寄せするcss*/
-.test01 {
-	text-align: right;
-}
-
-.dli-arrow-left {
-  display: inline-block;
-  vertical-align: middle;
-  color: #fff;
-  line-height: 1;
-  position: relative;
-  width: 3em;
-  height: 0.5em;
-  background: currentColor;
-}
-
-.dli-arrow-left::before {
-  content: '';
-  width: 2em;
-  height: 2em;
-  border: 0.5em solid currentColor;
-  border-right: 0;
-  border-bottom: 0;
-  transform: rotate(-45deg);
-  transform-origin: top left;
-  position: absolute;
-  top: 50%;
-  left: -0.5em;
-  box-sizing: border-box;
-}
-
-/* 都道府県選択*/
-.cp_ipselect {
-	position: relative;
-	width: 90%;
-	margin: 2em auto;
-	text-align: center;
-}
-.cp_sl06 {
-	position: relative;
-	font-family: inherit;
-	background-color: transparent;
-	width: 100%;
-	padding: 10px 10px 10px 0;
-	font-size: 18px;
-	border-radius: 0;
-	border: none;
-	border-bottom: 1px solid rgba(0,0,0, 0.3);
-}
-.cp_sl06:focus {
-	outline: none;
-	border-bottom: 1px solid rgba(0,0,0, 0);
-}
-.cp_ipselect .cp_sl06 {
-	appearance: none;
-	-webkit-appearance:none
-}
-.cp_ipselect select::-ms-expand {
-	display: none;
-}
-.cp_ipselect:after {
-	position: absolute;
-	top: 18px;
-	right: 10px;
-	width: 0;
-	height: 0;
-	padding: 0;
-	content: '';
-	border-left: 6px solid transparent;
-	border-right: 6px solid transparent;
-	border-top: 6px solid rgba(0, 0, 0, 0.3);
-	pointer-events: none;
-}
-.cp_sl06_selectlabel {
-	color: rgba(0,0,0, 0.5);
-	font-size: 18px;
-	font-weight: normal;
-	position: absolute;
-	pointer-events: none;
-	left: 0;
-	top: 10px;
-	transition: 0.2s ease all;
-}
-.cp_sl06:focus ~ .cp_sl06_selectlabel, .cp_sl06:valid ~ .cp_sl06_selectlabel {
-	color: #da3c41;
-	top: -20px;
-	transition: 0.2s ease all;
-	font-size: 14px;
-}
-.cp_sl06_selectbar {
-	position: relative;
-	display: block;
-	width: 100%;
-}
-.cp_sl06_selectbar:before, .cp_sl06_selectbar:after {
-	content: '';
-	height: 2px;
-	width: 0;
-	bottom: 1px;
-	position: absolute;
-	background: #da3c41;
-	transition: 0.2s ease all;
-}
-.cp_sl06_selectbar:before {
-	left: 50%;
-}
-.cp_sl06_selectbar:after {
-	right: 50%;
-}
-.cp_sl06:focus ~ .cp_sl06_selectbar:before, .cp_sl06:focus ~ .cp_sl06_selectbar:after {
-	width: 50%;
-}
-.cp_sl06_highlight {
-	position: absolute;
-	top: 25%;
-	left: 0;
-	pointer-events: none;
-	opacity: 0.5;
-}
-
-/* 地域詳細 */
-ul {
-    list-style: none;
-}
-.selectdiv {
-  position: relative;
-  /*Don't really need this just for demo styling*/
-  
-  float: left;
-  min-width: 200px;
-  margin: 50px 33%;
-}
-
-/* IE11 hide native button (thanks Matt!) */
-select::-ms-expand {
-display: none;
-}
-
-.selectdiv:after {
-  content: '<>';
-  font: 17px "Consolas", monospace;
-  color: #333;
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-  right: 11px;
-  /*Adjust for position however you want*/
-  
-  top: 18px;
-  padding: 0 0 2px;
-  border-bottom: 1px solid #999;
-  /*left line */
-  
-  position: absolute;
-  pointer-events: none;
-}
-
-.selectdiv select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  /* Add some styling */
-  
-  display: block;
-  width: 100%;
-  max-width: 320px;
-  height: 50px;
-  float: right;
-  margin: 5px 0px;
-  padding: 0px 24px;
-  font-size: 20px;
-  line-height: 1.75;
-  color: #333;
-  background-color: #ffffff;
-  background-image: none;
-  border: 1px solid #cccccc;
-  -ms-word-break: normal;
-  word-break: normal;
-}
-.circle_btn02 {
-  position: relative;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  max-width: 300px; /* ボタンの最大幅 */
-  padding: 1em 2em;
-  color: initial; /* 文字色 */
-  transition: 0.3s ease-in-out;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.circle_btn02::before, .circle_btn02::after {
-  content: "";
-  position: absolute;
-  display: block;
-  top: 50%;
-}
-
-.circle_btn02::before {
-  width: 0.5em;
-  height: 0.5em;
-  left: 1em;
-  border-top: solid 2px #fff; /* 矢印の色 */
-  border-right: solid 2px #fff; /* 矢印の色 */
-  z-index: 2;
-  transform: translateY(-50%) rotate(45deg);
-  transition: all 0.3s;
-}
-
-.circle_btn02::after {
-  left: 0;
-  background: #4D9BC1; /* 背景色 */
-  z-index: 1;
-  width: 3em;
-  height: 3em;
-  border-radius: 3em;
-  transform: translateY(-50%);
-  transition: all 0.5s;
-}
-
-.circle_btn02 span {
-  position: relative;
-  transition: all 0.3s;
-  z-index: 3;
-}
-
-/* マウスオーバーした際のデザイン */
-.circle_btn02:hover span {
-  color: #fff; /* 文字色 */
-}
-
-.circle_btn02:hover:before {
-  left: 2rem;
-}
-
-.circle_btn02:hover:after {
-  right: 0;
-  width: 100%;
-}
-/* 選んだ服のアイコンの枠 */
-.clothes_box1 {
-  width: 500px;
-  height: 500px;
-  background: #ffffff;
-  border-radius: 20px;
-}
-.suitcase{
-  width: 120px;
-  height: 120px;
-}
-
-/* shopのアイコン */
-.btn-social-square {
-  display: inline-block;
-  text-decoration: none;
-  width: 200px;
-  margin:2px;
-  height: 200px;
-  line-height: 50px;
-  font-size: 23px;
-  color:white;
-  border-radius: 12px;
-  text-align: center;
-  overflow: hidden;
-  font-weight: bold;
-  transition: .3s;
-}
-.btn-social-square i {
-  line-height:50px;
-}
-.btn-social-square:hover {
-  -webkit-transform: translateY(-5px);
-  transform: translateY(-5px);
-}
-
-/* 吹き出し ＆　悲壮犬 */
-/* 全体のスタイル */
-.kaiwa {
-  margin-bottom: 25px;
-}
-/* 右画像 */
-.kaiwa-img-right {
-  margin: 0;
-  float: right;
-  width: 300px;
-  height: 300px;
-  margin-left: -70px;
-}
-.kaiwa figure img {
-  width: 100%;
-  height: 100%;
-}
-/* 右からの吹き出しテキスト */
-.kaiwa-text-left {
-  position: relative;
-  margin-right: 80px;
-  padding: 10px;
-  border-radius: 20px;
-  background-color: #ffffff;
-  margin-left: 12%;
-  float: right;
-}
-p.kaiwa-text {
-  margin: 0 0 10px;
-}
-p.kaiwa-text:last-child {
-  margin-bottom: 0;
-}
-/* 右の三角形を作る */
-.kaiwa-text-left:before {
-  position: absolute;
-  content: '';
-  border: 10px solid transparent;
-  top: 15px;
-  right: -20px;
-}
-.kaiwa-text-left:after {
-  position: absolute;
-  content: '';
-  border: 10px solid transparent;
-  border-left: 10px solid #ffffff;
-  top: 15px;
-  right: -19px;
-}
-/* 回り込み解除 */
-.kaiwa:after,.kaiwa:before {
-  clear: both;
-  content: "";
-  display: block;
-}
-
-
-/*dropdown用 flex-endで右寄せ でも反映されて無さそう？*/
-.dropdown{
-  justify-content: flex-end;
-}
-
-/* p184参考書より コンテンツの最大表示幅 */
-.wrapper{
-  max-width: 1400px;  /* 横幅最大1100px */
-  margin: 0 auto;     /* 中央に配置する指定 */
-}
-
-/* p208参考 天気、気温、湿度、不快指数表示用 横並び */
-.weather-contents{
-  display: flex;                   /* flexboxの指定 */
-  justify-content: space-around;  /*               */
-  /*margin-bottom: 50px;*/    	/* 下にmarginを50px取得 */
-}
-
-/* !天気関連 要素ごとに余白を開ける */
-.weather-social{
-    /* margin-left: 10%; */
-    /* margin-right: 5%; */
-    margin: 20% 0% 10%;
-    width: 200px;
-}
-
-.weather-social-text{
-	position: relative;
-	color: white;
-	font-family: 'Hattori Hanzo', serif;
-	margin: 6% 0% 10%;
-	font-size: 730%;
-}
-
-</style>
 </head>
             
             <div  class="Hiritu"> 
             　　　　　　　
                 <center>
                     <div class="WebpageColor_box">
-                    
-                        <!--日付-->
-                        <font size="7"> 
-                            <div id="current_date" style="font-family: ravie,fantasy; margin-right: 50%;">
-                                <script>
-                                    //今日の日付データを変数に格納
-                                    //変数は"today"とする
-                                    var today=new Date(); 
-                    
-                                    //年・月・日・曜日を取得
-                                    var year = today.getFullYear();
-                                    var month = today.getMonth()+1;
-                                    var week = today.getDay();
-                                    var day = today.getDate();
-                    
-                                    var week_ja= new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri","Sat");
-                    
-                                    //年・月・日・曜日を書き出す
-                                    document.write("　　"+year+"　"+month+"/"+day+" 　("+week_ja[week]+")　　　　　　　　　　　　　　　　");
-                                </script>
-                            </div>
-                        </font size>
-
-
-			                <!-- 現在の天気・温度表示用 表示分けないなら一個でいいかも -->
-                        <p id="sampleweather" style="position: relative;font-family: 'Hattori Hanzo', serif;font-size: 500%;">
-                        jfaff
-                        </p>
-                    
-                        <!---天気表示（黒おび）-->
-                        <div class="weather_box wrapper weather-contents">
-
-			                  <!-- 都道府県表示用 -->
-                            <div>
-                              兵庫県
-                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" style="max-width: 70%">
+                      <!-- ヘッダー部 -->
+                        <div class="header-contents">
+                            <!--日付-->
+                            <font size="7"> 
+                                <div id="current_date" style="font-family: ravie,fantasy; margin-top: 3%;">
+                                    <script>
+                                        //今日の日付データを変数に格納
+                                        //変数は"today"とする
+                                        var today=new Date(); 
+                        
+                                        //年・月・日・曜日を取得
+                                        var year = today.getFullYear();
+                                        var month = today.getMonth()+1;
+                                        var week = today.getDay();
+                                        var day = today.getDate();
+                        
+                                        var week_ja= new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri","Sat");
+                        
+                                        //年・月・日・曜日を書き出す
+                                        document.write("　　"+year+"　"+month+"/"+day+" 　("+week_ja[week]+")");
+                                    </script>
+                                </div>
+                            </font size>
+                            
+                            <!-- 現在の天気・温度表示用 表示分けないなら一個でいいかも -->
+                            <p id="sampleweather" style="position: relative;font-family: 'Hattori Hanzo', serif;font-size: 500%;">
+                             
+                            </p>
+                           
+                            
+                            <!-- Settings Dropdown 
+                                 メニュー表示用    -->
+                            <div class="hidden sm:flex sm:items-center sm:ml-6 dropdown" style="margin-right: 2%;">
+                                <!--ここからのやつはcomponentから持ってきてます-->
+                                <x-dropdown align="right" width="48">
+                                    <x-slot name="trigger">
+                                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                            <!--現在ログインしているユーザーの名前が表示されるようになっている-->
+                                            <div>メニュー</div>
+                                            {{--<div>{{ Auth::user()->name }}</div>--}}
+                                  <!--  <div>テストユーザー</div> -->
+                                            <div class="ml-1">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </x-slot>
+                                    <x-slot name="content">
+                                        <x-dropdown-link :href="route('profile.edit')">
+                                            {{ __('プロフィール') }}
+                                        </x-dropdown-link>
+                                        
+                                        <!-- Authentication -->
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                
+                                            <x-dropdown-link :href="route('logout')"
+                                                    onclick="event.preventDefault();
+                                                                this.closest('form').submit();">
+                                                {{ __('ログアウト') }}
+                                            </x-dropdown-link>
+                                        </form>
+                                    </x-slot>
+                                </x-dropdown>
                             </div>
                             
+                        </div>
+                        
+                         <!---天気表示（黒おび）-->
+                        <div class="weather_box wrapper weather-contents weather-social-text">
+                            
+                            <!-- 都道府県表示用 -->
+                            <div style="margin: 0% -28% 0%;">
+                              <!--普通にコメントアウトできなかったのでちゅうかっこ左端だけ消してます-->
+                                <!--{ $area->name }}-->
+                                <!--↓↓サイズ調整お願いします-->
+                                <!--<img src="{ $area->path}}" style="max-width: 20%">-->
+                                <p>
+                                  北海道
+                                </p>
+                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704450028/%E5%8C%97%E6%B5%B7%E9%81%93%E5%85%A8%E4%BD%93_hrcsg1.png" style="max-width: 20%">
+                            
+                            </div>
                             <!---お天気アイコン-->
-				                    <div id="morning_OTENKI" >
-				                      朝
-                              <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 120px;"/>
+				            <div>
+				                朝
+                                <img id="morning_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 120px;"/>
                             	<!-- 湿度 -->
                             	<p id="temperature_morning" style="margin: -2% 0% -10%;">
                             	    5°C
@@ -459,21 +110,21 @@ p.kaiwa-text:last-child {
                             	<p id="rainypercent_morning">
                             	    💧10% 　<!-- 半角,全角空白で位置調整 -->
                             	</p>
-				                    </div>
-				                    <div>
-				                      昼
-                              <img id="noon_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 120px;"/>
-                              <!-- 湿度 -->
-                              <p id="temperature_noon" style="margin: -2% 0% -10%;">
-                          	    5°C
-                          	  </p>
-                              <p id="rainypercent_noon" style="margin: -14% 0% -10%;">
-                                  10%
-                              </p>
-				                    </div>
-				                    <div>
-                            	夜
-                              <img id="night_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 120px;"/>
+				            </div>
+				            <div>
+				                昼
+                                <img id="noon_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png"  style="width: 120px;" />
+                                <!-- 湿度 -->
+                                <p id="temperature_noon" style="margin: -2% 0% -10%;">
+                            	    5°C
+                            	</p>
+                                <p id="rainypercent_noon" style="margin: -14% 0% -10%;">
+                                    10%
+                                </p>
+				            </div>
+				            <div>
+                            	 夜
+                                <img  id="night_OTENKI" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png" style="width: 120px;"/>
                             	<!-- 湿度 -->
                             	<p id="temperature_night" style="margin: -2% 0% -10%;">
                             	    5°C
@@ -481,151 +132,330 @@ p.kaiwa-text:last-child {
                             	<p id="rainypercent_night" style="margin: -14% 0% -10%;">
                             	    20%
                             	</p>
-				                    </div>
-			    	<script>
-					var click = 0;
-					var OTENKI = [
-/* 曇りのち晴れ */
-'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png',
-/* 曇り */
-'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png',
-/* 晴れのち曇り */
-'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png',
-/* 晴れ */
-'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png',
-/* 雨 */
-'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png'
-];
+				            </div>
+			    	        <!--<script>
+					            var click = 0;
+				                var OTENKI = [
+                                    /* 曇りのち晴れ */
+                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png',
+                                    /* 曇り */
+                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png',
+                                    /* 晴れのち曇り */
+                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png',
+                                    /* 晴れ */
+                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png',
+                                    /* 雨 */
+                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png'
+                                ];
+                                document.getElementById('click_OTENKI').onclick = function(){
+                					click++;
+                					this.src = OTENKI[click%OTENKI.length];
+                				}
+			                </script>-->
+			                
+			                
+                            <!---不快指数-->
+                            <div id="hukaiSisuu" class="weather-social">
+                                <p>
+                                    <img  src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png"  />
+                                </p>
+                            </div>
+            			    <!---<script>
+                				var click = 0;
+                				var KankyouSisuu = [
+                                    /* 最高 */
+                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png',
+                                    /* 結構いい */
+                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E7%B5%90%E6%A7%8B%E3%81%84%E3%81%84_h8tsks.png',
+                                    /* あかん */
+                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png',
+                                    /* 普通 */
+                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png',
+                                    /* 良くない */
+                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'
+                                ];
+				                document.getElementById('click_KankyouSisuu').onclick = function(){
+                					click++;
+                					this.src = KankyouSisuu[click%KankyouSisuu.length];
+                				}
+                			</script>--->
+                        <script>
+                        
+                                //43.76 142.37 (北海道旭川市)
+                                //01/12 下部のデータ受け渡しがまだ？なので一時的にオンにしました！
+                            let lat = 43.76;
+                            let long = 142.37;
 
-				document.getElementById('click_OTENKI').onclick = function(){
-					click++;
-					this.src = OTENKI[click%OTENKI.length];
-				}
-			    </script>
-
-
-
-                            <p id="sampleweather" class="weather-social-text">
-                             
-                            </p>
-                            <p id="sampleweather" class="weather-social-text">
+                            //経度・緯度をもらうときの今数字書いてるところに、これを入れよう
+                            //普通にコメントアウトできなかったのでちゅうかっこ左端だけ消してます
+                            //let lat  = {$finelyarea -> latitude}};
+                            //let long = {$finelyarea -> longitude}};
+                            
+                            /*
+                            URL:'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
+                            
+                            現在の気温
+                            現在の天気コード
+                            現在の湿度
+                            時間毎の天気コード
+                            時間毎の降水確率
+                            時間毎の気温
+                            
+                            */
+                            const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+long+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
+                            
+                            fetch(apiUrl)
+                            .then(response => {
+                            return response.json();
+                            })
+                            .then(data =>{
+                            const jsonData = data;
+                            const weather = jsonData.current.weather_code;                                        
+                            const temperature = jsonData.current.temperature_2m;                                  //現在の気温
+                            const probability = Array.from(jsonData.hourly.precipitation_probability);            //時間毎の降水確率  
+                            const temperature2 = Array.from(jsonData.hourly.temperature_2m);                      //時間毎の気温 
+                            const weather2 = Array.from(jsonData.hourly.weather_code);                            //時間毎のの天気コード
+                            const humidity = jsonData.current.relative_humidity_2m;                               //現在の湿度                             
+                            const fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;   //不快指数
+                            
+                            
+                            
+                            //天気コード分岐
+                            //晴れ
+                            if(weather === 0 || weather === 1){
+                              sampleweather.innerHTML = "☀"+temperature + "℃";
+                            
+                            }
+                            //一部くもり
+                            else if(weather === 2){
+                                sampleweather.innerHTML = "🌤 "+temperature + "℃";
+                            }
+                            //曇り
+                            else if(weather === 3){
+                              sampleweather.innerHTML =  "☁  "+temperature + "℃";
+                            }
+                            //雨
+                            else if(weather <= 69){
+                              sampleweather.innerHTML =  "☂ "+temperature + "℃";
+                            }
+                            //雪
+                            else if(weather <=  79){
+                                sampleweather.innerHTML = "⛄ "+temperature + "℃";
+                            }
+                            else{
+                              sampleweather.innerHTML = " ★"+temperature + "℃";
+                            }
+                            
+                            //不快指数分岐
+                            //寒い
+                            if(fukai <= 54){
+                            
+                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'>";
+                            
+                            }
+                            //肌寒い
+                            else if(fukai >= 55 && fukai <= 65 ){
+                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E7%B5%90%E6%A7%8B%E3%81%84%E3%81%84_h8tsks.png'>";
+                            }
+                            //快い
+                            else if(fukai > 65 && fukai <= 75 ){
+                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png'>";
+                            }
+                                //暑い
+                            else if(fukai > 75 && fukai <= 85 ){
+                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png'>";
+                            }
+                            //暑くてたまらない
+                            else if(fukai >= 86){
+                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png'>";
+                            }
+                            
+                            //↓朝・昼・夜の天気の画像を表示
+                                //朝の天気
+                                //晴れ（快晴）
+                                if(weather2[7] === 0 ){
+                                  morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+                            
+                                }
+                                //曇りのち晴れ（晴れだけど雲がでてる）
+                                else if(weather2[7] === 1){
+                                    morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                }
+                                //晴れのち曇り(一部曇り)
+                                else if(weather2[7] === 2){
+                                    morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                }
+                            
+                                //曇り
+                                else if( weather2[7] === 3){
+                                    morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                }
+                            
+                            
+                                //雨
+                                else if(weather2[7] <= 69  ){
+                                    morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                }
+                                //雪
+                                else if (weather2[7] <= 79){
+                                    morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                }
+                            
+                                //不明
+                                else{
+                                    morning_OTENKI.innerHTML = "★";
+                                }
+                            
+                                //朝7時の気温出力
+                                temperature_noon.innerHTML =  temperature2[7] + "℃";
+                                //朝7時の降水確率を出力
+                                rainypercent_noon.innerHTML  =  probability[7] + "％";
+                            
+                            
                                 
-                            </p>
-                           
-			    <!---環境指数-->
-			<div>
-                            <p>
-                                <img id="click_KankyouSisuu" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png" class="weather-social" />
-                            </p>
-			</div>
-			    <script>
-				var click = 0;
-				var KankyouSisuu = [
-                    /* 最高 */
-                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png',
-                    /* 結構いい */
-                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E7%B5%90%E6%A7%8B%E3%81%84%E3%81%84_h8tsks.png',
-                    /* あかん */
-                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png',
-                    /* 普通 */
-                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png',
-                    /* 良くない */
-                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'
-                ];
-				document.getElementById('click_KankyouSisuu').onclick = function(){
-					click++;
-					this.src = KankyouSisuu[click%KankyouSisuu.length];
-				}
-			    </script>
+                                
+                                //昼の天気
+                                //晴れ（快晴）
+                                if(weather2[13] === 0 ){
+                                  noon_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+                            
+                                }
+                                //曇りのち晴れ（晴れだけど雲がでてる）
+                                else if(weather2[13] === 1){
+                                    noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                }
+                                //晴れのち曇り(一部曇り)
+                                else if(weather2[13] === 2){
+                                    noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                }
+                            
+                                //曇り
+                                else if( weather2[13] === 3){
+                                    noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                }
+                            
+                            
+                                //雨
+                                else if(weather2[13] <= 99  ){
+                                    noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                }
+                                //雪
+                                else if (weather2[7] <= 79){
+                                    noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                }
 
-			                <script>
-                                let lat = 35.6785;
-                                let long = 139.6823;
-                                
-                          
-                                const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&current=temperature_2m,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
-                                
-                                fetch(apiUrl)
-                                .then(response => {
-                                    return response.json();
-                                })
-                                .then(data =>{
-                                    const jsonData = data;
-                                    const weather = jsonData.current.weather_code;
-                                    const temperature = jsonData.current.temperature_2m;
-                          
-                                    if(weather === 0){
-                                      sampleweather.innerHTML = "☀　"+ temperature + "℃";
-                          
-                                    }
-                                    
-                                    else{
-                                      sampleweather.innerHTML = "☂　"+ temperature + "℃";
-                                    }
-                          
-                                    
-                                })
-                                .catch(error => {
-                                    console.error('データ取得に失敗しました',error)
-                                });
+                            
+                                //昼13時の気温出力
+                                temperature_noon.innerHTML =  temperature2[13] + "℃";
+                                //昼13時の降水確率を出力
+                                rainypercent_noon.innerHTML  =  probability[13] + "％";
+                            
+                            
+                            
+                            
+                            //夜の天気
+                                //晴れ（快晴）
+                                if(weather2[19] === 0 ){
+                                  night_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+                            
+                                }
+                                //曇りのち晴れ（晴れだけど雲がでてる）
+                                else if(weather2[19] === 1){
+                                    night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                }
+                                //晴れのち曇り(一部曇り)
+                                else if(weather2[19] === 2){
+                                    night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                }
+                            
+                                //曇り
+                                else if( weather2[19] === 3){
+                                    night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                }
+                            
+                            
+                                //雨
+                                else if(weather2[19] <= 99  ){
+                                    night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                }
+                            
+                                //夜19時の気温出力
+                                temperature_night.innerHTML =  temperature2[19] + "℃";
+                                //夜19時の降水確率を出力
+                                rainypercent_night.innerHTML  =  probability[19] + "％";
+                            
+                            
+                            
+                            
+                            
+                            
+                            })
+                            
+                            
+                            .catch(error => {
+                            console.error('データ取得に失敗しました',error)
+                            });
                             </script>
-                        </div>
-<!--戻るボタン-->
-<a href="{{ route('main') }}">
-<div class="test01"　>
-<button onclick="">
-                                 <img src="kkrn_icon_modoru_16.png" width=150px height=150px;　style="margin: 75% 0% 300%;"/>
-                                </button>
-</a>
-</div>
+                          </div>
 
-    <!---都道府県選択-->
-<form>
-<div class="cp_ipselect">
-<select  name=”item” class="cp_sl06" required>
- <option disabled style='display:none;' @if (empty($user->area_id)) selected @endif>選択してください</option>
-  @foreach($areas as $area)
-      <option value="{{ $area->id }}" @if (isset($user->area_id) && ($user->area_id === $area->id)) selected @endif>{{ $area->name }}</option>
-  @endforeach
-</select>
-<span class="cp_sl06_highlight"></span>
-<span class="cp_sl06_selectbar"></span>
-<label class="cp_sl06_selectlabel">お住まいの地域</label>
-</div>
-</form>
-
-<!---地域詳細--->
-<font size="5">
-<details><summary><strong>地域詳細</strong></summary>
-<ul>
-  <li>
-
-<table align="center" border="1">		
-                                <tr>
-				　<td>　　　　　</td>
-				  <td><img src=
-"town2021.png" width="600" height="600"/></td>
-				<td>　　　　　</td>  
-                                  <td><div class="selectdiv" style="margin: 30% 0% -300% 0%;">
-  <label>
-      <select>
-          <option selected>選択</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-      </select>
-  </label>
-</div></td>
-<td><a href="#" class="circle_btn02"　 style="margin: 30% 0% -300% 0%;"><span>決定</span></a>　</td>
-
-                                </tr>
-			    </table>
-
-</li>
-</ul>
-</details>
-</font size>
+                          <!--戻るボタン-->
+                          <a href="{{ route('main') }}">
+                          <div class="test01"　>
+                          <button onclick="">
+                           <img src="kkrn_icon_modoru_16.png" width=150px height=150px;　style="margin: 75% 0% 300%;"/>
+                          </button>
+                          </a>
+                          </div>
+                          
+                              <!---都道府県選択-->
+                          {{--
+                          <form>
+                          <div class="cp_ipselect">
+                          <select  name=”item” class="cp_sl06" required>
+                           <option disabled style='display:none;' @if (empty($user->area_id)) selected @endif>選択してください</option>
+                            @foreach($areas as $area)
+                                <option value="{{ $area->id }}" @if (isset($user->area_id) && ($user->area_id === $area->id)) selected @endif>{{ $area->name }}</option>
+                            @endforeach
+                          </select>
+                          --}}
+                          <span class="cp_sl06_highlight"></span>
+                          <span class="cp_sl06_selectbar"></span>
+                          <label class="cp_sl06_selectlabel">お住まいの地域</label>
+                          </div>
+                          </form>
+                          
+                          <!---地域詳細--->
+                          <font size="5">
+                          <details><summary><strong>地域詳細</strong></summary>
+                          <ul>
+                            <li>
+                          
+                          <table align="center" border="1">		
+                                                          <tr>
+                          				　<td>　　　　　</td>
+                          				  <td><img src=
+                          "town2021.png" width="600" height="600"/></td>
+                          				<td>　　　　　</td>  
+                                                            <td><div class="selectdiv" style="margin: 30% 0% -300% 0%;">
+                            <label>
+                                <select>
+                                    <option selected>選択</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                            </label>
+                          </div></td>
+                          <td><a href="#" class="circle_btn02"　 style="margin: 30% 0% -300% 0%;"><span>決定</span></a>　</td>
+                          
+                                                          </tr>
+                          			    </table>
+                          
+                          </li>
+                          </ul>
+                          </details>
+                          </font size>
 
 
 
@@ -730,6 +560,6 @@ p.kaiwa-text:last-child {
                         </table>
                      </div>
                 </center>
-            </body>
-        </body>
+              </body>
+            </body>  
     </html>
