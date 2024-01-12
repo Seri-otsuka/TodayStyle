@@ -31,9 +31,10 @@ Route::get('/', function () {
     
 Route::get('/main',[UserController::class,'todouhuken'])->name('main');
 //Route::get('/main/{user}',[FashonController::class,'fashon'])->name('main.fashon');
-    
-Route::get('/coordination', function () {
-    return view('main.coordination');})->name('coordination');
+
+Route::get('/coordination',[UserController::class,'coordination'])->name('coordination');
+//Route::get('/coordination', function () {
+   // return view('main.coordination');})->name('coordination');
 
 //とりあえず都道府県データのみ 
 Route::get('/goout',[UserController::class,'goout'])->name('goout');

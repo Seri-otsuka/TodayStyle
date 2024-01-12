@@ -78,6 +78,8 @@ table {
 /* 全体のスタイル */
 .kaiwa {
   margin-bottom: 25px;
+  
+  
 }
 /* 右画像 */
 .kaiwa-img-right {
@@ -94,11 +96,11 @@ table {
 /* 右からの吹き出しテキスト */
 .kaiwa-text-left {
   position: relative;
-  margin-right: 80px;
-  padding: 10px;
+  margin-right: 50px;
+  padding: 30px;
   border-radius: 20px;
   background-color: #ffffff;
-  margin-left: 12%;
+  /*margin-left: 12%;*/
   float: right;
 }
 p.kaiwa-text {
@@ -180,7 +182,7 @@ p.kaiwa-text:last-child {
   background: #d5d5d5;
 }
 body {
-  background-color: #ffffff;
+  background: #ffffff;
 }
 
 

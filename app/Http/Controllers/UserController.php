@@ -64,4 +64,17 @@ class UserController extends Controller
             'finelyarea' => $login_users_finelyarea,
             ]);
     }
+    
+        public function coordination()
+    {
+        $login_users_area = \Auth::user()->area;
+        $login_users_finelyarea = \Auth::user()->finelyarea;
+        
+        return view('main.coordination')->with([
+            'area' => $login_users_area,
+            'finelyarea' => $login_users_finelyarea,
+            ]);
+    }
+    
+    
 }
