@@ -1,8 +1,8 @@
  <!DOCTYPE html>
-    <html lang="ja">
+    <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
         <head>
             <meta charset="utf-8">
-            <title>メインページ</title>
+            <title>お出かけモード</title>
            <meta name="description" content="">
            <!-- Fonts -->
             <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,9 +12,9 @@
 </head>
             
             <div  class="Hiritu"> 
-            　　　　　　　
                 <center>
-                    <div class="WebpageColor_box">
+                    
+                    <div class="gooutColor_box">
                       <!-- ヘッダー部 -->
                         <div class="header-contents">
                             <!--日付-->
@@ -94,7 +94,7 @@
                                 <!--↓↓サイズ調整お願いします-->
                                 <!--<img src="{ $area->path}}" style="max-width: 20%">-->
                                 <p>
-                                  北海道
+                                  {{ $area->name }}・{{$finelyarea->name }}
                                 </p>
                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704450028/%E5%8C%97%E6%B5%B7%E9%81%93%E5%85%A8%E4%BD%93_hrcsg1.png" style="max-width: 20%">
                             
@@ -402,12 +402,17 @@
                           <a href="{{ route('main') }}">
                           <div class="test01"　>
                           <button onclick="">
-                           <img src="kkrn_icon_modoru_16.png" width=150px height=150px;　style="margin: 75% 0% 300%;"/>
+                           <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705026228/modoru_r4tkuo.png" width=150px height=150px;　style="margin: 75% 0% 300%;"/>
                           </button>
-                          </a>
-                          </div>
                           
-                              <!---都道府県選択-->
+                          </div>
+                          </a>
+                          
+                            <!---都道府県選択-->
+                            <form>
+                                <div class="cp_ipselect">
+                                    <select  name=”item” class="cp_sl06" required>
+                                        <option value="" hidden disabled selected></option>
                           {{--
                           <form>
                           <div class="cp_ipselect">
@@ -418,6 +423,7 @@
                             @endforeach
                           </select>
                           --}}
+                          </select>
                           <span class="cp_sl06_highlight"></span>
                           <span class="cp_sl06_selectbar"></span>
                           <label class="cp_sl06_selectlabel">お住まいの地域</label>
@@ -426,16 +432,17 @@
                           
                           <!---地域詳細--->
                           <font size="5">
-                          <details><summary><strong>地域詳細</strong></summary>
-                          <ul>
-                            <li>
+                          <strong>地域詳細</strong>
                           
                           <table align="center" border="1">		
-                                                          <tr>
+                                        <tr>
                           				　<td>　　　　　</td>
-                          				  <td><img src=
-                          "town2021.png" width="600" height="600"/></td>
-                          				<td>　　　　　</td>  
+                          				  <td>　　　　　</td>
+                          				<td>　　　　　</td>
+                          				<td><img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704450028/%E5%8C%97%E6%B5%B7%E9%81%93%E5%85%A8%E4%BD%93_hrcsg1.png" width="600" height="600"/></td>
+                          				<td>　　　　　</td> 
+                          				
+                          				                    <!--選択-->
                                                             <td><div class="selectdiv" style="margin: 30% 0% -300% 0%;">
                             <label>
                                 <select>
@@ -447,15 +454,26 @@
                                 </select>
                             </label>
                           </div></td>
-                          <td><a href="#" class="circle_btn02"　 style="margin: 30% 0% -300% 0%;"><span>決定</span></a>　</td>
+                          <td><a href="#" class="circle_btn02"　 style="margin: 30% 0% -300% 0%;">
                           
-                                                          </tr>
+                        <!---決定ボタン--->
+                        <td>
+                            <font color="#ffffff">
+                                <div  class="Iti" style="margin: 35% 0% -300% 10%;">
+                                    <div class="radius_test"  align="center"　style="border: none;">
+                                        決定
+                                    </div>
+                                <div>
+                            </font>
+                        </td>
+                          
+                                            </tr>
                           			    </table>
-                          
-                          </li>
-                          </ul>
-                          </details>
                           </font size>
+                          
+                          
+                        <!---隙間-->
+	                    <div class="sukima_box"></div>
 
 
 
@@ -465,40 +483,47 @@
                         <body>
                             <table align="center"  border="1">
 				<tr>
-                                    <td>　　　　</td>
-				    <td>トップス</td>
-                                    <td>　　　　</td>
-				　  <td>ボトムス</td>
-				    <td>　　　　</td>
-                                </tr>			
-                                <tr>
-				　<td>　　　</td>
-				  <td class="clothes_box1"></td>
-				  <td>　　　　</td>
-                                  <td class="clothes_box1"></td>
-				　<td>　　　</td>
-                                </tr>
+                    <td>　　　　</td>
+				    <td>　トップス</td>
+                    <td>　　　　</td>
+                    <td>　ボトムス</td>
+				　  <td>　　　　</td>
+                </tr>			
+                <tr>
+				    <td>　　　</td>
+			        <td class="clothes_box1"></td>
+		            <td>　　　　</td>
+                    <td class="clothes_box1"></td>
+			        <td>　　　</td>
+                </tr>
 			    </table>
 
 			<table align="center"  border="1">
 				<tr>
                                     <td>　　　　</td>
-				    <td>アウター</td>
+				    <td>　アウター</td>
                                     <td>　　　　</td>
                     <a href="{{ route('coordination') }}">
-				　     <td>お出かけ</td>
-				     <td>　　　　</td></a>
+                    <td>　お出かけ</td>    
+				　     			
+				　     <td>　　　　</td></a>
                                 </tr>			
                                 <tr>
-				　<td>　　　</td>
-				  <td class="clothes_box1"><img src="kkrn_icon_modoru_16.png"/><a href="{{ route('coordination') }}">まるごとリンク</a></td>
-				  <td>　　　</td>
-                                  <td class="clothes_box1"></td>
-				　<td>　　　</td>
-                                </tr>
-			    </table>
-                        </body>
-			</font>
+				    <td>　　　</td>
+			        <td class="clothes_box1"></td>
+			        <td>　　　</td>
+                    <td class="clothes_box1" >
+                        <a href="{{ route('coordination') }}">
+                            <button type="button">
+                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704939153/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%BC%E3%83%83%E3%83%88_%E6%9C%8D%E7%84%A1%E3%81%97_bvgsln.png" class="code_size" />
+                            </button>
+                        </a>
+                    </td>
+				    <td>　　　</td>
+                </tr>
+			</table>
+        </body>
+	</font>
                     
                     
                         <!--かご-->
@@ -532,7 +557,7 @@
                     
                     
                         <!--ワンポイントアドバイス-->
-                        <table align="center">
+                        <table align="center" class="sample_test">
                             <tr>
                                 <td>
                                      <div class="kaiwa-text-left">
@@ -560,6 +585,7 @@
                         </table>
                      </div>
                 </center>
+                </div>
               </body>
             </body>  
     </html>

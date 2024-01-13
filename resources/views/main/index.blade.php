@@ -13,11 +13,11 @@
             
             
              <!--ここからしたにコード書いてね～！-->
-            
-            <div  class="Hiritu"> 
-            　　
+                   
+            <div  class="Hiritu">
                 <center>
-                    <div class="WebpageColor_box">
+                    
+                    <div class="mainColor_box">  
                         <!-- ヘッダー部 -->
                         <div class="header-contents">
                             <!--日付-->
@@ -42,11 +42,13 @@
                                 </div>
                             </font size>
                             
-                            <!-- 現在の天気・温度表示用 表示分けないなら一個でいいかも -->
+                            <!-- 現在の天気・温度表示用 表示分けないなら一個でいいかも
                             <p id="sampleweather" style="position: relative;font-family: 'Hattori Hanzo', serif;font-size: 500%;">
                              
+                            </p> -->
+                            <p id="sampleweather" style="position: relative;font-family: ravie,fantasy, serif;font-size: 450%;">
+                             
                             </p>
-                           
                             
                             <!-- Settings Dropdown 
                                  メニュー表示用    -->
@@ -89,10 +91,9 @@
                         
                         <!---天気表示（黒おび）-->
                         <div class="weather_box wrapper weather-contents weather-social-text">
-                            
-                            <!-- 都道府県表示用 -->
-                            <div style="margin: 0% -28% 0%;">
-                                {{ $area->name }}
+                            <!---->                            
+                            <div style="margin: 0% -28% 0%;" class="maru_box">
+                                {{ $area->name }}・{{ $finelyarea->name }}
                                 <!--↓↓サイズ調整お願いします-->
                                 <img src="{{ $area->path}}" style="max-width: 20%">
                             
@@ -217,27 +218,26 @@
                             //天気コード分岐
                             //晴れ
                             if(weather === 0 || weather === 1){
-                              sampleweather.innerHTML = "☀"+temperature + "℃";
-                            
+                              sampleweather.innerHTML = "☀"+temperature + "°C";
                             }
                             //一部くもり
                             else if(weather === 2){
-                                sampleweather.innerHTML = "🌤 "+temperature + "℃";
+                                sampleweather.innerHTML = "🌤  "+temperature + "°C";
                             }
                             //曇り
                             else if(weather === 3){
-                              sampleweather.innerHTML =  "☁  "+temperature + "℃";
+                              sampleweather.innerHTML =  "☁  "+temperature + "°C";
                             }
                             //雨
                             else if(weather <= 69){
-                              sampleweather.innerHTML =  "☂ "+temperature + "℃";
+                              sampleweather.innerHTML =  "☂ "+temperature + "°C";
                             }
                             //雪
                             else if(weather <=  79){
-                                sampleweather.innerHTML = "⛄ "+temperature + "℃";
+                                sampleweather.innerHTML = "☃ "+temperature + "°C";
                             }
                             else{
-                              sampleweather.innerHTML = " ★"+temperature + "℃";
+                              sampleweather.innerHTML = " ★"+temperature + "°C";
                             }
                             
                             //不快指数分岐
@@ -404,16 +404,27 @@
                             </button>
                         </div>
                         </a>
+                        
+                        
+                        <!--とりあえずお試しで入れてるのであとでけしてね-->
+                        <div>
+                            @foreach($categories as $category )
+                            <img src="{{ $category->image_true }}" style="max-width: 10%">
+                            @endforeach
+                        </div>
+                    
+                        
+                        
                         <!---選んだ服のアイコン-->
 
             			<font size="6">
                             <body>
-                                <table align="center"  border="1">
+                                <table align="center" border="1">
             				        <tr>
                                         <td>　　　　</td>
-            				            <td>トップス</td>
+            				            <td>　トップス</td>
                                         <td>　　　　</td>
-            				　          <td>ボトムス</td>
+            				　          <td>　ボトムス</td>
             				            <td>　　　　</td>
                                     </tr>			
                                     <tr>
@@ -425,29 +436,35 @@
                                     </tr>
             			        </table>
             
-            			       <table align="center"  border="1">
+            			       <table align="center">
                     				<tr>
                                         <td>　　　　</td>
-                    				    <td>アウター</td>
+                    				    <td>　アウター</td>
                                         <td>　　　　</td>
-                    				　  <td>お出かけ</td>
+                    				　  <td>　お出かけ</td>
                     				    <td>　　　　</td>
-                                    </tr>			
+                                    </tr>
                                     <tr>
                     				    <td>　　　</td>
                     				    <td class="clothes_box1"></td>
                     				    <td>　　　</td>
-                                        <td class="clothes_box1"><img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704939153/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%BC%E3%83%83%E3%83%88_%E6%9C%8D%E7%84%A1%E3%81%97_bvgsln.png"/></td>
+                                        <td class="clothes_box1">
+                                            <a href="{{ route('coordination') }}">
+                                                <button type="button">
+                                                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704939153/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%BC%E3%83%83%E3%83%88_%E6%9C%8D%E7%84%A1%E3%81%97_bvgsln.png" class="code_size" />
+                                                </button>
+                                            </a>
+                                        </td>
                     				    <td>　　　</td>
                                     </tr>
                     			</table>
                             </body>
             			</font>
                     
-  <!--かご-->
+                        <!--かご-->
                         <center>
                             <div>
-                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%94_xwtyed.png"/   width=150px height=150px;>
+                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%94_xwtyed.png"   />
                             </div>
                         </center>
                     
@@ -476,58 +493,57 @@
                     
                     
                         <!--ワンポイントアドバイス-->
-                        <table align="center">
+                        <table align="center" class="sample_test">
                             <tr>
                                 <td>
-                                     <div class="kaiwa-text-left">
-                                                                            <center>
-                                        <p class="kaiwa-text ">
-                                            <font size="6">
-                                                   ワンポイントアドバイス
-                                            </font>
-                                        </p> 
-                                        <p id="advice" class="kaiwa-text">
-                                            <nobr>
-                                            <font size="4">
-                                                
-                                                <p id="advicesamuatu" class="kaiwa-text">
-                                                    <nobr>
+                                    <div class="kaiwa-text-left">
+                                        <center>
+                                            <p class="kaiwa-text ">
+                                                <font size="6" >
+                                                       ワンポイントアドバイス
+                                                </font>
+                                            </p> 
+                                            <p id="advice" class="kaiwa-text">
+                                                <nobr>
                                                     <font size="4">
-                                                        <p id = "recommend_items" class = "kaiwa-text">
+                                                        <p id="advicesamuatu" class="kaiwa-text"　 style=font-family: "源瑛ラテン">
                                                             <nobr>
-                                                          <font size="4">
-                                                         </font>
-                                                         </nobr>
-                                                          </p>
-                                                        
+                                                                <font size="4">
+                                                                    <p id = "recommend_items" class = "kaiwa-text">
+                                                                        <nobr>
+                                                                            <font size="4">
+                                                                            </font>
+                                                                        </nobr>
+                                                                    </p>
+                                                                </font>
+                                                            </nobr>
+                                                        </p>
                                                     </font>
                                                 </nobr>
-                                                </p>
-                                            </font>
-                                            </nobr>
-                                        </p>
-                                     </center>
+                                            </p>
+                                        </center>
+                                    </div>
                                 </td>
-                                 <td>
+                                <td>
                                     <div class="kaiwa">
                                         <a
                                             x-data=""
                                             x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
                                         >
-                                        <figure class="kaiwa-img-right">
-                                               <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
-                                            </a>
-                                              <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-                                                <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
-                                                    @csrf
-                                                    @method('delete')
+                                            <figure class="kaiwa-img-right">
+                                            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
+                                        </a>
+                                        <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
+                                            <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+                                                @csrf
+                                                @method('delete')
                                                     
                                                     
-                                                    <h2 class="text-2xl font-medium text-gray-900">
-                                                        {{ __('悲壮犬とは？') }}
-                                                    </h2>
-                                                    <div class="flex justify-between">
-                                                        <img class="w-2" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
+                                                <h2 class="text-2xl font-medium text-gray-900">
+                                                    {{ __('悲壮犬とは？') }}
+                                                </h2>
+                                                <div class="flex justify-between">
+                                                    <img class="w-2" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
                                                     <div class="text-lg font-medium text-gray-900">名前：悲壮犬</div>
                                                     </div>
                                                     <div class="mt-6 flex justify-end">
@@ -542,10 +558,12 @@
                                  </td>
                             </tr>
                         </table>
+                        
                      </div>
                 </center>
+            </div>
 
-<svg class="fill-cyan-500 hover:fill-cyan-700">
+<svg class="fill-cyan-500 hover:fill-cyan-700"　width="0px" height="0px">
   <!-- ... -->
 </svg>
         </body>
@@ -608,9 +626,11 @@
                         return value == 71  || value == 75;
                     });    
 
+
                     //確認用
+                    
                     console.log(result);      
-                    console.log(weather_code);        
+                    console.log(weather_code);      
                      
                         
                     //3行目

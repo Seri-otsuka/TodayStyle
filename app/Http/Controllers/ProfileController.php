@@ -17,11 +17,11 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        $areas = areas::all();
+        //$areas = areas::all();
         
         return view('profile.edit', [
             'user' => $request->user(),
-             'areas' => $areas,
+             //'areas' => $areas,
         ]);
     }
 
