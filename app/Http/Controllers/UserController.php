@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Iamge;
 use App\Models\Area;
 use App\Models\Category;
+use App\Models\Fashon;
 use App\Models\Finelyarea;
 
 
@@ -44,13 +45,15 @@ class UserController extends Controller
     }
     
     //gooutページにareaテーブルのデータ全件渡す
-    public function goout(Area $area,User $user)
+    public function goout()
     {
+        $login_users_area = \Auth::user()->area;
+        $login_users_finelyarea = \Auth::user()->finelyarea;
+        
         return view('main.goout')->with([
-            'users' => $user,
-            
-            //データを呼び出す
-            $area = Area::get()]);
+            'area' => $login_users_area,
+            'finelyarea' => $login_users_finelyarea,
+            ]);
     }
     
     //ログインユーザーのお住いの地域の表示メソッド
@@ -58,10 +61,12 @@ class UserController extends Controller
     {
         $login_users_area = \Auth::user()->area;
         $login_users_finelyarea = \Auth::user()->finelyarea;
+        $categories = \Auth::user()->fashon_categories()->get();
         
         return view('main.index')->with([
             'area' => $login_users_area,
             'finelyarea' => $login_users_finelyarea,
+            'categories' => $categories,
             ]);
     }
     

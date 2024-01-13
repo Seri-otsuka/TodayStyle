@@ -3,10 +3,15 @@
 @import "tailwindcss/utilities";
 @import url('https://fonts.cdnfonts.com/css/hattori-hanzo');
 
-table {
+/* tableでborder-collapseやborder-spacingを指定していましたが、
+他の部分がおかしくなったので書き換えさせていただきました。classで指定しています。
+サイズ指定したい時などは極力タグ指定ではなく、クラス名を指定していただくとありがたいです。　by小島 */
+
+.sample_test {
   border-collapse: separate;
   border-spacing: 100px;
 }
+
 
 /* 上の余白消す */
 * { 
@@ -16,9 +21,18 @@ table {
 
 
 /* 画面の色・比率 */
-.WebpageColor_box {
+
+  /* メインページの壁紙  */
+.mainColor_box {
   width: 1400px;
-  height: 3100px;
+  height: 2700px;
+  background: #d5d5d5;
+}
+
+   /* お出かけモードの壁紙  */
+.gooutColor_box {
+  width: 1400px;
+  height: 3300px;
   background: #d5d5d5;
 }
 
@@ -36,10 +50,183 @@ table {
   color: #2196F3;
 }
 
+/* 黒おびの地図 */
+.maru_box {
+    border-radius: 20px;
+}
+
+
 /* 戻るボタンを右寄せするcss*/
 .test01 {
 	text-align: right;
 }
+
+/* 都道府県選択*/
+.cp_ipselect {
+	position: relative;
+	width: 90%;
+	margin: 2em auto;
+	text-align: center;
+}
+.cp_sl06 {
+	position: relative;
+	font-family: inherit;
+	background-color: transparent;
+	width: 100%;
+	padding: 10px 10px 10px 0;
+	font-size: 18px;
+	border-radius: 0;
+	border: none;
+	border-bottom: 1px solid rgba(0,0,0, 0.3);
+}
+.cp_sl06:focus {
+	outline: none;
+	border-bottom: 1px solid rgba(0,0,0, 0);
+}
+.cp_ipselect .cp_sl06 {
+	appearance: none;
+	-webkit-appearance:none
+}
+.cp_ipselect select::-ms-expand {
+	display: none;
+}
+.cp_ipselect:after {
+	position: absolute;
+	top: 18px;
+	right: 10px;
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid rgba(0, 0, 0, 0.3);
+	pointer-events: none;
+}
+.cp_sl06_selectlabel {
+	color: rgba(0,0,0, 0.5);
+	font-size: 18px;
+	font-weight: normal;
+	position: absolute;
+	pointer-events: none;
+	left: 0;
+	top: 10px;
+	transition: 0.2s ease all;
+}
+.cp_sl06:focus ~ .cp_sl06_selectlabel, .cp_sl06:valid ~ .cp_sl06_selectlabel {
+	color: #da3c41;
+	top: -20px;
+	transition: 0.2s ease all;
+	font-size: 14px;
+}
+.cp_sl06_selectbar {
+	position: relative;
+	display: block;
+	width: 100%;
+}
+.cp_sl06_selectbar:before, .cp_sl06_selectbar:after {
+	content: '';
+	height: 2px;
+	width: 0;
+	bottom: 1px;
+	position: absolute;
+	background: #da3c41;
+	transition: 0.2s ease all;
+}
+.cp_sl06_selectbar:before {
+	left: 50%;
+}
+.cp_sl06_selectbar:after {
+	right: 50%;
+}
+.cp_sl06:focus ~ .cp_sl06_selectbar:before, .cp_sl06:focus ~ .cp_sl06_selectbar:after {
+	width: 50%;
+}
+.cp_sl06_highlight {
+	position: absolute;
+	top: 25%;
+	left: 0;
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+/* 地域詳細 */
+ul {
+    list-style: none;
+}
+.selectdiv {
+  position: relative;
+  /*Don't really need this just for demo styling*/
+  
+  float: left;
+  min-width: 200px;
+  margin: 50px 33%;
+}
+
+/* IE11 hide native button (thanks Matt!) */
+select::-ms-expand {
+display: none;
+}
+
+.selectdiv:after {
+  content: '<>';
+  font: 17px "Consolas", monospace;
+  color: #333;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 11px;
+  /*Adjust for position however you want*/
+  
+  top: 18px;
+  padding: 0 0 2px;
+  border-bottom: 1px solid #999;
+  /*left line */
+  
+  position: absolute;
+  pointer-events: none;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Add some styling */
+  
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: 50px;
+  float: right;
+  margin: 5px 0px;
+  padding: 0px 24px;
+  font-size: 20px;
+  line-height: 1.75;
+  color: #333;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #cccccc;
+  -ms-word-break: normal;
+  word-break: normal;
+　border-radius: 20px;
+}
+
+/* コーディネートルームのアイコンサイズ*/
+.code_size{
+   width: 500px;
+  height: 500px; 
+}
+
+
+/* 隙間*/
+.sukima_box {
+  width: 1400px;
+  height: 80px;
+  color: #2196F3;
+  background: #d5d5d5;
+}
+
 
 /* 選んだ服のアイコンの枠 */
 .clothes_box1 {
@@ -185,7 +372,23 @@ body {
   background: #ffffff;
 }
 
+/* 決定ボタン */
+.radius_test {
+    width: 75px;               /* 幅指定 */
+    height: 40px;              /* 高さ指定 */
+    border: solid 2px #000;     /* 枠線指定 */
+    background-color: #808080;     /* 背景色指定 */
+    border-radius: 10px;        /* 角丸指定 */
+}
 
+.Iti{
+  position: relative;
+  /*Don't really need this just for demo styling*/
+  
+  float: left;
+  min-width: 200px;
+  margin: 50px 33%;
+}
 
 /* コーディネートの枠 */
 .coo_box {

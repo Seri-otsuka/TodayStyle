@@ -43,6 +43,7 @@
             @endif
         </div>
         
+        {{--
          <!-- area -->
         <div class="mt-4">
             <div>
@@ -55,6 +56,7 @@
                 </select>
             </div>
         </div>
+        --}}
         
          <!--temperature暑がりは0寒がりは1でデータベースに格納-->
         <div class="mt-4">
