@@ -56,7 +56,15 @@
                 </select>
             </div>
         </div>
-        --}}
+    --}}
+                   
+        <!--所持している服-->  
+         <x-input-label for="email" :value="__('所持している服')" />
+         <div>
+            @foreach($categories as $category )
+            <img src="{{ $category->image_true }}" style="max-width: 10%">
+            @endforeach
+        </div>
         
          <!--temperature暑がりは0寒がりは1でデータベースに格納-->
         <div class="mt-4">

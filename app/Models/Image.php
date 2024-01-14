@@ -11,21 +11,18 @@ class Image extends Model
     
     protected $fillable = [
         'path',
+        'user_id',
+        'category_id',
     ];
     
-      //ファッションはカテゴリーに対して多く存在する
-    public function categories()
+     public function user()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsTo(User::class);
     }
     
-    public function users()
+    public function categry()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(Category::class);
     }
     
-    public function users()
-    {
-        return $this->hasMany(User::class);
-    }
 }

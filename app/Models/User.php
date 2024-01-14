@@ -87,6 +87,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Finelyarea::class);//黄色の文字はモデルの名前
     }
+    
+    //画像処理についての受け渡し
+     public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 
     
 }

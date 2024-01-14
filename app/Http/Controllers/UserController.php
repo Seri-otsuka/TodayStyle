@@ -49,10 +49,12 @@ class UserController extends Controller
     {
         $login_users_area = \Auth::user()->area;
         $login_users_finelyarea = \Auth::user()->finelyarea;
+        $categories = \Auth::user()->fashon_categories()->get();
         
         return view('main.goout')->with([
             'area' => $login_users_area,
             'finelyarea' => $login_users_finelyarea,
+            'categories' => $categories,
             ]);
     }
     
@@ -70,14 +72,16 @@ class UserController extends Controller
             ]);
     }
     
-        public function coordination()
+    public function coordination()
     {
         $login_users_area = \Auth::user()->area;
         $login_users_finelyarea = \Auth::user()->finelyarea;
+        $categories = \Auth::user()->fashon_categories()->get();
         
         return view('main.coordination')->with([
             'area' => $login_users_area,
             'finelyarea' => $login_users_finelyarea,
+            'categories' => $categories,
             ]);
     }
     

@@ -12,7 +12,18 @@
  
 	
 <center>
-    
+    <!--お試しで入れてます、あとで消してね！-->
+        <div>
+            @foreach($categories as $category )
+            @if($category->genre == 0)<!--ジャンル分けです,0=トップス,1=ボトムス,2=コートワンピース-->
+            <img src="{{ $category->image_true }}" style="max-width: 10%">
+            @foreach($category->images()->latest()->get() as $image)
+            <img src="{{ $image->path }}" style="max-width: 10%">
+            @endforeach
+            @endif
+            @endforeach
+        </div>
+{{--    いったんコメントアウトしてます！
 <div class="WebpageColor_box1">
     <!---コーディネート枠-->
     <div class="coo_box">
@@ -32,7 +43,7 @@
             <img id="out" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1703848138/%E3%81%97%E3%81%8B%E3%81%8F%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%		83%B3_di4zbl.png"width=420px height=430px; >
         </div>
         
-    </div>
+    </div>--}}
     
 
 
