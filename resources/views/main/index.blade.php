@@ -409,7 +409,9 @@
                         <!--とりあえずお試しで入れてるのであとでけしてね-->
                         <div>
                             @foreach($categories as $category )
+                            @if($category->genre == 0)<!--ジャンル分けです,0=トップス,1=ボトムス,2=コートワンピース-->
                             <img src="{{ $category->image_true }}" style="max-width: 10%">
+                            @endif
                             @endforeach
                         </div>
                     

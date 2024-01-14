@@ -18,9 +18,15 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         //$areas = areas::all();
+         $login_users_area = \Auth::user()->area;
+         $login_users_finelyarea = \Auth::user()->finelyarea;
+         $categories = \Auth::user()->fashon_categories()->get();
         
         return view('profile.edit', [
             'user' => $request->user(),
+            'area' => $login_users_area,
+            'finelyarea' => $login_users_finelyarea,
+            'categories' => $categories,
              //'areas' => $areas,
         ]);
     }

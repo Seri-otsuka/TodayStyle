@@ -21,8 +21,14 @@ class Category extends Model
         return $this->belongsTo(User::class);
     }
     
-		public function fashon()
+	public function fashon()
     {
         return $this->belongsTo(Fashon::class);
     }
+    
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
 }

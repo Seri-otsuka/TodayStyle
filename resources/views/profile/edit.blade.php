@@ -70,11 +70,13 @@
                             </div>
                         </div>
                         
+                        {{--
                          <div class="p-4 sm:p-8 bg-gray-300 shadow sm:rounded-lg">
                             <div class="max-w-xl">
                                 @include('profile.partials.update-fashon-form')
                             </div>
                         </div>
+                        --}}
             
                         <div class="p-4 sm:p-8 bg-gray-300 shadow sm:rounded-lg">
                             <div class="max-w-xl">
