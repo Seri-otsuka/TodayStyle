@@ -1,8 +1,22 @@
 <section>
     <header>
+        <!-- パスワード注意書きを書くために変更を加えました！ -->
+        <!-- 下にコメントアウトされている文が元の文です。大森 -->
+        <div style="display: flex;justify-content: flex-start;" class="text-lg font-medium text-gray-900">
+            <h2 class="text-gray-900">
+                パスワードの変更
+            </h2>
+            <p class="text-gray-500">
+            　※8~12文字の半角英数字 
+            　<!---テキスト表示でごり押し 先頭に全角スペースを書いて位置調整しています -->
+            </p>
+        </div>
+        
+        <!--
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('パスワードの変更') }}
         </h2>
+        -->
 
         <p class="mt-1 text-sm text-gray-600">
             {{ __('安全を確保するために、アカウントが長くてランダムなパスワードを使用していることを確認してください。') }}

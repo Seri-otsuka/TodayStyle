@@ -39,8 +39,11 @@
                                 </div>
                             </font size>
                             
-                            <!-- 現在の天気・温度表示用 表示分けないなら一個でいいかも -->
+                            <!-- 現在の天気・温度表示用 表示分けないなら一個でいいかも 
                             <p id="sampleweather" style="position: relative;font-family: 'Hattori Hanzo', serif;font-size: 500%;">
+                             
+                            </p>-->
+                             <p id="sampleweather" style="position: relative;font-family: ravie,fantasy, serif;font-size: 450%;">
                              
                             </p>
                            
@@ -188,7 +191,7 @@
 
                             //経度・緯度をもらうときの今数字書いてるところに、これを入れよう
                             //普通にコメントアウトできなかったのでちゅうかっこ左端だけ消してます
-                            //let lat  = {$finelyarea -> latitude}};
+                           // let lat  = {$finelyarea -> latitude}};
                             //let long = {$finelyarea -> longitude}};
                             
                             /*
@@ -219,33 +222,96 @@
                             const fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;   //不快指数
                             
                             
-                            
-                            //天気コード分岐
+                                          //天気コード分岐
                             //晴れ
                             if(weather === 0 || weather === 1){
-                              sampleweather.innerHTML = "☀"+temperature + "℃";
-                            
+                              sampleweather.innerHTML = "☀"+temperature + "°C";
                             }
                             //一部くもり
                             else if(weather === 2){
-                                sampleweather.innerHTML = "🌤 "+temperature + "℃";
+                                sampleweather.innerHTML = "🌤  "+temperature + "°C";
                             }
                             //曇り
                             else if(weather === 3){
-                              sampleweather.innerHTML =  "☁  "+temperature + "℃";
+                              sampleweather.innerHTML =  "☁  "+temperature + "°C";
                             }
                             //雨
                             else if(weather <= 69){
-                              sampleweather.innerHTML =  "☂ "+temperature + "℃";
+                              sampleweather.innerHTML =  "☂ "+temperature + "°C";
                             }
                             //雪
                             else if(weather <=  79){
-                                sampleweather.innerHTML = "⛄ "+temperature + "℃";
+                                sampleweather.innerHTML = "☃ "+temperature + "°C";
                             }
                             else{
-                              sampleweather.innerHTML = " ★"+temperature + "℃";
+                              sampleweather.innerHTML = " ★"+temperature + "°C";
                             }
                             
+                            //不快指数分岐
+                            //寒い
+                            if(fukai <= 54){
+                            
+                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'>";
+                            
+                            }
+                            //肌寒い
+                            else if(fukai >= 55 && fukai <= 65 ){
+                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E7%B5%90%E6%A7%8B%E3%81%84%E3%81%84_h8tsks.png'>";
+                            }
+                            //快い
+                            else if(fukai > 65 && fukai <= 75 ){
+                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png'>";
+                            }
+                                //暑い
+                            else if(fukai > 75 && fukai <= 85 ){
+                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png'>";
+                            }
+                            //暑くてたまらない
+                            else if(fukai >= 86){
+                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png'>";
+                            }
+                            
+                            //↓朝・昼・夜の天気の画像を表示
+                                //朝の天気
+                                //晴れ（快晴）
+                                if(weather2[7] === 0 ){
+                                  morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+                            
+                                }
+                                //曇りのち晴れ（晴れだけど雲がでてる）
+                                else if(weather2[7] === 1){
+                                    morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                }
+                                //晴れのち曇り(一部曇り)
+                                else if(weather2[7] === 2){
+                                    morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                }
+                            
+                                //曇り
+                                else if( weather2[7] === 3){
+                                    morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                }
+                            
+                            
+                                //雨
+                                else if(weather2[7] <= 69  ){
+                                    morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                }
+                                //雪
+                                else if (weather2[7] <= 79){
+                                    morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                }
+                            
+                                //不明
+                                else{
+                                    morning_OTENKI.innerHTML = "★";
+                                }
+                            
+                                //朝7時の気温出力
+                                temperature_morning.innerHTML = " 🌡　"+ temperature2[7] + "°C";
+                                //朝7時の降水確率を出力
+                                rainypercent_morning.innerHTML  = "💧　"　+ probability[7] + "％";
+
                             //不快指数分岐
                             //寒い
                             if(fukai <= 54){
@@ -573,11 +639,21 @@
                        	                            ワンポイントアドバイス
                     	                        </font>
                                             </p> 
-                                            <p class="kaiwa-text">
-                                                <font size="4">
-                                                    Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                </font>
-                                            </p>
+                                             <p id="advice" class="kaiwa-text">
+                                                <nobr>
+                                                    <font size="4">
+                                                        <p id="advicesamuatu" class="kaiwa-text"　 style=font-family: "源瑛ラテン">
+                                                            <nobr>
+                                                                <font size="4">
+                                                                    <p id = "recommend_items" class = "kaiwa-text">
+                                                                        <nobr>
+                                                                            <font size="4">
+                                                                            </font>
+                                                                        </nobr>
+                                                                    </p>
+                                                                </font>
+                                                            </nobr>
+                                                        </p>
                                          </center>
                                 </td>
                                  <td>
@@ -594,4 +670,153 @@
                 </div>
               </body>
             </body>  
+    <script>
+        //ワンポイント用コード
+            /*
+        UR:①'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
+        URL②(0109.json):https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,weather_code,uv_index&timezone=Asia%2FTokyo&forecast_days=1 
+       現在の気温
+       現在の湿度
+       現在の天気コード
+       時間毎の湿度
+       時間毎の気温
+       時間毎の天気コード
+       時間毎の降水確率
+       UV指数
+       */
+    
+        /*兵庫県			 
+        let lat2  = 35.6785;
+        let long2 = 139.6823;*/
+        //　北海道 旭川latitude":43.75,"longitude":142.375
+        let lat2  = {{$finelyarea -> latitude}};
+        let long2 = {{$finelyarea -> longitude}};
+        
+        
+         //open-meteoからURLを取得
+         let apiUrl2 = 'https://api.open-meteo.com/v1/forecast?latitude='+lat2+'&longitude='+long2+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,weather_code,uv_index&timezone=Asia%2FTokyo&forecast_days=1';
+         
+         const temMax = function (a, b) {return Math.max(a, b);} //最高気温
+         const temMin = function (a, b) {return Math.min(a, b);} //最低気温
+         const uvMax  = function (a, b) {return Math.max(a. b);} //一番紫外線が強い
+         const snowMax = function (a, b) {return Math.max(a. b);} //降雪量
+         const rainMax = function (a, b) {return Math.max(a. b);} //降雪量
+      
+         
+           //jsonデータを配列として取得
+                 fetch(apiUrl2)
+                 .then(response => {
+                     return  response.json();
+                 })
+                 .then(data2 =>{
+    
+                     const jsonData = data2;
+                     const probability = Array.from(jsonData.hourly.precipitation_probability);                     //降水確率
+                     const temperature1 = jsonData.current.temperature_2m;                                         //現在の気温
+                     const temperature2 = Array.from(jsonData.hourly.temperature_2m);                               //時間毎の気温                        
+                     const humidity2 = jsonData.current.relative_humidity_2m;                                      //現在の湿度  
+                     const weather_code =  Array.from(jsonData.hourly.weather_code);    
+                     const fukai2 = 0.81*temperature1 + 0.01*humidity2 * (0.99*temperature1 - 14.3) + 46.3;       //不快指数
+                     const uv_index1 = Array.from(jsonData.hourly.uv_index);
+                    
+                     let tmax = temperature2.reduce(temMax);    //  最高気温
+                     let tmin = temperature2.reduce(temMin);    //　最低気温
+                     let uvmax  = uv_index1.reduce(uvMax);
+                     let rainmax = probability.reduce(rainMax);
+                     let samatu = 1; // 1:寒がりさん？0:暑がりさん？
+
+                    let result = weather_code.some(function(value){
+                        return value == 71  || value == 75;
+                    });    
+
+
+                    //確認用
+                    
+                    console.log(result);      
+                    console.log(weather_code);      
+                     
+                        
+                    //3行目
+                    if(uvmax => 3){
+                        recommend_items.innerHTML = "今日は日差しが強いワン!日焼け対策をしっかりしよう。日焼け止めや日傘などを使おう。";
+                    }
+                    else if(uvmax => 6){
+                        recommend_items.innerHTML = "今日は日差しがすごく強いワン!できるだけ屋外での活動は控えよう。";
+                    }
+                    if(result == true){
+                        recommend_items.innerHTML = "今日は雪だワン!!滑らないようにしてね。傘やブーツ、マフラー、手袋などを使おう。";
+                    }
+                    else if(rainmax => 30){
+                        recommend_items.innerHTML = "今日は雨が降るかもしれないワン!折り畳み傘が便利だよ。 ";
+                    }
+                    else if(rainmax => 70){
+                        recommend_items.innerHTML = "今日は雨降りだワン!雨具をしっかり用意しよう。傘やレインブーツを使おう。";
+                    }
+                            //出力
+                            //if文はelseなしにする　→　選択されていなければ共通の文とグッズのみ出力0110
+                            //不快指数分岐
+
+                         //寒い
+                         if(fukai2 <= 54){
+                            advice.innerHTML = "最高気温"+tmax+"℃　最低気温"+tmin+"℃";
+                            //1:寒がり
+                            if(samatu == 1){
+                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!裏起毛の服がおすすめだワン!";
+
+                           }
+                           //0:暑がり
+                           else{
+                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!今日は暑がりさんも寒さに注意だワン! ";
+                           }
+                         }
+                         //肌寒い
+                         else if(fukai2 >= 55 && fukai2 <= 65 ){
+                            advice.innerHTML = "最高気温"+tmax+"℃　最低気温"+tmin+"℃";
+                             if(samatu == 1){
+                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!厚手の靴下やブーツも選んでみよう。";
+                             }
+                             else{
+                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!暖房に対応できるアウターを選ぼう。 ";
+                             }
+                         }
+                         //快い
+                         else if(fukai2 >= 65 && fukai2 <= 75 ){
+                            advice.innerHTML = "最高気温"+tmax+"℃　最低気温"+tmin+"℃";
+                            advicesamuatu.innerHTML= "今日は過ごしやすいワンダフルな一日‼好きなオシャレが楽しめそうだワン。";
+
+ 
+                           }
+                         //暑い
+                         else if(fukai2 >= 75 && fukai2 <= 85 ){
+                            advice.innerHTML = "最高気温"+tmax+"℃　最低気温"+tmin+"℃";
+                             if(samatu == 1){
+                                advicesamuatu.innerHTML = "薄手の素材がおすすめだワン。冷房に注意してね。七分丈もよいかも？ ";
+                             }
+                             else{
+                                advicesamuatu.innerHTML =" 薄手の素材がおすすめだワン。通気性の良い半袖や半ズボンがおすすめだよ。 ";
+                             }
+                           }
+                         //暑くてたまらない
+                         else if(fukai2 >= 86){
+                            advice.innerHTML = "最高気温"+tmax+"℃　最低気温"+tmin+"℃";
+                             if(samatu == 1){
+                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材がおすすめ。冷房に注意するワン!　 ";
+                             }
+                             else{
+                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材がおすすめ。汗拭きシートで快適だワン。 ";
+                             }
+                            
+                         
+
+
+    }})
+                            
+
+    
+           //json形式で情報取得失敗した時
+           .catch(error => {
+               console.error('データ取得に失敗しました',error)
+           });
+         
+</script>
     </html>

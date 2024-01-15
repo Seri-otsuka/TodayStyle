@@ -58,7 +58,7 @@
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
-
+{{--
         <!-- area -->
         <div class="mt-4">
             <div>
@@ -84,7 +84,7 @@
                 </select>
             </div>
             
-        </div>
+        </div>--}}
         
         <!--temperature暑がりは0寒がりは1でデータベースに格納-->
         <div class="mt-4">

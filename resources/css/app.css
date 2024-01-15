@@ -390,96 +390,109 @@ body {
   margin: 50px 33%;
 }
 
-/* コーディネートの枠 */
-.coo_box {
-  width: 800px;
-  height: 570px;
-  position: absolute;
-  top: 2px;
-  right: 15px;
-}
-.coord_box {
-  width: 700px;
-  height: 580px;
-  background: #d5d5d5;
-  border: 3px solid #000;      /* わかりやすくボーダーを引く */
-  border-radius: 10px;
-  position: absolute;
-  top: 10px;
-  right: 0px;
-}
-
-.manekin {
-    width:550px;
-    height:550px;
-    margin: 5px;
-    padding:5px;
-    position: absolute;
-    top: 20px;
-    left:0px;
-}
-
-
-.tops{
-    position: absolute;
-    top: 12px;
-    left:130px;
-    margin: 5px;
-    padding:5px;
-}
-
-.botoms{
-    position: absolute;
-    top: 247px;
-    left:130px;
-    margin: 5px;
-    padding:5px;
-}
-
-.outer{
-    position: absolute;
-    top: 12px;
-    left:400px;
-    margin: 5px;
-    padding:5px;
-}
-
-/* アイコンの枠 */
-.box1 {
-  width: 500px;
-  height: 550px;
-  background: #d5d5d5;
-
-  overflow-y: scroll;          /* 縦方向にスクロール可能にする */
-  position: absolute;
-  top: 40px;
-  left:35px;
-  text-align: left;
-}
-.box2 {
-  width: 470px;                /* 横幅を200pxに指定 */
-  height: 150px;               /* 横幅を200pxに指定 */
-  border: 1px solid #000;      /* わかりやすくボーダーを引く */
-  overflow-x: scroll;          /* 横方向にスクロール可能にする */
-  margin: 5px;
-}
-.box2>div{
-    width: 250%; 
-    display: flex;
-}
-.box2>div>div{
-    width: 10%;
-    /*border: 1px solid #999;*/
-    padding: 10px 20px;
-    margin: 20px;
-    background: #f2f2f2;
-}
-
-.icon {
-    width:115px;
-    height:115px;
-    border: 2px solid #000;      /* わかりやすくボーダーを引く */
+ .botan{
+        width: 1400px;
+        height: 55px;
+     
     
+        background-color: #d5d5d5;
+        text-align: left;
+    }
+    /* コーディネートの枠 */
+    .coord_box {
+      width: 695px;
+      height: 800px;
+      background: #d5d5d5;
+      border: 3px solid #000;      /* わかりやすくボーダーを引く */
+      border-radius: 10px;
+      text-align: right;
+      float: right;
+      position: relative;
+    }
+    
+    /* アイコンの枠 */
+    .box1 {
+      width: 695px;
+      height: 800px;
+      background: #d5d5d5;
+      border: 1px solid #000;      /* わかりやすくボーダーを引く */
+      border-radius: 10px;
+      direction: rtl;
+      overflow-y: scroll;          /* 縦方向にスクロール可能にする */
+      float: left;
+      text-align: left
+      
+    }
+    .box1>div{
+        direction: ltr;
+    }
+    .box2 {
+      width:94%;               
+      height: 150px;               
+      border: 1px solid #000;      /* わかりやすくボーダーを引く */
+      overflow-x: scroll;          /* 横方向にスクロール可能にする */
+      margin: 5px;
+      float: left;
+    }
+    .box2>div{
+        width: 250%; 
+        display: flex;
+    }
+    .box2>div>div{
+        width: 10%;
+        /*border: 1px solid #999;*/
+        padding: 10px 20px;
+        margin: 20px;
+        background: #f2f2f2;
+    }
+    
+    .manekin {
+    position: absolute;
+    top: 17px;
+    right:50px;
+    margin: 5px;
     padding:5px;
-    background-color: #fffbfb;
-}
+
+
+ 
+    }
+
+
+    .tops{
+        position: absolute;
+        top: 60px;
+        left:0px;
+        margin: 5px;
+        padding:5px;
+    }
+
+    .botoms{
+        position: absolute;
+        top: 350px;
+        left:0px;
+        margin: 5px;
+        padding:5px;
+    }
+
+    .outer{
+
+        position: absolute;
+        top: 60px;
+        left:300px;
+        margin: 5px;
+        padding:5px;
+    }
+    .icon {
+        width:115px;
+        height:115px;
+        border: 2px solid #000;      /* わかりやすくボーダーを引く */
+        float: left;
+        padding:5px;
+        background-color: #fffbfb;
+    }
+    
+     .coordWebpageColor_box {
+      width: 1400px;
+      height: 900px;
+      background: #d5d5d5;
+    }

@@ -301,9 +301,9 @@
                                 }
                             
                                 //朝7時の気温出力
-                                temperature_morning.innerHTML = "🌡　"+ temperature2[7] + "℃";
+                                temperature_morning.innerHTML = " 🌡　"+ temperature2[7] + "°C";
                                 //朝7時の降水確率を出力
-                                rainypercent_morning.innerHTML  = "⛆　"　+ probability[7] + "％";
+                                rainypercent_morning.innerHTML  = "💧　"　+ probability[7] + "％";
                             
                             
                                 

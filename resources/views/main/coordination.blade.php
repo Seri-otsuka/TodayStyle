@@ -10,7 +10,7 @@
         
         </head> 
  
-	
+<div  class="Hiritu">	
 <center>
     <!--お試しで入れてます、あとで消してね！-->
         <div>
@@ -23,323 +23,329 @@
             @endif
             @endforeach
         </div>
-{{--    いったんコメントアウトしてます！
-<div class="WebpageColor_box1">
-    <!---コーディネート枠-->
-    <div class="coo_box">
-        <div class="coord_box">
- 
+            <div class="coordWebpageColor_box">
+        <div class="botan">
+            <img id="return" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705026228/modoru_r4tkuo.png"width=45px height=45px; >
         </div>
-        <div class="manekin">
-            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702962950/%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%81%AA%E4%		BA%BA%E7%89%A9%E3%83%94%E3%82%AF%E3%83%88%E3%82%B0%E3%83%A9%E3%83%A0_fcar3v.png"width=670px height=550px;>
+       
+           <!---コーディネート枠-->
+           
+         <div class="coord_box">
+         
+                
+            <div class="manekin">
+                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702962950/%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%81%AA%E4%		BA%BA%E7%89%A9%E3%83%94%E3%82%AF%E3%83%88%E3%82%B0%E3%83%A9%E3%83%A0_fcar3v.png"width=770px height=750px;>
+            </div>
+            <div class="tops">
+                <img id="top" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1703848138/%E3%81%97%E3%81%8B%E3%81%8F%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%		83%B3_di4zbl.png"width=480px height=510px; >
+            </div>
+            <div class="botoms">
+                <img id="botom" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1703848138/%E3%81%97%E3%81%8B%E3%81%8F%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%		83%B3_di4zbl.png"width=480px height=510px; >
+            </div>
+            <div class="outer">
+                <img id="out" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1703848138/%E3%81%97%E3%81%8B%E3%81%8F%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%		83%B3_di4zbl.png"width=480px height=510px; >
+            </div>
+            
+       
         </div>
-        <div class="tops">
-            <img id="top" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1703848138/%E3%81%97%E3%81%8B%E3%81%8F%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%		83%B3_di4zbl.png"width=420px height=430px; >
-        </div>
-        <div class="botoms">
-            <img id="botom" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1703848138/%E3%81%97%E3%81%8B%E3%81%8F%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%		83%B3_di4zbl.png"width=420px height=430px; >
-        </div>
-        <div class="outer">
-            <img id="out" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1703848138/%E3%81%97%E3%81%8B%E3%81%8F%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%		83%B3_di4zbl.png"width=420px height=430px; >
-        </div>
-        
-    </div>--}}
+           
+        <div class="box1">
+            
+            <!--1番目--->
+            <div class="icon">
+                <img id="one" name="one" width=115px height=115px;>
+            </div>
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                        94_xwtyed.png"/ width=130px height=130px;>
+                        
     
-
-
-    <div class="box1">
-        <!--1番目--->
-        <div class="icon">
-            <img id="one" name="one" width=115px height=115px;>
-        </div>
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-					94_xwtyed.png"/ width=130px height=130px;>
-
-
-
-
-
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---2番目--->
+            <div class="icon">
+                <img id="two" name="two" width=115px height=115px;>
+            </div>
             
+    
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                        94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---3番目--->
+            <div class="icon">
+                <img id="three" name="three"width=115px height=115px; >
+    
+            </div>
+            
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                        94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---4番目--->
+            <div class="icon">
+                <img id="four" name="four"width=115px height=115px; >
+            </div>
+            
+    
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                        94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---5番目--->
+            <div class="icon">
+                <img id="five" name="five"width=115px height=115px; >
+            </div>
+            
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                        94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---6番目--->
+            <div class="icon">
+                <img id="six" name="six"width=115px height=115px; >
+            </div>
+            
+    
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                        94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---7番目--->
+            <div class="icon">
+                <img id="seven" name="seven"width=115px height=115px; >
+            </div>
+            
+    
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                    94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---8番目--->
+            <div class="icon">
+                <img id="eight" name="eight"width=115px height=115px; >
+            </div>
+            
+    
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                    94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---9番目--->
+            <div class="icon">
+                <img id="nine" name="nine"width=115px height=115px; >
+            </div>
+            
+    
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                    94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---10番目--->
+            <div class="icon">
+                <img id="ten" name="ten"width=115px height=115px; >
+            </div>
+            
+    
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                    94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---11番目--->
+            <div class="icon">
+                <img id="eleven" name="eleven"width=115px height=115px; >
+            </div>
+            
+    
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                    94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---12番目--->
+            <div class="icon">
+                <img id="twelve" name="twelve"width=115px height=115px; >
+            </div>
+            
+    
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                    94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---13番目--->
+            <div class="icon">
+                <img id="thirteen" name="thirteen"width=115px height=115px; >
+            </div>
+            
+    
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                    94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---14番目--->
+            <div class="icon">
+                <img id="fourteen" name="fourteen"width=115px height=115px; >
+            </div>
+            
+    
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                    94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
+            </div>
+    
+            <!---15番目--->
+            <div class="icon">
+                <img id="fifteen" name="fifteen"width=115px height=115px; >
+            </div>
+            
+    
+            <div class="box2"style="display: flex; flex-wrap: wrap;">
+                <div>
+                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
+                    94_xwtyed.png"/   width=115px height=115px;>
+    
+    
+    
+    
+    
+                
+                </div>
             </div>
         </div>
-
-        <!---2番目--->
-        <div class="icon">
-            <img id="two" name="two" width=115px height=115px;>
-        </div>
+    
+    
+     
         
-
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-					94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
-
-        <!---3番目--->
-        <div class="icon">
-            <img id="three" name="three"width=115px height=115px; >
-
-        </div>
-        
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-					94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
-
-        <!---4番目--->
-        <div class="icon">
-            <img id="four" name="four"width=115px height=115px; >
-        </div>
-        
-
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-					94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
-
-        <!---5番目--->
-        <div class="icon">
-            <img id="five" name="five"width=115px height=115px; >
-        </div>
-        
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-					94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
-
-        <!---6番目--->
-        <div class="icon">
-            <img id="six" name="six"width=115px height=115px; >
-        </div>
-        
-
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-					94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
-
-        <!---7番目--->
-        <div class="icon">
-            <img id="seven" name="seven"width=115px height=115px; >
-        </div>
-        
-
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-                94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
-
-        <!---8番目--->
-        <div class="icon">
-            <img id="eight" name="eight"width=115px height=115px; >
-        </div>
-        
-
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-                94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
-
-        <!---9番目--->
-        <div class="icon">
-            <img id="nine" name="nine"width=115px height=115px; >
-        </div>
-        
-
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-                94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
-
-        <!---10番目--->
-        <div class="icon">
-            <img id="ten" name="ten"width=115px height=115px; >
-        </div>
-        
-
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-                94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
-
-        <!---11番目--->
-        <div class="icon">
-            <img id="eleven" name="eleven"width=115px height=115px; >
-        </div>
-        
-
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-                94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
-
-        <!---12番目--->
-        <div class="icon">
-            <img id="twelve" name="twelve"width=115px height=115px; >
-        </div>
-        
-
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-                94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
-
-        <!---13番目--->
-        <div class="icon">
-            <img id="thirteen" name="thirteen"width=115px height=115px; >
-        </div>
-        
-
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-                94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
-
-        <!---14番目--->
-        <div class="icon">
-            <img id="fourteen" name="fourteen"width=115px height=115px; >
-        </div>
-        
-
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-                94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
-
-        <!---15番目--->
-        <div class="icon">
-            <img id="fifteen" name="fifteen"width=115px height=115px; >
-        </div>
-        
-
-        <div class="box2"style="display: flex; flex-wrap: wrap;">
-            <div>
-                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%
-                94_xwtyed.png"/   width=115px height=115px;>
-
-
-
-
-
-            
-            </div>
-        </div>
+    
+    
+    
+    
     </div>
 
-
-    
-    
-
-
-
-
-</div>
 </center>
+</div>
 
 <script>
 let lat  = {{$finelyarea -> latitude}};
