@@ -67,8 +67,8 @@
     --}}
                    
         <!--所持している服-->  
-         <x-input-label for="email" :value="__('所持している服')" />
-         <div>
+        <x-input-label for="email" :value="__('所持している服')" />
+        <div>
             @foreach($categories as $category )
             <img src="{{ $category->image_true }}" style="max-width: 10%">
             @endforeach
