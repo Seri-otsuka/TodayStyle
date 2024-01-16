@@ -14,7 +14,15 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <div style="display: flex; justify-content: flex-start;" class="text-gray-700 font-medium text-sm">
+            <p class="text-gray-700">
+                お名前
+            </p>
+            <p class="text-gray-500">
+                　※本名の入力はお控えください
+            </p>  
+            </div>
+            <!--<x-input-label for="name" :value="__('Name')" />-->
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
@@ -59,8 +67,8 @@
     --}}
                    
         <!--所持している服-->  
-         <x-input-label for="email" :value="__('所持している服')" />
-         <div>
+        <x-input-label for="email" :value="__('所持している服')" />
+        <div>
             @foreach($categories as $category )
             <img src="{{ $category->image_true }}" style="max-width: 10%">
             @endforeach

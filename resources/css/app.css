@@ -42,6 +42,103 @@
 }
 
 
+/* メニュー画面 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background: #d5d5d5;
+}
+/* ここから下がハンバーガーメニューに関するCSS */
+/* チェックボックスを非表示にする */
+.drawer_hidden {
+  display: none;
+}
+
+/* ハンバーガーアイコンの設置スペース */
+.drawer_open {
+  display: flex;
+  height: 60px;
+  width: 60px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 100;/* 重なり順を一番上にする */
+  cursor: pointer;
+}
+
+/* ハンバーガーメニューのアイコン */
+.drawer_open span,
+.drawer_open span:before,
+.drawer_open span:after {
+  content: '';
+  display: block;
+  height: 3px;
+  width: 25px;
+  border-radius: 3px;
+  background: #333;
+  transition: 0.5s;
+  position: absolute;
+}
+
+/* 三本線の一番上の棒の位置調整 */
+.drawer_open span:before {
+  bottom: 8px;
+}
+
+/* 三本線の一番下の棒の位置調整 */
+.drawer_open span:after {
+  top: 8px;
+}
+
+/* アイコンがクリックされたら真ん中の線を透明にする */
+#drawer_input:checked ~ .drawer_open span {
+  background: rgba(255, 255, 255, 0);
+}
+
+/* アイコンがクリックされたらアイコンが×印になように上下の線を回転 */
+#drawer_input:checked ~ .drawer_open span::before {
+  bottom: 0;
+  transform: rotate(45deg);
+}
+
+#drawer_input:checked ~ .drawer_open span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+  
+/* メニューのデザイン*/
+.nav_content {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 100%; /* メニューを画面の外に飛ばす */
+  z-index: 99;
+  background: #000;
+  transition: .5s;
+  background-color: rgba(0,0,0,0.7);
+  text-align:center;
+}
+
+/* メニュー黒ポチを消す */
+.nav_list {
+  list-style: none;
+}
+
+.nav_item a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* アイコンがクリックされたらメニューを表示 */
+#drawer_input:checked ~ .nav_content {
+  left: 0;/* メニューを画面に入れる */
+}
+
+
+
 /* 天気表示画面の黒おび*/
 .weather_box {
   width: 1400px;
@@ -211,11 +308,15 @@ display: none;
   word-break: normal;
 　border-radius: 20px;
 }
+#selectdiv option:disabled{
+  display:none;
+}
 
 /* コーディネートルームのアイコンサイズ*/
 .code_size{
    width: 500px;
-  height: 500px; 
+   height: 500px;
+  object-position: 50% 50%;
 }
 
 
@@ -236,6 +337,26 @@ display: none;
   border-radius: 20px;
 }
 
+/* 所持している服のアイコン */
+.fashon_icon {
+  display: inline-block;
+  text-decoration: none;
+  width: 150px;
+  margin:2px;
+  margin-top: 5%;/*上方向に余白*/
+  margin-left: 1%;
+  margin-right: 1%;
+  height: 150px;
+  line-height: 50px;
+  font-size: 23px;
+  color:white;
+  border-radius: 12px;
+  text-align: center;
+  overflow: hidden;
+  font-weight: bold;
+  vertical-align: top;
+  border: 4px #777777 solid;
+}
 
 /* shopのアイコン */
 .btn-social-square {
@@ -279,12 +400,13 @@ display: none;
 .kaiwa figure img {
   width: 100%;
   height: 100%;
+  margin: 25px -8%;
 }
 /* 右からの吹き出しテキスト */
 .kaiwa-text-left {
   position: relative;
   margin-right: 50px;
-  padding: 30px;
+  padding: 35px;
   border-radius: 20px;
   background-color: #ffffff;
   /*margin-left: 12%;*/
@@ -319,6 +441,18 @@ p.kaiwa-text:last-child {
   display: block;
 }
 
+/* アドバイス内テキスト用 */
+.advice-text{
+  font-size:30px;
+}
+
+/* p208参考 テキスト/最高・最低気温 */
+.advice-temperature{
+  display: flex;                   /* flexboxの指定 */
+  justify-content: space-around;  /*               */
+  font-size:30px;
+  /*margin-bottom: 50px;*/    	/* 下にmarginを50px取得 */
+}
 
 /*dropdown用 flex-endで右寄せ でも反映されて無さそう？*/
 .dropdown{
@@ -390,96 +524,118 @@ body {
   margin: 50px 33%;
 }
 
-/* コーディネートの枠 */
-.coo_box {
-  width: 800px;
-  height: 570px;
-  position: absolute;
-  top: 2px;
-  right: 15px;
-}
-.coord_box {
-  width: 700px;
-  height: 580px;
-  background: #d5d5d5;
-  border: 3px solid #000;      /* わかりやすくボーダーを引く */
-  border-radius: 10px;
-  position: absolute;
-  top: 10px;
-  right: 0px;
-}
-
-.manekin {
-    width:550px;
-    height:550px;
-    margin: 5px;
-    padding:5px;
-    position: absolute;
-    top: 20px;
-    left:0px;
-}
-
-
-.tops{
-    position: absolute;
-    top: 12px;
-    left:130px;
-    margin: 5px;
-    padding:5px;
-}
-
-.botoms{
-    position: absolute;
-    top: 247px;
-    left:130px;
-    margin: 5px;
-    padding:5px;
-}
-
-.outer{
-    position: absolute;
-    top: 12px;
-    left:400px;
-    margin: 5px;
-    padding:5px;
-}
-
-/* アイコンの枠 */
-.box1 {
-  width: 500px;
-  height: 550px;
-  background: #d5d5d5;
-
-  overflow-y: scroll;          /* 縦方向にスクロール可能にする */
-  position: absolute;
-  top: 40px;
-  left:35px;
-  text-align: left;
-}
-.box2 {
-  width: 470px;                /* 横幅を200pxに指定 */
-  height: 150px;               /* 横幅を200pxに指定 */
-  border: 1px solid #000;      /* わかりやすくボーダーを引く */
-  overflow-x: scroll;          /* 横方向にスクロール可能にする */
-  margin: 5px;
-}
-.box2>div{
-    width: 250%; 
-    display: flex;
-}
-.box2>div>div{
-    width: 10%;
-    /*border: 1px solid #999;*/
-    padding: 10px 20px;
-    margin: 20px;
-    background: #f2f2f2;
-}
-
-.icon {
-    width:115px;
-    height:115px;
-    border: 2px solid #000;      /* わかりやすくボーダーを引く */
+        .coordWebpageColor_box {
+      width: 1400px;
+      height: 900px;
+      background: #d5d5d5;
+    }
     
+    .botan{
+        width: 1400px;
+        height: 55px;
+     
+    
+        background-color: #d5d5d5;
+        text-align: left;
+    }
+    /* コーディネートの枠 */
+    .coord_box {
+      width: 695px;
+      height: 800px;
+      background: #d5d5d5;
+      border: 3px solid #000;      /* わかりやすくボーダーを引く */
+      border-radius: 10px;
+      text-align: right;
+      float: right;
+      position: relative;
+    }
+    
+    /* アイコンの枠 */
+    .box1 {
+      width: 695px;
+      height: 800px;
+      background: #d5d5d5;
+      border: 1px solid #000;      /* わかりやすくボーダーを引く */
+      border-radius: 10px;
+      overflow-y: scroll;          /* 縦方向にスクロール可能にする */
+      float: left;
+      text-align: left
+      
+    }
+
+    .box2 {
+      width:94%;               
+      height: 160px;               
+      border: 1px solid #000;      /* わかりやすくボーダーを引く */
+      overflow-x: scroll;          /* 横方向にスクロール可能にする */
+      margin: 5px;
+      float: left;
+    }
+    .box2>div{
+        width: 250%; 
+        display: flex;
+    }
+    .box2>div>div{
+        width: 10%;
+        /*border: 1px solid #999;*/
+        padding: 10px 20px;
+        margin: 20px;
+        background: #f2f2f2;
+    }
+    
+    .manekin {
+    position: absolute;
+    top: 17px;
+    left:50px;
+    margin: 5px;
     padding:5px;
-    background-color: #fffbfb;
-}
+
+
+ 
+    }
+
+    .boxsize{
+        width:250px;               
+      height: 310px;  
+    }
+    .manekinsize{
+        width:370px;               
+      height: 750px;   
+    }
+    .tops{
+        position: absolute;
+        top: 135px;
+        left:110px;
+        margin: 5px;
+        padding:5px;
+    }
+
+    .botoms{
+        position: absolute;
+        top: 440px;
+        left:110px;
+        margin: 5px;
+        padding:5px;
+    }
+
+    .outer{
+
+        position: absolute;
+        top: 140px;
+        left:400px;
+        margin: 5px;
+        padding:5px;
+    }
+    .icon {
+        width:115px;
+        height:115px;
+        border: 2px solid #000;      /* わかりやすくボーダーを引く */
+        float: left;
+        padding:5px;
+        background-color: #fffbfb;
+    }
+
+    .fukusize{
+        width:130px;
+        height:130px;
+    }

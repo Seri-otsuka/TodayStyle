@@ -58,7 +58,7 @@
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
-
+{{--
         <!-- area -->
         <div class="mt-4">
             <div>
@@ -84,7 +84,7 @@
                 </select>
             </div>
             
-        </div>
+        </div>--}}
         
         <!--temperature暑がりは0寒がりは1でデータベースに格納-->
         <div class="mt-4">
@@ -115,21 +115,67 @@
                      <div class="flex justify-center items-center gap-5">
                      <!--キャミ-->
                      <div>
-                         <center>
+                        <center>
                         <a
                             x-data=""
                             x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
                         >
+                        
+                           <img class="w-16 rounded-md bg-white pointer-events-auto indigo-500" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png">
+                        </a>
+                        <!-- ↓figure~ 123行から誘拐しました -->
                         <figure class="w-16 rounded-md bg-white pointer-events-auto indigo-500">
-                               <img class="w-16 rounded-md bg-white pointer-events-auto indigo-500" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png">
-                            </a>
-                              <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
+                            <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
                                 <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
                                     @csrf
                                     @method('delete')
                                     
                                     <!--ここから中身の内容-->
-                                   <div class="flex items-center justify-center w-full">
+                                    <div class="flex items-center justify-center w-full">
+                                        <label for="dropzone-file" class="flex mt-6 ml-2 justify-center h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                                </svg>
+                                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">クリックして画像をアップロードしてください</span> 
+                                                <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                            </div>
+                                            <input id="dropzone-file" type="file" class="hidden" />
+                                        </label>
+                                    </div>
+                                    <div class="mt-6 mb-2 flex justify-end mr-2">
+                                        <x-secondary-button x-on:click="$dispatch('close')">
+                                            {{ __('登録') }}
+                                        </x-secondary-button>
+                                        <div class="ml-2"></div>
+                                        
+                                        <x-secondary-button x-on:click="$dispatch('close')">
+                                            {{ __('戻る') }}
+                                        </x-secondary-button>
+                                    </div>
+                                </form>
+                            </x-modal>
+                        </figure>
+                        <x-input-label class="" for="email" :value="__('キャミ')" />
+                    </div>
+                        
+                        
+                    <div>
+                        <center>
+                        <a
+                            x-data=""
+                            x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion2')"
+                        >
+                        <figure class="w-16 rounded-md bg-white pointer-events-auto indigo-500">
+                           <img class="w-16 rounded-md bg-white pointer-events-auto indigo-500" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0294_ziqwci.png">
+                        </a>
+                            <x-modal name="confirm-user-deletion2" :show="$errors->userDeletion->isNotEmpty()" focusable>
+                                <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+                                    @csrf
+                                    @method('delete')
+                                    
+                                    <!--ここから中身の内容-->
+                                <div class="flex items-center justify-center w-full">
                                     <label for="dropzone-file" class="flex mt-6 ml-2 justify-center h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                         <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -153,53 +199,9 @@
                                     </div>
                                 </form>
                             </x-modal>
-                         </figure>
-                         <x-input-label class="" for="email" :value="__('キャミ')" />
-                        </div>
-                        
-                        
-                         <div>
-                         <center>
-                        <a
-                            x-data=""
-                            x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-                        >
-                        <figure class="w-16 rounded-md bg-white pointer-events-auto indigo-500">
-                               <img class="w-16 rounded-md bg-white pointer-events-auto indigo-500" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0294_ziqwci.png">
-                            </a>
-                              <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-                                <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
-                                    @csrf
-                                    @method('delete')
-                                    
-                                    <!--ここから中身の内容-->
-                                   <div class="flex items-center justify-center w-full">
-                                    <label for="dropzone-file" class="flex mt-6 ml-2 justify-center h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                                            </svg>
-                                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">クリックして画像をアップロードしてください</span> 
-                                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                                        </div>
-                                        <input id="dropzone-file" type="file" class="hidden" />
-                                    </label>
-                                </div> 
-                                    <div class="mt-6 mb-2 flex justify-end mr-2">
-                                        <x-secondary-button x-on:click="$dispatch('close')">
-                                            {{ __('登録') }}
-                                        </x-secondary-button>
-                                        <div class="ml-2"></div>
-                                        
-                                        <x-secondary-button x-on:click="$dispatch('close')">
-                                            {{ __('戻る') }}
-                                        </x-secondary-button>
-                                    </div>
-                                </form>
-                            </x-modal>
-                         </figure>
-                         <x-input-label class="" for="email" :value="__('ノースリーブ')" />
-                        </div>
+                        </figure>
+                        <x-input-label class="" for="email" :value="__('ノースリーブ')" />
+                    </div>
                     
                      <!--ノースリーブ-->
                    {{-- <div class="mt-4 focus:border-indigo-500 focus:ring-indigo-500 ">

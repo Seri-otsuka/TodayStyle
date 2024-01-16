@@ -24,12 +24,11 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         //全件渡すregisterにareasテーブルにデータを
-        $areas = Area::all();
+        //$areas = Area::all();
         
         return view('auth.register')
             ->with([
-                'areas' => $areas,
-                'areas_finely' => $areas_finely,
+                
             ]);
     }
 
@@ -40,9 +39,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        
-        $areas = areas::all();
-        $areas_finely =areas_finely::all();
         
         //バリデーション
         $request->validate([
@@ -67,8 +63,7 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME) 
             ->with([
-                'areas' => $areas,
-                'areas_finely' => $areas_finely,
+                
             ]);
     }
 }
