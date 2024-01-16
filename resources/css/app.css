@@ -524,24 +524,29 @@ body {
   margin: 50px 33%;
 }
 
-        .coordWebpageColor_box {
+      .coordWebpageColor_box {
       width: 1400px;
-      height: 900px;
+      height: 2550px;
       background: #d5d5d5;
     }
     
+     .text{
+        position: absolute;
+        left: 450px;
+        top:20px;
+    }
     .botan{
         width: 1400px;
-        height: 55px;
+        height: 125px;
      
-    
+        position: relative;
         background-color: #d5d5d5;
         text-align: left;
     }
     /* コーディネートの枠 */
     .coord_box {
-      width: 695px;
-      height: 800px;
+      width: 805px;
+      height: 1200px;
       background: #d5d5d5;
       border: 3px solid #000;      /* わかりやすくボーダーを引く */
       border-radius: 10px;
@@ -552,24 +557,26 @@ body {
     
     /* アイコンの枠 */
     .box1 {
-      width: 695px;
-      height: 800px;
+      width: 585px;
+      height: 1200px;
       background: #d5d5d5;
       border: 1px solid #000;      /* わかりやすくボーダーを引く */
       border-radius: 10px;
       overflow-y: scroll;          /* 縦方向にスクロール可能にする */
       float: left;
-      text-align: left
-      
+      text-align: left;
+      position: relative;
     }
 
     .box2 {
-      width:94%;               
-      height: 160px;               
+      width:96%;               
+      height: 210px;               
       border: 1px solid #000;      /* わかりやすくボーダーを引く */
       overflow-x: scroll;          /* 横方向にスクロール可能にする */
       margin: 5px;
       float: left;
+      display: flex;
+      align-items: center;
     }
     .box2>div{
         width: 250%; 
@@ -586,7 +593,7 @@ body {
     .manekin {
     position: absolute;
     top: 17px;
-    left:50px;
+    left:15px;
     margin: 5px;
     padding:5px;
 
@@ -595,25 +602,25 @@ body {
     }
 
     .boxsize{
-        width:250px;               
-      height: 310px;  
+        width:350px;               
+      height: 410px;  
     }
     .manekinsize{
-        width:370px;               
-      height: 750px;   
+        width:450px;               
+      height: 1050px;   
     }
     .tops{
         position: absolute;
-        top: 135px;
-        left:110px;
+        top: 195px;
+        left:63px;
         margin: 5px;
         padding:5px;
     }
 
     .botoms{
         position: absolute;
-        top: 440px;
-        left:110px;
+        top: 606px;
+        left:63px;
         margin: 5px;
         padding:5px;
     }
@@ -621,21 +628,35 @@ body {
     .outer{
 
         position: absolute;
-        top: 140px;
-        left:400px;
+        top: 195px;
+        left:440px;
         margin: 5px;
         padding:5px;
     }
     .icon {
-        width:115px;
-        height:115px;
+        width:187px;
+        height:187px;
         border: 2px solid #000;      /* わかりやすくボーダーを引く */
         float: left;
         padding:5px;
         background-color: #fffbfb;
     }
-
+    .fukuiconsize{
+        width:175px;
+        height:175px;
+    }
     .fukusize{
-        width:130px;
-        height:130px;
+        width:160px;
+        height:160px;
+    }
+
+        
+    .under_box {
+      width: 1400px;
+      height: 1200px;
+      background: #d5d5d5;
+      border: 1px solid #000;      /* わかりやすくボーダーを引く */
+      border-radius: 10px;
+      position: absolute;
+      top: 1323px;
     }

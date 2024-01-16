@@ -13,7 +13,7 @@
 <div  class="Hiritu">	
 <center>
     
-        <!--お試しで入れてます、あとで消してね！-->
+               <!--お試しで入れてます、あとで消してね！-->
         <div>
             @foreach($n_1categories as $n_1category )
             @foreach($n_1category->images()->latest()->get() as $image)
@@ -26,8 +26,9 @@
         <button type="button">
         <div class="botan">
             <a href="{{ route('main') }}">
-            <img id="return" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705026228/modoru_r4tkuo.png"width=45px height=45px; >
+            <img id="return" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705026228/modoru_r4tkuo.png"width=105px height=105px; >
              </a>
+             <font size="40"class="text">コーディネートルーム</font>
         </div>
         </button>
         
@@ -220,14 +221,17 @@
             @endif
             <!--ここまで所持しているかどうかの処理コード-->
             
+            
+            
             <!--1番目--->
             <div class="icon">
-                <img id="one" name="one" width=115px height=115px;>
+                <img id="one" name="one" class="fukuiconsize">
             </div>
             <div class="box2"style="display: flex; flex-wrap: wrap;">
                 <div>
                     <img id = "naga"    src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705294515/%E7%84%A1%E9%A1%8C3_20240115135144_lw0qfr.png" class="fukusize">
-
+                        
+    
     
     
     
@@ -238,7 +242,7 @@
     
             <!---2番目--->
             <div class="icon">
-                <img id="two" name="two" width=115px height=115px;>
+                <img id="two" name="two" class="fukuiconsize">
             </div>
             
     
@@ -257,7 +261,7 @@
     
             <!---3番目--->
             <div class="icon">
-                <img id="three" name="three"width=115px height=115px; >
+                <img id="three" name="three"class="fukuiconsize" >
     
             </div>
             
@@ -275,7 +279,7 @@
     
             <!---4番目--->
             <div class="icon">
-                <img id="four" name="four"width=115px height=115px; >
+                <img id="four" name="four"class="fukuiconsize" >
             </div>
             
     
@@ -293,7 +297,7 @@
     
             <!---5番目--->
             <div class="icon">
-                <img id="five" name="five"width=115px height=115px; >
+                <img id="five" name="five"class="fukuiconsize" >
             </div>
             
             <div class="box2"style="display: flex; flex-wrap: wrap;">
@@ -310,7 +314,7 @@
     
             <!---6番目--->
             <div class="icon">
-                <img id="six" name="six"width=115px height=115px; >
+                <img id="six" name="six"class="fukuiconsize" >
             </div>
             
     
@@ -328,7 +332,7 @@
     
             <!---7番目--->
             <div class="icon">
-                <img id="seven" name="seven"width=115px height=115px; >
+                <img id="seven" name="seven"class="fukuiconsize" >
             </div>
             
     
@@ -346,7 +350,7 @@
     
             <!---8番目--->
             <div class="icon">
-                <img id="eight" name="eight"width=115px height=115px; >
+                <img id="eight" name="eight"class="fukuiconsize" >
             </div>
             
     
@@ -364,7 +368,7 @@
     
             <!---9番目--->
             <div class="icon">
-                <img id="nine" name="nine"width=115px height=115px; >
+                <img id="nine" name="nine"class="fukuiconsize" >
             </div>
             
     
@@ -382,7 +386,7 @@
     
             <!---10番目--->
             <div class="icon">
-                <img id="ten" name="ten"width=115px height=115px; >
+                <img id="ten" name="ten"class="fukuiconsize" >
             </div>
             
     
@@ -400,7 +404,7 @@
     
             <!---11番目--->
             <div class="icon">
-                <img id="eleven" name="eleven"width=115px height=115px; >
+                <img id="eleven" name="eleven"class="fukuiconsize" >
             </div>
             
     
@@ -418,7 +422,7 @@
     
             <!---12番目--->
             <div class="icon">
-                <img id="twelve" name="twelve"width=115px height=115px; >
+                <img id="twelve" name="twelve"class="fukuiconsize" >
             </div>
             
     
@@ -436,7 +440,7 @@
     
             <!---13番目--->
             <div class="icon">
-                <img id="thirteen" name="thirteen"width=115px height=115px; >
+                <img id="thirteen" name="thirteen"class="fukuiconsize" >
             </div>
             
     
@@ -454,7 +458,7 @@
     
             <!---14番目--->
             <div class="icon">
-                <img id="fourteen" name="fourteen"width=115px height=115px; >
+                <img id="fourteen" name="fourteen"class="fukuiconsize" >
             </div>
             
     
@@ -471,7 +475,7 @@
     
             <!---15番目--->
             <div class="icon">
-                <img id="fifteen" name="fifteen"width=115px height=115px; >
+                <img id="fifteen" name="fifteen"class="fukuiconsize" >
             </div>
             
     
@@ -487,6 +491,11 @@
                 
                 </div>
             </div>
+        </div>
+        
+        <div class="under_box">
+            <font size="40">操作説明</font>
+            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705384539/MicrosoftTeams-image_v0zvm8.png">
         </div>
     
     
