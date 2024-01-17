@@ -13,20 +13,20 @@
 <div  class="Hiritu">	
 <center>
     
-               <!--お試しで入れてます、あとで消してね！-->
+      {{-- <!--お試しで入れてます、あとで消してね！-->
         <div>
             @foreach($n_1categories as $n_1category )
             @foreach($n_1category->images()->latest()->get() as $image)
-            <img src="{{ $image->path }}" style="max-width: 10%">
+            <img src={{ $image->path }} style="max-width: 10%">
             @endforeach
             @endforeach
-        </div>
+        </div>--}}
 
         <div class="coordWebpageColor_box">
         <button type="button">
         <div class="botan">
             <a href="{{ route('main') }}">
-            <img id="return" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705026228/modoru_r4tkuo.png"width=105px height=105px; >
+            <img id="return" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705026228/modoru_r4tkuo.png"width=45px height=45px; >
              </a>
              <font size="40"class="text">コーディネートルーム</font>
         </div>
@@ -221,33 +221,25 @@
             @endif
             <!--ここまで所持しているかどうかの処理コード-->
             
-            
-            
             <!--1番目--->
             <div class="icon">
-                <img id="one" name="one" class="fukuiconsize">
+                <img id="one" name="one" width=115px height=115px;>
             </div>
             <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                    <img id = "naga"    src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705294515/%E7%84%A1%E9%A1%8C3_20240115135144_lw0qfr.png" class="fukusize">
-                        
-    
-    
-    
-    
-    
-                
+                <div  id="k">
+                   
                 </div>
             </div>
     
+
             <!---2番目--->
             <div class="icon">
-                <img id="two" name="two" class="fukuiconsize">
+                <img id="two" name="two" width=115px height=115px;>
             </div>
             
     
             <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
+                <div id = "i">
                     <img id = "sya"    src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705294515/%E7%84%A1%E9%A1%8C3_20240115135204_ungtuc.png" class="fukusize">
                     <img id = "sya2"    src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705294515/%E7%84%A1%E9%A1%8C3_20240115135229_wgtsnj.png" class="fukusize">
     
@@ -261,7 +253,7 @@
     
             <!---3番目--->
             <div class="icon">
-                <img id="three" name="three"class="fukuiconsize" >
+                <img id="three" name="three"width=115px height=115px; >
     
             </div>
             
@@ -279,7 +271,7 @@
     
             <!---4番目--->
             <div class="icon">
-                <img id="four" name="four"class="fukuiconsize" >
+                <img id="four" name="four"width=115px height=115px; >
             </div>
             
     
@@ -297,7 +289,7 @@
     
             <!---5番目--->
             <div class="icon">
-                <img id="five" name="five"class="fukuiconsize" >
+                <img id="five" name="five"width=115px height=115px; >
             </div>
             
             <div class="box2"style="display: flex; flex-wrap: wrap;">
@@ -314,7 +306,7 @@
     
             <!---6番目--->
             <div class="icon">
-                <img id="six" name="six"class="fukuiconsize" >
+                <img id="six" name="six"width=115px height=115px; >
             </div>
             
     
@@ -332,7 +324,7 @@
     
             <!---7番目--->
             <div class="icon">
-                <img id="seven" name="seven"class="fukuiconsize" >
+                <img id="seven" name="seven"width=115px height=115px; >
             </div>
             
     
@@ -350,7 +342,7 @@
     
             <!---8番目--->
             <div class="icon">
-                <img id="eight" name="eight"class="fukuiconsize" >
+                <img id="eight" name="eight"width=115px height=115px; >
             </div>
             
     
@@ -368,7 +360,7 @@
     
             <!---9番目--->
             <div class="icon">
-                <img id="nine" name="nine"class="fukuiconsize" >
+                <img id="nine" name="nine"width=115px height=115px; >
             </div>
             
     
@@ -386,7 +378,7 @@
     
             <!---10番目--->
             <div class="icon">
-                <img id="ten" name="ten"class="fukuiconsize" >
+                <img id="ten" name="ten"width=115px height=115px; >
             </div>
             
     
@@ -404,7 +396,7 @@
     
             <!---11番目--->
             <div class="icon">
-                <img id="eleven" name="eleven"class="fukuiconsize" >
+                <img id="eleven" name="eleven"width=115px height=115px; >
             </div>
             
     
@@ -422,7 +414,7 @@
     
             <!---12番目--->
             <div class="icon">
-                <img id="twelve" name="twelve"class="fukuiconsize" >
+                <img id="twelve" name="twelve"width=115px height=115px; >
             </div>
             
     
@@ -440,7 +432,7 @@
     
             <!---13番目--->
             <div class="icon">
-                <img id="thirteen" name="thirteen"class="fukuiconsize" >
+                <img id="thirteen" name="thirteen"width=115px height=115px; >
             </div>
             
     
@@ -458,10 +450,8 @@
     
             <!---14番目--->
             <div class="icon">
-                <img id="fourteen" name="fourteen"class="fukuiconsize" >
+                <img id="fourteen" name="fourteen"width=115px height=115px; >
             </div>
-            
-    
             <div class="box2"style="display: flex; flex-wrap: wrap;">
                 <div>
                     
@@ -475,7 +465,7 @@
     
             <!---15番目--->
             <div class="icon">
-                <img id="fifteen" name="fifteen"class="fukuiconsize" >
+                <img id="fifteen" name="fifteen"width=115px height=115px; >
             </div>
             
     
@@ -492,13 +482,11 @@
                 </div>
             </div>
         </div>
-        
-        <div class="under_box">
+    
+            <p class="under_box">
             <font size="40">操作説明</font>
             <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705384539/MicrosoftTeams-image_v0zvm8.png">
-        </div>
-    
-    
+            </p>
      
         
     
@@ -548,14 +536,15 @@
                     
                     
                     
-                    
+
     
                
         
                             //不快指数分岐
                             //～55 	　寒い
                             if(fukai <= 54){
-        　
+        　                      document.getElementById('k').innerHTML ='  @foreach($n_1categories as $n_1category )+@foreach($n_1category->images()->latest()->get() as $image+<img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">+@endforeach+@endforeach';
+        　                     // document.getElementById('ky').id = "i";
                                 if(na == 0){
                                     document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
                                 }
@@ -1258,33 +1247,20 @@
                 function ChangeImage( imgid , newimgid ) {
  				  document.getElementById(imgid).src = document.getElementById(newimgid).src;
 				}
-				document.getElementById("wanpi").onclick = function(){
-					ChangeImage('out' , 'wanpi');
+				
+				@foreach($n_1categories as $n_1category)        //配列を一個一個回してます
+				@foreach($n_1category->images()->latest()->get() as $image) //画像データを回してます
+					document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+					ChangeImage('out' , {{ $image->id }});  //idを挿入してます！---------基本的に変数を入れるときは""で囲む必要なありません！ex):src={{ 変数 }}のように直置きで大丈夫です！
 				}
-				document.getElementById("wanpi2").onclick = function(){
-					ChangeImage('out' , 'wanpi2');
-				}
-                document.getElementById("sya").onclick = function(){
-					ChangeImage('top' , 'sya');
-				}
-                document.getElementById("sya2").onclick = function(){
-					ChangeImage('top' , 'sya2');
-				}
-                document.getElementById("naga").onclick = function(){
-					ChangeImage('top' , 'naga');
-				}
-                document.getElementById("ky").onclick = function(){
-					ChangeImage('top' , 'ky');
-				}
-                document.getElementById("nz").onclick = function(){
-					ChangeImage('botom' , 'nz');
-				}
-                document.getElementById("nz2").onclick = function(){
-					ChangeImage('botom' , 'nz2');
-				}
-                document.getElementById("ko").onclick = function(){
-					ChangeImage('out' , 'ko');
-				}
+				@endforeach
+				@endforeach
+				
+				
+				
+				
+
+		
         
         </script>
     

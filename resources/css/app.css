@@ -308,8 +308,12 @@ display: none;
   word-break: normal;
 　border-radius: 20px;
 }
-#selectdiv option:disabled{
+#children option:disabled{
   display:none;
+}
+
+#children option{
+  display:block;
 }
 
 /* コーディネートルームのアイコンサイズ*/
