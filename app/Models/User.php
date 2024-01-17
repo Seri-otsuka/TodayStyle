@@ -76,6 +76,11 @@ class User extends Authenticatable
    }*/
    //--------------------------------------------------------
    
+   public function finely_areas()
+    {
+        return $this->belongsToMany(Area::class, 'finelyareas','area_id');
+    }
+    
     //areaに対して
      public function area()
     {

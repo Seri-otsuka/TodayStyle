@@ -18,8 +18,9 @@ class Area extends Model
     //usersテーブルに対してのリレーション
     public function users()
     {
-        return $this->hasMany(User::class,'area_id', 'id');    
+        return $this->hasMany(user::class,'area_id', 'id');    
     }
+
     //ユーザーに対して1:1
      /* public function user()
     {
