@@ -196,6 +196,22 @@ class UserController extends Controller
         $area45 = Area::find(45);
         $area46 = Area::find(46);
         $area47 = Area::find(47);
+        $Categories = Category::get(); 
+        $category1 = Category::find(1);
+        $category2 = Category::find(2);
+        $category3 = Category::find(3);
+        $category4 = Category::find(4);
+        $category5 = Category::find(5);
+        $category6 = Category::find(6);
+        $category7 = Category::find(7);
+        $category8 = Category::find(8);
+        $category9 = Category::find(9);
+        $category10 = Category::find(10);
+        $category11 = Category::find(11);
+        $category12 = Category::find(12);
+        $category13 = Category::find(13);
+        $category14 = Category::find(14);
+        $category15 = Category::find(15);
         $n_1Finelyareas = Finelyarea::where('area_id',1)->get(); 
         $n_2Finelyareas = Finelyarea::where('area_id',2)->get(); 
         $n_3Finelyareas = Finelyarea::where('area_id',3)->get(); 
@@ -394,6 +410,22 @@ class UserController extends Controller
             'area45' => $area45,
             'area46' => $area46,
             'area47' => $area47,
+            'category_alls' => $Categories,
+            'category1' => $category1,
+            'category2' => $category2,
+            'category3' => $category3,
+            'category4' => $category4,
+            'category5' => $category5,
+            'category6' => $category6,
+            'category7' => $category7,
+            'category8' => $category8,
+            'category9' => $category9,
+            'category10' => $category10,
+            'category11' => $category11,
+            'category12' => $category12,
+            'category13' => $category13,
+            'category14' => $category14,
+            'category15' => $category15,
             'n_1Finelyareas' => $n_1Finelyareas,
             'n_2Finelyareas' => $n_2Finelyareas,
             'n_3Finelyareas' => $n_3Finelyareas,
@@ -443,6 +475,7 @@ class UserController extends Controller
             'n_47Finelyareas' => $n_47Finelyareas,
             
             
+            
             ]);
     }
     
@@ -452,11 +485,44 @@ class UserController extends Controller
         $login_users_area = \Auth::user()->area;
         $login_users_finelyarea = \Auth::user()->finelyarea;
         $categories = \Auth::user()->fashon_categories()->get();
+        $Categories = Category::get(); 
+        $category1 = Category::find(1);
+        $category2 = Category::find(2);
+        $category3 = Category::find(3);
+        $category4 = Category::find(4);
+        $category5 = Category::find(5);
+        $category6 = Category::find(6);
+        $category7 = Category::find(7);
+        $category8 = Category::find(8);
+        $category9 = Category::find(9);
+        $category10 = Category::find(10);
+        $category11 = Category::find(11);
+        $category12 = Category::find(12);
+        $category13 = Category::find(13);
+        $category14 = Category::find(14);
+        $category15 = Category::find(15);
+        
         
         return view('main.index')->with([
             'area' => $login_users_area,
             'finelyarea' => $login_users_finelyarea,
             'categories' => $categories,
+            'category_alls' => $Categories,
+            'category1' => $category1,
+            'category2' => $category2,
+            'category3' => $category3,
+            'category4' => $category4,
+            'category5' => $category5,
+            'category6' => $category6,
+            'category7' => $category7,
+            'category8' => $category8,
+            'category9' => $category9,
+            'category10' => $category10,
+            'category11' => $category11,
+            'category12' => $category12,
+            'category13' => $category13,
+            'category14' => $category14,
+            'category15' => $category15,
             ]);
     }
     

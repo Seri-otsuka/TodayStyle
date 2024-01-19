@@ -13,6 +13,8 @@
             
             
              <!--ここからしたにコード書いてね～！-->
+             
+             
                    
             <div  class="Hiritu">
                 <center>
@@ -161,57 +163,19 @@
                             	    
                             	</p>
 				            </div>
-			    	        <!--<script>
-					            var click = 0;
-				                var OTENKI = [
-                                    /* 曇りのち晴れ */
-                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png',
-                                    /* 曇り */
-                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png',
-                                    /* 晴れのち曇り */
-                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png',
-                                    /* 晴れ */
-                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png',
-                                    /* 雨 */
-                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png'
-                                ];
-                                document.getElementById('click_OTENKI').onclick = function(){
-                					click++;
-                					this.src = OTENKI[click%OTENKI.length];
-                				}
-			                </script>-->
+			    	   
 			                
 			                
                             <!---不快指数-->
                             <!---不快指数-->
                             <div id="hukaiSisuu" class="weather-social">
-                              <!---  <p>
-                                    <img  src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png"  />
-                                </p>-->
+
                                  <p>
                                     
                                 </p>
                             </div>
-            			    <!---<script>
-                				var click = 0;
-                				var KankyouSisuu = [
-                                    /* 最高 */
-                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png',
-                                    /* 結構いい */
-                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E7%B5%90%E6%A7%8B%E3%81%84%E3%81%84_h8tsks.png',
-                                    /* あかん */
-                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png',
-                                    /* 普通 */
-                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png',
-                                    /* 良くない */
-                                    'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'
-                                ];
-				                document.getElementById('click_KankyouSisuu').onclick = function(){
-                					click++;
-                					this.src = KankyouSisuu[click%KankyouSisuu.length];
-                				}
-                			</script>--->
- <script>
+            			    
+<script>
                     
                             //43.76 142.37 (北海道旭川市)
                             //01/12 下部のデータ受け渡しがまだ？なので一時的にオンにしました！
@@ -220,8 +184,8 @@
 
                         //経度・緯度をもらうときの今数字書いてるところに、これを入れよう
                         //普通にコメントアウトできなかったのでちゅうかっこ左端だけ消してます
-                        let lat  = {{$finelyarea -> latitude}};
-                        let long = {{$finelyarea -> longitude}};
+                        let lat1  = {{$finelyarea -> latitude}};
+                        let long1 = {{$finelyarea -> longitude}};
                         
                         /*
                         URL:'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
@@ -234,7 +198,7 @@
                         時間毎の気温
                         
                         */
-                        const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+long+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
+                        const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat1+'&longitude='+long1+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
                         
                         fetch(apiUrl)
                         .then(response => {
@@ -583,7 +547,7 @@
                         .catch(error => {
                         console.error('データ取得に失敗しました',error)
                         });
-                        </script>                          
+                        </script>                        
               
   		
 
@@ -615,13 +579,177 @@
                             @endif
                             @endforeach
                         </div>--}}
-                    
                         
                         
                         <!---選んだ服のアイコン-->
 
             			<font size="6">
+            			    
                             <body>
+                                 <!--キャミ-->
+                                            @if($categories->contains('id','1'))
+                                            @php
+                                                $icon1 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon1 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--ノースリーブ-->
+                                            @if($categories->contains('id','2'))
+                                            @php
+                                                $icon2 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon2 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--半袖-->
+                                            @if($categories->contains('id','3'))
+                                            @php
+                                                $icon3 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon3 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--長袖-->
+                                            @if($categories->contains('id','4'))
+                                            @php
+                                                $icon4 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon4 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--シャツ-->
+                                            @if($categories->contains('id','5'))
+                                            @php
+                                                $icon5 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon5 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--カーディガン-->
+                                            @if($categories->contains('id','6'))
+                                            @php
+                                                $icon6 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon6 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--ジャケット-->
+                                            @if($categories->contains('id','7'))
+                                            @php
+                                                $icon7 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon7 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--タートルネック-->
+                                            @if($categories->contains('id','8'))
+                                            @php
+                                                $icon8 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon8 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--ニット-->
+                                            @if($categories->contains('id','9'))
+                                            @php
+                                                $icon9 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon9 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--パーカー-->
+                                            @if($categories->contains('id','10'))
+                                            @php
+                                                $icon10 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon10 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--コート/ダウン-->
+                                            @if($categories->contains('id','11'))
+                                            @php
+                                                $icon11 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon11 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--半ズボン-->
+                                            @if($categories->contains('id','12'))
+                                            @php
+                                                $icon12 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon12 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--長ズボン-->
+                                            @if($categories->contains('id','13'))
+                                            @php
+                                                $icon13 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon13 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--スカート-->
+                                            @if($categories->contains('id','14'))
+                                            @php
+                                                $icon14 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon14 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--ワンピース-->
+                                            @if($categories->contains('id','15'))
+                                            @php
+                                                $icon15 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon15 = 0;
+                                            @endphp
+                                            @endif
                                 <table align="center" border="1">
             				        <tr>
                                         <td>　　　　</td>
@@ -633,12 +761,12 @@
                                     <tr>
             				　          <td>　　　</td>
             				            <td class="clothes_box1"  valign="baseline">
+                                           
             				                <div>
-            				                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png" class="fashon_icon">
-            				                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png" class="fashon_icon">
-            				                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203315_ruwc1p.png" class="fashon_icon">
-            				                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png" class="fashon_icon">
-            				                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png" class="fashon_icon">
+            				                    <img id="one" name="one" class="fashon_icon">
+                                                <img id="two" name="two" class="fashon_icon">
+                                                <img id="three" name="three"class="fashon_icon" >
+                                                <img id="four" name="four"class="fashon_icon" >
             				                </div>
             				                {{--<div>
                                                 @foreach($categories as $category )
@@ -651,7 +779,7 @@
             				            <td>　　　　</td>
                                         <td class="clothes_box1" valign="baseline">
                                             <div>
-                                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png" class="fashon_icon">
+                                                <img id="five" name="five"class="fashon_icon" >
                                             </div>
                                             {{--<div>
                                                 @foreach($categories as $category )
@@ -668,7 +796,7 @@
             			       <table align="center">
                     				<tr>
                                         <td>　　　　</td>
-                    				    <td>　アウター</td>
+                    				    <td>　アウター・ワンピース</td>
                                         <td>　　　　</td>
                     				　  <td>　コーディネートモード→</td>
                     				    <td>　　　　</td>
@@ -684,7 +812,7 @@
                                                 @endforeach
                                             </div>--}}
                                             <div>
-                                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png" class="fashon_icon">
+                                                <img id="six" name="six"class="fashon_icon" >
                                             </div>
                     				    </td>
                     				    <td>　　　</td>
@@ -700,7 +828,13 @@
                     			</table>
                             </body>
             			</font>
-                    
+            			
+            			
+            			
+            			
+            			
+   
+    
                         <!--かご-->
                         <center>
                             <div>
@@ -797,12 +931,14 @@
                                                     <div class="text-lg font-medium text-gray-900">名前：悲壮犬
                                                                                                英語表記：Hiso Ken
                                                                                                    原産：日本　
-                                                                                                        サイズ：小型犬
+                                                                                                　サイズ：小型犬
                                                                                                  ＜悲壮犬の性格＞
-                                                                                                                         
-                                                                                                                           悲壮犬は他人や他犬に対して懐疑心が強く、信頼関係を築くのが苦手です。
+                                                                                                 悲壮犬は他人や他犬に対して懐疑心が強く、信頼関係を築くのが苦手です。
+                                                                                                
                                                                                                 自立心がなく順応性も低いため、家族に対しての依存心が強い傾向があります。
-                                                                                                最初の頃はしつけに苦労します。しかし、飼い主に愛されている実感を持つと徐々にしつけを聞くようになります。
+                                                                                                最初の頃はしつけに苦労します。
+                                                                                                
+                                                                                                しかし、飼い主に愛されている実感を持つと徐々にしつけを聞くようになります。
                                                     </div>
                                                     
                                                     </div>
@@ -880,7 +1016,7 @@
                      let tmin = temperature2.reduce(temMin);    //　最低気温
                      let uvmax  = uv_index1.reduce(uvMax);
                      let rainmax = probability.reduce(rainMax);
-                     let samatu = 1; // 1:寒がりさん？0:暑がりさん？
+                     let samatu = {{ Auth::user()->temperature }}; // 1:寒がりさん0:暑がりさん
 
                     let result = weather_code.some(function(value){
                         return value == 71  || value == 75;
@@ -890,7 +1026,8 @@
                     //確認用
                     
 
-                     
+                     console.log(samatu);
+                     console.log(rainmax);
                         
                     //3行目
                     if(uvmax => 3){
@@ -902,12 +1039,19 @@
                      if(result == true){
                         recommend_items.innerHTML = "今日は雪だワン!!滑らないようにしてね。<br>傘やブーツ、マフラー、手袋などを使おう。";
                     }
+                    else if(rainmax <= 20){
+                        recommend_items.innerHTML = "雨の心配は無さそうだワン！洗濯物を乾かすのも👌";
+                    }
+                    else if(rainmax <= 29){
+                        recommend_items.innerHTML = "折り畳み傘が助けてくれるかもだワン！ ";
+                    }
                     else if(rainmax => 30){
                         recommend_items.innerHTML = "今日は雨が降るかもしれないワン!折り畳み傘が便利だよ。 ";
                     }
                     else if(rainmax => 70){
                         recommend_items.innerHTML = "今日は雨降りだワン!雨具をしっかり用意しよう。傘やレインブーツを使おう。";
                     }
+                   
                        
                             //出力
                             //if文はelseなしにする　→　選択されていなければ共通の文とグッズのみ出力0110
@@ -980,6 +1124,336 @@
                console.error('データ取得に失敗しました',error)
            });
          
+</script>
+
+
+
+ <script>
+
+     
+    let lat  = {{$finelyarea -> latitude}};
+    let long = {{$finelyarea -> longitude}};  
+    //open-meteoからURLを取得
+    //const apiUrl = ' https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
+    const apiUrl3 = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+long+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';      
+          
+          //fetch処理でurlからjson形式で情報を取得
+          fetch(apiUrl3)
+          .then(response => {
+              return response.json();
+          })
+          .then(data =>{
+              const jsonData = data;                              //
+              const humidity = jsonData.current.relative_humidity_2m;      //現在の湿度を取得
+              const temperature = jsonData.current.temperature_2m;//現在の気温を取得
+               let fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;
+ 
+                
+
+                var ky = {{ $icon1 }};
+                   var no = {{ $icon2 }};
+                   var ha = {{ $icon3 }};
+                   var na = {{ $icon4 }};
+                   var sy = {{ $icon5 }};
+                   var ka = {{ $icon6 }};
+                   var ja = {{ $icon7 }};
+                   var ta = {{ $icon8 }};
+                   var ni = {{ $icon9 }};
+                   var pa = {{ $icon10 }};
+                   var da = {{ $icon11 }};
+                   var hz = {{ $icon12 }};
+                   var nz = {{ $icon13 }};
+                   var su = {{ $icon14 }};
+                   var wa = {{ $icon15 }};
+
+                  //不快指数分岐
+                        //～55 	　寒い
+                        if(fukai <= 54){
+    　
+    if(na == 0){
+        document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
+    }
+    else if(na == 1){
+        document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
+    }
+    document.getElementById("one").alt="one";
+    
+    if(sy ==0){
+        document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
+    }
+    else if(sy == 1){
+        document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
+    }
+   
+    document.getElementById("two").alt="two";
+
+    if(ta ==0){
+        document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203315_ruwc1p.png";
+    }
+    else if(ta == 1){
+        document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%bf%e3%83%bc%e3%83%88%e3%83%ab%e3%83%8d%e3%83%83%e3%82%af%e3%81%ae%e7%84%a1%e6%96%99%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3_plixtm.png";
+    }    
+    
+    document.getElementById("three").alt="three";
+
+    if(ni ==0){
+        document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png";
+    }
+    else if(sy == 1){
+        document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0287_wfezcx.png";
+    }    
+    
+    document.getElementById("four").alt="four";
+
+    if(pa ==0){
+        document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
+    }
+    else if(pa == 1){
+        document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
+    }    
+    
+    document.getElementById("five").alt="five";
+
+    if(da ==0){
+        document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203404_hjobme.png";
+    }
+    else if(da == 1){
+        document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png";
+    }    
+    
+    document.getElementById("six").alt="six";
+}
+
+
+ //54～65　　肌寒い 
+ else if(fukai >= 55 && fukai <= 65 ){
+                            if(na == 0){
+                                document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
+                            }
+                            else if(na == 1){
+                                document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
+                            }
+    
+                            document.getElementById("one").alt="one";
+
+                            if(sy ==0){
+                                document.getElementById("two").src=":https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
+                            }
+                            else if(sy == 1){
+                                document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
+                            }
+                            
+                            document.getElementById("two").alt="two";
+    
+                            if(ka ==0){
+                                document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203408_luvbqi.png";
+                            }
+                            else if(ka == 1){
+                                document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0292_co2req.png";
+                            }
+                            
+                            document.getElementById("three").alt="three";
+    
+                            if(ja ==0){
+                                document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203319_bzhvix.png";
+                            }
+                            else if(ja == 1){
+                                document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%902_axoaz6.png";
+                            }
+                            
+                            document.getElementById("four").alt="four";
+    
+                            if(pa ==0){
+                                document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
+                            }
+                            else if(pa == 1){
+                                document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
+                            } 
+                           
+                            document.getElementById("five").alt="five";
+    
+                            if(nz ==0){
+                                document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
+                            }
+                            else if(nz == 1){
+                                document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
+                            }
+                            
+                            document.getElementById("six").alt="six";
+
+
+                        }
+
+    //64～75　　快い 
+    else if(fukai >= 65 && fukai <= 75 ){
+                            if(na == 0){
+                                document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
+                            }
+                            else if(na == 1){
+                                document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
+                            }
+                            
+                            document.getElementById("one").alt="one";
+    
+                            if(sy ==0){
+                                document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
+                            }
+                            else if(sy == 1){
+                                document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
+                            }
+                            
+                            document.getElementById("two").alt="two";
+    
+                            if(ha ==0){
+                                document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
+                            }
+                            else if(ha == 1){
+                                document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
+                            }
+                            
+                            document.getElementById("three").alt="three";
+    
+                            if(nz ==0){
+                                document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
+                            }
+                            else if(nz == 1){
+                                document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
+                            }
+                            
+                            document.getElementById("four").alt="four";
+    
+                            if(su ==0){
+                                document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
+                            }
+                            else if(su == 1){
+                                document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
+                            }
+                            
+                            document.getElementById("five").alt="five";
+    
+                            if(wa ==0){
+                                document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
+                            }
+                            else if(wa == 1){
+                                document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
+                            }
+                            
+                            document.getElementById("six").alt="six";
+
+                        }
+
+//70～85　　暑い 
+else if(fukai >= 75 && fukai <= 85 ){
+                         
+                         if(ha ==0){
+                             document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
+                         }
+                         else if(ha == 1){
+                             document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
+                         }
+                         
+                         document.getElementById("one").alt="one";
+ 
+                         if(hz ==0){
+                             document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
+                         }
+                         else if(hz == 1){
+                             document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
+                         }
+                         document.getElementById("two").alt="two";
+ 
+                         if(su ==0){
+                             document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
+                         }
+                         else if(su == 1){
+                             document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
+                         }
+                         
+                         document.getElementById("three").alt="three";
+ 
+                         if(wa ==0){
+                             document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
+                         }
+                         else if(wa == 1){
+                             document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
+                         }
+                         
+                         document.getElementById("four").alt="four";
+
+                        }
+
+
+//84～　　　暑くてたまらない 
+else if(fukai >= 86){
+                        
+                        if(ky ==0){
+                            document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203326_s3xmu4.png";
+                        }
+                        else if(ky == 1){
+                            document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png";
+                        }
+                        
+                        document.getElementById("one").alt="one";
+
+                        if(no ==0){
+                            document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203412_r6sovt.png";
+                        }
+                        else if(no == 1){
+                            document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0294_ziqwci.png";
+                        }
+                        
+                        document.getElementById("two").alt="two";
+
+                        if(ha ==0){
+                            document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
+                        }
+                        else if(ha == 1){
+                            document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
+                        }
+                        
+                        document.getElementById("three").alt="three";
+
+                        if(hz ==0){
+                            document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
+                        }
+                        else if(hz == 1){
+                            document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
+                        }
+                        
+                        document.getElementById("four").alt="four";
+
+                        if(su ==0){
+                            document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
+                        }
+                        else if(su == 1){
+                            document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
+                        }
+                        
+                        document.getElementById("five").alt="five";
+
+                        if(wa ==0){
+                            document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
+                        }
+                        else if(wa == 1){
+                            document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
+                        }
+                        
+                        document.getElementById("six").alt="six";
+
+                    }
+
+                })
+            //json形式で情報取得失敗した時
+            .catch(error => {
+                console.error('データ取得に失敗しました',error)
+            });
+
+
+
+
+
+
+
 </script>
     
 
