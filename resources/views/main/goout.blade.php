@@ -193,19 +193,23 @@
                           <button onclick="">
                               <a href="{{ route('main') }}">
                            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705026228/modoru_r4tkuo.png" width=150px height=150px;　style="margin: 75% 0% 300%;"/>
+                           
                            </a>
                           </button>
                           </div>
                           
                             <!---都道府県選択-->
-                            <form>
+                            
+                                
+                                {{--<form>
                                 <div class="cp_ipselect">
                                     <select id="parent" onchange="date()" class="form">
                                     @foreach($area_alls as $area_all)
                                       <option value={{ $area_all->id }}>{{ $area_all->name}}</option>
                                     @endforeach
                                       <option value="" disabled selected>選択してください</option>
-                                    </select>
+                                    </select>--}}
+                                    
                                    <!-- <select  name=”item” class="cp_sl06" required>-->
                                    {{--
                                    <select id="parent" onchange="date()" class="cp_sl06">
@@ -215,11 +219,41 @@
                                         @endforeach
                                 　　</select>--}}
                                 　　
-                          <span class="cp_sl06_highlight"></span>
-                          <span class="cp_sl06_selectbar"></span>
-                          <label class="cp_sl06_selectlabel">お住まいの地域</label>
-                          </div>
-                          </form>
+                                {{--  <span class="cp_sl06_highlight"></span>
+                                  <span class="cp_sl06_selectbar"></span>
+                                  <label class="cp_sl06_selectlabel">お住まいの地域</label>
+                                  </div>
+                                </form>--}}
+                                
+                                
+                                
+                                
+                                
+                                <form>
+                                <div class="cp_ipselect">
+                                    
+                                    <!--<select id="parent" onchange="date()" class="form">
+                                    {{--@foreach($area_alls as $area_all)
+                                      <option value="{{ $area_all->id }}">{{ $area_all->name}}</option>
+                                    @endforeach			
+                                      <option value=""  hidden disabled selected>　　　　　選択してください</option>
+                                    </select>--}}                                 
+                                   <!-- <select  name=”item” class="cp_sl06" required>-->
+                                   
+                                   <select id="parent" onchange="date()" class="form cp_sl06" >
+                                      　<option value="" disabled selected></option>
+
+                                      　@foreach($area_alls as $area_all)
+                                        <option value={{ $area_all->id }}>{{ $area_all->name }}</option>
+                                        @endforeach
+                                　　</select>　　
+                                  <span class="cp_sl06_highlight"></span>
+                                  <span class="cp_sl06_selectbar"></span>
+                                  <label class="cp_sl06_selectlabel">お住まいの地域を選択してください</label>
+                                  </div>
+                                </form>
+                          
+                          
                           
                           <!---地域詳細--->
                           <font size="5">
@@ -434,11 +468,12 @@
                               
                             </select>
                            <script>
-                                               let   lat01  = {{$finelyarea1 -> latitude}};
-                                               let long01 = {{$finelyarea1 -> longitude}};
+                                               let lat01  = {{$finelyarea -> latitude}}; //自分の地域の変数に変える、今北海道になってる
+                                               let long01   =   {{$finelyarea -> longitude}};
 
                            
                                function date() {
+                                   
 
                                 //id="parent"の値を取得
                                 var parentlement = document.getElementById( "parent" ) ;
@@ -695,43 +730,43 @@
                                     }
                                     
                                 
-                                 // 選択されているオプションの値を取得
-
-                                
-                                        // 選択されているオプションの値を取得
-                                        // 選択されているオプションの値を取得
-                                     // var selectedValue = document.getElementByIdchildren').value;
-                                    
-                                      // 選択されているオプションのテキストを取得
-                                      //var selectedText = document.getElementById'children').options[document.getElementByIdchildren').selectedIndex].text;
-                                    
-                                      // 出力
-                                      
-
-                                          if(childrenDate.options[1].disabled == false && childrenDate.options[1].selected == true) {
+                                                                        //旭川
+                                  
+                             // 選択された値を取得
+                                let selectedValue = childrenDate.value;
+                            
+                                // 出力
+                                console.log(selectedValue);
+                        
+                                          if(selectedValue == 1 ) { //
+                                           
                                             console.log(document.getElementById('children').options[1].text);
                                                  lat01  = {{$finelyarea1 -> latitude}};
                                                  long01 = {{$finelyarea1 -> longitude}};
-                                          
+                                           
                                           }
-                                      
-                                        else if (childrenDate.options[2].disabled == false && childrenDate.options[2].selected == true) {
+                                      //網走
+                                        else if (childrenDate.options[2].selected == true && childrenDate.options[2].disabled == false) {
                                                  console.log(document.getElementById('children').options[2].text);
-                                                 lat01  = {{$finelyarea1 -> latitude}};
+                                                 lat01  = {{$finelyarea2 -> latitude}};
                                                  long01 = {{$finelyarea2-> longitude}};
                                         }
-                                        
+                                        //４
                                         else if (childrenDate.options[3].disabled == false && childrenDate.options[3].selected == true) {
                                                  lat01  = {{$finelyarea3-> latitude}};
                                                  long01 = {{$finelyarea3-> longitude}};
                                                  
                                         }
-                                        else if (childrenDate.options[6].disabled == false && childrenDate.options[6].selected == true) {
+                                        //十和田
+                                        
+                                        else if (selectedValue == 6) {
+                                         
                                                  lat01  = {{$finelyarea6-> latitude}};
                                                  long01 = {{$finelyarea6-> longitude}};
-                                                 
+                                            
                                         }
-                                        
+                             
+                             
                                         
                             /*
                             URL:'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
@@ -1105,20 +1140,27 @@
 
                                 
                                                 
-                                        
+                               
+                                      
                                     
                                 
                                 //↓触らないdataの終わり
-                                }
+                         }
                                   
                             //↑まで地域選択
                             
                             
+                                      //button関数を定義
+                                      function Button() {
+                                        console.log("ボタンがクリックされました");
+                                      }   
 
                                 
                                
                            </script>
-            
+             <script>
+                        
+                          </script>
                             </label>
                           </div>
                           </td>
@@ -1131,9 +1173,10 @@
                             <font color="#ffffff">
                                 <div  class="Iti" style="margin: 35% 0% -300% 10%;">
                                      
-                                    <div id="myDiv" class="radius_test"  align="center"　style="border: none;" name = "button" >
+                                    <!--<div id="myDiv" class="radius_test"  align="center"　style="border: none;" name = "button" >
                                         決定 
-                                    </div>
+                                    </div>-->
+                                    <input id="button1" type="button" value="決定" onclick="Button()">
                                     
                                  
                                  
@@ -1144,7 +1187,7 @@
                                             </tr>
                           			    </table>
                           </font size>
-                          
+                         
                           <!--
                          
                           <td>
@@ -1236,7 +1279,7 @@
 				    <td>　アウター</td>
                                     <td>　　　　</td>
                     <a href="{{ route('coordination') }}">
-                    <td>　お出かけ</td>    
+                    <td>　コーディネートモード→</td>    
 				　     			
 				　     <td>　　　　</td></a>
                                 </tr>			

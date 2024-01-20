@@ -55,6 +55,7 @@
                              
                             </p>
                             
+                            {{--
                             <!-- ハンバーガーメニュー部分 -->
                                     <div class="nav">
             
@@ -79,7 +80,7 @@
                                     </nav>
                                 </div>
                             </header>
-                        </body>
+                        </body>--}}
                             
                             <!-- Settings Dropdown 
                                  メニュー表示用    -->
@@ -558,6 +559,7 @@
                             <button onclick="">
                                 <a href="{{ route('goout') }}">
                                  <img class="mr-2" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704939146/bag1_giuxki.png" width=150px height=150px; />
+                                 <p style="margin: 5% 0% 5%;">お出かけモード→</p>
                                  </a>
                             </button>
                         </div>
@@ -780,7 +782,7 @@
                                         <td class="clothes_box1" valign="baseline">
                                             <div>
                                                 <img id="botom1" name="botom1"class="fashon_icon" >
-                                                <img id="botom1" name="botom2"class="fashon_icon" >
+                                                <img id="botom2" name="botom2"class="fashon_icon" >
                                             </div>
                                             {{--<div>
                                                 @foreach($categories as $category )
@@ -1166,10 +1168,18 @@
                    var nz = {{ $icon13 }};
                    var su = {{ $icon14 }};
                    var wa = {{ $icon15 }};
-
+                   function _delete_element( id_name ){
+	var dom_obj = document.getElementById(id_name);
+	var dom_obj_parent = dom_obj.parentNode;
+	dom_obj_parent.removeChild(dom_obj);
+}
+     
                   //不快指数分岐
                        //～55 	　寒い
                         if(fukai <= 54){
+                       _delete_element('botom2');
+
+    
     　
     if(na == 0){
         document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
@@ -1231,6 +1241,7 @@
         document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
     } 
     document.getElementById("botom1").alt="botom1";
+
     
     
 }
@@ -1238,6 +1249,8 @@
 
  //54～65　　肌寒い 
  else if(fukai >= 55 && fukai <= 65 ){
+  _delete_element('botom2');
+   _delete_element('top4');
                             if(na == 0){
                                 document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
                             }
@@ -1297,6 +1310,8 @@
 
     //64～75　　快い 
     else if(fukai >= 65 && fukai <= 75 ){
+     _delete_element('top4');
+      _delete_element('out2');
                             if(na == 0){
                                 document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
                             }
@@ -1355,6 +1370,11 @@
 
 //70～85　　暑い 
 else if(fukai >= 75 && fukai <= 85 ){
+ _delete_element('top2');
+  _delete_element('top3');
+   _delete_element('top4');
+    _delete_element('out2');
+     
                          
                          if(ha ==0){
                              document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
@@ -1396,6 +1416,8 @@ else if(fukai >= 75 && fukai <= 85 ){
 
 //84～　　　暑くてたまらない 
 else if(fukai >= 86){
+ _delete_element('top4');
+    _delete_element('out2');
                         
                         if(ky ==0){
                             document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203326_s3xmu4.png";

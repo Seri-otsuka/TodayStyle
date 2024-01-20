@@ -15,6 +15,9 @@ use Illuminate\View\View;
 
 use App\Models\Area;
 use App\Models\Finelyarea;
+use App\Models\Image;
+use App\Models\Fashon;
+use App\Models\Category;
 
 
 class RegisteredUserController extends Controller

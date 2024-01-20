@@ -362,6 +362,8 @@ display: none;
   border: 4px #777777 solid;
 }
 
+
+
 /* shopのアイコン */
 .btn-social-square {
   display: inline-block;
@@ -510,7 +512,8 @@ body {
   background: #ffffff;
 }
 
-/* 決定ボタン */
+
+  /*決定ボタン */
 .radius_test {
     width: 75px;               /* 幅指定 */
     height: 40px;              /* 高さ指定 */

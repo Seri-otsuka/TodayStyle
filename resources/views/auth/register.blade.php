@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data"> <!--画像データも入るようにした-->。
         @csrf
 
         <!-- Name -->
@@ -574,6 +574,8 @@
         
         <div class="flex flex-col  items-center pt-6 sm:pt-0 bg-gray-300">
             
+            
+            
            {{-- <!--入力ブロックの範囲-->
             <div class="w-full sm:max-w-xl mt-6 px-6 py-4 bg-gray-300 shadow-md overflow-hidden sm:rounded-lg">
                  <form method="POST" action="{{ route('register') }}">
@@ -803,7 +805,6 @@
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('すでに登録していますか？') }}
             </a>
-            
             
             <x-primary-button class="ml-4">
                 {{ __('Register') }}
