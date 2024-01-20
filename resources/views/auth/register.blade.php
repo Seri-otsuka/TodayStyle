@@ -572,7 +572,8 @@
             </ul>
         </div>
         
-        <div class="flex flex-col  items-center pt-6 sm:pt-0 bg-gray-300">
+        
+        <!--<div class="flex flex-col  items-center pt-6 sm:pt-0 bg-gray-300">-->
             
             
             

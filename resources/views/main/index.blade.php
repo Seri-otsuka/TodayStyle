@@ -47,10 +47,7 @@
                                     </font size>
                             
                             
-                            <!-- 現在の天気・温度表示用 表示分けないなら一個でいいかも
-                            <p id="sampleweather" style="position: relative;font-family: 'Hattori Hanzo', serif;font-size: 500%;">
-                             
-                            </p> -->
+                            <!-- 現在の天気・温度表示用 表示分けないなら一個でいいかも-->
                             <p id="sampleweather" style="position: relative;font-family: ravie,fantasy, serif;font-size: 450%;">
                              
                             </p>
@@ -164,16 +161,12 @@
                             	    
                             	</p>
 				            </div>
-			    	   
-			                
-			                
-                            <!---不快指数-->
-                            <!---不快指数-->
-                            <div id="hukaiSisuu" class="weather-social">
 
-                                 <p>
-                                    
-                                </p>
+
+                            <!---不快指数-->
+                            <div>
+                                <img id="hukaiSisuu" class="weather-social"/>
+                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E7%84%A1%E9%A1%8C20_20240118105545_lfqdgz.png" style="height: 25%;"/>
                             </div>
             			    
 <script>
@@ -243,26 +236,26 @@
                         
 
                         //↓不快指数分岐（ヘッダー用）
-                        //寒い
+                        //寒い 画像：とても寒い
                         if(fukai <= 54){
                         
-                            hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'>";    
+                            hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%8B%E3%82%93_hkfi0w.png';    
                         }
-                        //肌寒い
+                        //肌寒い 画像；寒い
                         else if(fukai >= 55 && fukai <= 65 ){
-                            hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E7%B5%90%E6%A7%8B%E3%81%84%E3%81%84_h8tsks.png'>";
+                            hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%95%E3%82%80%E3%81%84_jbbyyb.png';
                         }
-                        //快い
+                        //快い 画像：快適
                         else if(fukai > 65 && fukai <= 75 ){
-                            hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png'>";
+                            hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%8B%E3%81%84%E3%81%A6%E3%81%8D_o2qa7h.png';
                         }
-                        //暑い
+                        //暑い 画像：やや暑い
                         else if(fukai > 75 && fukai <= 85 ){
-                            hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png'>";
+                            hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%84_rkd08t.png';
                         }
-                        //暑くてたまらない
+                        //暑くてたまらない 画像：とても暑い
                         else if(fukai >= 86){
-                            hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png'>";
+                            hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%99%E3%81%8E_ltpfdk.png';
                         }
                         
                     //↓朝・昼・夜の天気の画像を表示
@@ -882,7 +875,6 @@
                                     <div class="kaiwa-text-left">
                                         <center  class="advice-text">
                                             <div class="advice-temperature">
-                                                <!-- 改修中 -->
                                                 <div>
                                                     　　最高気温
                                                 </div>
@@ -1035,10 +1027,10 @@
                         
                     //3行目
                     if(uvmax => 3){
-                        recommend_items.innerHTML = "今日は日差しが強いワン!日焼け対策をしっかりしよう。日焼け止めや日傘などを使おう。";
+                        recommend_items.innerHTML = "今日は日差しが強いワン!日焼け対策を<br>しっかりしよう。日焼け止めや日傘などを使おう。";
                     }
                     else if(uvmax => 6){
-                        recommend_items.innerHTML = "今日は日差しがすごく強いワン!できるだけ屋外での活動は控えよう。";
+                        recommend_items.innerHTML = "今日は日差しがすごく強いワン!<br>できるだけ屋外での活動は控えよう。";
                     }
                      if(result == true){
                         recommend_items.innerHTML = "今日は雪だワン!!滑らないようにしてね。<br>傘やブーツ、マフラー、手袋などを使おう。";
@@ -1050,10 +1042,10 @@
                         recommend_items.innerHTML = "折り畳み傘が助けてくれるかもだワン！ ";
                     }
                     else if(rainmax => 30){
-                        recommend_items.innerHTML = "今日は雨が降るかもしれないワン!折り畳み傘が便利だよ。 ";
+                        recommend_items.innerHTML = "今日は雨が降るかもしれないワン!<br>折り畳み傘が便利だよ。 ";
                     }
                     else if(rainmax => 70){
-                        recommend_items.innerHTML = "今日は雨降りだワン!雨具をしっかり用意しよう。傘やレインブーツを使おう。";
+                        recommend_items.innerHTML = "今日は雨降りだワン!雨具をしっかり用意しよう。<br>傘やレインブーツを使おう。";
                     }
                    
                        
@@ -1072,7 +1064,7 @@
                            }
                            //0:暑がり
                            else{
-                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!今日は暑がりさんも寒さに注意だワン! ";
+                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!<br>今日は暑がりさんも寒さに注意だワン! ";
                            }
                          }
                          //肌寒い
@@ -1080,17 +1072,17 @@
                             advice.innerHTML = tmax+"℃　";
                             advicetwo.innerHTML = tmin+"℃　　　　";
                              if(samatu == 1){
-                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!厚手の靴下やブーツも選んでみよう。";
+                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>厚手の靴下やブーツも選んでみよう。";
                              }
                              else{
-                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!暖房に対応できるアウターを選ぼう。 ";
+                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>暖房に対応できるアウターを選ぼう。 ";
                              }
                          }
                          //快い
                          else if(fukai2 >= 65 && fukai2 <= 75 ){
                             advice.innerHTML = tmax+"℃　";
                             advicetwo.innerHTML = tmin+"℃　　　　";
-                            advicesamuatu.innerHTML= "今日は過ごしやすいワンダフルな一日‼好きなオシャレが楽しめそうだワン。";
+                            advicesamuatu.innerHTML= "今日は過ごしやすいワンダフルな一日‼<br>好きなオシャレが楽しめそうだワン。";
 
  
                            }
@@ -1099,10 +1091,10 @@
                             advice.innerHTML = tmax+"℃　";
                             advicetwo.innerHTML = tmin+"℃　　　　";
                              if(samatu == 1){
-                                advicesamuatu.innerHTML = "薄手の素材がおすすめだワン。冷房に注意してね。七分丈もよいかも？ ";
+                                advicesamuatu.innerHTML = "薄手の素材がおすすめだワン。<br>冷房に注意してね。七分丈もよいかも？ ";
                              }
                              else{
-                                advicesamuatu.innerHTML =" 薄手の素材がおすすめだワン。通気性の良い半袖や半ズボンがおすすめだよ。 ";
+                                advicesamuatu.innerHTML =" 薄手の素材がおすすめだワン。<br>通気性の良い半袖や半ズボンがおすすめだよ。 ";
                              }
                            }
                          //暑くてたまらない
@@ -1110,10 +1102,10 @@
                             advice.innerHTML = tmax+"℃　";
                             advicetwo.innerHTML = tmin+"℃　　　　";
                              if(samatu == 1){
-                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材がおすすめ。冷房に注意するワン!　 ";
+                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。冷房に注意するワン!　 ";
                              }
                              else{
-                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材がおすすめ。汗拭きシートで快適だワン。 ";
+                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。汗拭きシートで快適だワン。 ";
                              }
                             
                          

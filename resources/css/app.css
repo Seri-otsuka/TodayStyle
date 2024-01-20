@@ -32,7 +32,7 @@
    /* お出かけモードの壁紙  */
 .gooutColor_box {
   width: 1400px;
-  height: 3300px;
+  height: 3400px;
   background: #d5d5d5;
 }
 
@@ -488,7 +488,7 @@ p.kaiwa-text:last-child {
 .weather-social{
     /* margin-left: 10%; */
     /* margin-right: 5%; */
-    margin: 3% 0% 10%;
+    /* margin: 3% 0% 10%; */
     width: 200px;
 }
 
