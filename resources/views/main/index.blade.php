@@ -820,10 +820,10 @@
                                             </div>
                     				    </td>
                     				    <td>　　　</td>
-                                        <td valign="top">
+                                        <td valign="top" width=500px height=450px>
                                             <a href="{{ route('coordination') }}">
                                                 <button type="button">
-                                                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704939153/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%BC%E3%83%83%E3%83%88_%E6%9C%8D%E7%84%A1%E3%81%97_bvgsln.png" class="code_size"/>
+                                                    <img src="https://res.cloudinary.com/dg5imilid/image/upload/v1705730150/%28%5E%5E%29/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%BC%E3%83%83%E3%83%88_%E6%9C%8D%E7%84%A1%E3%81%97_bvgsln_fh0sot.png"/>
                                                 </button>
                                             </a>
                                         </td>

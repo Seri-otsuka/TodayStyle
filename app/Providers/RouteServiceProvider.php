@@ -20,7 +20,7 @@ class RouteServiceProvider extends ServiceProvider
      /*
         ログイン後の画面を/mainに設定
      */
-    public const HOME = '/register2';
+    public const HOME = '/images/create';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
