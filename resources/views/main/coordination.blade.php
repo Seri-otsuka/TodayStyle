@@ -24,12 +24,12 @@
 
         <div class="coordWebpageColor_box">
         <button type="button">
-        <div class="botan">
-            <a href="{{ route('main') }}">
-            <img id="return" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705026228/modoru_r4tkuo.png"width=45px height=45px; >
-             </a>
-             <font size="40"class="text">コーディネートルーム</font>
-        </div>
+            <div class="botan">
+                <a href="{{ route('main') }}">
+                    <img id="return" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705026228/modoru_r4tkuo.png"width=105px height=105px; >
+                 </a>
+                <font size="40"class="text">コーディネートルーム</font>
+             </div>
         </button>
         
        
@@ -221,267 +221,242 @@
             @endif
             <!--ここまで所持しているかどうかの処理コード-->
             
-            <!--1番目--->
-            <div class="icon">
-                <img id="one" name="one" width=115px height=115px;>
-            </div>
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div  id="k">
-                   
-                </div>
-            </div>
-    
-
-            <!---2番目--->
-            <div class="icon">
-                <img id="two" name="two" width=115px height=115px;>
-            </div>
-            
-    
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div id = "i">
-                    <img id = "sya"    src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705294515/%E7%84%A1%E9%A1%8C3_20240115135204_ungtuc.png" class="fukusize">
-                    <img id = "sya2"    src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705294515/%E7%84%A1%E9%A1%8C3_20240115135229_wgtsnj.png" class="fukusize">
-    
-    
-    
-    
-    
-                
-                </div>
-            </div>
-    
-            <!---3番目--->
-            <div class="icon">
-                <img id="three" name="three"width=115px height=115px; >
-    
-            </div>
-            
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                   
-    
-    
-    
-    
-    
-                
-                </div>
-            </div>
-    
-            <!---4番目--->
-            <div class="icon">
-                <img id="four" name="four"width=115px height=115px; >
-            </div>
-            
-    
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                    
-    
-    
-    
-    
-    
-                
-                </div>
-            </div>
-    
-            <!---5番目--->
-            <div class="icon">
-                <img id="five" name="five"width=115px height=115px; >
-            </div>
-            
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                    
-    
-    
-    
-    
-    
-                
-                </div>
-            </div>
-    
-            <!---6番目--->
-            <div class="icon">
-                <img id="six" name="six"width=115px height=115px; >
-            </div>
-            
-    
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                    <img id = "ko"    src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705295191/%E7%84%A1%E9%A1%8C3_20240115140411_bvw5mq.png" class="fukusize">
-    
-    
-    
-    
-    
-                
-                </div>
-            </div>
-    
-            <!---7番目--->
-            <div class="icon">
-                <img id="seven" name="seven"width=115px height=115px; >
-            </div>
-            
-    
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                    <img id = "nz"    src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705295191/%E7%84%A1%E9%A1%8C3_20240115140329_balagc.png" class="fukusize">
-                    <img id = "nz2"    src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705295191/%E7%84%A1%E9%A1%8C3_20240115140344_kudvlx.png" class="fukusize">
-    
-    
-    
-    
-                
-                </div>
-            </div>
-    
-            <!---8番目--->
-            <div class="icon">
-                <img id="eight" name="eight"width=115px height=115px; >
-            </div>
-            
-    
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                    <img id = "ky"    src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705295274/%E7%84%A1%E9%A1%8C3_20240115135836_yobenx.png" class="fukusize">
-    
-    
-    
-    
-    
-                
-                </div>
-            </div>
-    
-            <!---9番目--->
-            <div class="icon">
-                <img id="nine" name="nine"width=115px height=115px; >
-            </div>
-            
-    
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                    
-    
-    
-    
-    
-    
-                
-                </div>
-            </div>
-    
-            <!---10番目--->
-            <div class="icon">
-                <img id="ten" name="ten"width=115px height=115px; >
-            </div>
-            
-    
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                  
-    
-    
-    
-    
-    
-                
-                </div>
-            </div>
-    
-            <!---11番目--->
-            <div class="icon">
-                <img id="eleven" name="eleven"width=115px height=115px; >
-            </div>
-            
-    
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                    
-    
-    
-    
-    
-    
-                
-                </div>
-            </div>
-    
-            <!---12番目--->
-            <div class="icon">
-                <img id="twelve" name="twelve"width=115px height=115px; >
-            </div>
-            
-    
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                    
-    
-    
-    
-    
-    
-                
-                </div>
-            </div>
-    
-            <!---13番目--->
-            <div class="icon">
-                <img id="thirteen" name="thirteen"width=115px height=115px; >
-            </div>
-            
-    
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                  
-    
-    
-    
-    
-    
-                
-                </div>
-            </div>
-    
-            <!---14番目--->
-            <div class="icon">
-                <img id="fourteen" name="fourteen"width=115px height=115px; >
-            </div>
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                    
-    
-    
-    
-    
-                
-                </div>
-            </div>
-    
-            <!---15番目--->
-            <div class="icon">
-                <img id="fifteen" name="fifteen"width=115px height=115px; >
-            </div>
-            
-    
-            <div class="box2"style="display: flex; flex-wrap: wrap;">
-                <div>
-                    <img id = "wanpi"    src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705294515/%E7%84%A1%E9%A1%8C3_20240115135330_kpdpbq.png" class="fukusize">
-                    <img id = "wanpi2"    src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705294515/%E7%84%A1%E9%A1%8C3_20240115135311_tzvgn6.png" class="fukusize">
-    
-    
-    
-    
-    
-                
-                </div>
+           <!--1番目--->
+        <div class="icon">
+            <img id="one" name="one"class="fukuiconsize" >
+        </div>
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_4categories as $n_4category )
+                @foreach($n_4category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
             </div>
         </div>
+
+
+        <!---2番目--->
+        <div class="icon">
+            <img id="two" name="two" class="fukuiconsize">
+        </div>
+        
+
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div >
+                @foreach($n_5categories as $n_5category )
+                @foreach($n_5category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        <!---3番目--->
+        <div class="icon">
+            <img id="three" name="three"class="fukuiconsize" >
+
+        </div>
+        
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_8categories as $n_8category )
+                @foreach($n_8category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        <!---4番目--->
+        <div class="icon">
+            <img id="four" name="four"class="fukuiconsize" >
+        </div>
+        
+
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_10categories as $n_10category )
+                @foreach($n_10category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach 
+            </div>
+        </div>
+
+        <!---5番目--->
+        <div class="icon">
+            <img id="five" name="five"class="fukuiconsize" >
+        </div>
+        
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_1categories as $n_1category )
+                @foreach($n_1category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        <!---6番目--->
+        <div class="icon">
+            <img id="six" name="six"class="fukuiconsize" >
+        </div>
+        
+
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_2categories as $n_2category )
+                @foreach($n_2category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        <!---7番目--->
+        <div class="icon">
+            <img id="seven" name="seven"class="fukuiconsize" >
+        </div>
+        
+
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_3categories as $n_3category )
+                @foreach($n_3category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        <!---8番目--->
+        <div class="icon">
+            <img id="eight" name="eight"class="fukuiconsize" >
+        </div>
+        
+
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_9categories as $n_9category )
+                @foreach($n_9category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        <!---9番目--->
+        <div class="icon">
+            <img id="nine" name="nine"class="fukuiconsize" >
+        </div>
+        
+
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_11categories as $n_11category )
+                @foreach($n_11category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        <!---10番目--->
+        <div class="icon">
+            <img id="ten" name="ten"class="fukuiconsize" >
+        </div>
+        
+
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_6categories as $n_6category )
+                @foreach($n_6category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        <!---11番目--->
+        <div class="icon">
+            <img id="eleven" name="eleven"class="fukuiconsize" >
+        </div>
+        
+
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_7categories as $n_7category )
+                @foreach($n_7category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        <!---12番目--->
+        <div class="icon">
+            <img id="twelve" name="twelve"class="fukuiconsize" >
+        </div>
+        
+
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_15categories as $n_15category )
+                @foreach($n_15category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        <!---13番目--->
+        <div class="icon">
+            <img id="thirteen" name="thirteen"class="fukuiconsize" >
+        </div>
+        
+
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_13categories as $n_13category )
+                @foreach($n_13category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        <!---14番目--->
+        <div class="icon">
+            <img id="fourteen" name="fourteen"class="fukuiconsize" >
+        </div>
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_12categories as $n_12category )
+                @foreach($n_12category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        <!---15番目--->
+        <div class="icon">
+            <img id="fifteen" name="fifteen"class="fukuiconsize" >
+        </div>
+        
+
+        <div class="box2"style="display: flex; flex-wrap: wrap;">
+            <div>
+                @foreach($n_14categories as $n_14category )
+                @foreach($n_14category->images()->latest()->get() as $image)
+                <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endforeach
+                @endforeach
+            </div>
+        </div>
+    </div>
     
             <p class="under_box">
             <font size="40">操作説明</font>
@@ -499,25 +474,7 @@
 
 <script>
 
-        let lat = 35.6785;   //緯度
-        let long = 139.6823; //経度
-            
-        //open-meteoからURLを取得
-        const apiUrl = ' https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
-                
-              
-              //fetch処理でurlからjson形式で情報を取得
-              fetch(apiUrl)
-              .then(response => {
-                  return response.json();
-              })
-              .then(data =>{
-                  const jsonData = data;                              //
-                  const humidity = jsonData.current.relative_humidity_2m;      //現在の湿度を取得
-                  const temperature = jsonData.current.temperature_2m;//現在の気温を取得
-                   let fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;
-                   
-                   var ky = {{ $icon1 }};
+       var ky = {{ $icon1 }};
                    var no = {{ $icon2 }};
                    var ha = {{ $icon3 }};
                    var na = {{ $icon4 }};
@@ -533,19 +490,7 @@
                    var su = {{ $icon14 }};
                    var wa = {{ $icon15 }};
                    
-                    
-                    
-                    
-
-    
-               
-        
-                            //不快指数分岐
-                            //～55 	　寒い
-                            if(fukai <= 54){
-        　                      document.getElementById('k').innerHTML ='  @foreach($n_1categories as $n_1category )+@foreach($n_1category->images()->latest()->get() as $image+<img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">+@endforeach+@endforeach';
-        　                     // document.getElementById('ky').id = "i";
-                                if(na == 0){
+                   if(na == 0){
                                     document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
                                 }
                                 else if(na == 1){
@@ -572,690 +517,237 @@
                                 document.getElementById("three").alt="three";
     
                                 if(ni ==0){
-                                    document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png";
+                                    document.getElementById("eight").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png";
                                 }
-                                else if(sy == 1){
-                                    document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0287_wfezcx.png";
+                                else if(ni == 1){
+                                    document.getElementById("eight").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0287_wfezcx.png";
                                 }    
                                 
                                 document.getElementById("four").alt="four";
     
                                 if(pa ==0){
-                                    document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
+                                    document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
                                 }
                                 else if(pa == 1){
-                                    document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
+                                    document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
                                 }    
                                 
                                 document.getElementById("five").alt="five";
     
                                 if(da ==0){
-                                    document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203404_hjobme.png";
+                                    document.getElementById("nine").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203404_hjobme.png";
                                 }
                                 else if(da == 1){
-                                    document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png";
+                                    document.getElementById("nine").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png";
                                 }    
                                 
                                 document.getElementById("six").alt="six";
     
                                 if(nz ==0){
-                                    document.getElementById("seven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
+                                    document.getElementById("thirteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
                                 }
                                 else if(nz == 1){
-                                    document.getElementById("seven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
+                                    document.getElementById("thirteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
                                 }    
                                 
                                 document.getElementById("seven").alt="seven";
     
-                                if(ky ==0){
-                                    document.getElementById("eight").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203326_s3xmu4.png";
-                                }
-                                else if(ky == 1){
-                                    document.getElementById("eight").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png";
-                                }    
-                                
-                                document.getElementById("eight").alt="eight";
-    
-                                if(no ==0){
-                                    document.getElementById("nine").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203412_r6sovt.png";
-                                }
-                                else if(no == 1){
-                                    document.getElementById("nine").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0294_ziqwci.png";
-                                }    
-                                
-                                document.getElementById("nine").alt="nine"
-    
-                                if(ha ==0){
-                                    document.getElementById("ten").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
-                                }
-                                else if(ha == 1){
-                                    document.getElementById("ten").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                                }    
-                                
-                                document.getElementById("ten").alt="ten";
-    
-                                if(ka ==0){
-                                    document.getElementById("eleven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203408_luvbqi.png";
-                                }
-                                else if(ka == 1){
-                                    document.getElementById("eleven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0292_co2req.png";
-                                }    
-                                
-                                document.getElementById("eleven").alt="eleven";
-    
-                                 if(ja ==0){
-                                    document.getElementById("twelve").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203319_bzhvix.png";
-                                }
-                                else if(ja == 1){
-                                    document.getElementById("twelve").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%902_axoaz6.png";
-                                }   
-                                
-                                document.getElementById("twelve").alt="twelve";
-                                if(hz ==0){
-                                    document.getElementById("thirteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
-                                }
-                                else if(hz == 1){
-                                    document.getElementById("thirteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
-                                }    
-                                
-                                document.getElementById("thirteen").alt="thirteen";
-    
-                                if(su ==0){
-                                    document.getElementById("fourteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                                }
-                                else if(su == 1){
-                                    document.getElementById("fourteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                                }    
-                                
-                                document.getElementById("fourteen").alt="fourteen";
-                                if(wa ==0){
-                                    document.getElementById("fifteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                                }
-                                else if(wa == 1){
-                                    document.getElementById("fifteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
-                                }    
-                                
-                                document.getElementById("fifteen").alt="fifteen";
-        
-        
-                  
-                            }
-                             //54～65　　肌寒い 
-                            else if(fukai >= 55 && fukai <= 65 ){
-                                if(na == 0){
-                                    document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
-                                }
-                                else if(na == 1){
-                                    document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
-                                }
-        
-                                document.getElementById("one").alt="one";
-    
-                                if(sy ==0){
-                                    document.getElementById("two").src=":https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
-                                }
-                                else if(sy == 1){
-                                    document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
-                                }
-                                
-                                document.getElementById("two").alt="two";
-        
-                                if(ka ==0){
-                                    document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203408_luvbqi.png";
-                                }
-                                else if(ka == 1){
-                                    document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0292_co2req.png";
-                                }
-                                
-                                document.getElementById("three").alt="three";
-        
-                                if(ja ==0){
-                                    document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203319_bzhvix.png";
-                                }
-                                else if(ja == 1){
-                                    document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%902_axoaz6.png";
-                                }
-                                
-                                document.getElementById("four").alt="four";
-        
-                                if(pa ==0){
-                                    document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
-                                }
-                                else if(pa == 1){
-                                    document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
-                                } 
-                               
-                                document.getElementById("five").alt="five";
-        
-                                if(nz ==0){
-                                    document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
-                                }
-                                else if(nz == 1){
-                                    document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
-                                }
-                                
-                                document.getElementById("six").alt="six";
-        
-                                if(ky ==0){
-                                    document.getElementById("seven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203326_s3xmu4.png";
-                                }
-                                else if(ky == 1){
-                                    document.getElementById("seven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png";
-                                }
-                                
-                                document.getElementById("seven").alt="seven";
-        
-                                if(no ==0){
-                                    document.getElementById("eight").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203412_r6sovt.png";
-                                }
-                                else if(no == 1){
-                                    document.getElementById("eight").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0294_ziqwci.png";
-                                }
-                                
-                                document.getElementById("eight").alt="eight";
-        
-                                if(ha ==0){
-                                    document.getElementById("nine").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
-                                }
-                                else if(ha == 1){
-                                    document.getElementById("nine").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                                }
-                                
-                                document.getElementById("nine").alt="nine";
-        
-                                if(ta ==0){
-                                    document.getElementById("ten").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203315_ruwc1p.png";
-                                }
-                                else if(ta == 1){
-                                    document.getElementById("ten").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%bf%e3%83%bc%e3%83%88%e3%83%ab%e3%83%8d%e3%83%83%e3%82%af%e3%81%ae%e7%84%a1%e6%96%99%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3_plixtm.png";
-                                }
-                                
-                                document.getElementById("ten").alt="ten";
-        
-                                if(ni ==0){
-                                    document.getElementById("eleven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png";
-                                }
-                                else if(sy == 1){
-                                    document.getElementById("eleven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0287_wfezcx.png";
-                                }
-                                
-                                document.getElementById("eleven").alt="eleven";
-        
-                                if(da ==0){
-                                    document.getElementById("twelve").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203404_hjobme.png";
-                                }
-                                else if(da == 1){
-                                    document.getElementById("twelve").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png";
-                                } 
-                                
-                                document.getElementById("twelve").alt="twelve";
-        
-                                if(hz ==0){
-                                    document.getElementById("thirteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
-                                }
-                                else if(hz == 1){
-                                    document.getElementById("thirteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
-                                }
-                                
-                                document.getElementById("thirteen").alt="thirteen";
-        
-                                if(su ==0){
-                                    document.getElementById("fourteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                                }
-                                else if(su == 1){
-                                    document.getElementById("fourteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                                }
-                                
-                                document.getElementById("fourteen").alt="fourteen";
-        
-                                if(wa ==0){
-                                    document.getElementById("fifteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                                }
-                                else if(wa == 1){
-                                    document.getElementById("fifteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
-                                }
-                                
-                                document.getElementById("fifteen").alt="fifteen"; 
-                            }
-                            //64～75　　快い 
-                            else if(fukai >= 65 && fukai <= 75 ){
-                                if(na == 0){
-                                    document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
-                                }
-                                else if(na == 1){
-                                    document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
-                                }
-                                
-                                document.getElementById("one").alt="one";
-        
-                                if(sy ==0){
-                                    document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
-                                }
-                                else if(sy == 1){
-                                    document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
-                                }
-                                
-                                document.getElementById("two").alt="two";
-        
-                                if(ha ==0){
-                                    document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
-                                }
-                                else if(ha == 1){
-                                    document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                                }
-                                
-                                document.getElementById("three").alt="three";
-        
-                                if(nz ==0){
-                                    document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
-                                }
-                                else if(nz == 1){
-                                    document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
-                                }
-                                
-                                document.getElementById("four").alt="four";
-        
-                                if(su ==0){
-                                    document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                                }
-                                else if(su == 1){
-                                    document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                                }
-                                
-                                document.getElementById("five").alt="five";
-        
-                                if(wa ==0){
-                                    document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                                }
-                                else if(wa == 1){
-                                    document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
-                                }
-                                
-                                document.getElementById("six").alt="six";
-        
-                                if(ky ==0){
-                                    document.getElementById("seven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203326_s3xmu4.png";
-                                }
-                                else if(ky == 1){
-                                    document.getElementById("seven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png";
-                                }
-                                
-                                document.getElementById("seven").alt="seven";
-        
-                                if(no ==0){
-                                    document.getElementById("eight").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203412_r6sovt.png";
-                                }
-                                else if(no == 1){
-                                    document.getElementById("eight").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0294_ziqwci.png";
-                                }
-                               
-                                document.getElementById("eight").alt="eight";
-        
-                                if(ka ==0){
-                                    document.getElementById("nine").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203408_luvbqi.png";
-                                }
-                                else if(ka == 1){
-                                    document.getElementById("nine").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0292_co2req.png";
-                                }
-                                
-                                document.getElementById("nine").alt="nine"
-        
-                                if(ja ==0){
-                                    document.getElementById("ten").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203319_bzhvix.png";
-                                }
-                                else if(ja == 1){
-                                    document.getElementById("ten").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%902_axoaz6.png";
-                                }
-                                
-                                document.getElementById("ten").alt="ten";
-        
-                                if(ta ==0){
-                                    document.getElementById("eleven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203315_ruwc1p.png";
-                                }
-                                else if(ta == 1){
-                                    document.getElementById("eleven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%bf%e3%83%bc%e3%83%88%e3%83%ab%e3%83%8d%e3%83%83%e3%82%af%e3%81%ae%e7%84%a1%e6%96%99%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3_plixtm.png";
-                                }
-                                
-                                document.getElementById("eleven").alt="eleven";
-        
-                                if(ni ==0){
-                                    document.getElementById("twelve").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png";
-                                }
-                                else if(sy == 1){
-                                    document.getElementById("twelve").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0287_wfezcx.png";
-                                }
-                                
-                                document.getElementById("twelve").alt="twelve";
-        
-                                if(pa ==0){
-                                    document.getElementById("thirteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
-                                }
-                                else if(pa == 1){
-                                    document.getElementById("thirteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
-                                } 
-                               
-                                document.getElementById("thirteen").alt="thirteen";
-        
-                                if(da ==0){
-                                    document.getElementById("fourteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203404_hjobme.png";
-                                }
-                                else if(da == 1){
-                                    document.getElementById("fourteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png";
-                                } 
-                                
-                                document.getElementById("fourteen").alt="fourteen";
-        
-                                if(hz ==0){
-                                    document.getElementById("fifteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
-                                }
-                                else if(hz == 1){
-                                    document.getElementById("fifteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
-                                }
-                                
-                                document.getElementById("fifteen").alt="fifteen";
-                            }
-                            //70～85　　暑い 
-                            else if(fukai >= 75 && fukai <= 85 ){
-                             
-                                if(ha ==0){
-                                    document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
-                                }
-                                else if(ha == 1){
-                                    document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                                }
-                                
-                                document.getElementById("one").alt="one";
-        
-                                if(hz ==0){
-                                    document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
-                                }
-                                else if(hz == 1){
-                                    document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
-                                }
-                                document.getElementById("two").alt="two";
-        
-                                if(su ==0){
-                                    document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                                }
-                                else if(su == 1){
-                                    document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                                }
-                                
-                                document.getElementById("three").alt="three";
-        
-                                if(wa ==0){
-                                    document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                                }
-                                else if(wa == 1){
-                                    document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
-                                }
-                                
-                                document.getElementById("four").alt="four";
-        
                                 if(ky ==0){
                                     document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203326_s3xmu4.png";
                                 }
                                 else if(ky == 1){
                                     document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png";
-                                }
+                                }    
                                 
-                                document.getElementById("five").alt="five";
-        
+                                document.getElementById("eight").alt="eight";
+    
                                 if(no ==0){
                                     document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203412_r6sovt.png";
                                 }
                                 else if(no == 1){
                                     document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0294_ziqwci.png";
-                                }
-                                
-                                document.getElementById("six").alt="six";
-    
-                                if(na == 0){
-                                    document.getElementById("seven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
-                                }
-                                else if(na == 1){
-                                    document.getElementById("seven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
-                                }
-                                
-                                document.getElementById("seven").alt="seven";
-        
-                                if(sy ==0){
-                                    document.getElementById("eight").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
-                                }
-                                else if(sy == 1){
-                                    document.getElementById("eight").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
-                                }
-                                
-                                document.getElementById("eight").alt="eight";
-        
-                                if(ka ==0){
-                                    document.getElementById("nine").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203408_luvbqi.png";
-                                }
-                                else if(ka == 1){
-                                    document.getElementById("nine").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0292_co2req.png";
-                                }
+                                }    
                                 
                                 document.getElementById("nine").alt="nine"
-        
-                                if(ja ==0){
-                                    document.getElementById("ten").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203319_bzhvix.png";
-                                }
-                                else if(ja == 1){
-                                    document.getElementById("ten").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%902_axoaz6.png";
-                                }
-                                
-                                document.getElementById("ten").alt="ten";
-        
-                                if(ta ==0){
-                                    document.getElementById("eleven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203315_ruwc1p.png";
-                                }
-                                else if(ta == 1){
-                                    document.getElementById("eleven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%bf%e3%83%bc%e3%83%88%e3%83%ab%e3%83%8d%e3%83%83%e3%82%af%e3%81%ae%e7%84%a1%e6%96%99%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3_plixtm.png";
-                                }
-                                
-                                document.getElementById("eleven").alt="eleven";
-        
-                                if(ni ==0){
-                                    document.getElementById("twelve").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png";
-                                }
-                                else if(sy == 1){
-                                    document.getElementById("twelve").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0287_wfezcx.png";
-                                }
-                                
-                                document.getElementById("twelve").alt="twelve";
-        
-                                if(pa ==0){
-                                    document.getElementById("thirteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
-                                }
-                                else if(pa == 1){
-                                    document.getElementById("thirteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
-                                } 
-                                
-                                document.getElementById("thirteen").alt="thirteen";
-        
-                                if(da ==0){
-                                    document.getElementById("fourteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203404_hjobme.png";
-                                }
-                                else if(da == 1){
-                                    document.getElementById("fourteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png";
-                                } 
-                                
-                                document.getElementById("fourteen").alt="fourteen";
-        
-                                if(nz ==0){
-                                    document.getElementById("fifteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
-                                }
-                                else if(nz == 1){
-                                    document.getElementById("fifteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
-                                }
-                                
-                                document.getElementById("fifteen").alt="fifteen";
-        
-        
-        
-                            }
-                            //84～　　　暑くてたまらない 
-                            else if(fukai >= 86){
-                            
-                                if(ky ==0){
-                                    document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203326_s3xmu4.png";
-                                }
-                                else if(ky == 1){
-                                    document.getElementById("one").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png";
-                                }
-                                
-                                document.getElementById("one").alt="one";
-        
-                                if(no ==0){
-                                    document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203412_r6sovt.png";
-                                }
-                                else if(no == 1){
-                                    document.getElementById("two").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0294_ziqwci.png";
-                                }
-                                
-                                document.getElementById("two").alt="two";
-        
+    
                                 if(ha ==0){
-                                    document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
+                                    document.getElementById("seven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
                                 }
                                 else if(ha == 1){
-                                    document.getElementById("three").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                                }
-                                
-                                document.getElementById("three").alt="three";
-        
-                                if(hz ==0){
-                                    document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
-                                }
-                                else if(hz == 1){
-                                    document.getElementById("four").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
-                                }
-                                
-                                document.getElementById("four").alt="four";
-        
-                                if(su ==0){
-                                    document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                                }
-                                else if(su == 1){
-                                    document.getElementById("five").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                                }
-                                
-                                document.getElementById("five").alt="five";
-        
-                                if(wa ==0){
-                                    document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                                }
-                                else if(wa == 1){
-                                    document.getElementById("six").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
-                                }
-                                
-                                document.getElementById("six").alt="six";
-        
-                                if(na == 0){
-                                    document.getElementById("seven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
-                                }
-                                else if(na == 1){
-                                    document.getElementById("seven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
-                                }
-                                
-                                document.getElementById("seven").alt="seven";
-        
-                                if(sy ==0){
-                                    document.getElementById("eight").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
-                                }
-                                else if(sy == 1){
-                                    document.getElementById("eight").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
-                                }
-                                
-                                document.getElementById("eight").alt="eight";
-        
-                                if(ka ==0){
-                                    document.getElementById("nine").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203408_luvbqi.png";
-                                }
-                                else if(ka == 1){
-                                    document.getElementById("nine").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0292_co2req.png";
-                                }
-                                
-                                document.getElementById("nine").alt="nine";
-        
-                                if(ja ==0){
-                                    document.getElementById("ten").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203319_bzhvix.png";
-                                }
-                                else if(ja == 1){
-                                    document.getElementById("ten").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%902_axoaz6.png";
-                                }
+                                    document.getElementById("seven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
+                                }    
                                 
                                 document.getElementById("ten").alt="ten";
     
-                                if(ta ==0){
-                                    document.getElementById("eleven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203315_ruwc1p.png";
+                                if(ka ==0){
+                                    document.getElementById("ten").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203408_luvbqi.png";
                                 }
-                                else if(ta == 1){
-                                    document.getElementById("eleven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%bf%e3%83%bc%e3%83%88%e3%83%ab%e3%83%8d%e3%83%83%e3%82%af%e3%81%ae%e7%84%a1%e6%96%99%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3_plixtm.png";
-                                }
+                                else if(ka == 1){
+                                    document.getElementById("ten").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0292_co2req.png";
+                                }    
                                 
                                 document.getElementById("eleven").alt="eleven";
-        
-                                if(ni ==0){
-                                    document.getElementById("twelve").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png";
+    
+                                 if(ja ==0){
+                                    document.getElementById("eleven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203319_bzhvix.png";
                                 }
-                                else if(sy == 1){
-                                    document.getElementById("twelve").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0287_wfezcx.png";
-                                }
+                                else if(ja == 1){
+                                    document.getElementById("eleven").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%902_axoaz6.png";
+                                }   
                                 
                                 document.getElementById("twelve").alt="twelve";
-        
-                                if(pa ==0){
-                                    document.getElementById("thirteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
+                                if(hz ==0){
+                                    document.getElementById("fourteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
                                 }
-                                else if(pa == 1){
-                                    document.getElementById("thirteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
-                                } 
+                                else if(hz == 1){
+                                    document.getElementById("fourteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
+                                }    
                                 
                                 document.getElementById("thirteen").alt="thirteen";
-                                
-        
-                                if(da ==0){
-                                    document.getElementById("fourteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203404_hjobme.png";
+    
+                                if(su ==0){
+                                    document.getElementById("fifteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
                                 }
-                                else if(da == 1){
-                                    document.getElementById("fourteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png";
-                                } 
+                                else if(su == 1){
+                                    document.getElementById("fifteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
+                                }    
                                 
                                 document.getElementById("fourteen").alt="fourteen";
-        
-                                if(nz ==0){
-                                    document.getElementById("fifteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
+                                if(wa ==0){
+                                    document.getElementById("twelve").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
                                 }
-                                else if(nz == 1){
-                                    document.getElementById("fifteen").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
-                                }
+                                else if(wa == 1){
+                                    document.getElementById("twelve").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
+                                }    
                                 
                                 document.getElementById("fifteen").alt="fifteen";
-                            }
-                          
-    
-     
-              
-              })
-                //json形式で情報取得失敗した時
-                .catch(error => {
-                    console.error('データ取得に失敗しました',error)
-                });
-    
-    
-                function ChangeImage( imgid , newimgid ) {
- 				  document.getElementById(imgid).src = document.getElementById(newimgid).src;
-				}
-				
-				@foreach($n_1categories as $n_1category)        //配列を一個一個回してます
-				@foreach($n_1category->images()->latest()->get() as $image) //画像データを回してます
-					document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
-					ChangeImage('out' , {{ $image->id }});  //idを挿入してます！---------基本的に変数を入れるときは""で囲む必要なありません！ex):src={{ 変数 }}のように直置きで大丈夫です！
-				}
-				@endforeach
-				@endforeach
-				
+                                
+                                
+                                 function ChangeImage( imgid , newimgid ) {
+               document.getElementById(imgid).src = document.getElementById(newimgid).src;
+            }
+            
+            @foreach($n_1categories as $n_1category)        //配列を一個一個回してます
+            @foreach($n_1category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('top' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+
+            @foreach($n_2categories as $n_2category)        //配列を一個一個回してます
+            @foreach($n_2category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('top' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+            
+            @foreach($n_3categories as $n_3category)        //配列を一個一個回してます
+            @foreach($n_3category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('top' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+
+            @foreach($n_4categories as $n_4category)        //配列を一個一個回してます
+            @foreach($n_4category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('top' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+
+            @foreach($n_5categories as $n_5category)        //配列を一個一個回してます
+            @foreach($n_5category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('top' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+            
+            
+            @foreach($n_6categories as $n_6category)        //配列を一個一個回してます
+            @foreach($n_6category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('out' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+
+            @foreach($n_7categories as $n_7category)        //配列を一個一個回してます
+            @foreach($n_7category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('out' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+            
+            @foreach($n_8categories as $n_8category)        //配列を一個一個回してます
+            @foreach($n_8category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('top' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+
+            @foreach($n_9categories as $n_9category)        //配列を一個一個回してます
+            @foreach($n_9category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('out' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+
+
+            @foreach($n_10categories as $n_10category)        //配列を一個一個回してます
+            @foreach($n_10category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('top' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+
+            @foreach($n_11categories as $n_11category)        //配列を一個一個回してます
+            @foreach($n_11category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('out' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+
+            @foreach($n_12categories as $n_12category)        //配列を一個一個回してます
+            @foreach($n_12category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('botom' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+
+            @foreach($n_13categories as $n_13category)        //配列を一個一個回してます
+            @foreach($n_13category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('botom' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+
+            @foreach($n_14categories as $n_14category)        //配列を一個一個回してます
+            @foreach($n_14category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('botom' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
+
+            @foreach($n_15categories as $n_15category)        //配列を一個一個回してます
+            @foreach($n_15category->images()->latest()->get() as $image) //画像データを回してます
+                document.getElementById({{ $image->id}}).onclick = function(){  //idを一個一個入れてます
+                ChangeImage('out' , {{ $image->id }});  
+            }
+            @endforeach
+            @endforeach
 				
 				
 				

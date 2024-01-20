@@ -6,6 +6,7 @@ use App\Http\Controllers\FashonController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AreaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,9 @@ Route::get('/', function () {
 
 /*Route::get('/main', function () {
     return view('main.index');})->name('main');*/
+Route::get('/images/create', [ImageController::class, 'create'])->name('images.create');
+Route::post('/images', [ImageController::class, 'store'])->name('images.store');
+Route::get('/images', [ImageController::class, 'index'])->name('images.index');
     
 Route::get('/main',[UserController::class,'todouhuken'])->name('main');
 //Route::get('/main/{user}',[FashonController::class,'fashon'])->name('main.fashon');

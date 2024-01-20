@@ -12,7 +12,7 @@ class FashonController extends Controller
     
     public function fashon(Fashon $fashon)
     {   
-        return $fashon0>get();
+        return $fashon->get();
     }
     //とりあえずコメントアウトしときます。
         /*
