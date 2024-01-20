@@ -361,7 +361,13 @@ display: none;
   vertical-align: top;
   border: 4px #777777 solid;
 }
-
+.fashon_icon i {
+  line-height:50px;
+}
+.fashon_icon:hover {
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+}
 
 
 /* shopのアイコン */

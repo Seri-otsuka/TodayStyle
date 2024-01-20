@@ -249,11 +249,385 @@
                                 　　</select>　　
                                   <span class="cp_sl06_highlight"></span>
                                   <span class="cp_sl06_selectbar"></span>
-                                  <label class="cp_sl06_selectlabel">お住まいの地域を選択してください</label>
+                                  <label class="cp_sl06_selectlabel">地域を選択してください</label>
                                   </div>
                                 </form>
                           
                           
+                          
+                          <script>
+                                            //お住まいの地域の天気
+                                             //変数の宣言
+                                              let lat01  = 　　{{$finelyarea -> latitude}}; //自分の地域の変数に変える、今北海道になってる
+                                              let long01   =   {{$finelyarea -> longitude}};
+                                              
+                                            　 const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat01+'&longitude='+long01+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
+                                                console.log(lat01+"です");
+                                            　　console.log(long01+"です");
+                            
+                                               fetch(apiUrl)
+                                                .then(response => {
+                                                return response.json();
+                                                })
+                                                .then(data =>{
+                                                const jsonData = data;
+                                                const weather = jsonData.current.weather_code;                                        
+                                                const temperature = jsonData.current.temperature_2m;                                  //現在の気温
+                                                const probability = Array.from(jsonData.hourly.precipitation_probability);            //時間毎の降水確率  
+                                                const temperature2 = Array.from(jsonData.hourly.temperature_2m);                      //時間毎の気温 
+                                                const weather2 = Array.from(jsonData.hourly.weather_code);                            //時間毎のの天気コード
+                                                const humidity = jsonData.current.relative_humidity_2m;                               //現在の湿度                             
+                                                const fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;   //不快指数
+                                                
+                                            
+                                            //天気コード分岐
+                                            //晴れ
+                                            if(weather === 0 || weather === 1){
+                                              sampleweather.innerHTML = "☀"+temperature + "°C";
+                                            }
+                                            //一部くもり
+                                            else if(weather === 2){
+                                                sampleweather.innerHTML = "🌤  "+temperature + "°C";
+                                            }
+                                            //曇り
+                                            else if(weather === 3){
+                                              sampleweather.innerHTML =  "☁  "+temperature + "°C";
+                                            }
+                                            //雨
+                                            else if(weather <= 69){
+                                              sampleweather.innerHTML =  "☂ "+temperature + "°C";
+                                            }
+                                            //雪
+                                            else if(weather <=  79){
+                                                sampleweather.innerHTML = "☃ "+temperature + "°C";
+                                            }
+                                            else{
+                                              sampleweather.innerHTML = " ★"+temperature + "°C";
+                                            }
+                                            
+                                            //不快指数分岐
+                                            //寒い
+                                            if(fukai <= 54){
+                                            
+                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'>";
+                                            
+                                            }
+                                            //肌寒い
+                                            else if(fukai >= 55 && fukai <= 65 ){
+                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E7%B5%90%E6%A7%8B%E3%81%84%E3%81%84_h8tsks.png'>";
+                                            }
+                                            //快い
+                                            else if(fukai > 65 && fukai <= 75 ){
+                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png'>";
+                                            }
+                                                //暑い
+                                            else if(fukai > 75 && fukai <= 85 ){
+                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png'>";
+                                            }
+                                            //暑くてたまらない
+                                            else if(fukai >= 86){
+                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png'>";
+                                            }
+                                            
+                                    //↓朝・昼・夜の天気の画像を表示
+                                        //朝の天気
+                                        //快晴
+                                        if(weather2[7] === 0 ){
+                                          morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
+                                        }
+                                        //晴れだけど雲がでてる
+                                        else if(weather2[7] === 1){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                        }
+                                        //一部曇り
+                                        else if(weather2[7] === 2){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                        }            
+                                        //曇り
+                                        else if( weather2[7] === 3){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                        }
+                                         //霧（曇りアイコン使用）
+                                         else if (weather2[7] <= 49){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                        }
+                
+                                        //雨
+                                        else if(weather2[7] <= 69  ){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                        }
+                                        //雪
+                                        else if (weather2[7] <= 79){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                        }
+                                        //にわか雨(晴れのち雨アイコン使用)
+                                        else if(weather2[7] <= 84){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                                        }
+                                        //雪（雪のアイコン使用）
+                                        else if(weather2[7] <= 94){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                        }
+                                        //雷雨（雨のアイコン使用）
+                                        else if(weather2[7] <= 99){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                        }                           
+                                        //曇りのち晴れ
+                                        else if (weather2[7] === 210){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                        }
+                                        //晴れのち曇り
+                                        else if (weather2[7] === 211){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                        }
+                                        //曇りのち雨
+                                        else if (weather2[7] === 212){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                                        }
+                                        //雪のち雨
+                                        else if (weather2[7] === 213){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                                        }
+                                        //晴れのち雨
+                                        else if (weather2[7] === 411){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                                        }
+                                        //雨のち晴れ
+                                        else if (weather2[7] === 311){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                                        }
+                                        //晴れのち雪
+                                        else if (weather2[7] === 311){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                                        }
+                                        //雨のち曇り
+                                        else if (weather2[7] === 214){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                                        }
+                                         //雪のち曇り
+                                         else if (weather2[7] === 217){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                                        }
+                
+                                    //不明
+                                        else{
+                                            morning_OTENKI.innerHTML = "★";
+                                        }
+                                    
+                                        //朝7時の気温出力
+                                        temperature_morning.innerHTML =  "🌡  "+temperature2[7] + "°C";
+                                        //朝7時の降水確率を出力
+                                        rainypercent_morning.innerHTML  = "⛆"+ probability[7] + "%";
+                                    
+                                    
+                                        
+                                        
+                                        //昼の天気
+                                        //快晴
+                                        if(weather2[13] === 0 ){
+                                          noon_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
+                                        }
+                                        //晴れだけど雲がでてる
+                                        else if(weather2[13] === 1){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                        }
+                                        //一部曇り
+                                        else if(weather2[13] === 2){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                        }            
+                                        //曇り
+                                        else if( weather2[13] === 3){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                        }
+                                         //霧（曇りアイコン使用）
+                                         else if (weather2[13] <= 49){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                        }
+                
+                                        //雨
+                                        else if(weather2[13] <= 69  ){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                        }
+                                        //雪
+                                        else if (weather2[13] <= 79){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                        }
+                                        //にわか雨(晴れのち雨アイコン使用)
+                                        else if(weather2[13] <= 84){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                                        }
+                                        //雪（雪のアイコン使用）
+                                        else if(weather2[13] <= 94){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                        }
+                                        //雷雨（雨のアイコン使用）
+                                        else if(weather2[13] <= 99){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                        }                           
+                                        //曇りのち晴れ
+                                        else if (weather2[13] === 210){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                        }
+                                        //晴れのち曇り
+                                        else if (weather2[13] === 211){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                        }
+                                        //曇りのち雨
+                                        else if (weather2[13] === 212){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                                        }
+                                        //雪のち雨
+                                        else if (weather2[13] === 213){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                                        }
+                                        //晴れのち雨
+                                        else if (weather2[13] === 411){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                                        }
+                                        //雨のち晴れ
+                                        else if (weather2[13] === 311){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                                        }
+                                        //晴れのち雪
+                                        else if (weather2[13] === 311){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                                        }
+                                        //雨のち曇り
+                                        else if (weather2[13] === 214){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                                        }
+                                         //雪のち曇り
+                                         else if (weather2[13] === 217){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                                        }
+                
+                                    //不明
+                                        else{
+                                            noon_OTENKI.innerHTML = "★";
+                                        }
+                
+                                    
+                                        //昼13時の気温出力
+                                        temperature_noon.innerHTML =  temperature2[13] + "°C";
+                                        //昼13時の降水確率を出力
+                                        rainypercent_noon.innerHTML  =  probability[13] + "%";
+                                    
+                                    
+                                    
+                                    
+                                    //夜の天気
+                                        //快晴
+                                        if(weather2[19] === 0 ){
+                                          night_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
+                                        }
+                                        //晴れだけど雲がでてる
+                                        else if(weather2[19] === 1){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                        }
+                                        //一部曇り
+                                        else if(weather2[19] === 2){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                        }            
+                                        //曇り
+                                        else if( weather2[19] === 3){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                        }
+                                         //霧（曇りアイコン使用）
+                                         else if (weather2[19] <= 49){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                        }
+                
+                                        //雨
+                                        else if(weather2[19] <= 69  ){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                        }
+                                        //雪
+                                        else if (weather2[19] <= 79){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                        }
+                                        //にわか雨(晴れのち雨アイコン使用)
+                                        else if(weather2[19] <= 84){
+                                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                                        }
+                                        //雪（雪のアイコン使用）
+                                        else if(weather2[19] <= 94){
+                                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                        }
+                                        //雷雨（雨のアイコン使用）
+                                        else if(weather2[19] <= 99){
+                                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                        }                           
+                                        //曇りのち晴れ
+                                        else if (weather2[19] === 210){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                        }
+                                        //晴れのち曇り
+                                        else if (weather2[19] === 211){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                        }
+                                        //曇りのち雨
+                                        else if (weather2[19] === 212){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                                        }
+                                        //雪のち雨
+                                        else if (weather2[19] === 213){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                                        }
+                                        //晴れのち雨
+                                        else if (weather2[19] === 411){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                                        }
+                                        //雨のち晴れ
+                                        else if (weather2[19] === 311){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                                        }
+                                        //晴れのち雪
+                                        else if (weather2[19] === 311){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                                        }
+                                        //雨のち曇り
+                                        else if (weather2[19] === 214){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                                        }
+                                         //雪のち曇り
+                                         else if (weather2[19] === 217){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                                        }
+                
+                                    //不明
+                                        else{
+                                            night_OTENKI.innerHTML = "★";
+                                        }
+                                    
+                                        //夜19時の気温出力
+                                        temperature_night.innerHTML =  temperature2[19] + "°C";
+                                        //夜19時の降水確率を出力
+                                        rainypercent_night.innerHTML  =  probability[19] + "%"
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            })
+                                            
+                                            
+                                            .catch(error => {
+                                            console.error('データ取得に失敗しました',error)
+                                            });
+
+                                      
+
+                                                //変数の宣言
+                                               //id="parent"の値を取得
+                                                let parentlement  ;
+                                
+                                                //id="children"を取得
+                                                let childrenDate  ;
+                                                 let selectedValue ;
+
+
+                          </script>
                           
                           <!---地域詳細--->
                           <font size="5">
@@ -468,18 +842,15 @@
                               
                             </select>
                            <script>
-                                               let lat01  = {{$finelyarea -> latitude}}; //自分の地域の変数に変える、今北海道になってる
-                                               let long01   =   {{$finelyarea -> longitude}};
 
-                           
                                function date() {
                                    
 
                                 //id="parent"の値を取得
-                                var parentlement = document.getElementById( "parent" ) ;
+                                parentlement = document.getElementById( "parent" ) ;
                                 
                                 //id="children"を取得
-                                var childrenDate = document.getElementById("children") ;
+                                 childrenDate = document.getElementById("children") ;
                                 
                                    //disabledをtrueに
                                   for (var i = 0; i < childrenDate.length; i++){
@@ -730,430 +1101,822 @@
                                     }
                                     
                                 
-                                                                        //旭川
-                                  
-                             // 選択された値を取得
-                                let selectedValue = childrenDate.value;
-                            
-                                // 出力
-                                console.log(selectedValue);
-                        
-                                          if(selectedValue == 1 ) { //
-                                           
-                                            console.log(document.getElementById('children').options[1].text);
-                                                 lat01  = {{$finelyarea1 -> latitude}};
-                                                 long01 = {{$finelyarea1 -> longitude}};
-                                           
-                                          }
-                                      //網走
-                                        else if (childrenDate.options[2].selected == true && childrenDate.options[2].disabled == false) {
-                                                 console.log(document.getElementById('children').options[2].text);
-                                                 lat01  = {{$finelyarea2 -> latitude}};
-                                                 long01 = {{$finelyarea2-> longitude}};
-                                        }
-                                        //４
-                                        else if (childrenDate.options[3].disabled == false && childrenDate.options[3].selected == true) {
-                                                 lat01  = {{$finelyarea3-> latitude}};
-                                                 long01 = {{$finelyarea3-> longitude}};
-                                                 
-                                        }
-                                        //十和田
-                                        
-                                        else if (selectedValue == 6) {
-                                         
-                                                 lat01  = {{$finelyarea6-> latitude}};
-                                                 long01 = {{$finelyarea6-> longitude}};
-                                            
-                                        }
+
                              
-                             
-                                        
-                            /*
-                            URL:'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
-                            
-                            現在の気温
-                            現在の天気コード
-                            現在の湿度
-                            時間毎の天気コード
-                            時間毎の降水確率
-                            時間毎の気温
-                            
-                            */
-                                        
-            　                 const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat01+'&longitude='+long01+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
-                                console.log(lat01+"です");
-                            　　console.log(long01+"です");
-            
-                               fetch(apiUrl)
-                                .then(response => {
-                                return response.json();
-                                })
-                                .then(data =>{
-                                const jsonData = data;
-                                const weather = jsonData.current.weather_code;                                        
-                                const temperature = jsonData.current.temperature_2m;                                  //現在の気温
-                                const probability = Array.from(jsonData.hourly.precipitation_probability);            //時間毎の降水確率  
-                                const temperature2 = Array.from(jsonData.hourly.temperature_2m);                      //時間毎の気温 
-                                const weather2 = Array.from(jsonData.hourly.weather_code);                            //時間毎のの天気コード
-                                const humidity = jsonData.current.relative_humidity_2m;                               //現在の湿度                             
-                                const fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;   //不快指数
-                                
-                            
-                            //天気コード分岐
-                      console.log(temperature2+"です");      
-                          
 
-                            //晴れ
-                            if(weather === 0 || weather === 1){
-                              sampleweather.innerHTML = "☀"+temperature + "°C";
-                            }
-                            //一部くもり
-                            else if(weather === 2){
-                                sampleweather.innerHTML = "🌤  "+temperature + "°C";
-                            }
-                            //曇り
-                            else if(weather === 3){
-                              sampleweather.innerHTML =  "☁  "+temperature + "°C";
-                            }
-                            //雨
-                            else if(weather <= 69){
-                              sampleweather.innerHTML =  "☂ "+temperature + "°C";
-                            }
-                            //雪
-                            else if(weather <=  79){
-                                sampleweather.innerHTML = "☃ "+temperature + "°C";
-                            }
-                            else{
-                              sampleweather.innerHTML = " ★"+temperature + "°C";
-                            }
-                            
-                            //不快指数分岐
-                            //寒い
-                            if(fukai <= 54){
-                            
-                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'>";
-                            
-                            }
-                            //肌寒い
-                            else if(fukai >= 55 && fukai <= 65 ){
-                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E7%B5%90%E6%A7%8B%E3%81%84%E3%81%84_h8tsks.png'>";
-                            }
-                            //快い
-                            else if(fukai > 65 && fukai <= 75 ){
-                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png'>";
-                            }
-                                //暑い
-                            else if(fukai > 75 && fukai <= 85 ){
-                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png'>";
-                            }
-                            //暑くてたまらない
-                            else if(fukai >= 86){
-                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png'>";
-                            }
-                            
-                    //↓朝・昼・夜の天気の画像を表示
-                        //朝の天気
-                        //快晴
-                        if(weather2[7] === 0 ){
-                          morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
-                        }
-                        //晴れだけど雲がでてる
-                        else if(weather2[7] === 1){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                        }
-                        //一部曇り
-                        else if(weather2[7] === 2){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                        }            
-                        //曇り
-                        else if( weather2[7] === 3){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                        }
-                         //霧（曇りアイコン使用）
-                         else if (weather2[7] <= 49){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                        }
-
-                        //雨
-                        else if(weather2[7] <= 69  ){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                        }
-                        //雪
-                        else if (weather2[7] <= 79){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                        }
-                        //にわか雨(晴れのち雨アイコン使用)
-                        else if(weather2[7] <= 84){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                        }
-                        //雪（雪のアイコン使用）
-                        else if(weather2[7] <= 94){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                        }
-                        //雷雨（雨のアイコン使用）
-                        else if(weather2[7] <= 99){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                        }                           
-                        //曇りのち晴れ
-                        else if (weather2[7] === 210){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                        }
-                        //晴れのち曇り
-                        else if (weather2[7] === 211){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                        }
-                        //曇りのち雨
-                        else if (weather2[7] === 212){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
-                        }
-                        //雪のち雨
-                        else if (weather2[7] === 213){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
-                        }
-                        //晴れのち雨
-                        else if (weather2[7] === 411){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                        }
-                        //雨のち晴れ
-                        else if (weather2[7] === 311){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
-                        }
-                        //晴れのち雪
-                        else if (weather2[7] === 311){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
-                        }
-                        //雨のち曇り
-                        else if (weather2[7] === 214){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
-                        }
-                         //雪のち曇り
-                         else if (weather2[7] === 217){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
-                        }
-
-                    //不明
-                        else{
-                            morning_OTENKI.innerHTML = "★";
-                        }
-                    
-                        //朝7時の気温出力
-                        temperature_morning.innerHTML =  "🌡  "+temperature2[7] + "°C";
-                        //朝7時の降水確率を出力
-                        rainypercent_morning.innerHTML  = "⛆"+ probability[7] + "%";
-                    
-                    
-                        
-                        
-                        //昼の天気
-                        //快晴
-                        if(weather2[13] === 0 ){
-                          noon_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
-                        }
-                        //晴れだけど雲がでてる
-                        else if(weather2[13] === 1){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                        }
-                        //一部曇り
-                        else if(weather2[13] === 2){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                        }            
-                        //曇り
-                        else if( weather2[13] === 3){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                        }
-                         //霧（曇りアイコン使用）
-                         else if (weather2[13] <= 49){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                        }
-
-                        //雨
-                        else if(weather2[13] <= 69  ){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                        }
-                        //雪
-                        else if (weather2[13] <= 79){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                        }
-                        //にわか雨(晴れのち雨アイコン使用)
-                        else if(weather2[13] <= 84){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                        }
-                        //雪（雪のアイコン使用）
-                        else if(weather2[13] <= 94){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                        }
-                        //雷雨（雨のアイコン使用）
-                        else if(weather2[13] <= 99){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                        }                           
-                        //曇りのち晴れ
-                        else if (weather2[13] === 210){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                        }
-                        //晴れのち曇り
-                        else if (weather2[13] === 211){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                        }
-                        //曇りのち雨
-                        else if (weather2[13] === 212){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
-                        }
-                        //雪のち雨
-                        else if (weather2[13] === 213){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
-                        }
-                        //晴れのち雨
-                        else if (weather2[13] === 411){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                        }
-                        //雨のち晴れ
-                        else if (weather2[13] === 311){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
-                        }
-                        //晴れのち雪
-                        else if (weather2[13] === 311){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
-                        }
-                        //雨のち曇り
-                        else if (weather2[13] === 214){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
-                        }
-                         //雪のち曇り
-                         else if (weather2[13] === 217){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
-                        }
-
-                    //不明
-                        else{
-                            noon_OTENKI.innerHTML = "★";
-                        }
-
-                    
-                        //昼13時の気温出力
-                        temperature_noon.innerHTML =  temperature2[13] + "°C";
-                        //昼13時の降水確率を出力
-                        rainypercent_noon.innerHTML  =  probability[13] + "%";
-                    
-                    
-                    
-                    
-                    //夜の天気
-                        //快晴
-                        if(weather2[19] === 0 ){
-                          night_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
-                        }
-                        //晴れだけど雲がでてる
-                        else if(weather2[19] === 1){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                        }
-                        //一部曇り
-                        else if(weather2[19] === 2){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                        }            
-                        //曇り
-                        else if( weather2[19] === 3){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                        }
-                         //霧（曇りアイコン使用）
-                         else if (weather2[19] <= 49){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                        }
-
-                        //雨
-                        else if(weather2[19] <= 69  ){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                        }
-                        //雪
-                        else if (weather2[19] <= 79){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                        }
-                        //にわか雨(晴れのち雨アイコン使用)
-                        else if(weather2[19] <= 84){
-                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                        }
-                        //雪（雪のアイコン使用）
-                        else if(weather2[19] <= 94){
-                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                        }
-                        //雷雨（雨のアイコン使用）
-                        else if(weather2[19] <= 99){
-                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                        }                           
-                        //曇りのち晴れ
-                        else if (weather2[19] === 210){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                        }
-                        //晴れのち曇り
-                        else if (weather2[19] === 211){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                        }
-                        //曇りのち雨
-                        else if (weather2[19] === 212){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
-                        }
-                        //雪のち雨
-                        else if (weather2[19] === 213){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
-                        }
-                        //晴れのち雨
-                        else if (weather2[19] === 411){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                        }
-                        //雨のち晴れ
-                        else if (weather2[19] === 311){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
-                        }
-                        //晴れのち雪
-                        else if (weather2[19] === 311){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
-                        }
-                        //雨のち曇り
-                        else if (weather2[19] === 214){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
-                        }
-                         //雪のち曇り
-                         else if (weather2[19] === 217){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
-                        }
-
-                    //不明
-                        else{
-                            night_OTENKI.innerHTML = "★";
-                        }
-                    
-                        //夜19時の気温出力
-                        temperature_night.innerHTML =  temperature2[19] + "°C";
-                        //夜19時の降水確率を出力
-                        rainypercent_night.innerHTML  =  probability[19] + "%"
-                            
-                            
-                            
-                            
-                            
-                            
-                            })
-                            
-                            
-                            .catch(error => {
-                            console.error('データ取得に失敗しました',error)
-                            });
-
-                                
-                                                
                                
                                       
                                     
                                 
-                                //↓触らないdataの終わり
+                        //↓dataの終わり
                          }
                                   
-                            //↑まで地域選択
+                           
                             
                             
-                                      //button関数を定義
+                                      //button関数を定義、クリックで地域変更
                                       function Button() {
-                                        console.log("ボタンがクリックされました");
+                                       
+                                                 selectedValue = childrenDate.value;
+                                                console.log(selectedValue);
+                                               
+                                                         //1
+                                                          if(selectedValue == 1 ) { 
+                                                                 lat01  = {{$finelyarea1 -> latitude}};
+                                                                 long01 = {{$finelyarea1 -> longitude}};
+                                                          }
+                                                      //2
+                                                        else if (selectedValue == 2) {
+                                                                 lat01  = {{$finelyarea2 -> latitude}};
+                                                                 long01 = {{$finelyarea2-> longitude}};
+                                                        }
+                                                        //3
+                                                        else if (selectedValue == 3) {
+                                                                 lat01  = {{$finelyarea3-> latitude}};
+                                                                 long01 = {{$finelyarea3-> longitude}};
+                                                        }
+                                                          //4
+                                                        else if (selectedValue == 4) {                                                         
+                                                                 lat01  = {{$finelyarea4-> latitude}};
+                                                                 long01 = {{$finelyarea4-> longitude}};                                                         
+                                                        }
+                                                          //5
+                                                        else if (selectedValue == 5) {                                                         
+                                                                 lat01  = {{$finelyarea5-> latitude}};
+                                                                 long01 = {{$finelyarea5-> longitude}}                                                            
+                                                        }
+                                                        //6
+                                                        else if (selectedValue == 6) {                                                         
+                                                                 lat01  = {{$finelyarea6-> latitude}};
+                                                                 long01 = {{$finelyarea6-> longitude}};                                                            
+                                                        }
+                                                          //7
+                                                        else if (selectedValue == 7) {                                                         
+                                                                 lat01  = {{$finelyarea7-> latitude}};
+                                                                 long01 = {{$finelyarea7-> longitude}};                                                            
+                                                        }
+                                                          //8
+                                                        else if (selectedValue == 8) {                                                         
+                                                                 lat01  = {{$finelyarea8-> latitude}};
+                                                                 long01 = {{$finelyarea8-> longitude}};                                                            
+                                                        }
+                                                          //9
+                                                        else if (selectedValue == 9 ) {                                                         
+                                                                 lat01  = {{$finelyarea9-> latitude}};
+                                                                 long01 = {{$finelyarea9-> longitude}};                                                            
+                                                        }
+                                                        //10～19
+                                                        else if (selectedValue == 10) {                                                         
+                                                                 lat01  = {{$finelyarea10-> latitude}};
+                                                                 long01 = {{$finelyarea10-> longitude}};                                                            
+                                                        }
+                                                      //11
+                                                        else if (selectedValue == 11) {                                                         
+                                                                 lat01  = {{$finelyarea11-> latitude}};
+                                                                 long01 = {{$finelyarea11-> longitude}};                                                            
+                                                        }
+                                                        //12
+                                                        else if (selectedValue == 12) {                                                        
+                                                                 lat01  = {{$finelyarea12-> latitude}};
+                                                                 long01 = {{$finelyarea12-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue == 13) {                                                        
+                                                                 lat01  = {{$finelyarea13-> latitude}};
+                                                                 long01 = {{$finelyarea13-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 14) {                                                        
+                                                                 lat01  = {{$finelyarea14-> latitude}};
+                                                                 long01 = {{$finelyarea14-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 15) {                                                        
+                                                                 lat01  = {{$finelyarea15-> latitude}};
+                                                                 long01 = {{$finelyarea15-> longitude}};                                                            
+                                                        } 
+                                                        else if (selectedValue == 16){                                                        
+                                                                 lat01  = {{$finelyarea16-> latitude}};
+                                                                 long01 = {{$finelyarea16-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 17) {                                                        
+                                                                 lat01  = {{$finelyarea17-> latitude}};
+                                                                 long01 = {{$finelyarea17-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 18) {                                                        
+                                                                 lat01  = {{$finelyarea18-> latitude}};
+                                                                 long01 = {{$finelyarea18-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 19) {                                                        
+                                                                 lat01  = {{$finelyarea19-> latitude}};
+                                                                 long01 = {{$finelyarea19-> longitude}};                                                            
+                                                        }  
+                                                        
+                                                        //20～29
+                                                        else if (selectedValue == 20) {                                                         
+                                                                 lat01  = {{$finelyarea20-> latitude}};
+                                                                 long01 = {{$finelyarea20-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue ==21) {                                                                
+                                                                 lat01  = {{$finelyarea21-> latitude}};
+                                                                 long01 = {{$finelyarea21-> longitude}};                                                            
+                                                        }
+                                                        //12
+                                                        else if (selectedValue == 22) {                                                        
+                                                                 lat01  = {{$finelyarea22-> latitude}};
+                                                                 long01 = {{$finelyarea22-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue == 23) {                                                        
+                                                                 lat01  = {{$finelyarea23-> latitude}};
+                                                                 long01 = {{$finelyarea23-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 24) {                                                        
+                                                                 lat01  = {{$finelyarea24-> latitude}};
+                                                                 long01 = {{$finelyarea24-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 25) {                                                        
+                                                                 lat01  = {{$finelyarea25-> latitude}};
+                                                                 long01 = {{$finelyarea25-> longitude}};                                                            
+                                                        } 
+                                                        else if (selectedValue == 26){                                                        
+                                                                 lat01  = {{$finelyarea26-> latitude}};
+                                                                 long01 = {{$finelyarea26-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 27) {                                                        
+                                                                 lat01  = {{$finelyarea27-> latitude}};
+                                                                 long01 = {{$finelyarea27-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 28) {                                                        
+                                                                 lat01  = {{$finelyarea28-> latitude}};
+                                                                 long01 = {{$finelyarea28-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 29) {                                                        
+                                                                 lat01  = {{$finelyarea29-> latitude}};
+                                                                 long01 = {{$finelyarea29-> longitude}};                                                            
+                                                        }  
+                                                        
+                                                         //30～39
+                                                        else if (selectedValue == 30) {                                                         
+                                                                 lat01  = {{$finelyarea30-> latitude}};
+                                                                 long01 = {{$finelyarea30-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue ==31) {                                                                
+                                                                 lat01  = {{$finelyarea31-> latitude}};
+                                                                 long01 = {{$finelyarea31-> longitude}};                                                            
+                                                        }
+                                                        //12
+                                                        else if (selectedValue == 32) {                                                        
+                                                                 lat01  = {{$finelyarea32-> latitude}};
+                                                                 long01 = {{$finelyarea32-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue == 33) {                                                        
+                                                                 lat01  = {{$finelyarea33-> latitude}};
+                                                                 long01 = {{$finelyarea33-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 34) {                                                        
+                                                                 lat01  = {{$finelyarea34-> latitude}};
+                                                                 long01 = {{$finelyarea34-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 35) {                                                        
+                                                                 lat01  = {{$finelyarea35-> latitude}};
+                                                                 long01 = {{$finelyarea35-> longitude}};                                                            
+                                                        } 
+                                                        else if (selectedValue == 36){                                                        
+                                                                 lat01  = {{$finelyarea36-> latitude}};
+                                                                 long01 = {{$finelyarea36-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 37) {                                                        
+                                                                 lat01  = {{$finelyarea37-> latitude}};
+                                                                 long01 = {{$finelyarea37-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 38) {                                                        
+                                                                 lat01  = {{$finelyarea38-> latitude}};
+                                                                 long01 = {{$finelyarea38-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 39) {                                                        
+                                                                 lat01  = {{$finelyarea39-> latitude}};
+                                                                 long01 = {{$finelyarea39-> longitude}};                                                            
+                                                        }
+                                                        
+                                                         //40～49
+                                                        else if (selectedValue == 40) {                                                         
+                                                                 lat01  = {{$finelyarea40-> latitude}};
+                                                                 long01 = {{$finelyarea40-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue ==41) {                                                                
+                                                                 lat01  = {{$finelyarea41-> latitude}};
+                                                                 long01 = {{$finelyarea41-> longitude}};                                                            
+                                                        }
+                                                        //12
+                                                        else if (selectedValue == 42) {                                                        
+                                                                 lat01  = {{$finelyarea42-> latitude}};
+                                                                 long01 = {{$finelyarea42-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue == 43) {                                                        
+                                                                 lat01  = {{$finelyarea43-> latitude}};
+                                                                 long01 = {{$finelyarea43-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 44) {                                                        
+                                                                 lat01  = {{$finelyarea44-> latitude}};
+                                                                 long01 = {{$finelyarea44-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 45) {                                                        
+                                                                 lat01  = {{$finelyarea45-> latitude}};
+                                                                 long01 = {{$finelyarea45-> longitude}};                                                            
+                                                        } 
+                                                        else if (selectedValue == 46){                                                        
+                                                                 lat01  = {{$finelyarea46-> latitude}};
+                                                                 long01 = {{$finelyarea46-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 47) {                                                        
+                                                                 lat01  = {{$finelyarea47-> latitude}};
+                                                                 long01 = {{$finelyarea47-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 48) {                                                        
+                                                                 lat01  = {{$finelyarea48-> latitude}};
+                                                                 long01 = {{$finelyarea48-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 49) {                                                        
+                                                                 lat01  = {{$finelyarea49-> latitude}};
+                                                                 long01 = {{$finelyarea49-> longitude}};                                                            
+                                                        }
+                                                         //50～59
+                                                        else if (selectedValue == 50) {                                                         
+                                                                 lat01  = {{$finelyarea50-> latitude}};
+                                                                 long01 = {{$finelyarea50-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue ==51) {                                                                
+                                                                 lat01  = {{$finelyarea51-> latitude}};
+                                                                 long01 = {{$finelyarea51-> longitude}};                                                            
+                                                        }
+                                                        //12
+                                                        else if (selectedValue == 52) {                                                        
+                                                                 lat01  = {{$finelyarea52-> latitude}};
+                                                                 long01 = {{$finelyarea52-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue == 53) {                                                        
+                                                                 lat01  = {{$finelyarea53-> latitude}};
+                                                                 long01 = {{$finelyarea53-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 54) {                                                        
+                                                                 lat01  = {{$finelyarea54-> latitude}};
+                                                                 long01 = {{$finelyarea54-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 55) {                                                        
+                                                                 lat01  = {{$finelyarea55-> latitude}};
+                                                                 long01 = {{$finelyarea55-> longitude}};                                                            
+                                                        } 
+                                                        else if (selectedValue == 56){                                                        
+                                                                 lat01  = {{$finelyarea56-> latitude}};
+                                                                 long01 = {{$finelyarea56-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 57) {                                                        
+                                                                 lat01  = {{$finelyarea57-> latitude}};
+                                                                 long01 = {{$finelyarea57-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 58) {                                                        
+                                                                 lat01  = {{$finelyarea58-> latitude}};
+                                                                 long01 = {{$finelyarea58-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 59) {                                                        
+                                                                 lat01  = {{$finelyarea59-> latitude}};
+                                                                 long01 = {{$finelyarea59-> longitude}};                                                            
+                                                        }
+                                                        
+                                                         //60～69
+                                                        else if (selectedValue == 60) {                                                         
+                                                                 lat01  = {{$finelyarea60-> latitude}};
+                                                                 long01 = {{$finelyarea60-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue ==61) {                                                                
+                                                                 lat01  = {{$finelyarea61-> latitude}};
+                                                                 long01 = {{$finelyarea61-> longitude}};                                                            
+                                                        }
+                                                        //12
+                                                        else if (selectedValue == 62) {                                                        
+                                                                 lat01  = {{$finelyarea62-> latitude}};
+                                                                 long01 = {{$finelyarea62-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue == 63) {                                                        
+                                                                 lat01  = {{$finelyarea63-> latitude}};
+                                                                 long01 = {{$finelyarea63-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 64) {                                                        
+                                                                 lat01  = {{$finelyarea64-> latitude}};
+                                                                 long01 = {{$finelyarea64-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 65) {                                                        
+                                                                 lat01  = {{$finelyarea65-> latitude}};
+                                                                 long01 = {{$finelyarea65-> longitude}};                                                            
+                                                        } 
+                                                        else if (selectedValue == 66){                                                        
+                                                                 lat01  = {{$finelyarea66-> latitude}};
+                                                                 long01 = {{$finelyarea66-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 67) {                                                        
+                                                                 lat01  = {{$finelyarea67-> latitude}};
+                                                                 long01 = {{$finelyarea67-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 68) {                                                        
+                                                                 lat01  = {{$finelyarea68-> latitude}};
+                                                                 long01 = {{$finelyarea68-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 69) {                                                        
+                                                                 lat01  = {{$finelyarea69-> latitude}};
+                                                                 long01 = {{$finelyarea69-> longitude}};                                                            
+                                                        }
+                                                        
+                                                         //70～79
+                                                        else if (selectedValue == 70) {                                                         
+                                                                 lat01  = {{$finelyarea70-> latitude}};
+                                                                 long01 = {{$finelyarea70-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue ==71) {                                                                
+                                                                 lat01  = {{$finelyarea71-> latitude}};
+                                                                 long01 = {{$finelyarea71-> longitude}};                                                            
+                                                        }
+                                                        //12
+                                                        else if (selectedValue == 72) {                                                        
+                                                                 lat01  = {{$finelyarea72-> latitude}};
+                                                                 long01 = {{$finelyarea72-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue == 73) {                                                        
+                                                                 lat01  = {{$finelyarea73-> latitude}};
+                                                                 long01 = {{$finelyarea73-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 74) {                                                        
+                                                                 lat01  = {{$finelyarea74-> latitude}};
+                                                                 long01 = {{$finelyarea74-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 75) {                                                        
+                                                                 lat01  = {{$finelyarea75-> latitude}};
+                                                                 long01 = {{$finelyarea75-> longitude}};                                                            
+                                                        } 
+                                                        else if (selectedValue == 76){                                                        
+                                                                 lat01  = {{$finelyarea76-> latitude}};
+                                                                 long01 = {{$finelyarea76-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 77) {                                                        
+                                                                 lat01  = {{$finelyarea77-> latitude}};
+                                                                 long01 = {{$finelyarea77-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 78) {                                                        
+                                                                 lat01  = {{$finelyarea78-> latitude}};
+                                                                 long01 = {{$finelyarea78-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 79) {                                                        
+                                                                 lat01  = {{$finelyarea79-> latitude}};
+                                                                 long01 = {{$finelyarea79-> longitude}};                                                            
+                                                        }  
+                                                        
+                                                         //80～89
+                                                        else if (selectedValue == 80) {                                                         
+                                                                 lat01  = {{$finelyarea80-> latitude}};
+                                                                 long01 = {{$finelyarea80-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue ==81) {                                                                
+                                                                 lat01  = {{$finelyarea81-> latitude}};
+                                                                 long01 = {{$finelyarea81-> longitude}};                                                            
+                                                        }
+                                                        //12
+                                                        else if (selectedValue == 82) {                                                        
+                                                                 lat01  = {{$finelyarea82-> latitude}};
+                                                                 long01 = {{$finelyarea82-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue == 83) {                                                        
+                                                                 lat01  = {{$finelyarea83-> latitude}};
+                                                                 long01 = {{$finelyarea83-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 84) {                                                        
+                                                                 lat01  = {{$finelyarea84-> latitude}};
+                                                                 long01 = {{$finelyarea84-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 85) {                                                        
+                                                                 lat01  = {{$finelyarea85-> latitude}};
+                                                                 long01 = {{$finelyarea85-> longitude}};                                                            
+                                                        } 
+                                                        else if (selectedValue == 86){                                                        
+                                                                 lat01  = {{$finelyarea86-> latitude}};
+                                                                 long01 = {{$finelyarea86-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 87) {                                                        
+                                                                 lat01  = {{$finelyarea87-> latitude}};
+                                                                 long01 = {{$finelyarea87-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 88) {                                                        
+                                                                 lat01  = {{$finelyarea88-> latitude}};
+                                                                 long01 = {{$finelyarea88-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 89) {                                                        
+                                                                 lat01  = {{$finelyarea89-> latitude}};
+                                                                 long01 = {{$finelyarea89-> longitude}};                                                            
+                                                        }  
+                                                        
+                                                         //90～97
+                                                        else if (selectedValue == 90) {                                                         
+                                                                 lat01  = {{$finelyarea90-> latitude}};
+                                                                 long01 = {{$finelyarea90-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue ==91) {                                                                
+                                                                 lat01  = {{$finelyarea91-> latitude}};
+                                                                 long01 = {{$finelyarea91-> longitude}};                                                            
+                                                        }
+                                                        //12
+                                                        else if (selectedValue == 92) {                                                        
+                                                                 lat01  = {{$finelyarea92-> latitude}};
+                                                                 long01 = {{$finelyarea92-> longitude}};                                                            
+                                                        }
+                                                        else if (selectedValue == 93) {                                                        
+                                                                 lat01  = {{$finelyarea93-> latitude}};
+                                                                 long01 = {{$finelyarea93-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 94) {                                                        
+                                                                 lat01  = {{$finelyarea94-> latitude}};
+                                                                 long01 = {{$finelyarea94-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 95) {                                                        
+                                                                 lat01  = {{$finelyarea95-> latitude}};
+                                                                 long01 = {{$finelyarea95-> longitude}};                                                            
+                                                        } 
+                                                        else if (selectedValue == 96){                                                        
+                                                                 lat01  = {{$finelyarea96-> latitude}};
+                                                                 long01 = {{$finelyarea96-> longitude}};                                                            
+                                                        }  
+                                                        else if (selectedValue == 97) {                                                        
+                                                                 lat01  = {{$finelyarea97-> latitude}};
+                                                                 long01 = {{$finelyarea97-> longitude}};                                                            
+                                                        }  
+
+
+                                        
+                                            /*
+                                            URL:'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
+                                            
+                                            現在の気温
+                                            現在の天気コード
+                                            現在の湿度
+                                            時間毎の天気コード
+                                            時間毎の降水確率
+                                            時間毎の気温
+                                            
+                                            */
+                                                
+                                                        
+                            　                 const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat01+'&longitude='+long01+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
+                                                console.log(lat01+"です");
+                                            　　console.log(long01+"です");
+                            
+                                               fetch(apiUrl)
+                                                .then(response => {
+                                                return response.json();
+                                                })
+                                                .then(data =>{
+                                                const jsonData = data;
+                                                const weather = jsonData.current.weather_code;                                        
+                                                const temperature = jsonData.current.temperature_2m;                                  //現在の気温
+                                                const probability = Array.from(jsonData.hourly.precipitation_probability);            //時間毎の降水確率  
+                                                const temperature2 = Array.from(jsonData.hourly.temperature_2m);                      //時間毎の気温 
+                                                const weather2 = Array.from(jsonData.hourly.weather_code);                            //時間毎のの天気コード
+                                                const humidity = jsonData.current.relative_humidity_2m;                               //現在の湿度                             
+                                                const fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;   //不快指数
+                                                
+                                            
+                                            //天気コード分岐
+                                            //晴れ
+                                            if(weather === 0 || weather === 1){
+                                              sampleweather.innerHTML = "☀"+temperature + "°C";
+                                            }
+                                            //一部くもり
+                                            else if(weather === 2){
+                                                sampleweather.innerHTML = "🌤  "+temperature + "°C";
+                                            }
+                                            //曇り
+                                            else if(weather === 3){
+                                              sampleweather.innerHTML =  "☁  "+temperature + "°C";
+                                            }
+                                            //雨
+                                            else if(weather <= 69){
+                                              sampleweather.innerHTML =  "☂ "+temperature + "°C";
+                                            }
+                                            //雪
+                                            else if(weather <=  79){
+                                                sampleweather.innerHTML = "☃ "+temperature + "°C";
+                                            }
+                                            else{
+                                              sampleweather.innerHTML = " ★"+temperature + "°C";
+                                            }
+                                            
+                                            //不快指数分岐
+                                            //寒い
+                                            if(fukai <= 54){
+                                            
+                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'>";
+                                            
+                                            }
+                                            //肌寒い
+                                            else if(fukai >= 55 && fukai <= 65 ){
+                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E7%B5%90%E6%A7%8B%E3%81%84%E3%81%84_h8tsks.png'>";
+                                            }
+                                            //快い
+                                            else if(fukai > 65 && fukai <= 75 ){
+                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png'>";
+                                            }
+                                                //暑い
+                                            else if(fukai > 75 && fukai <= 85 ){
+                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png'>";
+                                            }
+                                            //暑くてたまらない
+                                            else if(fukai >= 86){
+                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png'>";
+                                            }
+                                            
+                                    //↓朝・昼・夜の天気の画像を表示
+                                        //朝の天気
+                                        //快晴
+                                        if(weather2[7] === 0 ){
+                                          morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
+                                        }
+                                        //晴れだけど雲がでてる
+                                        else if(weather2[7] === 1){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                        }
+                                        //一部曇り
+                                        else if(weather2[7] === 2){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                        }            
+                                        //曇り
+                                        else if( weather2[7] === 3){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                        }
+                                         //霧（曇りアイコン使用）
+                                         else if (weather2[7] <= 49){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                        }
+                
+                                        //雨
+                                        else if(weather2[7] <= 69  ){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                        }
+                                        //雪
+                                        else if (weather2[7] <= 79){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                        }
+                                        //にわか雨(晴れのち雨アイコン使用)
+                                        else if(weather2[7] <= 84){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                                        }
+                                        //雪（雪のアイコン使用）
+                                        else if(weather2[7] <= 94){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                        }
+                                        //雷雨（雨のアイコン使用）
+                                        else if(weather2[7] <= 99){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                        }                           
+                                        //曇りのち晴れ
+                                        else if (weather2[7] === 210){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                        }
+                                        //晴れのち曇り
+                                        else if (weather2[7] === 211){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                        }
+                                        //曇りのち雨
+                                        else if (weather2[7] === 212){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                                        }
+                                        //雪のち雨
+                                        else if (weather2[7] === 213){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                                        }
+                                        //晴れのち雨
+                                        else if (weather2[7] === 411){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                                        }
+                                        //雨のち晴れ
+                                        else if (weather2[7] === 311){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                                        }
+                                        //晴れのち雪
+                                        else if (weather2[7] === 311){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                                        }
+                                        //雨のち曇り
+                                        else if (weather2[7] === 214){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                                        }
+                                         //雪のち曇り
+                                         else if (weather2[7] === 217){
+                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                                        }
+                
+                                    //不明
+                                        else{
+                                            morning_OTENKI.innerHTML = "★";
+                                        }
+                                    
+                                        //朝7時の気温出力
+                                        temperature_morning.innerHTML =  "🌡  "+temperature2[7] + "°C";
+                                        //朝7時の降水確率を出力
+                                        rainypercent_morning.innerHTML  = "⛆"+ probability[7] + "%";
+                                    
+                                    
+                                        
+                                        
+                                        //昼の天気
+                                        //快晴
+                                        if(weather2[13] === 0 ){
+                                          noon_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
+                                        }
+                                        //晴れだけど雲がでてる
+                                        else if(weather2[13] === 1){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                        }
+                                        //一部曇り
+                                        else if(weather2[13] === 2){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                        }            
+                                        //曇り
+                                        else if( weather2[13] === 3){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                        }
+                                         //霧（曇りアイコン使用）
+                                         else if (weather2[13] <= 49){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                        }
+                
+                                        //雨
+                                        else if(weather2[13] <= 69  ){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                        }
+                                        //雪
+                                        else if (weather2[13] <= 79){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                        }
+                                        //にわか雨(晴れのち雨アイコン使用)
+                                        else if(weather2[13] <= 84){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                                        }
+                                        //雪（雪のアイコン使用）
+                                        else if(weather2[13] <= 94){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                        }
+                                        //雷雨（雨のアイコン使用）
+                                        else if(weather2[13] <= 99){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                        }                           
+                                        //曇りのち晴れ
+                                        else if (weather2[13] === 210){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                        }
+                                        //晴れのち曇り
+                                        else if (weather2[13] === 211){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                        }
+                                        //曇りのち雨
+                                        else if (weather2[13] === 212){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                                        }
+                                        //雪のち雨
+                                        else if (weather2[13] === 213){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                                        }
+                                        //晴れのち雨
+                                        else if (weather2[13] === 411){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                                        }
+                                        //雨のち晴れ
+                                        else if (weather2[13] === 311){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                                        }
+                                        //晴れのち雪
+                                        else if (weather2[13] === 311){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                                        }
+                                        //雨のち曇り
+                                        else if (weather2[13] === 214){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                                        }
+                                         //雪のち曇り
+                                         else if (weather2[13] === 217){
+                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                                        }
+                
+                                    //不明
+                                        else{
+                                            noon_OTENKI.innerHTML = "★";
+                                        }
+                
+                                    
+                                        //昼13時の気温出力
+                                        temperature_noon.innerHTML =  temperature2[13] + "°C";
+                                        //昼13時の降水確率を出力
+                                        rainypercent_noon.innerHTML  =  probability[13] + "%";
+                                    
+                                    
+                                    
+                                    
+                                    //夜の天気
+                                        //快晴
+                                        if(weather2[19] === 0 ){
+                                          night_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
+                                        }
+                                        //晴れだけど雲がでてる
+                                        else if(weather2[19] === 1){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                        }
+                                        //一部曇り
+                                        else if(weather2[19] === 2){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                        }            
+                                        //曇り
+                                        else if( weather2[19] === 3){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                        }
+                                         //霧（曇りアイコン使用）
+                                         else if (weather2[19] <= 49){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                                        }
+                
+                                        //雨
+                                        else if(weather2[19] <= 69  ){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                        }
+                                        //雪
+                                        else if (weather2[19] <= 79){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                        }
+                                        //にわか雨(晴れのち雨アイコン使用)
+                                        else if(weather2[19] <= 84){
+                                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                                        }
+                                        //雪（雪のアイコン使用）
+                                        else if(weather2[19] <= 94){
+                                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                                        }
+                                        //雷雨（雨のアイコン使用）
+                                        else if(weather2[19] <= 99){
+                                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                                        }                           
+                                        //曇りのち晴れ
+                                        else if (weather2[19] === 210){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                                        }
+                                        //晴れのち曇り
+                                        else if (weather2[19] === 211){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                                        }
+                                        //曇りのち雨
+                                        else if (weather2[19] === 212){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                                        }
+                                        //雪のち雨
+                                        else if (weather2[19] === 213){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                                        }
+                                        //晴れのち雨
+                                        else if (weather2[19] === 411){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                                        }
+                                        //雨のち晴れ
+                                        else if (weather2[19] === 311){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                                        }
+                                        //晴れのち雪
+                                        else if (weather2[19] === 311){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                                        }
+                                        //雨のち曇り
+                                        else if (weather2[19] === 214){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                                        }
+                                         //雪のち曇り
+                                         else if (weather2[19] === 217){
+                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                                        }
+                
+                                    //不明
+                                        else{
+                                            night_OTENKI.innerHTML = "★";
+                                        }
+                                    
+                                        //夜19時の気温出力
+                                        temperature_night.innerHTML =  temperature2[19] + "°C";
+                                        //夜19時の降水確率を出力
+                                        rainypercent_night.innerHTML  =  probability[19] + "%"
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            })
+                                            
+                                            
+                                            .catch(error => {
+                                            console.error('データ取得に失敗しました',error)
+                                            });
+
                                       }   
+                                                                          
+
 
                                 
                                
@@ -1173,10 +1936,11 @@
                             <font color="#ffffff">
                                 <div  class="Iti" style="margin: 35% 0% -300% 10%;">
                                      
-                                    <!--<div id="myDiv" class="radius_test"  align="center"　style="border: none;" name = "button" >
-                                        決定 
-                                    </div>-->
-                                    <input id="button1" type="button" value="決定" onclick="Button()">
+                                    <div id="myDiv" class="radius_test"  align="center"　style="border: none;" name = "button" >
+                                       <input id="button1" type="button" value="決定" onclick="Button()">
+
+                                    
+                                    </div>
                                     
                                  
                                  
@@ -1230,6 +1994,170 @@
                         <!---選んだ服のアイコン-->
                         <font size="6">
                         <body>
+                            <!--キャミ-->
+                                            @if($categories->contains('id','1'))
+                                            @php
+                                                $icon1 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon1 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--ノースリーブ-->
+                                            @if($categories->contains('id','2'))
+                                            @php
+                                                $icon2 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon2 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--半袖-->
+                                            @if($categories->contains('id','3'))
+                                            @php
+                                                $icon3 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon3 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--長袖-->
+                                            @if($categories->contains('id','4'))
+                                            @php
+                                                $icon4 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon4 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--シャツ-->
+                                            @if($categories->contains('id','5'))
+                                            @php
+                                                $icon5 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon5 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--カーディガン-->
+                                            @if($categories->contains('id','6'))
+                                            @php
+                                                $icon6 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon6 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--ジャケット-->
+                                            @if($categories->contains('id','7'))
+                                            @php
+                                                $icon7 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon7 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--タートルネック-->
+                                            @if($categories->contains('id','8'))
+                                            @php
+                                                $icon8 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon8 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--ニット-->
+                                            @if($categories->contains('id','9'))
+                                            @php
+                                                $icon9 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon9 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--パーカー-->
+                                            @if($categories->contains('id','10'))
+                                            @php
+                                                $icon10 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon10 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--コート/ダウン-->
+                                            @if($categories->contains('id','11'))
+                                            @php
+                                                $icon11 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon11 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--半ズボン-->
+                                            @if($categories->contains('id','12'))
+                                            @php
+                                                $icon12 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon12 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--長ズボン-->
+                                            @if($categories->contains('id','13'))
+                                            @php
+                                                $icon13 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon13 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--スカート-->
+                                            @if($categories->contains('id','14'))
+                                            @php
+                                                $icon14 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon14 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--ワンピース-->
+                                            @if($categories->contains('id','15'))
+                                            @php
+                                                $icon15 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon15 = 0;
+                                            @endphp
+                                            @endif
                             <table align="center"  border="1">
 				<tr>
                     <td>　　　　</td>
@@ -1242,11 +2170,10 @@
 				    <td>　　　</td>
 			        <td class="clothes_box1" valign="baseline">
             		    <div>
-            		        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png" class="fashon_icon">
-            		        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png" class="fashon_icon">
-            		        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203315_ruwc1p.png" class="fashon_icon">
-            		        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png" class="fashon_icon">
-            		        <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png" class="fashon_icon">
+            		        <img id="top1" name="top1" class="fashon_icon">
+                            <img id="top2" name="top2" class="fashon_icon">
+                            <img id="top3" name="top3"class="fashon_icon" >
+                            <img id="top4" name="top4"class="fashon_icon" >
             		    </div>
             			{{--<div>
                             @foreach($categories as $category )
@@ -1259,7 +2186,8 @@
 		            <td>　　　　</td>
                     <td class="clothes_box1" valign="baseline">
 			            <div>
-                            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png" class="fashon_icon">
+                            <img id="botom1" name="botom1"class="fashon_icon" >
+                            <img id="botom2" name="botom2"class="fashon_icon" >
                         </div>
                         {{--<div>
                             @foreach($categories as $category )
@@ -1276,7 +2204,7 @@
 			<table align="center"  border="1">
 				<tr>
                                     <td>　　　　</td>
-				    <td>　アウター</td>
+				    <td>　アウター・ワンピース</td>
                                     <td>　　　　</td>
                     <a href="{{ route('coordination') }}">
                     <td>　コーディネートモード→</td>    
@@ -1294,14 +2222,15 @@
                             @endforeach
                         </div>--}}
                         <div>
-                            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png" class="fashon_icon">
+                           <img id="out1" name="out1"class="fashon_icon" >
+                           <img id="out2" name="out2"class="fashon_icon" >
                         </div>
 			        </td>
 			        <td>　　　</td>
-                    <td >
+                    <td width=500px height=450px>
                         <a href="{{ route('coordination') }}">
                             <button type="button">
-                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704939153/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%BC%E3%83%83%E3%83%88_%E6%9C%8D%E7%84%A1%E3%81%97_bvgsln.png" />
+                                <img src="https://res.cloudinary.com/dg5imilid/image/upload/v1705730150/%28%5E%5E%29/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%BC%E3%83%83%E3%83%88_%E6%9C%8D%E7%84%A1%E3%81%97_bvgsln_fh0sot.png" />
                             </button>
                         </a>
                     </td>
@@ -1539,4 +2468,365 @@
            });
          
 </script>
+
+
+ <script>
+
+     
+    let lat  = {{$finelyarea -> latitude}};
+    let long = {{$finelyarea -> longitude}};  
+    //open-meteoからURLを取得
+    //const apiUrl = ' https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
+    const apiUrl3 = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+long+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';      
+          
+          //fetch処理でurlからjson形式で情報を取得
+          fetch(apiUrl3)
+          .then(response => {
+              return response.json();
+          })
+          .then(data =>{
+              const jsonData = data;                              //
+              const humidity = jsonData.current.relative_humidity_2m;      //現在の湿度を取得
+              const temperature = jsonData.current.temperature_2m;//現在の気温を取得
+               let fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;
+ 
+
+                var ky = {{ $icon1 }};
+                   var no = {{ $icon2 }};
+                   var ha = {{ $icon3 }};
+                   var na = {{ $icon4 }};
+                   var sy = {{ $icon5 }};
+                   var ka = {{ $icon6 }};
+                   var ja = {{ $icon7 }};
+                   var ta = {{ $icon8 }};
+                   var ni = {{ $icon9 }};
+                   var pa = {{ $icon10 }};
+                   var da = {{ $icon11 }};
+                   var hz = {{ $icon12 }};
+                   var nz = {{ $icon13 }};
+                   var su = {{ $icon14 }};
+                   var wa = {{ $icon15 }};
+                   function _delete_element( id_name ){
+	var dom_obj = document.getElementById(id_name);
+	var dom_obj_parent = dom_obj.parentNode;
+	dom_obj_parent.removeChild(dom_obj);
+}
+     
+                  //不快指数分岐
+                       //～55 	　寒い
+                        if(fukai <= 54){
+                       _delete_element('botom2');
+
+    
+    　
+    if(na == 0){
+        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
+    }
+    else if(na == 1){
+        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
+    }
+    document.getElementById("top1").alt="top1";
+    
+    if(sy ==0){
+        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
+    }
+    else if(sy == 1){
+        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
+    }
+   
+    document.getElementById("top2").alt="top2";
+
+    if(ta ==0){
+        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203315_ruwc1p.png";
+    }
+    else if(ta == 1){
+        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%bf%e3%83%bc%e3%83%88%e3%83%ab%e3%83%8d%e3%83%83%e3%82%af%e3%81%ae%e7%84%a1%e6%96%99%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3_plixtm.png";
+    }    
+    
+    document.getElementById("top3").alt="top3";
+
+    if(ni ==0){
+        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png";
+    }
+    else if(ni == 1){
+        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0287_wfezcx.png";
+    }    
+    
+    document.getElementById("out1").alt="out1";
+
+    if(pa ==0){
+        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
+    }
+    else if(pa == 1){
+        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
+    }    
+    
+    document.getElementById("top4").alt="top4";
+
+    if(da ==0){
+        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203404_hjobme.png";
+    }
+    else if(da == 1){
+        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png";
+    }    
+    
+    document.getElementById("out2").alt="out2";
+    
+    if(nz ==0){
+         document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
+    }
+    else if(nz == 1){
+        document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
+    } 
+    document.getElementById("botom1").alt="botom1";
+
+    
+    
+}
+
+
+ //54～65　　肌寒い 
+ else if(fukai >= 55 && fukai <= 65 ){
+  _delete_element('botom2');
+   _delete_element('top4');
+                            if(na == 0){
+                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
+                            }
+                            else if(na == 1){
+                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
+                            }
+    
+                            document.getElementById("top1").alt="top1";
+
+                            if(sy ==0){
+                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
+                            }
+                            else if(sy == 1){
+                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
+                            }
+                            
+                            document.getElementById("top2").alt="top2";
+    
+                            if(ka ==0){
+                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203408_luvbqi.png";
+                            }
+                            else if(ka == 1){
+                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0292_co2req.png";
+                            }
+                            
+                            document.getElementById("out1").alt="out1";
+    
+                            if(ja ==0){
+                                document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203319_bzhvix.png";
+                            }
+                            else if(ja == 1){
+                                document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%902_axoaz6.png";
+                            }
+                            
+                            document.getElementById("out2").alt="out2";
+    
+                            if(pa ==0){
+                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
+                            }
+                            else if(pa == 1){
+                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
+                            } 
+                           
+                            document.getElementById("top3").alt="top3";
+    
+                            if(nz ==0){
+                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
+                            }
+                            else if(nz == 1){
+                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
+                            }
+                            
+                            document.getElementById("botom1").alt="botom1";
+
+
+                        }
+
+    //64～75　　快い 
+    else if(fukai >= 65 && fukai <= 75 ){
+     _delete_element('top4');
+      _delete_element('out2');
+                            if(na == 0){
+                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
+                            }
+                            else if(na == 1){
+                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
+                            }
+                            
+                            document.getElementById("top1").alt="top1";
+    
+                            if(sy ==0){
+                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
+                            }
+                            else if(sy == 1){
+                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
+                            }
+                            
+                            document.getElementById("top2").alt="top2";
+    
+                            if(ha ==0){
+                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
+                            }
+                            else if(ha == 1){
+                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
+                            }
+                            
+                            document.getElementById("top3").alt="top3";
+    
+                            if(nz ==0){
+                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
+                            }
+                            else if(nz == 1){
+                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
+                            }
+                            
+                            document.getElementById("botom1").alt="botom1";
+    
+                            if(su == 0){
+                                document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
+                            }
+                            else if(su == 1){
+                                document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
+                            }
+                            
+                            document.getElementById("botom2").alt="botom2";
+    
+                            if(wa ==0){
+                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
+                            }
+                            else if(wa == 1){
+                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0290_ststiv.png";
+                            }
+                            
+                            document.getElementById("out1").alt="out1";
+
+                        }
+
+//70～85　　暑い 
+else if(fukai >= 75 && fukai <= 85 ){
+ _delete_element('top2');
+  _delete_element('top3');
+   _delete_element('top4');
+    _delete_element('out2');
+     
+                         
+                         if(ha ==0){
+                             document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
+                         }
+                         else if(ha == 1){
+                             document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
+                         }
+                         
+                         document.getElementById("top1").alt="top1";
+ 
+                         if(hz ==0){
+                             document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
+                         }
+                         else if(hz == 1){
+                             document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
+                         }
+                         document.getElementById("botom1").alt="botom1";
+ 
+                         if(su ==0){
+                             document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
+                         }
+                         else if(su == 1){
+                             document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
+                         }
+                         
+                         document.getElementById("botom2").alt="botom2";
+ 
+                         if(wa ==0){
+                             document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
+                         }
+                         else if(wa == 1){
+                             document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
+                         }
+                         
+                         document.getElementById("out1").alt="out1";
+
+                        }
+
+
+//84～　　　暑くてたまらない 
+else if(fukai >= 86){
+ _delete_element('top4');
+    _delete_element('out2');
+                        
+                        if(ky ==0){
+                            document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203326_s3xmu4.png";
+                        }
+                        else if(ky == 1){
+                            document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png";
+                        }
+                        
+                        document.getElementById("top1").alt="top1";
+
+                        if(no ==0){
+                            document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203412_r6sovt.png";
+                        }
+                        else if(no == 1){
+                            document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0294_ziqwci.png";
+                        }
+                        
+                        document.getElementById("top2").alt="top2";
+
+                        if(ha ==0){
+                            document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
+                        }
+                        else if(ha == 1){
+                            document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
+                        }
+                        
+                        document.getElementById("top3").alt="top3";
+
+                        if(hz ==0){
+                            document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
+                        }
+                        else if(hz == 1){
+                            document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
+                        }
+                        
+                        document.getElementById("botom1").alt="botom1";
+
+                        if(su ==0){
+                            document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
+                        }
+                        else if(su == 1){
+                            document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
+                        }
+                        
+                        document.getElementById("botom2").alt="botom2";
+
+                        if(wa ==0){
+                            document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
+                        }
+                        else if(wa == 1){
+                            document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
+                        }
+                        
+                        document.getElementById("out1").alt="out1";
+
+                    }
+
+
+                })
+            //json形式で情報取得失敗した時
+            .catch(error => {
+                console.error('データ取得に失敗しました',error)
+            });
+
+
+
+
+
+
+
+</script>
+    
+
     </html>
