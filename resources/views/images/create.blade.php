@@ -20,7 +20,8 @@
             </div>
             
             <label class="mt-2">登録する画像をアップロードしてください。複数選択が可能です。</label>
-    <div class="w-full sm:max-w-xl mt-6 px-6 py-4 bg-gray-300 shadow-md overflow-hidden sm:rounded-lg">
+            <label class="mt-2">※登録しない場合は完了ボタンを押してください</label>
+            <div class="w-full sm:max-w-xl mt-6 px-6 py-4 bg-gray-300 shadow-md overflow-hidden sm:rounded-lg">
         <div class=" justify-center items-center gap-5">
 
     @foreach($categories as $category)
@@ -456,7 +457,7 @@
                     {{--</div>--}}
                     
     
-     <a href="{{ route('main') }}">
+     <a href="{{ route('main') }}" style="margin-left: 85%">
          <x-primary-button class="flex items-center justify-end mt-4">
             {{ __('完了') }}
         </x-primary-button>

@@ -19,7 +19,7 @@ class FashonSeeder extends Seeder
         //テストユーザー1さんの所持済みの服のデータ
         //キャミ
          DB::table('fashons')->insert([
-            'user_id' => '1',
+            'user_id' => '22',
             'category_id' => '1',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
@@ -28,7 +28,7 @@ class FashonSeeder extends Seeder
         
         //ノースリーブ
          DB::table('fashons')->insert([
-            'user_id' => '1',
+            'user_id' => '22',
             'category_id' => '2',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
@@ -37,17 +37,80 @@ class FashonSeeder extends Seeder
         
         //半袖
          DB::table('fashons')->insert([
-            'user_id' => '1',
+            'user_id' => '22',
             'category_id' => '3',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'deleted_at' => null,
         ]);
         
-        //半ズボン
+        //半袖
          DB::table('fashons')->insert([
-            'user_id' => '1',
-            'category_id' => '12',
+            'user_id' => '22',
+            'category_id' => '4',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            'deleted_at' => null,
+        ]);
+        
+        //半袖
+         DB::table('fashons')->insert([
+            'user_id' => '22',
+            'category_id' => '5',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            'deleted_at' => null,
+        ]);
+        
+        //半袖
+         DB::table('fashons')->insert([
+            'user_id' => '22',
+            'category_id' => '6',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            'deleted_at' => null,
+        ]);
+        
+        //半袖
+         DB::table('fashons')->insert([
+            'user_id' => '22',
+            'category_id' => '7',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            'deleted_at' => null,
+        ]);
+        
+        //半袖
+         DB::table('fashons')->insert([
+            'user_id' => '22',
+            'category_id' => '8',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            'deleted_at' => null,
+        ]);
+        
+        //半袖
+         DB::table('fashons')->insert([
+            'user_id' => '22',
+            'category_id' => '9',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            'deleted_at' => null,
+        ]);
+        
+        //半袖
+         DB::table('fashons')->insert([
+            'user_id' => '22',
+            'category_id' => '10',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            'deleted_at' => null,
+        ]);
+        
+        //半袖
+         DB::table('fashons')->insert([
+            'user_id' => '22',
+            'category_id' => '11',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'deleted_at' => null,
@@ -55,31 +118,23 @@ class FashonSeeder extends Seeder
         
         //長ズボン
          DB::table('fashons')->insert([
-            'user_id' => '1',
+            'user_id' => '22',
+            'category_id' => '13',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            'deleted_at' => null,
+        ]);
+        
+        //半袖
+         DB::table('fashons')->insert([
+            'user_id' => '22',
             'category_id' => '14',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'deleted_at' => null,
         ]);
         
-        //ワンピース
-         DB::table('fashons')->insert([
-            'user_id' => '1',
-            'category_id' => '15',
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-            'deleted_at' => null,
-        ]);
-        
-        //テストユーザー2さんの所持している服のデータ
-         //ワンピース
-         DB::table('fashons')->insert([
-            'user_id' => '2',
-            'category_id' => '15',
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-            'deleted_at' => null,
-        ]);
+        //テストユーザー2さんの所持している服のデー
         
         
     }

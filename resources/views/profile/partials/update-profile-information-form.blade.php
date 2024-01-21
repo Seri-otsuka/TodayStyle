@@ -51,6 +51,481 @@
             @endif
         </div>
         
+         <x-input-label class="" for="email" :value="__('※現在お住まいの地域の変更はできません。')" />
+        
+        
+        
+         {{--<div class="mt-4">
+            <div>
+            <x-input-label for="area_id" :value="__('お住いの地域')" />
+             <select id="parent" onchange="date()" class="mb-auto border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" name="area_id" required>
+                @foreach($area_alls as $area_all)
+                  <option value={{ $area_all->id }}>{{ $area_all->name}}</option>
+                @endforeach
+                  <option value="" disabled selected>選択してください</option>
+                </select>
+        </div>
+        <center>
+        <img id="todohuken" class="rounded-lg mt-4 flex" width="400" height="400"/>
+        </center>
+        <div class="mt-4">
+                <x-input-label for="area_id" :value="__('お住いの地域詳細')" />
+                <select id="children" class=" mb-auto border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" name="finelyarea_id" required>
+                              <option value="" disabled selected>選択してください</option>
+                            //北海道
+                              <option value={{ $finelyarea1->id }}>{{ $finelyarea1->id }}・{{ $finelyarea1->name }}</option>
+                              <option value={{ $finelyarea2->id }}>{{ $finelyarea2->id }}・{{ $finelyarea2->name }}</option>
+                              <option value={{ $finelyarea3->id }}>{{ $finelyarea3->id }}・{{ $finelyarea3->name }}</option>
+                              <option value={{ $finelyarea4->id }}>{{ $finelyarea4->id }}・{{ $finelyarea4->name }}</option>
+                            //青森
+                              <option value={{ $finelyarea5->id }}>{{ $finelyarea5->id }}・{{ $finelyarea5->name }}</option>
+                              <option value={{ $finelyarea6->id }}>{{ $finelyarea6->id }}・{{ $finelyarea6->name }}</option>
+                            
+                            
+                            //岩手 
+                             <option value={{ $finelyarea7->id }}>{{ $finelyarea7->id }}・{{ $finelyarea7->name }}</option>
+                             <option value={{ $finelyarea8->id }}>{{ $finelyarea8->id }}・{{ $finelyarea8->name }}</option>
+                             
+                             //宮城
+                             <option value={{ $finelyarea9->id }}>{{ $finelyarea9->id }}・{{ $finelyarea9->name }}</option>
+                             <option value={{ $finelyarea10->id }}>{{ $finelyarea10->id }}・{{ $finelyarea10->name }}</option>
+                             
+                             //秋田
+                             <option value={{ $finelyarea11->id }}>{{ $finelyarea11->id }}・{{ $finelyarea11->name }}</option>
+                             <option value={{ $finelyarea12->id }}>{{ $finelyarea12->id }}・{{ $finelyarea12->name }}</option>
+                             
+                             //山形
+                             <option value={{ $finelyarea13->id }}>{{ $finelyarea13->id }}・{{ $finelyarea13->name }}</option>
+                             <option value={{ $finelyarea14->id }}>{{ $finelyarea14->id }}・{{ $finelyarea14->name }}</option>
+                             
+                             //福島
+                             <option value={{ $finelyarea15->id }}>{{ $finelyarea15->id }}・{{ $finelyarea15->name }}</option>
+                             <option value={{ $finelyarea16->id }}>{{ $finelyarea16->id }}・{{ $finelyarea16->name }}</option>
+                             
+                             //茨城
+                             <option value={{ $finelyarea17->id }}>{{ $finelyarea17->id }}・{{ $finelyarea17->name }}</option>
+                             <option value={{ $finelyarea18->id }}>{{ $finelyarea18->id }}・{{ $finelyarea18->name }}</option>
+                             
+                             //栃木
+                             <option value={{ $finelyarea19->id }}>{{ $finelyarea19->id }}・{{ $finelyarea19->name }}</option>
+                             <option value={{ $finelyarea20->id }}>{{ $finelyarea20->id }}・{{ $finelyarea20->name }}</option>
+                             
+                             //群馬
+                             <option value={{ $finelyarea21->id }}>{{ $finelyarea21->id }}・{{ $finelyarea21->name }}</option>
+                             <option value={{ $finelyarea22->id }}>{{ $finelyarea22->id }}・{{ $finelyarea22->name }}</option>
+                             
+                             //埼玉
+                             <option value={{ $finelyarea23->id }}>{{ $finelyarea23->id }}・{{ $finelyarea23->name }}</option>
+                             <option value={{ $finelyarea24->id }}>{{ $finelyarea24->id }}・{{ $finelyarea24->name }}</option>
+                             
+                             //千葉
+                             <option value={{ $finelyarea25->id }}>{{ $finelyarea25->id }}・{{ $finelyarea25->name }}</option>
+                             <option value={{ $finelyarea26->id }}>{{ $finelyarea26->id }}・{{ $finelyarea26->name }}</option>
+                             
+                             //東京
+                             <option value={{ $finelyarea27->id }}>{{ $finelyarea27->id }}・{{ $finelyarea27->name }}</option>
+                             <option value={{ $finelyarea28->id }}>{{ $finelyarea28->id }}・{{ $finelyarea28->name }}</option>
+                             
+                             //神奈川
+                             <option value={{ $finelyarea29->id }}>{{ $finelyarea29->id }}・{{ $finelyarea29->name }}</option>
+                             <option value={{ $finelyarea30->id }}>{{ $finelyarea30->id }}・{{ $finelyarea30->name }}</option>
+                             
+                             //新潟
+                             <option value={{ $finelyarea31->id }}>{{ $finelyarea31->id }}・{{ $finelyarea31->name }}</option>
+                             <option value={{ $finelyarea32->id }}>{{ $finelyarea32->id }}・{{ $finelyarea32->name }}</option>
+                             
+                             //富山
+                             <option value={{ $finelyarea33->id }}>{{ $finelyarea33->id }}・{{ $finelyarea33->name }}</option>
+                             <option value={{ $finelyarea34->id }}>{{ $finelyarea34->id }}・{{ $finelyarea34->name }}</option>
+                             
+                             //石川
+                             <option value={{ $finelyarea35->id }}>{{ $finelyarea35->id }}・{{ $finelyarea35->name }}</option>
+                             <option value={{ $finelyarea36->id }}>{{ $finelyarea36->id }}・{{ $finelyarea36->name }}</option>
+                             
+                             //福井
+                             <option value={{ $finelyarea37->id }}>{{ $finelyarea37->id }}・{{ $finelyarea37->name }}</option>
+                             <option value={{ $finelyarea38->id }}>{{ $finelyarea38->id }}・{{ $finelyarea38->name }}</option>
+                             
+                             //山梨
+                             <option value={{ $finelyarea39->id }}>{{ $finelyarea39->id }}・{{ $finelyarea39->name }}</option>
+                             <option value={{ $finelyarea40->id }}>{{ $finelyarea40->id }}・{{ $finelyarea40->name }}</option>
+                             
+                             //長野
+                             <option value={{ $finelyarea41->id }}>{{ $finelyarea41->id }}・{{ $finelyarea41->name }}</option>
+                             <option value={{ $finelyarea42->id }}>{{ $finelyarea42->id }}・{{ $finelyarea42->name }}</option>
+                             
+                             //岐阜
+                             <option value={{ $finelyarea43->id }}>{{ $finelyarea43->id }}・{{ $finelyarea43->name }}</option>
+                             <option value={{ $finelyarea44->id }}>{{ $finelyarea44->id }}・{{ $finelyarea44->name }}</option>
+                             
+                             //静岡
+                             <option value={{ $finelyarea45->id }}>{{ $finelyarea45->id }}・{{ $finelyarea45->name }}</option>
+                             <option value={{ $finelyarea46->id }}>{{ $finelyarea46->id }}・{{ $finelyarea46->name }}</option>
+                             
+                             //愛知
+                             <option value={{ $finelyarea47->id }}>{{ $finelyarea47->id }}・{{ $finelyarea47->name }}</option>
+                             <option value={{ $finelyarea48->id }}>{{ $finelyarea48->id }}・{{ $finelyarea48->name }}</option>
+                             
+                             //三重
+                             <option value={{ $finelyarea49->id }}>{{ $finelyarea49->id }}・{{ $finelyarea49->name }}</option>
+                             <option value={{ $finelyarea50->id }}>{{ $finelyarea50->id }}・{{ $finelyarea50->name }}</option>
+                             
+                             //滋賀
+                             <option value={{ $finelyarea51->id }}>{{ $finelyarea51->id }}・{{ $finelyarea51->name }}</option>
+                             <option value={{ $finelyarea52->id }}>{{ $finelyarea52->id }}・{{ $finelyarea52->name }}</option>
+                             
+                             //京都
+                             <option value={{ $finelyarea53->id }}>{{ $finelyarea53->id }}・{{ $finelyarea53->name }}</option>
+                             <option value={{ $finelyarea54->id }}>{{ $finelyarea54->id }}・{{ $finelyarea54->name }}</option>
+                             
+                             //大阪
+                             <option value={{ $finelyarea55->id }}>{{ $finelyarea55->id }}・{{ $finelyarea55->name }}</option>
+                             <option value={{ $finelyarea56->id }}>{{ $finelyarea56->id }}・{{ $finelyarea56->name }}</option>
+                             
+                             //兵庫
+                             <option value={{ $finelyarea57->id }}>{{ $finelyarea57->id }}・{{ $finelyarea57->name }}</option>
+                             <option value={{ $finelyarea58->id }}>{{ $finelyarea58->id }}・{{ $finelyarea58->name }}</option>
+                             <option value={{ $finelyarea59->id }}>{{ $finelyarea59->id }}・{{ $finelyarea59->name }}</option>
+                             
+                             //奈良
+                             <option value={{ $finelyarea60->id }}>{{ $finelyarea60->id }}・{{ $finelyarea60->name }}</option>
+                             <option value={{ $finelyarea61->id }}>{{ $finelyarea61->id }}・{{ $finelyarea61->name }}</option>
+                             
+                             //和歌山
+                             <option value={{ $finelyarea62->id }}>{{ $finelyarea62->id }}・{{ $finelyarea62->name }}</option>
+                             <option value={{ $finelyarea63->id }}>{{ $finelyarea63->id }}・{{ $finelyarea63->name }}</option>
+                             
+                             //鳥取
+                             <option value={{ $finelyarea64->id }}>{{ $finelyarea64->id }}・{{ $finelyarea64->name }}</option>
+                             <option value={{ $finelyarea65->id }}>{{ $finelyarea65->id }}・{{ $finelyarea65->name }}</option>
+                             
+                             //岡山
+                             <option value={{ $finelyarea66->id }}>{{ $finelyarea66->id }}・{{ $finelyarea66->name }}</option>
+                             <option value={{ $finelyarea67->id }}>{{ $finelyarea67->id }}・{{ $finelyarea67->name }}</option>
+                             
+                             //島根
+                             <option value={{ $finelyarea68->id }}>{{ $finelyarea68->id }}・{{ $finelyarea68->name }}</option>
+                             <option value={{ $finelyarea69->id }}>{{ $finelyarea69->id }}・{{ $finelyarea69->name }}</option>
+                             
+                             //広島
+                             <option value={{ $finelyarea70->id }}>{{ $finelyarea70->id }}・{{ $finelyarea70->name }}</option>
+                             <option value={{ $finelyarea71->id }}>{{ $finelyarea71->id }}・{{ $finelyarea71->name }}</option>
+                             
+                             //山口
+                             <option value={{ $finelyarea72->id }}>{{ $finelyarea72->id }}・{{ $finelyarea72->name }}</option>
+                             <option value={{ $finelyarea73->id }}>{{ $finelyarea73->id }}・{{ $finelyarea73->name }}</option>
+                             
+                             //徳島
+                             <option value={{ $finelyarea74->id }}>{{ $finelyarea74->id }}・{{ $finelyarea74->name }}</option>
+                             <option value={{ $finelyarea75->id }}>{{ $finelyarea75->id }}・{{ $finelyarea75->name }}</option>
+                             
+                             //香川
+                             <option value={{ $finelyarea76->id }}>{{ $finelyarea76->id }}・{{ $finelyarea76->name }}</option>
+                             <option value={{ $finelyarea77->id }}>{{ $finelyarea77->id }}・{{ $finelyarea77->name }}</option>
+                             
+                             //愛媛
+                             <option value={{ $finelyarea78->id }}>{{ $finelyarea78->id }}・{{ $finelyarea78->name }}</option>
+                             <option value={{ $finelyarea79->id }}>{{ $finelyarea79->id }}・{{ $finelyarea79->name }}</option>
+                             
+                             //高知
+                             <option value={{ $finelyarea80->id }}>{{ $finelyarea80->id }}・{{ $finelyarea80->name }}</option>
+                             <option value={{ $finelyarea81->id }}>{{ $finelyarea81->id }}・{{ $finelyarea81->name }}</option>
+                             
+                             //福岡
+                             <option value={{ $finelyarea82->id }}>{{ $finelyarea82->id }}・{{ $finelyarea82->name }}</option>
+                             <option value={{ $finelyarea83->id }}>{{ $finelyarea83->id }}・{{ $finelyarea83->name }}</option>
+                             
+                             //佐賀
+                             <option value={{ $finelyarea84->id }}>{{ $finelyarea84->id }}・{{ $finelyarea84->name }}</option>
+                             <option value={{ $finelyarea85->id }}>{{ $finelyarea85->id }}・{{ $finelyarea85->name }}</option>
+                             
+                             //長崎
+                             <option value={{ $finelyarea86->id }}>{{ $finelyarea86->id }}・{{ $finelyarea86->name }}</option>
+                             <option value={{ $finelyarea87->id }}>{{ $finelyarea87->id }}・{{ $finelyarea87->name }}</option>
+                             
+                             //熊本
+                             <option value={{ $finelyarea88->id }}>{{ $finelyarea88->id }}・{{ $finelyarea88->name }}</option>
+                             <option value={{ $finelyarea89->id }}>{{ $finelyarea89->id }}・{{ $finelyarea89->name }}</option>
+                             
+                             //大分
+                             <option value={{ $finelyarea90->id }}>{{ $finelyarea90->id }}・{{ $finelyarea90->name }}</option>
+                             <option value={{ $finelyarea91->id }}>{{ $finelyarea91->id }}・{{ $finelyarea91->name }}</option>
+                             
+                             //宮崎
+                             <option value={{ $finelyarea92->id }}>{{ $finelyarea92->id }}・{{ $finelyarea92->name }}</option>
+                             <option value={{ $finelyarea93->id }}>{{ $finelyarea93->id }}・{{ $finelyarea93->name }}</option>
+                             
+                             //鹿児島
+                             <option value={{ $finelyarea94->id }}>{{ $finelyarea94->id }}・{{ $finelyarea94->name }}</option>
+                             <option value={{ $finelyarea95->id }}>{{ $finelyarea95->id }}・{{ $finelyarea95->name }}</option>
+                             
+                             //沖縄
+                             <option value={{ $finelyarea96->id }}>{{ $finelyarea96->id }}・{{ $finelyarea96->name }}</option>
+                             <option value={{ $finelyarea97->id }}>{{ $finelyarea97->id }}・{{ $finelyarea97->name }}</option>
+                              
+                            </select>
+                            </div>
+                           <script>
+                               function date() {
+
+                                //id="parent"の値を取得
+                                var parentlement = document.getElementById( "parent" ) ;
+                                
+                                //id="children"を取得
+                                var childrenDate = document.getElementById("children") ;
+                                
+                                   //disabledをtrueに
+                                  for (var i = 0; i < childrenDate.length; i++){
+                                       childrenDate.options[i].disabled = true;
+                                  }
+                                    // disabledに代入
+                                     if( parentlement.value == 1) {
+                                       childrenDate.options[1].disabled = false;//味噌汁
+                                       childrenDate.options[2].disabled = false;//肉じゃが
+                                       childrenDate.options[3].disabled = false;//天ぷら
+                                       childrenDate.options[4].disabled = false;//グラタン
+                                       //↓画像
+                                       document.getElementById("todohuken").src="{{ $area1->path }}";
+                                
+                                    } else if( parentlement.value == 2) {
+                                       childrenDate.options[5].disabled = false;//オムライス
+                                       childrenDate.options[6].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area2->path }}";
+                                       
+                                    } else if( parentlement.value == 3) {
+                                       childrenDate.options[7].disabled = false;//オムライス
+                                       childrenDate.options[8].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area3->path }}";
+                                     
+                                     } else if( parentlement.value == 4) {
+                                       childrenDate.options[9].disabled = false;//オムライス
+                                       childrenDate.options[10].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area4->path }}";
+                                     
+                                     } else if( parentlement.value == 5) {
+                                       childrenDate.options[11].disabled = false;//オムライス
+                                       childrenDate.options[12].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area5->path }}";
+                                     
+                                     } else if( parentlement.value == 6) {
+                                       childrenDate.options[13].disabled = false;//オムライス
+                                       childrenDate.options[14].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area6->path }}";
+                                     
+                                     } else if( parentlement.value == 7) {
+                                       childrenDate.options[15].disabled = false;//オムライス
+                                       childrenDate.options[16].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area7->path }}";
+                                     
+                                     } else if( parentlement.value == 8) {
+                                       childrenDate.options[17].disabled = false;//オムライス
+                                       childrenDate.options[18].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area8->path }}";
+                                     
+                                     } else if( parentlement.value == 9) {
+                                       childrenDate.options[19].disabled = false;//オムライス
+                                       childrenDate.options[20].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area9->path }}";
+                                     
+                                     } else if( parentlement.value == 10) {
+                                       childrenDate.options[21].disabled = false;//オムライス
+                                       childrenDate.options[22].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area10->path }}";
+                                     
+                                     } else if( parentlement.value == 11) {
+                                       childrenDate.options[23].disabled = false;//オムライス
+                                       childrenDate.options[24].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area11->path }}";
+                                     
+                                     } else if( parentlement.value == 12) {
+                                       childrenDate.options[25].disabled = false;//オムライス
+                                       childrenDate.options[26].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area12->path }}";
+                                     
+                                     } else if( parentlement.value == 13) {
+                                       childrenDate.options[27].disabled = false;//オムライス
+                                       childrenDate.options[28].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area13->path }}";
+                                     
+                                     } else if( parentlement.value == 14) {
+                                       childrenDate.options[29].disabled = false;//オムライス
+                                       childrenDate.options[30].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area14->path }}";
+                                     
+                                     } else if( parentlement.value == 15) {
+                                       childrenDate.options[31].disabled = false;//オムライス
+                                       childrenDate.options[32].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area15->path }}";
+                                     
+                                     } else if( parentlement.value == 16) {
+                                       childrenDate.options[33].disabled = false;//オムライス
+                                       childrenDate.options[34].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area16->path }}";
+                                     
+                                     } else if( parentlement.value == 17) {
+                                       childrenDate.options[35].disabled = false;//オムライス
+                                       childrenDate.options[36].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area17->path }}";
+                                     
+                                     } else if( parentlement.value == 18) {
+                                       childrenDate.options[37].disabled = false;//オムライス
+                                       childrenDate.options[38].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area18->path }}";
+                                     
+                                     } else if( parentlement.value == 19) {
+                                       childrenDate.options[39].disabled = false;//オムライス
+                                       childrenDate.options[40].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area19->path }}";
+                                     
+                                     } else if( parentlement.value == 20) {
+                                       childrenDate.options[41].disabled = false;//オムライス
+                                       childrenDate.options[42].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area20->path }}";
+                                     
+                                     } else if( parentlement.value == 21) {
+                                       childrenDate.options[43].disabled = false;//オムライス
+                                       childrenDate.options[44].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area21->path }}";
+                                     
+                                     } else if( parentlement.value == 22) {
+                                       childrenDate.options[45].disabled = false;//オムライス
+                                       childrenDate.options[46].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area22->path }}";
+                                     
+                                     } else if( parentlement.value == 23) {
+                                       childrenDate.options[47].disabled = false;//オムライス
+                                       childrenDate.options[48].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area23->path }}";
+                                     
+                                     } else if( parentlement.value == 24) {
+                                       childrenDate.options[49].disabled = false;//オムライス
+                                       childrenDate.options[50].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area24->path }}";
+                                     
+                                     } else if( parentlement.value == 25) {
+                                       childrenDate.options[51].disabled = false;//オムライス
+                                       childrenDate.options[52].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area25->path }}";
+                                     
+                                     } else if( parentlement.value == 26) {
+                                       childrenDate.options[53].disabled = false;//オムライス
+                                       childrenDate.options[54].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area26->path }}";
+                                     
+                                     } else if( parentlement.value == 27) {
+                                       childrenDate.options[55].disabled = false;//オムライス
+                                       childrenDate.options[56].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area27->path }}";
+                                     
+                                     } else if( parentlement.value == 28) {
+                                       childrenDate.options[57].disabled = false;//オムライス
+                                       childrenDate.options[58].disabled = false;//ナポリタン
+                                       childrenDate.options[59].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area28->path }}";
+                                     
+                                     } else if( parentlement.value == 29) {
+                                       childrenDate.options[60].disabled = false;//オムライス
+                                       childrenDate.options[61].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area29->path }}";
+                                     
+                                     } else if( parentlement.value == 30) {
+                                       childrenDate.options[62].disabled = false;//オムライス
+                                       childrenDate.options[63].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area30->path }}";
+                                     
+                                     } else if( parentlement.value == 31) {
+                                       childrenDate.options[64].disabled = false;//オムライス
+                                       childrenDate.options[65].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area31->path }}";
+                                     
+                                     } else if( parentlement.value == 32) {
+                                       childrenDate.options[66].disabled = false;//オムライス
+                                       childrenDate.options[67].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area32->path }}";
+                                     
+                                     } else if( parentlement.value == 33) {
+                                       childrenDate.options[68].disabled = false;//オムライス
+                                       childrenDate.options[69].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area33->path }}";
+                                     
+                                     } else if( parentlement.value == 34) {
+                                       childrenDate.options[70].disabled = false;//オムライス
+                                       childrenDate.options[71].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area34->path }}";
+                                     
+                                     } else if( parentlement.value == 35) {
+                                       childrenDate.options[72].disabled = false;//オムライス
+                                       childrenDate.options[73].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area35->path }}";
+                                     
+                                     } else if( parentlement.value == 36) {
+                                       childrenDate.options[74].disabled = false;//オムライス
+                                       childrenDate.options[75].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area36->path }}";
+                                     
+                                     } else if( parentlement.value == 37) {
+                                       childrenDate.options[76].disabled = false;//オムライス
+                                       childrenDate.options[77].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area37->path }}";
+                                     
+                                     } else if( parentlement.value == 38) {
+                                       childrenDate.options[78].disabled = false;//オムライス
+                                       childrenDate.options[79].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area38->path }}";
+                                     
+                                     } else if( parentlement.value == 39) {
+                                       childrenDate.options[80].disabled = false;//オムライス
+                                       childrenDate.options[81].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area39->path }}";
+                                     
+                                     } else if( parentlement.value == 40) {
+                                       childrenDate.options[82].disabled = false;//オムライス
+                                       childrenDate.options[83].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area40->path }}";
+                                     
+                                     } else if( parentlement.value == 41) {
+                                       childrenDate.options[84].disabled = false;//オムライス
+                                       childrenDate.options[85].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area41->path }}";
+                                     
+                                     } else if( parentlement.value == 42) {
+                                       childrenDate.options[86].disabled = false;//オムライス
+                                       childrenDate.options[87].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area42->path }}";
+                                     
+                                     } else if( parentlement.value == 43) {
+                                       childrenDate.options[88].disabled = false;//オムライス
+                                       childrenDate.options[89].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area43->path }}";
+                                     
+                                     } else if( parentlement.value == 44) {
+                                       childrenDate.options[90].disabled = false;//オムライス
+                                       childrenDate.options[91].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area44->path }}";
+                                     
+                                     } else if( parentlement.value == 45) {
+                                       childrenDate.options[92].disabled = false;//オムライス
+                                       childrenDate.options[93].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area45->path }}";
+                                     
+                                     } else if( parentlement.value == 46) {
+                                       childrenDate.options[94].disabled = false;//オムライス
+                                       childrenDate.options[95].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area46->path }}";
+                                     
+                                     } else if( parentlement.value == 47) {
+                                       childrenDate.options[96].disabled = false;//オムライス
+                                       childrenDate.options[97].disabled = false;//ナポリタン
+                                       document.getElementById("todohuken").src="{{ $area47->path }}";
+                                     
+                                     }  else if ( parentlement.value = "") {
+                                       childrenDate.disabled = true;
+                                    }
+                                     
+                                    
+                                }
+                           </script>--}}
+        
         {{--
          <!-- area -->
         <div class="mt-4">
