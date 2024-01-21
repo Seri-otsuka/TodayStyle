@@ -18,13 +18,29 @@ use App\Models\Finelyarea;
 use App\Models\Image;
 use App\Models\Fashon;
 use App\Models\Category;
-
+ use RegistersUsers;
 
 class RegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
      */
+     
+
+    
+        public function __construct()
+        {
+            $this->middleware('guest');
+        }
+    
+        // 他のメソッド...
+    
+        protected function redirectTo()
+        {
+            // 新規登録後のリダイレクト先を指定
+            return '/images/create'; // 任意のパスに変更
+        }
+        
     public function create(): View
     {
         //全件渡すregisterにareasテーブルにデータを

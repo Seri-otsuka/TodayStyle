@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -20,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
      /*
         ログイン後の画面を/mainに設定
      */
-    public const HOME = '/images/create';
+    public const HOME = '/main';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

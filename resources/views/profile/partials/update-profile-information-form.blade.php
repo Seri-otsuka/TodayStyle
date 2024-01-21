@@ -67,7 +67,7 @@
     --}}
                    
         <!--所持している服-->
-        <x-input-label for="email" :value="__('所持している服')" />
+        {{--
         <div class="flex flex-col  items-center pt-6 sm:pt-0 bg-gray-300">
             @foreach($categories as $category )
             <img src="{{ $category->image_true }}" style="max-width: 10%">
@@ -181,7 +181,7 @@
                     </div>
                     --}}
                     
-                    
+                   {{-- 
                     <!--半袖-->
                     <div class="mt-4 focus:border-indigo-500 focus:ring-indigo-500 ">
                         <center>
@@ -295,7 +295,7 @@
                     
                 </form>
             </div>
-        </div>
+        </div>--}}
         
          <!--temperature暑がりは0寒がりは1でデータベースに格納-->
         <div class="mt-4">

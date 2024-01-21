@@ -460,7 +460,7 @@
     
             <p class="under_box">
             <font size="40">操作説明</font>
-            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705384539/MicrosoftTeams-image_v0zvm8.png">
+            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705816776/MicrosoftTeams-image_2_rigrll.png">
             </p>
      
         

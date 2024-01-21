@@ -66,6 +66,9 @@ class ImageController extends Controller
 
     ]);
 
+    // モーダルから送信された categoryId を使用
+    $categoryId = $request->input('categoryId'); 
+    
      // 現在のログインユーザーの ID を取得
     $loggedInUserId = Auth::id();
     

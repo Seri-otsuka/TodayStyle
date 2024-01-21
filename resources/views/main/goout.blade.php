@@ -251,16 +251,27 @@
                                 </form>
                           
                           
-                          
+                          <!--変数の宣言ゾーン↓　✙　最初はお住まいの地域が表示されている-->
                           <script>
                                             //お住まいの地域の天気
                                              //変数の宣言
-                                              let lat01  = 　　{{$finelyarea -> latitude}}; //自分の地域の変数に変える、今北海道になってる
-                                              let long01   =   {{$finelyarea -> longitude}};
+                                            let lat01  = 　　{{$finelyarea -> latitude}}; 
+                                            let long01   =   {{$finelyarea -> longitude}};
+                                        　　let lat2  =　lat01; 
+                                            let long2 =  long01;
+                                            　　let lat3  = {{$finelyarea -> latitude}};
+                                        let long3 = {{$finelyarea -> longitude}};  
+
+                                                    console.log(lat2+"です！");
+                                                    console.log(long2+"です！");
+                                                    
+                                                     //open-meteoからURLを取得
+                                            let apiUrl2 = 'https://api.open-meteo.com/v1/forecast?latitude='+lat2+'&longitude='+long2+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,weather_code,uv_index&timezone=Asia%2FTokyo&forecast_days=1';
+
                                               
-                                            　 const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat01+'&longitude='+long01+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
-                                                console.log(lat01+"です");
-                                            　　console.log(long01+"です");
+                                             const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat01+'&longitude='+long01+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
+                                            console.log(lat01+"です");
+                                            console.log(long01+"です");
                             
                                                fetch(apiUrl)
                                                 .then(response => {
@@ -611,6 +622,171 @@
                                             .catch(error => {
                                             console.error('データ取得に失敗しました',error)
                                             });
+        //ワンポイント用コード
+            /*
+        UR:①'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
+        URL②(0109.json):https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,weather_code,uv_index&timezone=Asia%2FTokyo&forecast_days=1 
+       現在の気温
+       現在の湿度
+       現在の天気コード
+       時間毎の湿度
+       時間毎の気温
+       時間毎の天気コード
+       時間毎の降水確率
+       UV指数
+       */
+    
+        /*兵庫県			 
+        let lat2  = 35.6785;
+        let long2 = 139.6823;*/
+        //　北海道 旭川latitude":43.75,"longitude":142.375
+        lat2  =　lat01; 
+   　　  long2 =  long01;
+        console.log(lat2+"です！");　　
+        console.log(long2+"です！");
+        
+         //open-meteoからURLを取得
+         apiUrl2 = 'https://api.open-meteo.com/v1/forecast?latitude='+lat2+'&longitude='+long2+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,weather_code,uv_index&timezone=Asia%2FTokyo&forecast_days=1';
+         
+         const temMax = function (a, b) {return Math.max(a, b);} //最高気温
+         const temMin = function (a, b) {return Math.min(a, b);} //最低気温
+         const uvMax  = function (a, b) {return Math.max(a, b);} //一番紫外線が強い
+         //const snowMax = function (a, b) {return Math.max(a,b);} //降雪量
+         const rainMax = function (a, b) {return Math.max(a,b);} //降水確率
+         
+           //jsonデータを配列として取得
+                 fetch(apiUrl2)
+                 .then(response => {
+                     return  response.json();
+                 })
+                 .then(data2 =>{
+    
+                     const jsonData = data2;
+                     const probability = Array.from(jsonData.hourly.precipitation_probability);                     //降水確率
+                     const temperature1 = jsonData.current.temperature_2m;                                         //現在の気温
+                     const temperature2 = Array.from(jsonData.hourly.temperature_2m);                               //時間毎の気温                        
+                     const humidity2 = jsonData.current.relative_humidity_2m;                                      //現在の湿度  
+                     const weather_code =  Array.from(jsonData.hourly.weather_code);    
+                     const fukai2 = 0.81*temperature1 + 0.01*humidity2 * (0.99*temperature1 - 14.3) + 46.3;       //不快指数
+                     const uv_index1 = Array.from(jsonData.hourly.uv_index);
+                    
+                     let tmax = temperature2.reduce(temMax);    //  最高気温
+                     let tmin = temperature2.reduce(temMin);    //　最低気温
+                     let uvmax  = uv_index1.reduce(uvMax);
+                     let rainmax = probability.reduce(rainMax);
+                     let samatu = 1; // 1:寒がりさん？0:暑がりさん？
+
+                    let result = weather_code.some(function(value){
+                        return value == 71  || value == 75;
+                    });    
+
+
+                    //確認用
+                    
+                    console.log(result);      
+                    console.log(weather_code);   
+                    console.log(tmin);      
+                    console.log(temperature2);     
+                    
+
+                    
+                     
+                        
+                    //3行目
+                    if(uvmax => 3){
+                        recommend_items.innerHTML = "今日は日差しが強いワン!日焼け対策を<br>しっかりしよう。日焼け止めや日傘などを使おう。";
+                    }
+                    else if(uvmax => 6){
+                        recommend_items.innerHTML = "今日は日差しがすごく強いワン!<br>できるだけ屋外での活動は控えよう。";
+                    }
+                     if(result == true){
+                        recommend_items.innerHTML = "今日は雪だワン!!滑らないようにしてね。<br>傘やブーツ、マフラー、手袋などを使おう。";
+                    }
+                    else if(rainmax <= 20){
+                        recommend_items.innerHTML = "雨の心配は無さそうだワン！洗濯物を乾かすのも👌";
+                    }
+                    else if(rainmax <= 29){
+                        recommend_items.innerHTML = "折り畳み傘が助けてくれるかもだワン！ ";
+                    }
+                    else if(rainmax => 30){
+                        recommend_items.innerHTML = "今日は雨が降るかもしれないワン!<br>折り畳み傘が便利だよ。 ";
+                    }
+                    else if(rainmax => 70){
+                        recommend_items.innerHTML = "今日は雨降りだワン!雨具をしっかり用意しよう。<br>傘やレインブーツを使おう。";
+                    }
+                   
+                       
+                            //出力
+                            //if文はelseなしにする　→　選択されていなければ共通の文とグッズのみ出力0110
+                            //不快指数分岐
+
+                         //寒い
+                         if(fukai2 <= 54){
+                            advice.innerHTML = tmax+"℃　";
+                            advicetwo.innerHTML = tmin+"℃　　　　";
+                            //1:寒がり
+                            if(samatu == 1){
+                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!<br>裏起毛の服がおすすめだワン!";
+
+                           }
+                           //0:暑がり
+                           else{
+                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!<br>今日は暑がりさんも寒さに注意だワン! ";
+                           }
+                         }
+                         //肌寒い
+                         else if(fukai2 >= 55 && fukai2 <= 65 ){
+                            advice.innerHTML = tmax+"℃　";
+                            advicetwo.innerHTML = tmin+"℃　　　　";
+                             if(samatu == 1){
+                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>厚手の靴下やブーツも選んでみよう。";
+                             }
+                             else{
+                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>暖房に対応できるアウターを選ぼう。 ";
+                             }
+                         }
+                         //快い
+                         else if(fukai2 >= 65 && fukai2 <= 75 ){
+                            advice.innerHTML = tmax+"℃　";
+                            advicetwo.innerHTML = tmin+"℃　　　　";
+                            advicesamuatu.innerHTML= "今日は過ごしやすいワンダフルな一日‼<br>好きなオシャレが楽しめそうだワン。";
+
+ 
+                           }
+                         //暑い
+                         else if(fukai2 >= 75 && fukai2 <= 85 ){
+                            advice.innerHTML = tmax+"℃　";
+                            advicetwo.innerHTML = tmin+"℃　　　　";
+                             if(samatu == 1){
+                                advicesamuatu.innerHTML = "薄手の素材がおすすめだワン。<br>冷房に注意してね。七分丈もよいかも？ ";
+                             }
+                             else{
+                                advicesamuatu.innerHTML =" 薄手の素材がおすすめだワン。<br>通気性の良い半袖や半ズボンがおすすめだよ。 ";
+                             }
+                           }
+                         //暑くてたまらない
+                         else if(fukai2 >= 86){
+                            advice.innerHTML = tmax+"℃　";
+                            advicetwo.innerHTML = tmin+"℃　　　　";
+                             if(samatu == 1){
+                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。冷房に注意するワン!　 ";
+                             }
+                             else{
+                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。汗拭きシートで快適だワン。 ";
+                             }
+                            
+                         
+
+
+    }})
+                            
+
+    
+           //json形式で情報取得失敗した時
+           .catch(error => {
+               console.error('データ取得に失敗しました',error)
+           });
+
 
                                       
 
@@ -837,7 +1013,404 @@
                              <option value={{ $finelyarea97->id }}>{{ $finelyarea97->id }}・{{ $finelyarea97->name }}</option>
                               
                             </select>
-                           <script>
+
+                        
+                          
+                            </label>
+                          </div>
+                          </td>
+                          <td><a href="#" class="circle_btn02"　 style="margin: 30% 0% -300% 0%;">
+                          
+                          
+                          
+                        <!--決定ボタン-->
+                        <td>
+                            <font color="#ffffff">
+                                <div  class="Iti" style="margin: 35% 0% -300% 10%;">
+                                     
+                                    <div id="myDiv" class="radius_test"  align="center"　style="border: none;" name = "button" >
+                                       <input id="button1" type="button" value="決定" onclick="Button()">
+
+                                    
+                                    </div>
+                                    
+                                 
+                                 
+                                <div>
+                            </font>
+                        </td>
+                          
+                                            </tr>
+                          			    </table>
+                          </font size>
+                         
+
+                          
+                        <!---隙間-->
+	                    <div class="sukima_box"></div>
+
+                        <!--お試しで入れてます、あとでけしてね！-->
+                        {{--
+                        <div>
+                            @foreach($categories as $category )
+                            @if($category->genre == 0)<!--ジャンル分けです,0=トップス,1=ボトムス,2=コートワンピース-->
+                            <img src="{{ $category->image_true }}" style="max-width: 10%">
+                            @endif
+                            @endforeach
+                        </div>--}}
+            
+                        <!---選んだ服のアイコン-->
+                        <font size="6">
+                        <body>
+                            <!--キャミ-->
+                                            @if($categories->contains('id','1'))
+                                            @php
+                                                $icon1 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon1 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--ノースリーブ-->
+                                            @if($categories->contains('id','2'))
+                                            @php
+                                                $icon2 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon2 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--半袖-->
+                                            @if($categories->contains('id','3'))
+                                            @php
+                                                $icon3 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon3 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--長袖-->
+                                            @if($categories->contains('id','4'))
+                                            @php
+                                                $icon4 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon4 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--シャツ-->
+                                            @if($categories->contains('id','5'))
+                                            @php
+                                                $icon5 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon5 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--カーディガン-->
+                                            @if($categories->contains('id','6'))
+                                            @php
+                                                $icon6 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon6 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--ジャケット-->
+                                            @if($categories->contains('id','7'))
+                                            @php
+                                                $icon7 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon7 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--タートルネック-->
+                                            @if($categories->contains('id','8'))
+                                            @php
+                                                $icon8 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon8 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--ニット-->
+                                            @if($categories->contains('id','9'))
+                                            @php
+                                                $icon9 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon9 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--パーカー-->
+                                            @if($categories->contains('id','10'))
+                                            @php
+                                                $icon10 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon10 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--コート/ダウン-->
+                                            @if($categories->contains('id','11'))
+                                            @php
+                                                $icon11 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon11 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--半ズボン-->
+                                            @if($categories->contains('id','12'))
+                                            @php
+                                                $icon12 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon12 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--長ズボン-->
+                                            @if($categories->contains('id','13'))
+                                            @php
+                                                $icon13 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon13 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--スカート-->
+                                            @if($categories->contains('id','14'))
+                                            @php
+                                                $icon14 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon14 = 0;
+                                            @endphp
+                                            @endif
+                                            
+                                             <!--ワンピース-->
+                                            @if($categories->contains('id','15'))
+                                            @php
+                                                $icon15 = 1;
+                                            @endphp
+                                            @else
+                                            @php
+                                                $icon15 = 0;
+                                            @endphp
+                                            @endif
+                            <table align="center"  border="1">
+				<tr>
+                    <td>　　　　</td>
+				    <td>　トップス</td>
+                    <td>　　　　</td>
+                    <td>　ボトムス</td>
+				　  <td>　　　　</td>
+                </tr>			
+                <tr>
+				    <td>　　　</td>
+			        <td class="clothes_box1" valign="baseline">
+            		    <div>
+            		        <img id="top1" name="top1" class="fashon_icon">
+                            <img id="top2" name="top2" class="fashon_icon">
+                            <img id="top3" name="top3"class="fashon_icon" >
+                            <img id="top4" name="top4"class="fashon_icon" >
+            		    </div>
+            			{{--<div>
+                            @foreach($categories as $category )
+                            @if($category->genre == 0)<!--ジャンル分けです,0=トップス,1=ボトムス,2=コートワンピース-->
+                            <img src="{{ $category->image_true }}" class="fashon_icon">
+                            @endif
+                            @endforeach
+                        </div>--}}
+			        </td>
+		            <td>　　　　</td>
+                    <td class="clothes_box1" valign="baseline">
+			            <div>
+                            <img id="botom1" name="botom1"class="fashon_icon" >
+                            <img id="botom2" name="botom2"class="fashon_icon" >
+                        </div>
+                        {{--<div>
+                            @foreach($categories as $category )
+                            @if($category->genre == 1)<!--ジャンル分けです,0=トップス,1=ボトムス,2=コートワンピース-->
+                            <img src="{{ $category->image_true }}" class="fashon_icon">
+                            @endif
+                            @endforeach
+                        </div>--}}
+                    </td>
+			        <td>　　　</td>
+                </tr>
+			    </table>
+
+			<table align="center"  border="1">
+				<tr>
+                                    <td>　　　　</td>
+				    <td>　アウター・ワンピース</td>
+                                    <td>　　　　</td>
+                    <a href="{{ route('coordination') }}">
+                    <td>　コーディネートモード→</td>    
+				　     			
+				　     <td>　　　　</td></a>
+                                </tr>			
+                                <tr>
+				    <td>　　　</td>
+			        <td class="clothes_box1" valign="baseline">
+			            {{--<div>
+                            @foreach($categories as $category )
+                            @if($category->genre == 2)<!--ジャンル分けです,0=トップス,1=ボトムス,2=コートワンピース-->
+                            <img src="{{ $category->image_true }}" class="fashon_icon">
+                            @endif
+                            @endforeach
+                        </div>--}}
+                        <div>
+                           <img id="out1" name="out1"class="fashon_icon" >
+                           <img id="out2" name="out2"class="fashon_icon" >
+                        </div>
+			        </td>
+			        <td>　　　</td>
+                    <td width=500px height=450px>
+                        <a href="{{ route('coordination') }}">
+                            <button type="button">
+                                <img src="https://res.cloudinary.com/dg5imilid/image/upload/v1705730150/%28%5E%5E%29/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%BC%E3%83%83%E3%83%88_%E6%9C%8D%E7%84%A1%E3%81%97_bvgsln_fh0sot.png" />
+                            </button>
+                        </a>
+                    </td>
+				    <td>　　　</td>
+                </tr>
+			</table>
+        </body>
+	</font>
+                    
+                    
+                        <!--かご-->
+                        <center>
+                            <div>
+                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%94_xwtyed.png"/   width=150px height=150px;>
+                            </div>
+                        </center>
+                    
+                        <!---shop icon-->
+                        <center>
+                            <div>
+                               <button onclick="location.href='https://zozo.jp/'">
+                                    <!--zozotown-->
+                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/zozotown_tyfmb8.png" class="btn-social-square" />
+                                </button>
+                                <button onclick="location.href='https://jp.shein.com/category-picks.html?url_from=jpgooglebrandshein_shein02_srsa_LJP_category_20230128&cid=19616340873&setid=148607672587&adid=646447699347&pf=GOOGLE&gad_source=1&gclid=Cj0KCQiA4NWrBhD-ARIsAFCKwWt3_edjfdt-I4BF_kUW8z2lLsDCpFr9S8YLMrB3R5nUZvK2N7W9BpAaArYJEALw_wcB'">
+                                    <!--SHEIN-->
+                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/SHEIN_w77ctw.png" class="btn-social-square" />
+                                </button>
+                                <button onclick="location.href='https://www.grail.bz/'">
+                                    <!--GRL-->
+                                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/GRL_mji91c.png" class="btn-social-square" />
+                                </button>
+                                 <button onclick="location.href='https://www.mono-mart.jp/'">
+                                    <!--MONO-MART-->
+                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/MONO-MART_f41ttj.jpg" class="btn-social-square" />
+                                </button>
+                            </div>
+                        </center>
+                    
+                    
+                        <!--ワンポイントアドバイス-->
+                        <table align="center" class="sample_test">
+                            <tr>
+                                <td>
+                                    <p class="kaiwa-text ">
+                                                <font size="7" >
+                                                    　ワンポイントアドバイス
+                                                </font>
+                                            </p> 
+                                    <div class="kaiwa-text-left">
+                                        <center  class="advice-text">
+                                            <div class="advice-temperature">
+                                                <div>
+                                                    　　最高気温
+                                                </div>
+                                                <p id="advice" class="kaiwa-text text-red-500">
+                                                <div>
+                                                    　最低気温
+                                                </div>
+                                                <p id="advicetwo" class="kaiwa-text text-blue-600">
+                                            </div>
+                                                <nobr>
+                                                    <font size="6">
+                                                        <p id="advicesamuatu" class="kaiwa-text"　 style=font-family: "源瑛ラテン">
+                                                            <nobr>
+                                                                <font size="6">
+                                                                    <p id = "recommend_items" class = "kaiwa-text">
+                                                                        <nobr>
+                                                                            <font size="6">
+                                                                            </font>
+                                                                        </nobr>
+                                                                    </p>
+                                                                </font>
+                                                            </nobr>
+                                                        </p>
+                                                    </font>
+                                                </nobr>
+                                            </p>
+                                        </center>
+                                    </div>
+                                </td>
+                                 <td>
+                                    <div class="kaiwa">
+                                        <figure class="kaiwa-img-right">
+                                               <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
+                                         </figure>
+                                     </div>
+                                 </td>
+                            </tr>
+                        </table>
+                     </div>
+                </center>
+                </div>
+              </body>
+            </body>  
+    <script>
+
+</script>
+
+
+ <script>
+
+     
+
+
+
+
+
+
+
+</script>
+                               <script>
 
                                function date() {
                                    
@@ -1601,7 +2174,10 @@
                                             
                                             //不快指数分岐
                                             //寒い
-                                            if(fukai <= 54){
+                                    console.log(fukai+"です！！！！");
+
+                                            if(fukai <　55){
+                                            
                                             
                                                 hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'>";
                                             
@@ -1909,944 +2485,518 @@
                                             .catch(error => {
                                             console.error('データ取得に失敗しました',error)
                                             });
+                                        //ワンポイント用コード↓
+                                            /*
+                                        UR:①'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
+                                        URL②(0109.json):https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,weather_code,uv_index&timezone=Asia%2FTokyo&forecast_days=1 
+                                       現在の気温
+                                       現在の湿度
+                                       現在の天気コード
+                                       時間毎の湿度
+                                       時間毎の気温
+                                       時間毎の天気コード
+                                       時間毎の降水確率
+                                       UV指数
+                                       */
+                                    
+                                        /*兵庫県			 
+                                        let lat2  = 35.6785;
+                                        let long2 = 139.6823;*/
+                                        //　北海道 旭川latitude":43.75,"longitude":142.375
+                                        lat2  =　lat01; 
+                                   　　  long2 =  long01;
+                                        console.log(lat2+"です！");　　
+                                        console.log(long2+"です！");
+                                        
+                                         //open-meteoからURLを取得
+                                         apiUrl2 = 'https://api.open-meteo.com/v1/forecast?latitude='+lat2+'&longitude='+long2+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,weather_code,uv_index&timezone=Asia%2FTokyo&forecast_days=1';
+                                         
+                                         const temMax = function (a, b) {return Math.max(a, b);} //最高気温
+                                         const temMin = function (a, b) {return Math.min(a, b);} //最低気温
+                                         const uvMax  = function (a, b) {return Math.max(a, b);} //一番紫外線が強い
+                                         //const snowMax = function (a, b) {return Math.max(a,b);} //降雪量
+                                         const rainMax = function (a, b) {return Math.max(a,b);} //降水確率
+                                         
+                                           //jsonデータを配列として取得
+                                                 fetch(apiUrl2)
+                                                 .then(response => {
+                                                     return  response.json();
+                                                 })
+                                                 .then(data2 =>{
+                                    
+                                                     const jsonData = data2;
+                                                     const probability = Array.from(jsonData.hourly.precipitation_probability);                     //降水確率
+                                                     const temperature1 = jsonData.current.temperature_2m;                                         //現在の気温
+                                                     const temperature2 = Array.from(jsonData.hourly.temperature_2m);                               //時間毎の気温                        
+                                                     const humidity2 = jsonData.current.relative_humidity_2m;                                      //現在の湿度  
+                                                     const weather_code =  Array.from(jsonData.hourly.weather_code);    
+                                                     const fukai2 = 0.81*temperature1 + 0.01*humidity2 * (0.99*temperature1 - 14.3) + 46.3;       //不快指数
+                                                     const uv_index1 = Array.from(jsonData.hourly.uv_index);
+                                                    
+                                                     let tmax = temperature2.reduce(temMax);    //  最高気温
+                                                     let tmin = temperature2.reduce(temMin);    //　最低気温
+                                                     let uvmax  = uv_index1.reduce(uvMax);
+                                                     let rainmax = probability.reduce(rainMax);
+                                                     let samatu = 1; // 1:寒がりさん？0:暑がりさん？
+                                
+                                                    let result = weather_code.some(function(value){
+                                                        return value == 71  || value == 75;
+                                                    });    
+                                
+                                
+                                                    //確認用
+                                                    
+                                                    console.log(fukai2+"です！！！！");
 
-                                      }   
-                                                                          
+                                
+                                                    
+                                                     
+                                                        
+                                                    //3行目
+                                                    if(uvmax => 3){
+                                                        recommend_items.innerHTML = "今日は日差しが強いワン!日焼け対策を<br>しっかりしよう。日焼け止めや日傘などを使おう。";
+                                                    }
+                                                    else if(uvmax => 6){
+                                                        recommend_items.innerHTML = "今日は日差しがすごく強いワン!<br>できるだけ屋外での活動は控えよう。";
+                                                    }
+                                                     if(result == true){
+                                                        recommend_items.innerHTML = "今日は雪だワン!!滑らないようにしてね。<br>傘やブーツ、マフラー、手袋などを使おう。";
+                                                    }
+                                                    else if(rainmax <= 20){
+                                                        recommend_items.innerHTML = "雨の心配は無さそうだワン！洗濯物を乾かすのも👌";
+                                                    }
+                                                    else if(rainmax <= 29){
+                                                        recommend_items.innerHTML = "折り畳み傘が助けてくれるかもだワン！ ";
+                                                    }
+                                                    else if(rainmax => 30){
+                                                        recommend_items.innerHTML = "今日は雨が降るかもしれないワン!<br>折り畳み傘が便利だよ。 ";
+                                                    }
+                                                    else if(rainmax => 70){
+                                                        recommend_items.innerHTML = "今日は雨降りだワン!雨具をしっかり用意しよう。<br>傘やレインブーツを使おう。";
+                                                    }
+                                                   
+                                                       
+                                                            
+                                                            //不快指数分岐(ワンポイント)
+                                                         //寒い
+                                                         if(fukai2 <= 54){
+                                                            advice.innerHTML = tmax+"℃　";
+                                                            advicetwo.innerHTML = tmin+"℃　　　　";
+                                                            //1:寒がり
+                                                            if(samatu == 1){
+                                                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!<br>裏起毛の服がおすすめだワン!";
+                                
+                                                           }
+                                                           //0:暑がり
+                                                           else{
+                                                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!<br>今日は暑がりさんも寒さに注意だワン! ";
+                                                           }
+                                                         }
+                                                         //肌寒い
+                                                         else if(fukai2 >= 55 && fukai2 <= 65 ){
+                                                            advice.innerHTML = tmax+"℃　";
+                                                            advicetwo.innerHTML = tmin+"℃　　　　";
+                                                             if(samatu == 1){
+                                                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>厚手の靴下やブーツも選んでみよう。";
+                                                             }
+                                                             else{
+                                                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>暖房に対応できるアウターを選ぼう。 ";
+                                                             }
+                                                         }
+                                                         //快い
+                                                         else if(fukai2 >= 65 && fukai2 <= 75 ){
+                                                            advice.innerHTML = tmax+"℃　";
+                                                            advicetwo.innerHTML = tmin+"℃　　　　";
+                                                            advicesamuatu.innerHTML= "今日は過ごしやすいワンダフルな一日‼<br>好きなオシャレが楽しめそうだワン。";
+                                
+                                 
+                                                           }
+                                                         //暑い
+                                                         else if(fukai2 >= 75 && fukai2 <= 85 ){
+                                                            advice.innerHTML = tmax+"℃　";
+                                                            advicetwo.innerHTML = tmin+"℃　　　　";
+                                                             if(samatu == 1){
+                                                                advicesamuatu.innerHTML = "薄手の素材がおすすめだワン。<br>冷房に注意してね。七分丈もよいかも？ ";
+                                                             }
+                                                             else{
+                                                                advicesamuatu.innerHTML =" 薄手の素材がおすすめだワン。<br>通気性の良い半袖や半ズボンがおすすめだよ。 ";
+                                                             }
+                                                           }
+                                                         //暑くてたまらない
+                                                         else if(fukai2 >= 86){
+                                                            advice.innerHTML = tmax+"℃　";
+                                                            advicetwo.innerHTML = tmin+"℃　　　　";
+                                                             if(samatu == 1){
+                                                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。冷房に注意するワン!　 ";
+                                                             }
+                                                             else{
+                                                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。汗拭きシートで快適だワン。 ";
+                                                             }
+                                    }})
+                                                            
+                                
+                                    
+                                           //json形式で情報取得失敗した時
+                                           .catch(error => {
+                                               console.error('データ取得に失敗しました',error)
+                                           });
+
+
+                                      
+                                      
+                        　　lat3  =lat01;
+                            long3 = long01;  
+                            //open-meteoからURLを取得
+                            //const apiUrl = ' https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
+                            const apiUrl3 = 'https://api.open-meteo.com/v1/forecast?latitude='+lat3+'&longitude='+long3+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';      
+                          
+                          //fetch処理でurlからjson形式で情報を取得
+                          fetch(apiUrl3)
+                          .then(response => {
+                              return response.json();
+                          })
+                          .then(data =>{
+                              const jsonData = data;                              //
+                              const humidity = jsonData.current.relative_humidity_2m;      //現在の湿度を取得
+                              const temperature = jsonData.current.temperature_2m;//現在の気温を取得
+                               let fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;
+                 
+                
+                                var ky = {{ $icon1 }};
+                                   var no = {{ $icon2 }};
+                                   var ha = {{ $icon3 }};
+                                   var na = {{ $icon4 }};
+                                   var sy = {{ $icon5 }};
+                                   var ka = {{ $icon6 }};
+                                   var ja = {{ $icon7 }};
+                                   var ta = {{ $icon8 }};
+                                   var ni = {{ $icon9 }};
+                                   var pa = {{ $icon10 }};
+                                   var da = {{ $icon11 }};
+                                   var hz = {{ $icon12 }};
+                                   var nz = {{ $icon13 }};
+                                   var su = {{ $icon14 }};
+                                   var wa = {{ $icon15 }};
+                                   function _delete_element( id_name ){
+                	var dom_obj = document.getElementById(id_name);
+                	var dom_obj_parent = dom_obj.parentNode;
+                	dom_obj_parent.removeChild(dom_obj);
+                }
+                     
+                                  //不快指数分岐
+                                       //～55 	　寒い
+                                        if(fukai <= 54){
+                                       _delete_element('botom2');
+                
+                    
+                    　
+                    if(na == 0){
+                        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
+                    }
+                    else if(na == 1){
+                        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
+                    }
+                    document.getElementById("top1").alt="top1";
+                    
+                    if(sy ==0){
+                        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
+                    }
+                    else if(sy == 1){
+                        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
+                    }
+                   
+                    document.getElementById("top2").alt="top2";
+                
+                    if(ta ==0){
+                        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203315_ruwc1p.png";
+                    }
+                    else if(ta == 1){
+                        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%bf%e3%83%bc%e3%83%88%e3%83%ab%e3%83%8d%e3%83%83%e3%82%af%e3%81%ae%e7%84%a1%e6%96%99%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3_plixtm.png";
+                    }    
+                    
+                    document.getElementById("top3").alt="top3";
+                
+                    if(ni ==0){
+                        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png";
+                    }
+                    else if(ni == 1){
+                        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0287_wfezcx.png";
+                    }    
+                    
+                    document.getElementById("out1").alt="out1";
+                
+                    if(pa ==0){
+                        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
+                    }
+                    else if(pa == 1){
+                        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
+                    }    
+                    
+                    document.getElementById("top4").alt="top4";
+                
+                    if(da ==0){
+                        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203404_hjobme.png";
+                    }
+                    else if(da == 1){
+                        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png";
+                    }    
+                    
+                    document.getElementById("out2").alt="out2";
+                    
+                    if(nz ==0){
+                         document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
+                    }
+                    else if(nz == 1){
+                        document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
+                    } 
+                    document.getElementById("botom1").alt="botom1";
+                
+                    
+                    
+                }
+                
+                
+                 //54～65　　肌寒い 
+                 else if(fukai >= 55 && fukai <= 65 ){
+                  _delete_element('botom2');
+                   _delete_element('top4');
+                                            if(na == 0){
+                                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
+                                            }
+                                            else if(na == 1){
+                                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
+                                            }
+                    
+                                            document.getElementById("top1").alt="top1";
+                
+                                            if(sy ==0){
+                                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
+                                            }
+                                            else if(sy == 1){
+                                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
+                                            }
+                                            
+                                            document.getElementById("top2").alt="top2";
+                    
+                                            if(ka ==0){
+                                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203408_luvbqi.png";
+                                            }
+                                            else if(ka == 1){
+                                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0292_co2req.png";
+                                            }
+                                            
+                                            document.getElementById("out1").alt="out1";
+                    
+                                            if(ja ==0){
+                                                document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203319_bzhvix.png";
+                                            }
+                                            else if(ja == 1){
+                                                document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%902_axoaz6.png";
+                                            }
+                                            
+                                            document.getElementById("out2").alt="out2";
+                    
+                                            if(pa ==0){
+                                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
+                                            }
+                                            else if(pa == 1){
+                                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
+                                            } 
+                                           
+                                            document.getElementById("top3").alt="top3";
+                    
+                                            if(nz ==0){
+                                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
+                                            }
+                                            else if(nz == 1){
+                                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
+                                            }
+                                            
+                                            document.getElementById("botom1").alt="botom1";
+                
+                
+                                        }
+                
+                    //64～75　　快い 
+                    else if(fukai >= 65 && fukai <= 75 ){
+                     _delete_element('top4');
+                      _delete_element('out2');
+                                            if(na == 0){
+                                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
+                                            }
+                                            else if(na == 1){
+                                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
+                                            }
+                                            
+                                            document.getElementById("top1").alt="top1";
+                    
+                                            if(sy ==0){
+                                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
+                                            }
+                                            else if(sy == 1){
+                                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
+                                            }
+                                            
+                                            document.getElementById("top2").alt="top2";
+                    
+                                            if(ha ==0){
+                                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
+                                            }
+                                            else if(ha == 1){
+                                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
+                                            }
+                                            
+                                            document.getElementById("top3").alt="top3";
+                    
+                                            if(nz ==0){
+                                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
+                                            }
+                                            else if(nz == 1){
+                                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
+                                            }
+                                            
+                                            document.getElementById("botom1").alt="botom1";
+                    
+                                            if(su == 0){
+                                                document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
+                                            }
+                                            else if(su == 1){
+                                                document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
+                                            }
+                                            
+                                            document.getElementById("botom2").alt="botom2";
+                    
+                                            if(wa ==0){
+                                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
+                                            }
+                                            else if(wa == 1){
+                                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0290_ststiv.png";
+                                            }
+                                            
+                                            document.getElementById("out1").alt="out1";
+                
+                                        }
+                
+                //70～85　　暑い 
+                else if(fukai >= 75 && fukai <= 85 ){
+                 _delete_element('top2');
+                  _delete_element('top3');
+                   _delete_element('top4');
+                    _delete_element('out2');
+                     
+                                         
+                                         if(ha ==0){
+                                             document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
+                                         }
+                                         else if(ha == 1){
+                                             document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
+                                         }
+                                         
+                                         document.getElementById("top1").alt="top1";
+                 
+                                         if(hz ==0){
+                                             document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
+                                         }
+                                         else if(hz == 1){
+                                             document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
+                                         }
+                                         document.getElementById("botom1").alt="botom1";
+                 
+                                         if(su ==0){
+                                             document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
+                                         }
+                                         else if(su == 1){
+                                             document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
+                                         }
+                                         
+                                         document.getElementById("botom2").alt="botom2";
+                 
+                                         if(wa ==0){
+                                             document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
+                                         }
+                                         else if(wa == 1){
+                                             document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
+                                         }
+                                         
+                                         document.getElementById("out1").alt="out1";
+                
+                                        }
+                
+                
+                //84～　　　暑くてたまらない 
+                else if(fukai >= 86){
+                 _delete_element('top4');
+                    _delete_element('out2');
+                                        
+                                        if(ky ==0){
+                                            document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203326_s3xmu4.png";
+                                        }
+                                        else if(ky == 1){
+                                            document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png";
+                                        }
+                                        
+                                        document.getElementById("top1").alt="top1";
+                
+                                        if(no ==0){
+                                            document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203412_r6sovt.png";
+                                        }
+                                        else if(no == 1){
+                                            document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0294_ziqwci.png";
+                                        }
+                                        
+                                        document.getElementById("top2").alt="top2";
+                
+                                        if(ha ==0){
+                                            document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
+                                        }
+                                        else if(ha == 1){
+                                            document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
+                                        }
+                                        
+                                        document.getElementById("top3").alt="top3";
+                
+                                        if(hz ==0){
+                                            document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
+                                        }
+                                        else if(hz == 1){
+                                            document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
+                                        }
+                                        
+                                        document.getElementById("botom1").alt="botom1";
+                
+                                        if(su ==0){
+                                            document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
+                                        }
+                                        else if(su == 1){
+                                            document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
+                                        }
+                                        
+                                        document.getElementById("botom2").alt="botom2";
+                
+                                        if(wa ==0){
+                                            document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
+                                        }
+                                        else if(wa == 1){
+                                            document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
+                                        }
+                                        
+                                        document.getElementById("out1").alt="out1";
+                
+                                    }
+                
+                
+                                })
+                            //json形式で情報取得失敗した時
+                            .catch(error => {
+                                console.error('データ取得に失敗しました',error)
+                            });
+                        //Button()の終わり
+                        }                                                 
 
 
                                 
                                
                            </script>
-             <script>
-                        
-                          </script>
-                            </label>
-                          </div>
-                          </td>
-                          <td><a href="#" class="circle_btn02"　 style="margin: 30% 0% -300% 0%;">
-                          
-                          
-                          
-                        <!--決定ボタン-->
-                        <td>
-                            <font color="#ffffff">
-                                <div  class="Iti" style="margin: 35% 0% -300% 10%;">
-                                     
-                                    <div id="myDiv" class="radius_test"  align="center"　style="border: none;" name = "button" >
-                                       <input id="button1" type="button" value="決定" onclick="Button()">
 
-                                    
-                                    </div>
-                                    
-                                 
-                                 
-                                <div>
-                            </font>
-                        </td>
-                          
-                                            </tr>
-                          			    </table>
-                          </font size>
-                         
-                          <!--
-                         
-                          <td>
-                            <font color="#ffffff">
-                                <div  class="Iti" style="margin: 35% 0% -300% 10%;">
-                                    
-                                    <input id="elem" class="radius_test"  align="center"　style="border: none;" />
-                                        
-                                        
-                                        
-                                    
-                                     </div>
-                                    
-                                    <script>
-                                    
-                                    
-                                    </script>
-                                <div>
-                            </font>
-                        </td>
-                          
-                                            </tr>
-                          			    </table>
-                          </font size>-->
-                         
-                          
-                        <!---隙間-->
-	                    <div class="sukima_box"></div>
-
-                        <!--お試しで入れてます、あとでけしてね！-->
-                        {{--
-                        <div>
-                            @foreach($categories as $category )
-                            @if($category->genre == 0)<!--ジャンル分けです,0=トップス,1=ボトムス,2=コートワンピース-->
-                            <img src="{{ $category->image_true }}" style="max-width: 10%">
-                            @endif
-                            @endforeach
-                        </div>--}}
-            
-                        <!---選んだ服のアイコン-->
-                        <font size="6">
-                        <body>
-                            <!--キャミ-->
-                                            @if($categories->contains('id','1'))
-                                            @php
-                                                $icon1 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon1 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--ノースリーブ-->
-                                            @if($categories->contains('id','2'))
-                                            @php
-                                                $icon2 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon2 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--半袖-->
-                                            @if($categories->contains('id','3'))
-                                            @php
-                                                $icon3 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon3 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--長袖-->
-                                            @if($categories->contains('id','4'))
-                                            @php
-                                                $icon4 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon4 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--シャツ-->
-                                            @if($categories->contains('id','5'))
-                                            @php
-                                                $icon5 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon5 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--カーディガン-->
-                                            @if($categories->contains('id','6'))
-                                            @php
-                                                $icon6 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon6 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--ジャケット-->
-                                            @if($categories->contains('id','7'))
-                                            @php
-                                                $icon7 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon7 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--タートルネック-->
-                                            @if($categories->contains('id','8'))
-                                            @php
-                                                $icon8 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon8 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--ニット-->
-                                            @if($categories->contains('id','9'))
-                                            @php
-                                                $icon9 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon9 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--パーカー-->
-                                            @if($categories->contains('id','10'))
-                                            @php
-                                                $icon10 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon10 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--コート/ダウン-->
-                                            @if($categories->contains('id','11'))
-                                            @php
-                                                $icon11 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon11 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--半ズボン-->
-                                            @if($categories->contains('id','12'))
-                                            @php
-                                                $icon12 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon12 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--長ズボン-->
-                                            @if($categories->contains('id','13'))
-                                            @php
-                                                $icon13 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon13 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--スカート-->
-                                            @if($categories->contains('id','14'))
-                                            @php
-                                                $icon14 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon14 = 0;
-                                            @endphp
-                                            @endif
-                                            
-                                             <!--ワンピース-->
-                                            @if($categories->contains('id','15'))
-                                            @php
-                                                $icon15 = 1;
-                                            @endphp
-                                            @else
-                                            @php
-                                                $icon15 = 0;
-                                            @endphp
-                                            @endif
-                            <table align="center"  border="1">
-				<tr>
-                    <td>　　　　</td>
-				    <td>　トップス</td>
-                    <td>　　　　</td>
-                    <td>　ボトムス</td>
-				　  <td>　　　　</td>
-                </tr>			
-                <tr>
-				    <td>　　　</td>
-			        <td class="clothes_box1" valign="baseline">
-            		    <div>
-            		        <img id="top1" name="top1" class="fashon_icon">
-                            <img id="top2" name="top2" class="fashon_icon">
-                            <img id="top3" name="top3"class="fashon_icon" >
-                            <img id="top4" name="top4"class="fashon_icon" >
-            		    </div>
-            			{{--<div>
-                            @foreach($categories as $category )
-                            @if($category->genre == 0)<!--ジャンル分けです,0=トップス,1=ボトムス,2=コートワンピース-->
-                            <img src="{{ $category->image_true }}" class="fashon_icon">
-                            @endif
-                            @endforeach
-                        </div>--}}
-			        </td>
-		            <td>　　　　</td>
-                    <td class="clothes_box1" valign="baseline">
-			            <div>
-                            <img id="botom1" name="botom1"class="fashon_icon" >
-                            <img id="botom2" name="botom2"class="fashon_icon" >
-                        </div>
-                        {{--<div>
-                            @foreach($categories as $category )
-                            @if($category->genre == 1)<!--ジャンル分けです,0=トップス,1=ボトムス,2=コートワンピース-->
-                            <img src="{{ $category->image_true }}" class="fashon_icon">
-                            @endif
-                            @endforeach
-                        </div>--}}
-                    </td>
-			        <td>　　　</td>
-                </tr>
-			    </table>
-
-			<table align="center"  border="1">
-				<tr>
-                                    <td>　　　　</td>
-				    <td>　アウター・ワンピース</td>
-                                    <td>　　　　</td>
-                    <a href="{{ route('coordination') }}">
-                    <td>　コーディネートモード→</td>    
-				　     			
-				　     <td>　　　　</td></a>
-                                </tr>			
-                                <tr>
-				    <td>　　　</td>
-			        <td class="clothes_box1" valign="baseline">
-			            {{--<div>
-                            @foreach($categories as $category )
-                            @if($category->genre == 2)<!--ジャンル分けです,0=トップス,1=ボトムス,2=コートワンピース-->
-                            <img src="{{ $category->image_true }}" class="fashon_icon">
-                            @endif
-                            @endforeach
-                        </div>--}}
-                        <div>
-                           <img id="out1" name="out1"class="fashon_icon" >
-                           <img id="out2" name="out2"class="fashon_icon" >
-                        </div>
-			        </td>
-			        <td>　　　</td>
-                    <td width=500px height=450px>
-                        <a href="{{ route('coordination') }}">
-                            <button type="button">
-                                <img src="https://res.cloudinary.com/dg5imilid/image/upload/v1705730150/%28%5E%5E%29/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%BC%E3%83%83%E3%83%88_%E6%9C%8D%E7%84%A1%E3%81%97_bvgsln_fh0sot.png" />
-                            </button>
-                        </a>
-                    </td>
-				    <td>　　　</td>
-                </tr>
-			</table>
-        </body>
-	</font>
-                    
-                    
-                        <!--かご-->
-                        <center>
-                            <div>
-                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702010268/%E8%B2%B7%E3%81%84%E7%89%A9%E3%81%8B%E3%81%94_xwtyed.png"/   width=150px height=150px;>
-                            </div>
-                        </center>
-                    
-                        <!---shop icon-->
-                        <center>
-                            <div>
-                               <button onclick="location.href='https://zozo.jp/'">
-                                    <!--zozotown-->
-                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/zozotown_tyfmb8.png" class="btn-social-square" />
-                                </button>
-                                <button onclick="location.href='https://jp.shein.com/category-picks.html?url_from=jpgooglebrandshein_shein02_srsa_LJP_category_20230128&cid=19616340873&setid=148607672587&adid=646447699347&pf=GOOGLE&gad_source=1&gclid=Cj0KCQiA4NWrBhD-ARIsAFCKwWt3_edjfdt-I4BF_kUW8z2lLsDCpFr9S8YLMrB3R5nUZvK2N7W9BpAaArYJEALw_wcB'">
-                                    <!--SHEIN-->
-                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/SHEIN_w77ctw.png" class="btn-social-square" />
-                                </button>
-                                <button onclick="location.href='https://www.grail.bz/'">
-                                    <!--GRL-->
-                                    <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/GRL_mji91c.png" class="btn-social-square" />
-                                </button>
-                                 <button onclick="location.href='https://www.mono-mart.jp/'">
-                                    <!--MONO-MART-->
-                                 <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1701914045/MONO-MART_f41ttj.jpg" class="btn-social-square" />
-                                </button>
-                            </div>
-                        </center>
-                    
-                    
-                        <!--ワンポイントアドバイス-->
-                        <table align="center" class="sample_test">
-                            <tr>
-                                <td>
-                                    <p class="kaiwa-text ">
-                                                <font size="7" >
-                                                    　ワンポイントアドバイス
-                                                </font>
-                                            </p> 
-                                    <div class="kaiwa-text-left">
-                                        <center  class="advice-text">
-                                            <div class="advice-temperature">
-                                                <div>
-                                                    　　最高気温
-                                                </div>
-                                                <p id="advice" class="kaiwa-text text-red-500">
-                                                <div>
-                                                    　最低気温
-                                                </div>
-                                                <p id="advicetwo" class="kaiwa-text text-blue-600">
-                                            </div>
-                                                <nobr>
-                                                    <font size="6">
-                                                        <p id="advicesamuatu" class="kaiwa-text"　 style=font-family: "源瑛ラテン">
-                                                            <nobr>
-                                                                <font size="6">
-                                                                    <p id = "recommend_items" class = "kaiwa-text">
-                                                                        <nobr>
-                                                                            <font size="6">
-                                                                            </font>
-                                                                        </nobr>
-                                                                    </p>
-                                                                </font>
-                                                            </nobr>
-                                                        </p>
-                                                    </font>
-                                                </nobr>
-                                            </p>
-                                        </center>
-                                    </div>
-                                </td>
-                                 <td>
-                                    <div class="kaiwa">
-                                        <figure class="kaiwa-img-right">
-                                               <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
-                                         </figure>
-                                     </div>
-                                 </td>
-                            </tr>
-                        </table>
-                     </div>
-                </center>
-                </div>
-              </body>
-            </body>  
-    <script>
-        //ワンポイント用コード
-            /*
-        UR:①'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
-        URL②(0109.json):https://api.open-meteo.com/v1/forecast?latitude=35.6785&longitude=139.6823&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,weather_code,uv_index&timezone=Asia%2FTokyo&forecast_days=1 
-       現在の気温
-       現在の湿度
-       現在の天気コード
-       時間毎の湿度
-       時間毎の気温
-       時間毎の天気コード
-       時間毎の降水確率
-       UV指数
-       */
-    
-        /*兵庫県			 
-        let lat2  = 35.6785;
-        let long2 = 139.6823;*/
-        //　北海道 旭川latitude":43.75,"longitude":142.375
-        let lat2  = {{$finelyarea -> latitude}};
-        let long2 = {{$finelyarea -> longitude}};
-        
-        
-         //open-meteoからURLを取得
-         let apiUrl2 = 'https://api.open-meteo.com/v1/forecast?latitude='+lat2+'&longitude='+long2+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,weather_code,uv_index&timezone=Asia%2FTokyo&forecast_days=1';
-         
-         const temMax = function (a, b) {return Math.max(a, b);} //最高気温
-         const temMin = function (a, b) {return Math.min(a, b);} //最低気温
-         const uvMax  = function (a, b) {return Math.max(a, b);} //一番紫外線が強い
-         //const snowMax = function (a, b) {return Math.max(a,b);} //降雪量
-         const rainMax = function (a, b) {return Math.max(a,b);} //降水確率
-         
-           //jsonデータを配列として取得
-                 fetch(apiUrl2)
-                 .then(response => {
-                     return  response.json();
-                 })
-                 .then(data2 =>{
-    
-                     const jsonData = data2;
-                     const probability = Array.from(jsonData.hourly.precipitation_probability);                     //降水確率
-                     const temperature1 = jsonData.current.temperature_2m;                                         //現在の気温
-                     const temperature2 = Array.from(jsonData.hourly.temperature_2m);                               //時間毎の気温                        
-                     const humidity2 = jsonData.current.relative_humidity_2m;                                      //現在の湿度  
-                     const weather_code =  Array.from(jsonData.hourly.weather_code);    
-                     const fukai2 = 0.81*temperature1 + 0.01*humidity2 * (0.99*temperature1 - 14.3) + 46.3;       //不快指数
-                     const uv_index1 = Array.from(jsonData.hourly.uv_index);
-                    
-                     let tmax = temperature2.reduce(temMax);    //  最高気温
-                     let tmin = temperature2.reduce(temMin);    //　最低気温
-                     let uvmax  = uv_index1.reduce(uvMax);
-                     let rainmax = probability.reduce(rainMax);
-                     let samatu = 1; // 1:寒がりさん？0:暑がりさん？
-
-                    let result = weather_code.some(function(value){
-                        return value == 71  || value == 75;
-                    });    
-
-
-                    //確認用
-                    
-                    console.log(result);      
-                    console.log(weather_code);   
-                    console.log(tmin);      
-                    console.log(temperature2);     
-                    
-
-                    
-                     
-                        
-                    //3行目
-                    if(uvmax => 3){
-                        recommend_items.innerHTML = "今日は日差しが強いワン!日焼け対策を<br>しっかりしよう。日焼け止めや日傘などを使おう。";
-                    }
-                    else if(uvmax => 6){
-                        recommend_items.innerHTML = "今日は日差しがすごく強いワン!<br>できるだけ屋外での活動は控えよう。";
-                    }
-                     if(result == true){
-                        recommend_items.innerHTML = "今日は雪だワン!!滑らないようにしてね。<br>傘やブーツ、マフラー、手袋などを使おう。";
-                    }
-                    else if(rainmax <= 20){
-                        recommend_items.innerHTML = "雨の心配は無さそうだワン！洗濯物を乾かすのも👌";
-                    }
-                    else if(rainmax <= 29){
-                        recommend_items.innerHTML = "折り畳み傘が助けてくれるかもだワン！ ";
-                    }
-                    else if(rainmax => 30){
-                        recommend_items.innerHTML = "今日は雨が降るかもしれないワン!<br>折り畳み傘が便利だよ。 ";
-                    }
-                    else if(rainmax => 70){
-                        recommend_items.innerHTML = "今日は雨降りだワン!雨具をしっかり用意しよう。<br>傘やレインブーツを使おう。";
-                    }
-                   
-                       
-                            //出力
-                            //if文はelseなしにする　→　選択されていなければ共通の文とグッズのみ出力0110
-                            //不快指数分岐
-
-                         //寒い
-                         if(fukai2 <= 54){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                            //1:寒がり
-                            if(samatu == 1){
-                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!<br>裏起毛の服がおすすめだワン!";
-
-                           }
-                           //0:暑がり
-                           else{
-                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!<br>今日は暑がりさんも寒さに注意だワン! ";
-                           }
-                         }
-                         //肌寒い
-                         else if(fukai2 >= 55 && fukai2 <= 65 ){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                             if(samatu == 1){
-                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>厚手の靴下やブーツも選んでみよう。";
-                             }
-                             else{
-                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>暖房に対応できるアウターを選ぼう。 ";
-                             }
-                         }
-                         //快い
-                         else if(fukai2 >= 65 && fukai2 <= 75 ){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                            advicesamuatu.innerHTML= "今日は過ごしやすいワンダフルな一日‼<br>好きなオシャレが楽しめそうだワン。";
-
- 
-                           }
-                         //暑い
-                         else if(fukai2 >= 75 && fukai2 <= 85 ){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                             if(samatu == 1){
-                                advicesamuatu.innerHTML = "薄手の素材がおすすめだワン。<br>冷房に注意してね。七分丈もよいかも？ ";
-                             }
-                             else{
-                                advicesamuatu.innerHTML =" 薄手の素材がおすすめだワン。<br>通気性の良い半袖や半ズボンがおすすめだよ。 ";
-                             }
-                           }
-                         //暑くてたまらない
-                         else if(fukai2 >= 86){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                             if(samatu == 1){
-                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。冷房に注意するワン!　 ";
-                             }
-                             else{
-                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。汗拭きシートで快適だワン。 ";
-                             }
-                            
-                         
-
-
-    }})
-                            
-
-    
-           //json形式で情報取得失敗した時
-           .catch(error => {
-               console.error('データ取得に失敗しました',error)
-           });
-         
-</script>
-
-
- <script>
-
-     
-    let lat  = {{$finelyarea -> latitude}};
-    let long = {{$finelyarea -> longitude}};  
-    //open-meteoからURLを取得
-    //const apiUrl = ' https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
-    const apiUrl3 = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+long+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';      
-          
-          //fetch処理でurlからjson形式で情報を取得
-          fetch(apiUrl3)
-          .then(response => {
-              return response.json();
-          })
-          .then(data =>{
-              const jsonData = data;                              //
-              const humidity = jsonData.current.relative_humidity_2m;      //現在の湿度を取得
-              const temperature = jsonData.current.temperature_2m;//現在の気温を取得
-               let fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;
- 
-
-                var ky = {{ $icon1 }};
-                   var no = {{ $icon2 }};
-                   var ha = {{ $icon3 }};
-                   var na = {{ $icon4 }};
-                   var sy = {{ $icon5 }};
-                   var ka = {{ $icon6 }};
-                   var ja = {{ $icon7 }};
-                   var ta = {{ $icon8 }};
-                   var ni = {{ $icon9 }};
-                   var pa = {{ $icon10 }};
-                   var da = {{ $icon11 }};
-                   var hz = {{ $icon12 }};
-                   var nz = {{ $icon13 }};
-                   var su = {{ $icon14 }};
-                   var wa = {{ $icon15 }};
-                   function _delete_element( id_name ){
-	var dom_obj = document.getElementById(id_name);
-	var dom_obj_parent = dom_obj.parentNode;
-	dom_obj_parent.removeChild(dom_obj);
-}
-     
-                  //不快指数分岐
-                       //～55 	　寒い
-                        if(fukai <= 54){
-                       _delete_element('botom2');
-
-    
-    　
-    if(na == 0){
-        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
-    }
-    else if(na == 1){
-        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
-    }
-    document.getElementById("top1").alt="top1";
-    
-    if(sy ==0){
-        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
-    }
-    else if(sy == 1){
-        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
-    }
-   
-    document.getElementById("top2").alt="top2";
-
-    if(ta ==0){
-        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203315_ruwc1p.png";
-    }
-    else if(ta == 1){
-        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%bf%e3%83%bc%e3%83%88%e3%83%ab%e3%83%8d%e3%83%83%e3%82%af%e3%81%ae%e7%84%a1%e6%96%99%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3_plixtm.png";
-    }    
-    
-    document.getElementById("top3").alt="top3";
-
-    if(ni ==0){
-        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png";
-    }
-    else if(ni == 1){
-        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0287_wfezcx.png";
-    }    
-    
-    document.getElementById("out1").alt="out1";
-
-    if(pa ==0){
-        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
-    }
-    else if(pa == 1){
-        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
-    }    
-    
-    document.getElementById("top4").alt="top4";
-
-    if(da ==0){
-        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203404_hjobme.png";
-    }
-    else if(da == 1){
-        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png";
-    }    
-    
-    document.getElementById("out2").alt="out2";
-    
-    if(nz ==0){
-         document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
-    }
-    else if(nz == 1){
-        document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
-    } 
-    document.getElementById("botom1").alt="botom1";
-
-    
-    
-}
-
-
- //54～65　　肌寒い 
- else if(fukai >= 55 && fukai <= 65 ){
-  _delete_element('botom2');
-   _delete_element('top4');
-                            if(na == 0){
-                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
-                            }
-                            else if(na == 1){
-                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
-                            }
-    
-                            document.getElementById("top1").alt="top1";
-
-                            if(sy ==0){
-                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
-                            }
-                            else if(sy == 1){
-                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
-                            }
-                            
-                            document.getElementById("top2").alt="top2";
-    
-                            if(ka ==0){
-                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203408_luvbqi.png";
-                            }
-                            else if(ka == 1){
-                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0292_co2req.png";
-                            }
-                            
-                            document.getElementById("out1").alt="out1";
-    
-                            if(ja ==0){
-                                document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203319_bzhvix.png";
-                            }
-                            else if(ja == 1){
-                                document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%902_axoaz6.png";
-                            }
-                            
-                            document.getElementById("out2").alt="out2";
-    
-                            if(pa ==0){
-                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
-                            }
-                            else if(pa == 1){
-                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
-                            } 
-                           
-                            document.getElementById("top3").alt="top3";
-    
-                            if(nz ==0){
-                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
-                            }
-                            else if(nz == 1){
-                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
-                            }
-                            
-                            document.getElementById("botom1").alt="botom1";
-
-
-                        }
-
-    //64～75　　快い 
-    else if(fukai >= 65 && fukai <= 75 ){
-     _delete_element('top4');
-      _delete_element('out2');
-                            if(na == 0){
-                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
-                            }
-                            else if(na == 1){
-                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
-                            }
-                            
-                            document.getElementById("top1").alt="top1";
-    
-                            if(sy ==0){
-                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
-                            }
-                            else if(sy == 1){
-                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
-                            }
-                            
-                            document.getElementById("top2").alt="top2";
-    
-                            if(ha ==0){
-                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
-                            }
-                            else if(ha == 1){
-                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                            }
-                            
-                            document.getElementById("top3").alt="top3";
-    
-                            if(nz ==0){
-                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
-                            }
-                            else if(nz == 1){
-                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
-                            }
-                            
-                            document.getElementById("botom1").alt="botom1";
-    
-                            if(su == 0){
-                                document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                            }
-                            else if(su == 1){
-                                document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                            }
-                            
-                            document.getElementById("botom2").alt="botom2";
-    
-                            if(wa ==0){
-                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                            }
-                            else if(wa == 1){
-                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0290_ststiv.png";
-                            }
-                            
-                            document.getElementById("out1").alt="out1";
-
-                        }
-
-//70～85　　暑い 
-else if(fukai >= 75 && fukai <= 85 ){
- _delete_element('top2');
-  _delete_element('top3');
-   _delete_element('top4');
-    _delete_element('out2');
-     
-                         
-                         if(ha ==0){
-                             document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
-                         }
-                         else if(ha == 1){
-                             document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                         }
-                         
-                         document.getElementById("top1").alt="top1";
- 
-                         if(hz ==0){
-                             document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
-                         }
-                         else if(hz == 1){
-                             document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
-                         }
-                         document.getElementById("botom1").alt="botom1";
- 
-                         if(su ==0){
-                             document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                         }
-                         else if(su == 1){
-                             document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                         }
-                         
-                         document.getElementById("botom2").alt="botom2";
- 
-                         if(wa ==0){
-                             document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                         }
-                         else if(wa == 1){
-                             document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
-                         }
-                         
-                         document.getElementById("out1").alt="out1";
-
-                        }
-
-
-//84～　　　暑くてたまらない 
-else if(fukai >= 86){
- _delete_element('top4');
-    _delete_element('out2');
-                        
-                        if(ky ==0){
-                            document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203326_s3xmu4.png";
-                        }
-                        else if(ky == 1){
-                            document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png";
-                        }
-                        
-                        document.getElementById("top1").alt="top1";
-
-                        if(no ==0){
-                            document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203412_r6sovt.png";
-                        }
-                        else if(no == 1){
-                            document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0294_ziqwci.png";
-                        }
-                        
-                        document.getElementById("top2").alt="top2";
-
-                        if(ha ==0){
-                            document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
-                        }
-                        else if(ha == 1){
-                            document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                        }
-                        
-                        document.getElementById("top3").alt="top3";
-
-                        if(hz ==0){
-                            document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
-                        }
-                        else if(hz == 1){
-                            document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
-                        }
-                        
-                        document.getElementById("botom1").alt="botom1";
-
-                        if(su ==0){
-                            document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                        }
-                        else if(su == 1){
-                            document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                        }
-                        
-                        document.getElementById("botom2").alt="botom2";
-
-                        if(wa ==0){
-                            document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                        }
-                        else if(wa == 1){
-                            document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
-                        }
-                        
-                        document.getElementById("out1").alt="out1";
-
-                    }
-
-
-                })
-            //json形式で情報取得失敗した時
-            .catch(error => {
-                console.error('データ取得に失敗しました',error)
-            });
-
-
-
-
-
-
-
-</script>
-    
 
     </html>
