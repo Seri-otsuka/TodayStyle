@@ -35,7 +35,6 @@
                         <center>
                         <img class="w-16 rounded-md bg-white pointer-events-auto indigo-500" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png">
                         <x-input-label class="" for="email" :value="__('キャミ')" />
-                        <input type="file" name="file[]" multiple >
                         </center>
                     </div>
                     
