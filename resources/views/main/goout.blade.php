@@ -67,6 +67,9 @@
                                         </button>
                                     </x-slot>
                                     <x-slot name="content">
+                                        <x-dropdown-link :href="route('images.create')">
+                                            {{ __(' + 服追加') }}
+                                        </x-dropdown-link>
                                         <x-dropdown-link :href="route('profile.edit')">
                                             {{ __('プロフィール') }}
                                         </x-dropdown-link>
@@ -95,11 +98,16 @@
                               <!--普通にコメントアウトできなかったのでちゅうかっこ左端だけ消してます-->
                                 <!--{ $area->name }}-->
                                 <!--↓↓サイズ調整お願いします-->
-                                <!--<img src="{ $area->path}}" style="max-width: 20%">-->
+                                <!--<img src="{ $area->path}}" style="max-width: 20%">
                                 <p>
-                                  {{ $area->name }}・{{$finelyarea->name }}({{ $finelyarea->id }})
+                                
+                                </p>-->
+                                <p id = "areaname">
+                                      {{ $area->name }}・{{$finelyarea->name }}({{ $finelyarea->id }})
                                 </p>
-                                <img class="rounded-lg" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704450028/%E5%8C%97%E6%B5%B7%E9%81%93%E5%85%A8%E4%BD%93_hrcsg1.png" style="max-width: 20%">
+                                    
+                                
+                                <img  id = "areaobi" class="rounded-lg" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704450028/%E5%8C%97%E6%B5%B7%E9%81%93%E5%85%A8%E4%BD%93_hrcsg1.png" style="max-width: 20%">
                             
                             </div>
                             <!---お天気アイコン-->
@@ -125,7 +133,7 @@
                                     
                                 </p>
 				            </div>
-				            <div>
+				            <div class="night-otenki-right">
                             	 夜
                                 <img  id="night_OTENKI"  style="width: 120px;"/>
                             	<!-- 湿度 -->
@@ -158,9 +166,9 @@
 			                
 			                
                             <!---不快指数-->
-                            <div>
+                            <div class="hukaisisuu-right">
                                 <img id="hukaiSisuu" class="weather-social"/>
-                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E7%84%A1%E9%A1%8C20_20240118105545_lfqdgz.png" style="height: 25%;"/>
+                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705790906/%E7%92%B0%E5%A2%83%E6%8C%87%E6%95%B0%E6%94%B9%E8%A8%82%E7%89%88_eos4rt.png" style="height: 27%;"/>
                             </div>
                             
             			    <!---<script>
@@ -189,7 +197,7 @@
                           <div class="test01"　>
                           <button onclick="">
                               <a href="{{ route('main') }}">
-                           <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705026228/modoru_r4tkuo.png" width=150px height=150px;　style="margin: 75% 0% 300%;"/>
+                           <img class="rr_btn" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705026228/modoru_r4tkuo.png" width=150px height=150px;　style="margin: 75% 0% 300%;"/>
                            
                            </a>
                           </button>
@@ -259,14 +267,16 @@
                                             let long01   =   {{$finelyarea -> longitude}};
                                         　　let lat2  =　lat01; 
                                             let long2 =  long01;
-                                            　　let lat3  = {{$finelyarea -> latitude}};
-                                        let long3 = {{$finelyarea -> longitude}};  
+                                            let lat3  = lat01;
+                                            let long3 = long01;  
+                                            let fukai09 ;
+                                            let fukai2;
+                                            
+
 
                                                     console.log(lat2+"です！");
                                                     console.log(long2+"です！");
                                                     
-                                                     //open-meteoからURLを取得
-                                            let apiUrl2 = 'https://api.open-meteo.com/v1/forecast?latitude='+lat2+'&longitude='+long2+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,weather_code,uv_index&timezone=Asia%2FTokyo&forecast_days=1';
 
                                               
                                              const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat01+'&longitude='+long01+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
@@ -285,7 +295,7 @@
                                                 const temperature2 = Array.from(jsonData.hourly.temperature_2m);                      //時間毎の気温 
                                                 const weather2 = Array.from(jsonData.hourly.weather_code);                            //時間毎のの天気コード
                                                 const humidity = jsonData.current.relative_humidity_2m;                               //現在の湿度                             
-                                                const fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;   //不快指数
+                                                const fukai00 = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;   //不快指数
                                                 
                                             
                                             //天気コード分岐
@@ -315,24 +325,24 @@
                                             
                                             //↓不快指数分岐（ヘッダー用）
                                             //寒い 画像：とても寒い
-                                            if(fukai <= 54){
+                                            if(fukai00 <= 54){
                                             
                                                 hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%8B%E3%82%93_hkfi0w.png';    
                                             }
                                             //肌寒い 画像；寒い
-                                            else if(fukai >= 55 && fukai <= 65 ){
+                                            else if(fukai00 >= 55 && fukai00 <= 65 ){
                                                 hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%95%E3%82%80%E3%81%84_jbbyyb.png';
                                             }
                                             //快い 画像：快適
-                                            else if(fukai > 65 && fukai <= 75 ){
+                                            else if(fukai00 > 65 && fukai00 <= 75 ){
                                                 hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%8B%E3%81%84%E3%81%A6%E3%81%8D_o2qa7h.png';
                                             }
                                             //暑い 画像：やや暑い
-                                            else if(fukai > 75 && fukai <= 85 ){
+                                            else if(fukai00 > 75 && fukai00 <= 85 ){
                                                 hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%84_rkd08t.png';
                                             }
                                             //暑くてたまらない 画像：とても暑い
-                                            else if(fukai >= 86){
+                                            else if(fukai00 >= 86){
                                                 hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%99%E3%81%8E_ltpfdk.png';
                                             }
                                             
@@ -667,7 +677,7 @@
                      const temperature2 = Array.from(jsonData.hourly.temperature_2m);                               //時間毎の気温                        
                      const humidity2 = jsonData.current.relative_humidity_2m;                                      //現在の湿度  
                      const weather_code =  Array.from(jsonData.hourly.weather_code);    
-                     const fukai2 = 0.81*temperature1 + 0.01*humidity2 * (0.99*temperature1 - 14.3) + 46.3;       //不快指数
+                           fukai2 = 0.81*temperature1 + 0.01*humidity2 * (0.99*temperature1 - 14.3) + 46.3;       //不快指数
                      const uv_index1 = Array.from(jsonData.hourly.uv_index);
                     
                      let tmax = temperature2.reduce(temMax);    //  最高気温
@@ -797,6 +807,7 @@
                                                 //id="children"を取得
                                                 let childrenDate  ;
                                                  let selectedValue ;
+                                                
 
 
                           </script>
@@ -1682,436 +1693,646 @@
                                   
                            
                             
+                                                               function _delete_element( id_name ){
+                                                                    	var dom_obj = document.getElementById(id_name);
+                                                                    	var dom_obj_parent = dom_obj.parentNode;
+                                                                    	dom_obj_parent.removeChild(dom_obj);
+                                                                    }
                             
                                       //button関数を定義、クリックで地域変更
                                       function Button() {
-                                       
+                                          
+                                            
+                                                                                      
+                                          
+                                          
+                                        // 選択されているオプションのテキストを取得
+                                                 selectedText = document.getElementById('children').options[document.getElementById('children').selectedIndex].text;
                                                  selectedValue = childrenDate.value;
                                                 console.log(selectedValue);
+                                                console.log(selectedText);
                                                
                                                          //1
                                                           if(selectedValue == 1 ) { 
                                                                  lat01  = {{$finelyarea1 -> latitude}};
                                                                  long01 = {{$finelyarea1 -> longitude}};
+                                                                 document.getElementById("areaobi").src="{{ $area1->path }}";
+                                                                 areaname.innerHTML ="　北海道・"+" {{ $finelyarea1->name }}"+"（{{ $finelyarea1->id }}）";
                                                           }
                                                       //2
                                                         else if (selectedValue == 2) {
                                                                  lat01  = {{$finelyarea2 -> latitude}};
                                                                  long01 = {{$finelyarea2-> longitude}};
+                                                                 document.getElementById("areaobi").src="{{ $area1->path }}";
+                                                                 areaname.innerHTML ="　北海道・"+" {{ $finelyarea2->name }}"+"（{{ $finelyarea2->id }}）";
                                                         }
                                                         //3
                                                         else if (selectedValue == 3) {
                                                                  lat01  = {{$finelyarea3-> latitude}};
                                                                  long01 = {{$finelyarea3-> longitude}};
+                                                                 document.getElementById("areaobi").src="{{ $area1->path }}";
+                                                                 areaname.innerHTML ="　北海道・"+" {{ $finelyarea3->name }}"+"（{{ $finelyarea3->id }}）";
                                                         }
                                                           //4
                                                         else if (selectedValue == 4) {                                                         
                                                                  lat01  = {{$finelyarea4-> latitude}};
-                                                                 long01 = {{$finelyarea4-> longitude}};                                                         
+                                                                 long01 = {{$finelyarea4-> longitude}};        
+                                                                 document.getElementById("areaobi").src="{{ $area1->path }}";
+                                                                 areaname.innerHTML ="　北海道・"+" {{ $finelyarea4->name }}"+"（{{ $finelyarea4->id }}）";
                                                         }
                                                           //5
                                                         else if (selectedValue == 5) {                                                         
                                                                  lat01  = {{$finelyarea5-> latitude}};
-                                                                 long01 = {{$finelyarea5-> longitude}}                                                            
+                                                                 long01 = {{$finelyarea5-> longitude}}                
+                                                                 document.getElementById("areaobi").src="{{ $area2->path }}";
+                                                                 areaname.innerHTML ="青森・"+" {{ $finelyarea5->name }}"+"（{{ $finelyarea5->id }}）";
                                                         }
                                                         //6
                                                         else if (selectedValue == 6) {                                                         
                                                                  lat01  = {{$finelyarea6-> latitude}};
-                                                                 long01 = {{$finelyarea6-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea6-> longitude}};       
+                                                                 document.getElementById("areaobi").src="{{ $area2->path }}";
+                                                                 areaname.innerHTML ="　　青森・"+" {{ $finelyarea6->name }}"+"（{{ $finelyarea6->id }}）";
                                                         }
                                                           //7
                                                         else if (selectedValue == 7) {                                                         
                                                                  lat01  = {{$finelyarea7-> latitude}};
-                                                                 long01 = {{$finelyarea7-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea7-> longitude}};                       
+                                                                 document.getElementById("areaobi").src="{{ $area3->path }}";
+                                                                 areaname.innerHTML ="岩手・"+" {{ $finelyarea7->name }}"+"（{{ $finelyarea7->id }}）";
                                                         }
                                                           //8
                                                         else if (selectedValue == 8) {                                                         
                                                                  lat01  = {{$finelyarea8-> latitude}};
-                                                                 long01 = {{$finelyarea8-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea8-> longitude}};    
+                                                                 document.getElementById("areaobi").src="{{ $area3->path }}";
+                                                                 areaname.innerHTML ="岩手・"+" {{ $finelyarea8->name }}"+"（{{ $finelyarea8->id }}）";
                                                         }
                                                           //9
                                                         else if (selectedValue == 9 ) {                                                         
                                                                  lat01  = {{$finelyarea9-> latitude}};
-                                                                 long01 = {{$finelyarea9-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea9-> longitude}};           
+                                                                 document.getElementById("areaobi").src="{{ $area4->path }}";
+                                                                 areaname.innerHTML ="宮城・"+" {{ $finelyarea9->name }}"+"（{{ $finelyarea9->id }}）";
                                                         }
                                                         //10～19
                                                         else if (selectedValue == 10) {                                                         
                                                                  lat01  = {{$finelyarea10-> latitude}};
-                                                                 long01 = {{$finelyarea10-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea10-> longitude}};              
+                                                                 document.getElementById("areaobi").src="{{ $area4->path }}";
+                                                                 areaname.innerHTML ="宮城・"+" {{ $finelyarea10->name }}"+"（{{ $finelyarea10->id }}）";
                                                         }
                                                       //11
                                                         else if (selectedValue == 11) {                                                         
                                                                  lat01  = {{$finelyarea11-> latitude}};
-                                                                 long01 = {{$finelyarea11-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea11-> longitude}};         
+                                                                 document.getElementById("areaobi").src="{{ $area5->path }}";
+                                                                 areaname.innerHTML ="　　秋田・"+" {{ $finelyarea11->name }}"+"（{{ $finelyarea11->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 12) {                                                        
                                                                  lat01  = {{$finelyarea12-> latitude}};
-                                                                 long01 = {{$finelyarea12-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea12-> longitude}};                    
+                                                                 document.getElementById("areaobi").src="{{ $area5->path }}";
+                                                                 areaname.innerHTML ="秋田・"+" {{ $finelyarea12->name }}"+"（{{ $finelyarea12->id }}）";
                                                         }
                                                         else if (selectedValue == 13) {                                                        
                                                                  lat01  = {{$finelyarea13-> latitude}};
-                                                                 long01 = {{$finelyarea13-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea13-> longitude}};                     
+                                                                 document.getElementById("areaobi").src="{{ $area6->path }}";
+                                                                 areaname.innerHTML ="　　山形・"+" {{ $finelyarea13->name }}"+"（{{ $finelyarea13->id }}）";
                                                         }  
                                                         else if (selectedValue == 14) {                                                        
                                                                  lat01  = {{$finelyarea14-> latitude}};
-                                                                 long01 = {{$finelyarea14-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea14-> longitude}};               
+                                                                 document.getElementById("areaobi").src="{{ $area6->path }}";
+                                                                 areaname.innerHTML ="山形・"+" {{ $finelyarea14->name }}"+"（{{ $finelyarea14->id }}）";
                                                         }  
                                                         else if (selectedValue == 15) {                                                        
                                                                  lat01  = {{$finelyarea15-> latitude}};
-                                                                 long01 = {{$finelyarea15-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea15-> longitude}};   
+                                                                 document.getElementById("areaobi").src="{{ $area7->path }}";
+                                                                 areaname.innerHTML ="　　福島・"+" {{ $finelyarea15->name }}"+"（{{ $finelyarea15->id }}）";
                                                         } 
                                                         else if (selectedValue == 16){                                                        
                                                                  lat01  = {{$finelyarea16-> latitude}};
-                                                                 long01 = {{$finelyarea16-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea16-> longitude}};                         
+                                                                 document.getElementById("areaobi").src="{{ $area7->path }}";
+                                                                 areaname.innerHTML ="福島・"+" {{ $finelyarea16->name }}"+"（{{ $finelyarea16->id }}）";
                                                         }  
                                                         else if (selectedValue == 17) {                                                        
                                                                  lat01  = {{$finelyarea17-> latitude}};
-                                                                 long01 = {{$finelyarea17-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea17-> longitude}};             
+                                                                 document.getElementById("areaobi").src="{{ $area8->path }}";
+                                                                 areaname.innerHTML ="　茨城・"+" {{ $finelyarea17->name }}"+"（{{ $finelyarea17->id }}）";
                                                         }  
                                                         else if (selectedValue == 18) {                                                        
                                                                  lat01  = {{$finelyarea18-> latitude}};
-                                                                 long01 = {{$finelyarea18-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea18-> longitude}};     
+                                                                 document.getElementById("areaobi").src="{{ $area8->path }}";
+                                                                 areaname.innerHTML ="　茨城・"+" {{ $finelyarea18->name }}"+"（{{ $finelyarea18->id }}）";
                                                         }  
                                                         else if (selectedValue == 19) {                                                        
                                                                  lat01  = {{$finelyarea19-> latitude}};
-                                                                 long01 = {{$finelyarea19-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea19-> longitude}};                   
+                                                                 document.getElementById("areaobi").src="{{ $area9->path }}";
+                                                                 areaname.innerHTML ="　　栃木・"+" {{ $finelyarea19->name }}"+"（{{ $finelyarea19->id }}）";
                                                         }  
                                                         
                                                         //20～29
                                                         else if (selectedValue == 20) {                                                         
                                                                  lat01  = {{$finelyarea20-> latitude}};
-                                                                 long01 = {{$finelyarea20-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea20-> longitude}};     
+                                                                 document.getElementById("areaobi").src="{{ $area9->path }}";
+                                                                 areaname.innerHTML ="　　栃木・"+" {{ $finelyarea20->name }}"+"（{{ $finelyarea20->id }}）";
                                                         }
                                                         else if (selectedValue ==21) {                                                                
                                                                  lat01  = {{$finelyarea21-> latitude}};
-                                                                 long01 = {{$finelyarea21-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea21-> longitude}};   
+                                                                 document.getElementById("areaobi").src="{{ $area10->path }}";
+                                                                 areaname.innerHTML ="群馬・"+" {{ $finelyarea21->name }}"+"（{{ $finelyarea21->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 22) {                                                        
                                                                  lat01  = {{$finelyarea22-> latitude}};
-                                                                 long01 = {{$finelyarea22-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea22-> longitude}};   
+                                                                 document.getElementById("areaobi").src="{{ $area10->path }}";
+                                                                 areaname.innerHTML ="群馬・"+" {{ $finelyarea22->name }}"+"（{{ $finelyarea22->id }}）";
                                                         }
                                                         else if (selectedValue == 23) {                                                        
                                                                  lat01  = {{$finelyarea23-> latitude}};
-                                                                 long01 = {{$finelyarea23-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea23-> longitude}};    
+                                                                 document.getElementById("areaobi").src="{{ $area11->path }}";
+                                                                 areaname.innerHTML ="埼玉・"+" {{ $finelyarea23->name }}"+"（{{ $finelyarea23->id }}）";
                                                         }  
                                                         else if (selectedValue == 24) {                                                        
                                                                  lat01  = {{$finelyarea24-> latitude}};
-                                                                 long01 = {{$finelyarea24-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea24-> longitude}};        
+                                                                 document.getElementById("areaobi").src="{{ $area11->path }}";
+                                                                 areaname.innerHTML ="埼玉・"+" {{ $finelyarea24->name }}"+"（{{ $finelyarea24->id }}）";
                                                         }  
                                                         else if (selectedValue == 25) {                                                        
                                                                  lat01  = {{$finelyarea25-> latitude}};
-                                                                 long01 = {{$finelyarea25-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea25-> longitude}};    
+                                                                 document.getElementById("areaobi").src="{{ $area12->path }}";
+                                                                 areaname.innerHTML ="千葉・"+" {{ $finelyarea25->name }}"+"（{{ $finelyarea25->id }}）";
                                                         } 
                                                         else if (selectedValue == 26){                                                        
                                                                  lat01  = {{$finelyarea26-> latitude}};
-                                                                 long01 = {{$finelyarea26-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea26-> longitude}};         
+                                                                 document.getElementById("areaobi").src="{{ $area12->path }}";
+                                                                 areaname.innerHTML ="千葉・"+" {{ $finelyarea26->name }}"+"（{{ $finelyarea26->id }}）";
                                                         }  
                                                         else if (selectedValue == 27) {                                                        
                                                                  lat01  = {{$finelyarea27-> latitude}};
-                                                                 long01 = {{$finelyarea27-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea27-> longitude}};   
+                                                                 document.getElementById("areaobi").src="{{ $area13->path }}";
+                                                                 areaname.innerHTML ="東京・"+" {{ $finelyarea27->name }}"+"（{{ $finelyarea27->id }}）";
                                                         }  
                                                         else if (selectedValue == 28) {                                                        
                                                                  lat01  = {{$finelyarea28-> latitude}};
-                                                                 long01 = {{$finelyarea28-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea28-> longitude}};             
+                                                                 document.getElementById("areaobi").src="{{ $area13->path }}";
+                                                                 areaname.innerHTML ="東京・"+" {{ $finelyarea28->name }}"+"（{{ $finelyarea28->id }}）";
                                                         }  
                                                         else if (selectedValue == 29) {                                                        
                                                                  lat01  = {{$finelyarea29-> latitude}};
-                                                                 long01 = {{$finelyarea29-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea29-> longitude}};                
+                                                                 document.getElementById("areaobi").src="{{ $area14->path }}";
+                                                                 areaname.innerHTML ="神奈川・"+" {{ $finelyarea29->name }}"+"（{{ $finelyarea29->id }}）";
                                                         }  
                                                         
                                                          //30～39
                                                         else if (selectedValue == 30) {                                                         
                                                                  lat01  = {{$finelyarea30-> latitude}};
-                                                                 long01 = {{$finelyarea30-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea30-> longitude}};              
+                                                                 document.getElementById("areaobi").src="{{ $area14->path }}";
+                                                                 areaname.innerHTML ="神奈川・"+" {{ $finelyarea30->name }}"+"（{{ $finelyarea30->id }}）";
                                                         }
                                                         else if (selectedValue ==31) {                                                                
                                                                  lat01  = {{$finelyarea31-> latitude}};
-                                                                 long01 = {{$finelyarea31-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea31-> longitude}};   
+                                                                 document.getElementById("areaobi").src="{{ $area15->path }}";
+                                                                 areaname.innerHTML ="新潟・"+" {{ $finelyarea31->name }}"+"（{{ $finelyarea31->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 32) {                                                        
                                                                  lat01  = {{$finelyarea32-> latitude}};
-                                                                 long01 = {{$finelyarea32-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea32-> longitude}};   
+                                                                 document.getElementById("areaobi").src="{{ $area15->path }}";
+                                                                 areaname.innerHTML ="新潟・"+" {{ $finelyarea32->name }}"+"（{{ $finelyarea32->id }}）";
                                                         }
                                                         else if (selectedValue == 33) {                                                        
                                                                  lat01  = {{$finelyarea33-> latitude}};
-                                                                 long01 = {{$finelyarea33-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea33-> longitude}};            
+                                                                 document.getElementById("areaobi").src="{{ $area16->path }}";
+                                                                 areaname.innerHTML ="富山・"+" {{ $finelyarea33->name }}"+"（{{ $finelyarea33->id }}）";
                                                         }  
                                                         else if (selectedValue == 34) {                                                        
                                                                  lat01  = {{$finelyarea34-> latitude}};
-                                                                 long01 = {{$finelyarea34-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea34-> longitude}};         
+                                                                 document.getElementById("areaobi").src="{{ $area16->path }}";
+                                                                 areaname.innerHTML ="富山・"+" {{ $finelyarea34->name }}"+"（{{ $finelyarea34->id }}）";
                                                         }  
                                                         else if (selectedValue == 35) {                                                        
                                                                  lat01  = {{$finelyarea35-> latitude}};
-                                                                 long01 = {{$finelyarea35-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea35-> longitude}};    
+                                                                 document.getElementById("areaobi").src="{{ $area17->path }}";
+                                                                 areaname.innerHTML ="石川・"+" {{ $finelyarea35->name }}"+"（{{ $finelyarea35->id }}）";
                                                         } 
                                                         else if (selectedValue == 36){                                                        
                                                                  lat01  = {{$finelyarea36-> latitude}};
-                                                                 long01 = {{$finelyarea36-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea36-> longitude}};              
+                                                                 document.getElementById("areaobi").src="{{ $area17->path }}";
+                                                                 areaname.innerHTML ="石川・"+" {{ $finelyarea36->name }}"+"（{{ $finelyarea36->id }}）";
                                                         }  
                                                         else if (selectedValue == 37) {                                                        
                                                                  lat01  = {{$finelyarea37-> latitude}};
-                                                                 long01 = {{$finelyarea37-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea37-> longitude}};                       
+                                                                 document.getElementById("areaobi").src="{{ $area18->path }}";
+                                                                 areaname.innerHTML ="福井・"+" {{ $finelyarea37->name }}"+"（{{ $finelyarea37->id }}）";
                                                         }  
                                                         else if (selectedValue == 38) {                                                        
                                                                  lat01  = {{$finelyarea38-> latitude}};
-                                                                 long01 = {{$finelyarea38-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea38-> longitude}};             
+                                                                 document.getElementById("areaobi").src="{{ $area18->path }}";
+                                                                 areaname.innerHTML ="福井・"+" {{ $finelyarea38->name }}"+"（{{ $finelyarea38->id }}）";
                                                         }  
                                                         else if (selectedValue == 39) {                                                        
                                                                  lat01  = {{$finelyarea39-> latitude}};
-                                                                 long01 = {{$finelyarea39-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea39-> longitude}};                
+                                                                 document.getElementById("areaobi").src="{{ $area19->path }}";
+                                                                 areaname.innerHTML ="山梨・"+" {{ $finelyarea39->name }}"+"（{{ $finelyarea39->id }}）";
                                                         }
                                                         
                                                          //40～49
                                                         else if (selectedValue == 40) {                                                         
                                                                  lat01  = {{$finelyarea40-> latitude}};
-                                                                 long01 = {{$finelyarea40-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea40-> longitude}};                 
+                                                                 document.getElementById("areaobi").src="{{ $area19->path }}";
+                                                                 areaname.innerHTML ="山梨・"+" {{ $finelyarea40->name }}"+"（{{ $finelyarea40->id }}）";
                                                         }
                                                         else if (selectedValue ==41) {                                                                
                                                                  lat01  = {{$finelyarea41-> latitude}};
-                                                                 long01 = {{$finelyarea41-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea41-> longitude}};                
+                                                                 document.getElementById("areaobi").src="{{ $area20->path }}";
+                                                                 areaname.innerHTML ="長野・"+" {{ $finelyarea41->name }}"+"（{{ $finelyarea41->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 42) {                                                        
                                                                  lat01  = {{$finelyarea42-> latitude}};
-                                                                 long01 = {{$finelyarea42-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea42-> longitude}};        
+                                                                 document.getElementById("areaobi").src="{{ $area20->path }}";
+                                                                 areaname.innerHTML ="長野・"+" {{ $finelyarea42->name }}"+"（{{ $finelyarea42->id }}）";
                                                         }
                                                         else if (selectedValue == 43) {                                                        
                                                                  lat01  = {{$finelyarea43-> latitude}};
-                                                                 long01 = {{$finelyarea43-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea43-> longitude}};    
+                                                                 document.getElementById("areaobi").src="{{ $area21->path }}";
+                                                                 areaname.innerHTML ="岐阜・"+" {{ $finelyarea43->name }}"+"（{{ $finelyarea43->id }}）";
                                                         }  
                                                         else if (selectedValue == 44) {                                                        
                                                                  lat01  = {{$finelyarea44-> latitude}};
-                                                                 long01 = {{$finelyarea44-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea44-> longitude}};          
+                                                                 document.getElementById("areaobi").src="{{ $area21->path }}";
+                                                                 areaname.innerHTML ="岐阜・"+" {{ $finelyarea44->name }}"+"（{{ $finelyarea44->id }}）";
                                                         }  
                                                         else if (selectedValue == 45) {                                                        
                                                                  lat01  = {{$finelyarea45-> latitude}};
-                                                                 long01 = {{$finelyarea45-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea45-> longitude}};                   
+                                                                 document.getElementById("areaobi").src="{{ $area22->path }}";
+                                                                 areaname.innerHTML ="静岡・"+" {{ $finelyarea45->name }}"+"（{{ $finelyarea45->id }}）";
                                                         } 
                                                         else if (selectedValue == 46){                                                        
                                                                  lat01  = {{$finelyarea46-> latitude}};
-                                                                 long01 = {{$finelyarea46-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea46-> longitude}};     
+                                                                 document.getElementById("areaobi").src="{{ $area22->path }}";
+                                                                 areaname.innerHTML ="静岡・"+" {{ $finelyarea46->name }}"+"（{{ $finelyarea46->id }}）";
                                                         }  
                                                         else if (selectedValue == 47) {                                                        
                                                                  lat01  = {{$finelyarea47-> latitude}};
-                                                                 long01 = {{$finelyarea47-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea47-> longitude}};      
+                                                                 document.getElementById("areaobi").src="{{ $area23->path }}";
+                                                                 areaname.innerHTML ="　　愛知・"+" {{ $finelyarea47->name }}"+"（{{ $finelyarea47->id }}）";
                                                         }  
                                                         else if (selectedValue == 48) {                                                        
                                                                  lat01  = {{$finelyarea48-> latitude}};
-                                                                 long01 = {{$finelyarea48-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea48-> longitude}};                 
+                                                                 document.getElementById("areaobi").src="{{ $area23->path }}";
+                                                                 areaname.innerHTML ="愛知・"+" {{ $finelyarea48->name }}"+"（{{ $finelyarea48->id }}）";
                                                         }  
                                                         else if (selectedValue == 49) {                                                        
                                                                  lat01  = {{$finelyarea49-> latitude}};
-                                                                 long01 = {{$finelyarea49-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea49-> longitude}};      
+                                                                 document.getElementById("areaobi").src="{{ $area24->path }}";
+                                                                 areaname.innerHTML ="三重・"+" {{ $finelyarea49->name }}"+"（{{ $finelyarea49->id }}）";
                                                         }
                                                          //50～59
                                                         else if (selectedValue == 50) {                                                         
                                                                  lat01  = {{$finelyarea50-> latitude}};
-                                                                 long01 = {{$finelyarea50-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea50-> longitude}};          
+                                                                 document.getElementById("areaobi").src="{{ $area24->path }}";
+                                                                 areaname.innerHTML ="三重・"+" {{ $finelyarea50->name }}"+"（{{ $finelyarea50->id }}）";
                                                         }
                                                         else if (selectedValue ==51) {                                                                
                                                                  lat01  = {{$finelyarea51-> latitude}};
-                                                                 long01 = {{$finelyarea51-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea51-> longitude}};  
+                                                                 document.getElementById("areaobi").src="{{ $area25->path }}";
+                                                                 areaname.innerHTML ="滋賀・"+" {{ $finelyarea51->name }}"+"（{{ $finelyarea51->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 52) {                                                        
                                                                  lat01  = {{$finelyarea52-> latitude}};
-                                                                 long01 = {{$finelyarea52-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea52-> longitude}};        
+                                                                 document.getElementById("areaobi").src="{{ $area25->path }}";
+                                                                 areaname.innerHTML ="滋賀・"+" {{ $finelyarea52->name }}"+"（{{ $finelyarea52->id }}）";
                                                         }
                                                         else if (selectedValue == 53) {                                                        
                                                                  lat01  = {{$finelyarea53-> latitude}};
-                                                                 long01 = {{$finelyarea53-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea53-> longitude}};   
+                                                                 document.getElementById("areaobi").src="{{ $area26->path }}";
+                                                                 areaname.innerHTML ="京都・"+" {{ $finelyarea53->name }}"+"（{{ $finelyarea53->id }}）";
                                                         }  
                                                         else if (selectedValue == 54) {                                                        
                                                                  lat01  = {{$finelyarea54-> latitude}};
-                                                                 long01 = {{$finelyarea54-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea54-> longitude}};        
+                                                                 document.getElementById("areaobi").src="{{ $area26->path }}";
+                                                                 areaname.innerHTML ="京都・"+" {{ $finelyarea54->name }}"+"（{{ $finelyarea54->id }}）";
                                                         }  
                                                         else if (selectedValue == 55) {                                                        
                                                                  lat01  = {{$finelyarea55-> latitude}};
-                                                                 long01 = {{$finelyarea55-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea55-> longitude}};    
+                                                                 document.getElementById("areaobi").src="{{ $area27->path }}";
+                                                                 areaname.innerHTML ="大阪・"+" {{ $finelyarea55->name }}"+"（{{ $finelyarea55->id }}）";
                                                         } 
                                                         else if (selectedValue == 56){                                                        
                                                                  lat01  = {{$finelyarea56-> latitude}};
-                                                                 long01 = {{$finelyarea56-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea56-> longitude}};     
+                                                                 document.getElementById("areaobi").src="{{ $area27->path }}";
+                                                                 areaname.innerHTML ="　　大阪・"+" {{ $finelyarea56->name }}"+"（{{ $finelyarea56->id }}）";
                                                         }  
                                                         else if (selectedValue == 57) {                                                        
                                                                  lat01  = {{$finelyarea57-> latitude}};
-                                                                 long01 = {{$finelyarea57-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea57-> longitude}};      
+                                                                 document.getElementById("areaobi").src="{{ $area28->path }}";
+                                                                 areaname.innerHTML ="兵庫・"+" {{ $finelyarea57->name }}"+"（{{ $finelyarea57->id }}）";
                                                         }  
                                                         else if (selectedValue == 58) {                                                        
                                                                  lat01  = {{$finelyarea58-> latitude}};
-                                                                 long01 = {{$finelyarea58-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea58-> longitude}};            
+                                                                 document.getElementById("areaobi").src="{{ $area28->path }}";
+                                                                 areaname.innerHTML ="兵庫・"+" {{ $finelyarea58->name }}"+"（{{ $finelyarea58->id }}）";
                                                         }  
                                                         else if (selectedValue == 59) {                                                        
                                                                  lat01  = {{$finelyarea59-> latitude}};
-                                                                 long01 = {{$finelyarea59-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea59-> longitude}};         
+                                                                 document.getElementById("areaobi").src="{{ $area28->path }}";
+                                                                 areaname.innerHTML ="　　兵庫・"+" {{ $finelyarea59->name }}"+"（{{ $finelyarea59->id }}）";
                                                         }
                                                         
                                                          //60～69
                                                         else if (selectedValue == 60) {                                                         
                                                                  lat01  = {{$finelyarea60-> latitude}};
-                                                                 long01 = {{$finelyarea60-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea60-> longitude}};             
+                                                                 document.getElementById("areaobi").src="{{ $area29->path }}";
+                                                                 areaname.innerHTML ="奈良・"+" {{ $finelyarea60->name }}"+"（{{ $finelyarea60->id }}）";
                                                         }
                                                         else if (selectedValue ==61) {                                                                
                                                                  lat01  = {{$finelyarea61-> latitude}};
-                                                                 long01 = {{$finelyarea61-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea61-> longitude}};  
+                                                                 document.getElementById("areaobi").src="{{ $area29->path }}";
+                                                                 areaname.innerHTML ="　　奈良・"+" {{ $finelyarea61->name }}"+"（{{ $finelyarea61->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 62) {                                                        
                                                                  lat01  = {{$finelyarea62-> latitude}};
-                                                                 long01 = {{$finelyarea62-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea62-> longitude}};     
+                                                                 document.getElementById("areaobi").src="{{ $area30->path }}";
+                                                                 areaname.innerHTML ="　　和歌山・"+" {{ $finelyarea62->name }}"+"（{{ $finelyarea62->id }}）";
                                                         }
                                                         else if (selectedValue == 63) {                                                        
                                                                  lat01  = {{$finelyarea63-> latitude}};
-                                                                 long01 = {{$finelyarea63-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea63-> longitude}};           
+                                                                 document.getElementById("areaobi").src="{{ $area30->path }}";
+                                                                 areaname.innerHTML ="　和歌山・"+" {{ $finelyarea63->name }}"+"（{{ $finelyarea63->id }}）";
                                                         }  
                                                         else if (selectedValue == 64) {                                                        
                                                                  lat01  = {{$finelyarea64-> latitude}};
-                                                                 long01 = {{$finelyarea64-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea64-> longitude}};        
+                                                                 document.getElementById("areaobi").src="{{ $area31->path }}";
+                                                                 areaname.innerHTML ="鳥取・"+" {{ $finelyarea64->name }}"+"（{{ $finelyarea64->id }}）";
                                                         }  
                                                         else if (selectedValue == 65) {                                                        
                                                                  lat01  = {{$finelyarea65-> latitude}};
-                                                                 long01 = {{$finelyarea65-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea65-> longitude}};        
+                                                                 document.getElementById("areaobi").src="{{ $area31->path }}";
+                                                                 areaname.innerHTML ="鳥取・"+" {{ $finelyarea65->name }}"+"（{{ $finelyarea65->id }}）";
                                                         } 
                                                         else if (selectedValue == 66){                                                        
                                                                  lat01  = {{$finelyarea66-> latitude}};
-                                                                 long01 = {{$finelyarea66-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea66-> longitude}}; 
+                                                                 document.getElementById("areaobi").src="{{ $area32->path }}";
+                                                                 areaname.innerHTML ="岡山・"+" {{ $finelyarea66->name }}"+"（{{ $finelyarea66->id }}）";
                                                         }  
                                                         else if (selectedValue == 67) {                                                        
                                                                  lat01  = {{$finelyarea67-> latitude}};
-                                                                 long01 = {{$finelyarea67-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea67-> longitude}};      
+                                                                 document.getElementById("areaobi").src="{{ $area32->path }}";
+                                                                 areaname.innerHTML ="岡山・"+" {{ $finelyarea67->name }}"+"（{{ $finelyarea67->id }}）";
                                                         }  
                                                         else if (selectedValue == 68) {                                                        
                                                                  lat01  = {{$finelyarea68-> latitude}};
-                                                                 long01 = {{$finelyarea68-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea68-> longitude}};               
+                                                                 document.getElementById("areaobi").src="{{ $area33->path }}";
+                                                                 areaname.innerHTML ="島根・"+" {{ $finelyarea68->name }}"+"（{{ $finelyarea68->id }}）";
                                                         }  
                                                         else if (selectedValue == 69) {                                                        
                                                                  lat01  = {{$finelyarea69-> latitude}};
-                                                                 long01 = {{$finelyarea69-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea69-> longitude}}; 
+                                                                 document.getElementById("areaobi").src="{{ $area33->path }}";
+                                                                 areaname.innerHTML ="島根・"+" {{ $finelyarea69->name }}"+"（{{ $finelyarea69->id }}）";
                                                         }
                                                         
                                                          //70～79
                                                         else if (selectedValue == 70) {                                                         
                                                                  lat01  = {{$finelyarea70-> latitude}};
-                                                                 long01 = {{$finelyarea70-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea70-> longitude}};                 
+                                                                 document.getElementById("areaobi").src="{{ $area34->path }}";
+                                                                 areaname.innerHTML ="広島・"+" {{ $finelyarea70->name }}"+"（{{ $finelyarea70->id }}）";
                                                         }
                                                         else if (selectedValue ==71) {                                                                
                                                                  lat01  = {{$finelyarea71-> latitude}};
-                                                                 long01 = {{$finelyarea71-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea71-> longitude}};     
+                                                                 document.getElementById("areaobi").src="{{ $area34->path }}";
+                                                                 areaname.innerHTML ="広島・"+" {{ $finelyarea71->name }}"+"（{{ $finelyarea71->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 72) {                                                        
                                                                  lat01  = {{$finelyarea72-> latitude}};
-                                                                 long01 = {{$finelyarea72-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea72-> longitude}};                  
+                                                                 document.getElementById("areaobi").src="{{ $area35->path }}";
+                                                                 areaname.innerHTML ="山口・"+" {{ $finelyarea72->name }}"+"（{{ $finelyarea72->id }}）";
                                                         }
                                                         else if (selectedValue == 73) {                                                        
                                                                  lat01  = {{$finelyarea73-> latitude}};
-                                                                 long01 = {{$finelyarea73-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea73-> longitude}};     
+                                                                 document.getElementById("areaobi").src="{{ $area35->path }}";
+                                                                 areaname.innerHTML ="山口・"+" {{ $finelyarea73->name }}"+"（{{ $finelyarea73->id }}）";
                                                         }  
                                                         else if (selectedValue == 74) {                                                        
                                                                  lat01  = {{$finelyarea74-> latitude}};
-                                                                 long01 = {{$finelyarea74-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea74-> longitude}};    
+                                                                 document.getElementById("areaobi").src="{{ $area36->path }}";
+                                                                 areaname.innerHTML ="徳島・"+" {{ $finelyarea74->name }}"+"（{{ $finelyarea74->id }}）";
                                                         }  
                                                         else if (selectedValue == 75) {                                                        
                                                                  lat01  = {{$finelyarea75-> latitude}};
-                                                                 long01 = {{$finelyarea75-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea75-> longitude}};            
+                                                                 document.getElementById("areaobi").src="{{ $area36->path }}";
+                                                                 areaname.innerHTML ="徳島・"+" {{ $finelyarea75->name }}"+"（{{ $finelyarea75->id }}）";
                                                         } 
                                                         else if (selectedValue == 76){                                                        
                                                                  lat01  = {{$finelyarea76-> latitude}};
-                                                                 long01 = {{$finelyarea76-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea76-> longitude}};   
+                                                                 document.getElementById("areaobi").src="{{ $area37->path }}";
+                                                                 areaname.innerHTML ="香川・"+" {{ $finelyarea76->name }}"+"（{{ $finelyarea76->id }}）";
                                                         }  
                                                         else if (selectedValue == 77) {                                                        
                                                                  lat01  = {{$finelyarea77-> latitude}};
-                                                                 long01 = {{$finelyarea77-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea77-> longitude}};        
+                                                                 document.getElementById("areaobi").src="{{ $area37->path }}";
+                                                                 areaname.innerHTML ="香川・"+" {{ $finelyarea77->name }}"+"（{{ $finelyarea77->id }}）";
                                                         }  
                                                         else if (selectedValue == 78) {                                                        
                                                                  lat01  = {{$finelyarea78-> latitude}};
-                                                                 long01 = {{$finelyarea78-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea78-> longitude}};       
+                                                                 document.getElementById("areaobi").src="{{ $area38->path }}";
+                                                                 areaname.innerHTML ="愛媛・"+" {{ $finelyarea78->name }}"+"（{{ $finelyarea78->id }}）";
                                                         }  
                                                         else if (selectedValue == 79) {                                                        
                                                                  lat01  = {{$finelyarea79-> latitude}};
-                                                                 long01 = {{$finelyarea79-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea79-> longitude}}; 
+                                                                 document.getElementById("areaobi").src="{{ $area38->path }}";
+                                                                 areaname.innerHTML ="愛媛・"+" {{ $finelyarea79->name }}"+"（{{ $finelyarea79->id }}）";
                                                         }  
                                                         
                                                          //80～89
                                                         else if (selectedValue == 80) {                                                         
                                                                  lat01  = {{$finelyarea80-> latitude}};
-                                                                 long01 = {{$finelyarea80-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea80-> longitude}};          
+                                                                 document.getElementById("areaobi").src="{{ $area39->path }}";
+                                                                 areaname.innerHTML ="　　高知・"+" {{ $finelyarea80->name }}"+"（{{ $finelyarea80->id }}）";
                                                         }
                                                         else if (selectedValue ==81) {                                                                
                                                                  lat01  = {{$finelyarea81-> latitude}};
-                                                                 long01 = {{$finelyarea81-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea81-> longitude}};          
+                                                                 document.getElementById("areaobi").src="{{ $area39->path }}";
+                                                                 areaname.innerHTML ="高知・"+" {{ $finelyarea81->name }}"+"（{{ $finelyarea81->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 82) {                                                        
                                                                  lat01  = {{$finelyarea82-> latitude}};
-                                                                 long01 = {{$finelyarea82-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea82-> longitude}};          
+                                                                 document.getElementById("areaobi").src="{{ $area40->path }}";
+                                                                 areaname.innerHTML ="　　福岡・"+" {{ $finelyarea82->name }}"+"（{{ $finelyarea82->id }}）";
                                                         }
                                                         else if (selectedValue == 83) {                                                        
                                                                  lat01  = {{$finelyarea83-> latitude}};
-                                                                 long01 = {{$finelyarea83-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea83-> longitude}};                           
+                                                                 document.getElementById("areaobi").src="{{ $area40->path }}";
+                                                                 areaname.innerHTML ="　　福岡・"+" {{ $finelyarea83->name }}"+"（{{ $finelyarea83->id }}）";
                                                         }  
                                                         else if (selectedValue == 84) {                                                        
                                                                  lat01  = {{$finelyarea84-> latitude}};
-                                                                 long01 = {{$finelyarea84-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea84-> longitude}};                    
+                                                                 document.getElementById("areaobi").src="{{ $area41->path }}";
+                                                                 areaname.innerHTML ="　　佐賀・"+" {{ $finelyarea84->name }}"+"（{{ $finelyarea84->id }}）";
                                                         }  
                                                         else if (selectedValue == 85) {                                                        
                                                                  lat01  = {{$finelyarea85-> latitude}};
-                                                                 long01 = {{$finelyarea85-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea85-> longitude}};            
+                                                                 document.getElementById("areaobi").src="{{ $area41->path }}";
+                                                                 areaname.innerHTML ="佐賀・"+" {{ $finelyarea85->name }}"+"（{{ $finelyarea85->id }}）";
                                                         } 
                                                         else if (selectedValue == 86){                                                        
                                                                  lat01  = {{$finelyarea86-> latitude}};
-                                                                 long01 = {{$finelyarea86-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea86-> longitude}};                 
+                                                                 document.getElementById("areaobi").src="{{ $area42->path }}";
+                                                                 areaname.innerHTML ="　　　長崎・"+" {{ $finelyarea86->name }}"+"（{{ $finelyarea86->id }}）";
                                                         }  
                                                         else if (selectedValue == 87) {                                                        
                                                                  lat01  = {{$finelyarea87-> latitude}};
-                                                                 long01 = {{$finelyarea87-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea87-> longitude}};                      
+                                                                 document.getElementById("areaobi").src="{{ $area42->path }}";
+                                                                 areaname.innerHTML ="長崎・"+" {{ $finelyarea87->name }}"+"（{{ $finelyarea87->id }}）";
                                                         }  
                                                         else if (selectedValue == 88) {                                                        
                                                                  lat01  = {{$finelyarea88-> latitude}};
-                                                                 long01 = {{$finelyarea88-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea88-> longitude}};      
+                                                                 document.getElementById("areaobi").src="{{ $area43->path }}";
+                                                                 areaname.innerHTML ="熊本・"+" {{ $finelyarea88->name }}"+"（{{ $finelyarea88->id }}）";
                                                         }  
                                                         else if (selectedValue == 89) {                                                        
                                                                  lat01  = {{$finelyarea89-> latitude}};
-                                                                 long01 = {{$finelyarea89-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea89-> longitude}};                 
+                                                                 document.getElementById("areaobi").src="{{ $area43->path }}";
+                                                                 areaname.innerHTML ="熊本・"+" {{ $finelyarea89->name }}"+"（{{ $finelyarea89->id }}）";
                                                         }  
                                                         
                                                          //90～97
                                                         else if (selectedValue == 90) {                                                         
                                                                  lat01  = {{$finelyarea90-> latitude}};
-                                                                 long01 = {{$finelyarea90-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea90-> longitude}};
+                                                                 document.getElementById("areaobi").src="{{ $area44->path }}";
+                                                                 areaname.innerHTML ="大分・"+" {{ $finelyarea90->name }}"+"（{{ $finelyarea90->id }}）";
                                                         }
                                                         else if (selectedValue ==91) {                                                                
                                                                  lat01  = {{$finelyarea91-> latitude}};
-                                                                 long01 = {{$finelyarea91-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea91-> longitude}};   
+                                                                 document.getElementById("areaobi").src="{{ $area44->path }}";
+                                                                 areaname.innerHTML ="大分・"+" {{ $finelyarea91->name }}"+"（{{ $finelyarea91->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 92) {                                                        
                                                                  lat01  = {{$finelyarea92-> latitude}};
-                                                                 long01 = {{$finelyarea92-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea92-> longitude}};                    
+                                                                 document.getElementById("areaobi").src="{{ $area45->path }}";
+                                                                  areaname.innerHTML ="宮崎・"+" {{ $finelyarea92->name }}"+"（{{ $finelyarea92->id }}）";
                                                         }
                                                         else if (selectedValue == 93) {                                                        
                                                                  lat01  = {{$finelyarea93-> latitude}};
-                                                                 long01 = {{$finelyarea93-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea93-> longitude}};                   
+                                                                 document.getElementById("areaobi").src="{{ $area45->path }}";
+                                                                  areaname.innerHTML ="宮崎・"+" {{ $finelyarea93->name }}"+"（{{ $finelyarea93->id }}）";
                                                         }  
                                                         else if (selectedValue == 94) {                                                        
                                                                  lat01  = {{$finelyarea94-> latitude}};
-                                                                 long01 = {{$finelyarea94-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea94-> longitude}}; 
+                                                                 document.getElementById("areaobi").src="{{ $area46->path }}";
+                                                                  areaname.innerHTML ="　　鹿児島・"+" {{ $finelyarea94->name }}"+"（{{ $finelyarea94->id }}）";
                                                         }  
                                                         else if (selectedValue == 95) {                                                        
                                                                  lat01  = {{$finelyarea95-> latitude}};
-                                                                 long01 = {{$finelyarea95-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea95-> longitude}};
+                                                                 document.getElementById("areaobi").src="{{ $area46->path }}";
+                                                                 areaname.innerHTML ="　鹿児島・"+" {{ $finelyarea95->name }}"+"（{{ $finelyarea95->id }}）";
                                                         } 
                                                         else if (selectedValue == 96){                                                        
                                                                  lat01  = {{$finelyarea96-> latitude}};
-                                                                 long01 = {{$finelyarea96-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea96-> longitude}};       
+                                                                   //↓文字と画像変更
+                                                                  document.getElementById("areaobi").src="{{ $area47->path }}";
+                                                                  areaname.innerHTML ="沖縄・"+" {{ $finelyarea96->name }}"+"（{{ $finelyarea96->id }}）";
                                                         }  
                                                         else if (selectedValue == 97) {                                                        
                                                                  lat01  = {{$finelyarea97-> latitude}};
-                                                                 long01 = {{$finelyarea97-> longitude}};                                                            
+                                                                 long01 = {{$finelyarea97-> longitude}}; 
+                                                                 //↓文字と画像変更
+                                                                  document.getElementById("areaobi").src="{{ $area47->path }}";
+                                                                  areaname.innerHTML ="沖縄・"+" {{ $finelyarea97->name }}"+"（{{ $finelyarea97->id }}）";
+                                                               
                                                         }  
+
 
 
                                         
@@ -2128,11 +2349,11 @@
                                             */
                                                 
                                                         
-                            　                 const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat01+'&longitude='+long01+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
+                            　                 const apiUrl123 = 'https://api.open-meteo.com/v1/forecast?latitude='+lat01+'&longitude='+long01+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
                                                 console.log(lat01+"です");
                                             　　console.log(long01+"です");
                             
-                                               fetch(apiUrl)
+                                               fetch(apiUrl123)
                                                 .then(response => {
                                                 return response.json();
                                                 })
@@ -2144,7 +2365,8 @@
                                                 const temperature2 = Array.from(jsonData.hourly.temperature_2m);                      //時間毎の気温 
                                                 const weather2 = Array.from(jsonData.hourly.weather_code);                            //時間毎のの天気コード
                                                 const humidity = jsonData.current.relative_humidity_2m;                               //現在の湿度                             
-                                                const fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;   //不快指数
+                                                const fukai01 = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;   //不快指数
+                                                
                                                 
                                             
                                             //天気コード分岐
@@ -2173,30 +2395,27 @@
                                             }
                                             
                                             //不快指数分岐
-                                            //寒い
-                                    console.log(fukai+"です！！！！");
-
-                                            if(fukai <　55){
                                             
-                                            
-                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E8%89%AF%E3%81%8F%E3%81%AA%E3%81%84_ivv2mz.png'>";
-                                            
+                                    console.log(fukai01+"です！！！！");
+                                        //寒い
+                                            if(fukai01 <　55){
+                                                hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%8B%E3%82%93_hkfi0w.png';
                                             }
                                             //肌寒い
-                                            else if(fukai >= 55 && fukai <= 65 ){
-                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E7%B5%90%E6%A7%8B%E3%81%84%E3%81%84_h8tsks.png'>";
+                                            else if(fukai01 >= 55 && fukai01 <= 65 ){
+                                                hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%95%E3%82%80%E3%81%84_jbbyyb.png';
                                             }
                                             //快い
-                                            else if(fukai > 65 && fukai <= 75 ){
-                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%9C%80%E9%AB%98b_h92oe9.png'>";
+                                            else if(fukai01 > 65 && fukai01 <= 75 ){
+                                                hukaiSisuu.src  = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%84_rkd08t.png';
                                             }
                                                 //暑い
-                                            else if(fukai > 75 && fukai <= 85 ){
-                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png'>";
+                                            else if(fukai01 > 75 && fukai01 <= 85 ){
+                                                hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png';
                                             }
                                             //暑くてたまらない
-                                            else if(fukai >= 86){
-                                                hukaiSisuu.innerHTML = "<img src ='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png'>";
+                                            else if(fukai01 >= 86){
+                                                hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png';
                                             }
                                             
                                     //↓朝・昼・夜の天気の画像を表示
@@ -2650,348 +2869,390 @@
                             //const apiUrl = ' https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
                             const apiUrl3 = 'https://api.open-meteo.com/v1/forecast?latitude='+lat3+'&longitude='+long3+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';      
                           
-                          //fetch処理でurlからjson形式で情報を取得
-                          fetch(apiUrl3)
-                          .then(response => {
-                              return response.json();
-                          })
-                          .then(data =>{
-                              const jsonData = data;                              //
-                              const humidity = jsonData.current.relative_humidity_2m;      //現在の湿度を取得
-                              const temperature = jsonData.current.temperature_2m;//現在の気温を取得
-                               let fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;
-                 
-                
-                                var ky = {{ $icon1 }};
-                                   var no = {{ $icon2 }};
-                                   var ha = {{ $icon3 }};
-                                   var na = {{ $icon4 }};
-                                   var sy = {{ $icon5 }};
-                                   var ka = {{ $icon6 }};
-                                   var ja = {{ $icon7 }};
-                                   var ta = {{ $icon8 }};
-                                   var ni = {{ $icon9 }};
-                                   var pa = {{ $icon10 }};
-                                   var da = {{ $icon11 }};
-                                   var hz = {{ $icon12 }};
-                                   var nz = {{ $icon13 }};
-                                   var su = {{ $icon14 }};
-                                   var wa = {{ $icon15 }};
-                                   function _delete_element( id_name ){
-                	var dom_obj = document.getElementById(id_name);
-                	var dom_obj_parent = dom_obj.parentNode;
-                	dom_obj_parent.removeChild(dom_obj);
-                }
-                     
-                                  //不快指数分岐
-                                       //～55 	　寒い
-                                        if(fukai <= 54){
-                                       _delete_element('botom2');
-                
-                    
-                    　
-                    if(na == 0){
-                        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
-                    }
-                    else if(na == 1){
-                        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
-                    }
-                    document.getElementById("top1").alt="top1";
-                    
-                    if(sy ==0){
-                        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
-                    }
-                    else if(sy == 1){
-                        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
-                    }
+                                    fetch(apiUrl3)
+          .then(response => {
+              return response.json();
+          })
+          .then(data =>{
+              const jsonData = data;                              //
+              const humidity = jsonData.current.relative_humidity_2m;      //現在の湿度を取得
+              const temperature = jsonData.current.temperature_2m;//現在の気温を取得
+               let fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;
+ 
+
+                var ky = {{ $icon1 }};
+                   var no = {{ $icon2 }};
+                   var ha = {{ $icon3 }};
+                   var na = {{ $icon4 }};
+                   var sy = {{ $icon5 }};
+                   var ka = {{ $icon6 }};
+                   var ja = {{ $icon7 }};
+                   var ta = {{ $icon8 }};
+                   var ni = {{ $icon9 }};
+                   var pa = {{ $icon10 }};
+                   var da = {{ $icon11 }};
+                   var hz = {{ $icon12 }};
+                   var nz = {{ $icon13 }};
+                   var su = {{ $icon14 }};
+                   var wa = {{ $icon15 }};
                    
-                    document.getElementById("top2").alt="top2";
-                
-                    if(ta ==0){
-                        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203315_ruwc1p.png";
+
+                  //不快指数分岐
+                       //～55 	　寒い
+                       
+                    
+
+     if(fukai <= 54){
+                       if(na == 0){
+        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_g_hdppf0.png";
+    }
+    else if(na == 1){
+        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_w_hxmyty.png";
+    }
+    document.getElementById("top1").alt="top1";
+    
+    if(sy ==0){
+        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850800/4_g_xoy3op.png";
+    }
+    else if(sy == 1){
+        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850801/4_w_xqezhd.png";
+    }
+   
+    document.getElementById("top2").alt="top2";
+
+    if(ta ==0){
+        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/1_g_gjpyfc.png";
+    }
+    else if(ta == 1){
+        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850798/1_w_lcj0em.png";
+    }
+if(pa ==0){
+        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/14_g_k9dwem.png";
+    }
+    else if(pa == 1){
+        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/14_w_imlxid.png";
+    }    
+
+if(ni ==0){
+        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/10_g_ipaiuo.png";
+    }
+    else if(sy == 1){
+        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/10_w_ivzohz.png";
+    }    
+    
+    document.getElementById("out1").alt="out1";
+
+
+    if(da ==0){
+        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/15_g_isdqhd.png";
+    }
+    else if(da == 1){
+        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/15_w_res7s4.png";
+    }    
+    
+    document.getElementById("out2").alt="out2";
+    if(nz ==0){
+         document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_g_nt4qz0.png";
+    }
+    else if(nz == 1){
+        document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_w_gbczg1.png";
+    } 
+    document.getElementById("botom1").alt="botom1";
+
+document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("botom2").alt="botom2";
+    
+    
+}
+
+
+ //54～65　　肌寒い 
+ else if(fukai >= 55 && fukai <= 65 ){
+  if(na == 0){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_g_hdppf0.png";
+}
+else if(na == 1){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_w_hxmyty.png";
+}
+    
+document.getElementById("top1").alt="top1";
+
+if(sy ==0){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850800/4_g_xoy3op.png";
+}
+else if(sy == 1){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850801/4_w_xqezhd.png";
+}
+
+document.getElementById("top2").alt="top2";
+
+
+if(pa ==0){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/14_g_k9dwem.png";
+}
+else if(pa == 1){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/14_w_imlxid.png";
+} 
+                           
+document.getElementById("top3").alt="top3";
+    
+if(ka ==0){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850796/8_g_dxphgc.png";
+}
+else if(ka == 1){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850796/8_w_fodsba.png";
+}
+
+document.getElementById("out1").alt="out1";
+    
+if(ja ==0){
+    document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850799/2_g_nj4rd1.png";
+}
+else if(ja == 1){
+    document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850799/2_w_zsfafv.png";
+}
+
+document.getElementById("out2").alt="out2";
+    
+
+    
+if(nz ==0){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_g_nt4qz0.png";
+}
+else if(nz == 1){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_w_gbczg1.png";
+}
+
+document.getElementById("botom1").alt="botom1";
+
+
+document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top4").alt="top4";
+
+document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("botom2").alt="botom2";
+
+                        }
+
+    //64～75　　快い 
+    else if(fukai >= 65 && fukai <= 75 ){
+
+                            if(na == 0){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_g_hdppf0.png";
+}
+else if(na == 1){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_w_hxmyty.png";
+}
+
+document.getElementById("top1").alt="top1";
+    
+if(sy ==0){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850800/4_g_xoy3op.png";
+}
+else if(sy == 1){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850801/4_w_xqezhd.png";
+}
+
+document.getElementById("top2").alt="top2";
+    
+if(ha ==0){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/5_g_ll1lji.png";
+}
+else if(ha == 1){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/5_w_k4kmcf.png";
+}
+
+document.getElementById("top3").alt="top3";
+    
+if(nz ==0){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_g_nt4qz0.png";
+}
+else if(nz == 1){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_w_gbczg1.png";
+}
+
+document.getElementById("botom1").alt="botom1";
+    
+if(su ==0){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_g_biwcu6.png";
+}
+else if(su == 1){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_w_v0lmk7.png";
+}
+
+document.getElementById("botom2").alt="botom2";
+    
+if(wa ==0){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_g_iyv0nk.png";
+}
+else if(wa == 1){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_w_uloywe.png";
+}
+
+document.getElementById("out1").alt="out1";
+
+
+document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top4").alt="top4";
+
+document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("out2").alt="out2";
+
+                        }
+
+//70～85　　暑い 
+else if(fukai >= 75 && fukai <= 85 ){
+
+     
+                         
+                         if(ha ==0){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/5_g_ll1lji.png";
+}
+else if(ha == 1){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/5_w_k4kmcf.png";
+}
+
+document.getElementById("top1").alt="top1";
+ 
+if(hz ==0){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850803/11_g_dysagq.png";
+}
+else if(hz == 1){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850803/11_w_ouiu8j.png";
+}
+document.getElementById("botom1").alt="botom1";
+ 
+if(su ==0){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_g_biwcu6.png";
+}
+else if(su == 1){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_w_v0lmk7.png";
+}
+
+document.getElementById("botom2").alt="botom2";
+ 
+if(wa ==0){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_g_iyv0nk.png";
+}
+else if(wa == 1){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_w_uloywe.png";
+}
+
+document.getElementById("out1").alt="out1";
+
+
+document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top2").alt="top2";
+
+
+document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top3").alt="top3";
+
+
+document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top4").alt="top4";
+
+document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("out2").alt="out2";
+                        }
+
+
+//84～　　　暑くてたまらない 
+else if(fukai >= 86){
+
+                        
+                        if(ky ==0){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850799/3_g_g7e8di.png";
+}
+else if(ky == 1){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850800/3_w_jwwoq6.png";
+}
+
+document.getElementById("top1").alt="top1";
+
+if(no ==0){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/7_g_un1ngt.png";
+}
+else if(no == 1){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/7_w_alpwni.png";
+}
+
+document.getElementById("top2").alt="top2";
+
+if(ha ==0){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/5_g_ll1lji.png";
+}
+else if(ha == 1){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/5_w_k4kmcf.png";
+}
+
+document.getElementById("top3").alt="top3";
+
+if(hz ==0){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850803/11_g_dysagq.png";
+}
+else if(hz == 1){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850803/11_w_ouiu8j.png";
+}
+
+document.getElementById("botom1").alt="botom1";
+
+if(su ==0){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_g_biwcu6.png";
+}
+else if(su == 1){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_w_v0lmk7.png";
+}
+
+document.getElementById("botom2").alt="botom2";
+
+if(wa ==0){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_g_iyv0nk.png";
+}
+else if(wa == 1){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_w_uloywe.png";
+}
+
+document.getElementById("out1").alt="out1";
+
+
+document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top4").alt="top4";
+
+
+document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("out2").alt="out2";
+
                     }
-                    else if(ta == 1){
-                        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%bf%e3%83%bc%e3%83%88%e3%83%ab%e3%83%8d%e3%83%83%e3%82%af%e3%81%ae%e7%84%a1%e6%96%99%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3_plixtm.png";
-                    }    
                     
-                    document.getElementById("top3").alt="top3";
-                
-                    if(ni ==0){
-                        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png";
-                    }
-                    else if(ni == 1){
-                        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0287_wfezcx.png";
-                    }    
-                    
-                    document.getElementById("out1").alt="out1";
-                
-                    if(pa ==0){
-                        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
-                    }
-                    else if(pa == 1){
-                        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
-                    }    
-                    
-                    document.getElementById("top4").alt="top4";
-                
-                    if(da ==0){
-                        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203404_hjobme.png";
-                    }
-                    else if(da == 1){
-                        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png";
-                    }    
-                    
-                    document.getElementById("out2").alt="out2";
-                    
-                    if(nz ==0){
-                         document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
-                    }
-                    else if(nz == 1){
-                        document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
-                    } 
-                    document.getElementById("botom1").alt="botom1";
-                
-                    
-                    
-                }
-                
-                
-                 //54～65　　肌寒い 
-                 else if(fukai >= 55 && fukai <= 65 ){
-                  _delete_element('botom2');
-                   _delete_element('top4');
-                                            if(na == 0){
-                                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
-                                            }
-                                            else if(na == 1){
-                                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
-                                            }
-                    
-                                            document.getElementById("top1").alt="top1";
-                
-                                            if(sy ==0){
-                                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
-                                            }
-                                            else if(sy == 1){
-                                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
-                                            }
-                                            
-                                            document.getElementById("top2").alt="top2";
-                    
-                                            if(ka ==0){
-                                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203408_luvbqi.png";
-                                            }
-                                            else if(ka == 1){
-                                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0292_co2req.png";
-                                            }
-                                            
-                                            document.getElementById("out1").alt="out1";
-                    
-                                            if(ja ==0){
-                                                document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203319_bzhvix.png";
-                                            }
-                                            else if(ja == 1){
-                                                document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%902_axoaz6.png";
-                                            }
-                                            
-                                            document.getElementById("out2").alt="out2";
-                    
-                                            if(pa ==0){
-                                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
-                                            }
-                                            else if(pa == 1){
-                                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
-                                            } 
-                                           
-                                            document.getElementById("top3").alt="top3";
-                    
-                                            if(nz ==0){
-                                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
-                                            }
-                                            else if(nz == 1){
-                                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
-                                            }
-                                            
-                                            document.getElementById("botom1").alt="botom1";
-                
-                
-                                        }
-                
-                    //64～75　　快い 
-                    else if(fukai >= 65 && fukai <= 75 ){
-                     _delete_element('top4');
-                      _delete_element('out2');
-                                            if(na == 0){
-                                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
-                                            }
-                                            else if(na == 1){
-                                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
-                                            }
-                                            
-                                            document.getElementById("top1").alt="top1";
-                    
-                                            if(sy ==0){
-                                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
-                                            }
-                                            else if(sy == 1){
-                                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
-                                            }
-                                            
-                                            document.getElementById("top2").alt="top2";
-                    
-                                            if(ha ==0){
-                                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
-                                            }
-                                            else if(ha == 1){
-                                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                                            }
-                                            
-                                            document.getElementById("top3").alt="top3";
-                    
-                                            if(nz ==0){
-                                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
-                                            }
-                                            else if(nz == 1){
-                                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
-                                            }
-                                            
-                                            document.getElementById("botom1").alt="botom1";
-                    
-                                            if(su == 0){
-                                                document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                                            }
-                                            else if(su == 1){
-                                                document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                                            }
-                                            
-                                            document.getElementById("botom2").alt="botom2";
-                    
-                                            if(wa ==0){
-                                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                                            }
-                                            else if(wa == 1){
-                                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0290_ststiv.png";
-                                            }
-                                            
-                                            document.getElementById("out1").alt="out1";
-                
-                                        }
-                
-                //70～85　　暑い 
-                else if(fukai >= 75 && fukai <= 85 ){
-                 _delete_element('top2');
-                  _delete_element('top3');
-                   _delete_element('top4');
-                    _delete_element('out2');
-                     
-                                         
-                                         if(ha ==0){
-                                             document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
-                                         }
-                                         else if(ha == 1){
-                                             document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                                         }
-                                         
-                                         document.getElementById("top1").alt="top1";
-                 
-                                         if(hz ==0){
-                                             document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
-                                         }
-                                         else if(hz == 1){
-                                             document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
-                                         }
-                                         document.getElementById("botom1").alt="botom1";
-                 
-                                         if(su ==0){
-                                             document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                                         }
-                                         else if(su == 1){
-                                             document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                                         }
-                                         
-                                         document.getElementById("botom2").alt="botom2";
-                 
-                                         if(wa ==0){
-                                             document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                                         }
-                                         else if(wa == 1){
-                                             document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
-                                         }
-                                         
-                                         document.getElementById("out1").alt="out1";
-                
-                                        }
-                
-                
-                //84～　　　暑くてたまらない 
-                else if(fukai >= 86){
-                 _delete_element('top4');
-                    _delete_element('out2');
-                                        
-                                        if(ky ==0){
-                                            document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203326_s3xmu4.png";
-                                        }
-                                        else if(ky == 1){
-                                            document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png";
-                                        }
-                                        
-                                        document.getElementById("top1").alt="top1";
-                
-                                        if(no ==0){
-                                            document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203412_r6sovt.png";
-                                        }
-                                        else if(no == 1){
-                                            document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0294_ziqwci.png";
-                                        }
-                                        
-                                        document.getElementById("top2").alt="top2";
-                
-                                        if(ha ==0){
-                                            document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
-                                        }
-                                        else if(ha == 1){
-                                            document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                                        }
-                                        
-                                        document.getElementById("top3").alt="top3";
-                
-                                        if(hz ==0){
-                                            document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
-                                        }
-                                        else if(hz == 1){
-                                            document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
-                                        }
-                                        
-                                        document.getElementById("botom1").alt="botom1";
-                
-                                        if(su ==0){
-                                            document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                                        }
-                                        else if(su == 1){
-                                            document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                                        }
-                                        
-                                        document.getElementById("botom2").alt="botom2";
-                
-                                        if(wa ==0){
-                                            document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                                        }
-                                        else if(wa == 1){
-                                            document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
-                                        }
-                                        
-                                        document.getElementById("out1").alt="out1";
-                
-                                    }
-                
-                
-                                })
-                            //json形式で情報取得失敗した時
-                            .catch(error => {
-                                console.error('データ取得に失敗しました',error)
-                            });
+
+
+                })
+            //json形式で情報取得失敗した時
+            .catch(error => {
+                console.error('データ取得に失敗しました',error)
+            });
+
+
+                                               
+
+
+                          //fetch処理でurlからjson形式で情報を取得
                         //Button()の終わり
-                        }                                                 
+                        }
+                        
+
 
 
                                 

@@ -157,6 +157,22 @@
 .test01 {
 	text-align: right;
 }
+.return_btn{
+   border: 4px #777777 solid;
+   border-radius: 12px;
+   margin:　2px;
+}
+/*.return_btn i {
+  line-height:50px;
+}
+.return_btn:hover {
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+}*/
+/*.rr_btn:hover{
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+}*/
 
 /* 都道府県選択*/
 .cp_ipselect {
@@ -168,7 +184,7 @@
 .cp_sl06 {
 	position: relative;
 	font-family: inherit;
-	background-color: transparent;
+	/*background-color: transparent;*/
 	width: 100%;
 	padding: 10px 10px 10px 0;
 	font-size: 18px;
@@ -187,7 +203,7 @@
 .cp_ipselect select::-ms-expand {
 	display: none;
 }
-.cp_ipselect:after {
+/*.cp_ipselect:after {
 	position: absolute;
 	top: 18px;
 	right: 10px;
@@ -199,7 +215,7 @@
 	border-right: 6px solid transparent;
 	border-top: 6px solid rgba(0, 0, 0, 0.3);
 	pointer-events: none;
-}
+}*/
 .cp_sl06_selectlabel {
 	color: rgba(0,0,0, 0.5);
 	font-size: 18px;
@@ -227,7 +243,7 @@
 	width: 0;
 	bottom: 1px;
 	position: absolute;
-	background: #da3c41;
+	background: #ffffff;
 	transition: 0.2s ease all;
 }
 .cp_sl06_selectbar:before {
@@ -354,12 +370,12 @@ display: none;
   line-height: 50px;
   font-size: 23px;
   color:white;
-  border-radius: 12px;
+
   text-align: center;
   overflow: hidden;
   font-weight: bold;
   vertical-align: top;
-  border: 4px #777777 solid;
+  
 }
 .fashon_icon i {
   line-height:50px;
@@ -490,6 +506,16 @@ p.kaiwa-text:last-child {
     /* margin-right: 5%; */
     /* margin: 3% 0% 10%; */
     width: 200px;
+}
+
+/*不快指数の位置調整*/
+.hukaisisuu-right{
+  margin-right: -2%;
+}
+
+/*お天気：夜の位置調整*/
+.night-otenki-right{
+  margin-right: -5%;
 }
 
 .weather-social-text{

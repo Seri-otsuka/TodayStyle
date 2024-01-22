@@ -98,9 +98,13 @@
                                         </button>
                                     </x-slot>
                                     <x-slot name="content">
+                                         {{--<x-dropdown-link :href="route('images.create')">
+                                            {{ __(' + 服追加') }}
+                                        </x-dropdown-link>
+                                        
                                         <x-dropdown-link :href="route('profile.edit')">
                                             {{ __('プロフィール') }}
-                                        </x-dropdown-link>
+                                        </x-dropdown-link>--}}
                                         
                                         <!-- Authentication -->
                                         <form method="POST" action="{{ route('logout') }}">
@@ -150,7 +154,7 @@
                                     
                                 </p>
 				            </div>
-				            <div>
+				            <div class="night-otenki-right">
                             	 夜
                                 <img  id="night_OTENKI" style="width: 120px;"/>
                             	<!-- 湿度 -->
@@ -164,9 +168,9 @@
 
 
                             <!---不快指数-->
-                            <div>
+                            <div class="hukaisisuu-right">
                                 <img id="hukaiSisuu" class="weather-social"/>
-                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E7%84%A1%E9%A1%8C20_20240118105545_lfqdgz.png" style="height: 25%;"/>
+                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705790906/%E7%92%B0%E5%A2%83%E6%8C%87%E6%95%B0%E6%94%B9%E8%A8%82%E7%89%88_eos4rt.png" style="height: 27%;"/>
                             </div>
             			    
 <script>
@@ -234,6 +238,7 @@
                           sampleweather.innerHTML = " ★"+temperature + "°C";
                         }
                         
+                        console.log();
 
                         //↓不快指数分岐（ヘッダー用）
                         //寒い 画像：とても寒い
@@ -551,8 +556,8 @@
                         <div class="test01"　>
                             <button onclick="">
                                 <a href="{{ route('goout') }}">
-                                 <img class="mr-2" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704939146/bag1_giuxki.png" width=150px height=150px; />
-                                 <p style="margin: 5% 0% 5%;">お出かけモード→</p>
+                                 <img class="mr-2 return_btn" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704939146/bag1_giuxki.png" width=150px height=150px;/>
+                                 <p style="margin: 0% 0% 5%;">お出かけモード→</p>
                                  </a>
                             </button>
                         </div>
@@ -910,7 +915,6 @@
                                             x-data=""
                                             x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
                                         >
-                                            <figure class="kaiwa-img-right">
                                             <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
                                         </a>
                                         <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
@@ -919,33 +923,35 @@
                                                 @method('delete')
                                                     
                                                     
-                                                <h2 class="text-2xl font-medium text-gray-900">
+                                                <h2 class="text-5xl font-medium text-gray-900 mb-6">
                                                     {{ __('悲壮犬とは？') }}
                                                 </h2>
-                                                <div class="flex justify-between">
-                                                    <img class="w-2" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
-                                                    <div class="text-lg font-medium text-gray-900">名前：悲壮犬
-                                                                                               英語表記：Hiso Ken
-                                                                                                   原産：日本　
-                                                                                                　サイズ：小型犬
-                                                                                                 ＜悲壮犬の性格＞
+                                                <div class="flex">
+                                                    <img class="w-50" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
+                                                    <div class="text-xl font-medium text-gray-900 ml-10 mt-6"><p>名前：悲壮犬</p>
+                                                                                               <p>英語表記：Hiso Ken</p>
+                                                                                                   <p>原産：日本</p><p>サイズ：小型犬</p>
+                                                                                                   </div>
+                                                                                                   </div>
+                                                                                                 <div class="text-lg font-medium text-gray-900">
+                                                                                                <p> ＜悲壮犬の性格＞</p>
                                                                                                  悲壮犬は他人や他犬に対して懐疑心が強く、信頼関係を築くのが苦手です。
                                                                                                 
                                                                                                 自立心がなく順応性も低いため、家族に対しての依存心が強い傾向があります。
                                                                                                 最初の頃はしつけに苦労します。
                                                                                                 
-                                                                                                しかし、飼い主に愛されている実感を持つと徐々にしつけを聞くようになります。
-                                                    </div>
-                                                    
-                                                    </div>
-                                                    <div class="mt-6 flex justify-end">
+                                                                                                しかし、飼い主に愛されている実感を持つと徐々にしつけを聞くようになります
+                                                                                                </div>
+                                                            </div>
+                                                            <div class="mt-6 flex justify-end">
                                                         <x-secondary-button x-on:click="$dispatch('close')">
                                                             {{ __('戻る') }}
                                                         </x-secondary-button>
                                                     </div>
+                                                    </div>
+                                                    
                                                 </form>
                                             </x-modal>
-                                         </figure>
                                      </div>
                                  </td>
                             </tr>
@@ -1169,71 +1175,65 @@
                   //不快指数分岐
                        //～55 	　寒い
                         if(fukai <= 54){
-                       _delete_element('botom2');
-
-    
-    　
-    if(na == 0){
-        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
+                       if(na == 0){
+        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_g_hdppf0.png";
     }
     else if(na == 1){
-        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
+        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_w_hxmyty.png";
     }
     document.getElementById("top1").alt="top1";
     
     if(sy ==0){
-        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
+        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850800/4_g_xoy3op.png";
     }
     else if(sy == 1){
-        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
+        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850801/4_w_xqezhd.png";
     }
    
     document.getElementById("top2").alt="top2";
 
     if(ta ==0){
-        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203315_ruwc1p.png";
+        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/1_g_gjpyfc.png";
     }
     else if(ta == 1){
-        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%bf%e3%83%bc%e3%83%88%e3%83%ab%e3%83%8d%e3%83%83%e3%82%af%e3%81%ae%e7%84%a1%e6%96%99%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3_plixtm.png";
-    }    
-    
-    document.getElementById("top3").alt="top3";
-
-    if(ni ==0){
-        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203337_gufjdi.png";
+        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850798/1_w_lcj0em.png";
     }
-    else if(ni == 1){
-        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0287_wfezcx.png";
+if(pa ==0){
+        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/14_g_k9dwem.png";
+    }
+    else if(pa == 1){
+        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/14_w_imlxid.png";
+    }    
+
+if(ni ==0){
+        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/10_g_ipaiuo.png";
+    }
+    else if(sy == 1){
+        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/10_w_ivzohz.png";
     }    
     
     document.getElementById("out1").alt="out1";
 
-    if(pa ==0){
-        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
-    }
-    else if(pa == 1){
-        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
-    }    
-    
-    document.getElementById("top4").alt="top4";
 
     if(da ==0){
-        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203404_hjobme.png";
+        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/15_g_isdqhd.png";
     }
     else if(da == 1){
-        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%83%80%e3%82%a6%e3%83%b3%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_mcfxxc.png";
+        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/15_w_res7s4.png";
     }    
     
     document.getElementById("out2").alt="out2";
-    
     if(nz ==0){
-         document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
+         document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_g_nt4qz0.png";
     }
     else if(nz == 1){
-        document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
+        document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_w_gbczg1.png";
     } 
     document.getElementById("botom1").alt="botom1";
 
+document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("botom2").alt="botom2";
     
     
 }
@@ -1241,229 +1241,270 @@
 
  //54～65　　肌寒い 
  else if(fukai >= 55 && fukai <= 65 ){
-  _delete_element('botom2');
-   _delete_element('top4');
-                            if(na == 0){
-                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
-                            }
-                            else if(na == 1){
-                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
-                            }
+  if(na == 0){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_g_hdppf0.png";
+}
+else if(na == 1){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_w_hxmyty.png";
+}
     
-                            document.getElementById("top1").alt="top1";
+document.getElementById("top1").alt="top1";
 
-                            if(sy ==0){
-                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
-                            }
-                            else if(sy == 1){
-                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
-                            }
-                            
-                            document.getElementById("top2").alt="top2";
-    
-                            if(ka ==0){
-                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203408_luvbqi.png";
-                            }
-                            else if(ka == 1){
-                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0292_co2req.png";
-                            }
-                            
-                            document.getElementById("out1").alt="out1";
-    
-                            if(ja ==0){
-                                document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203319_bzhvix.png";
-                            }
-                            else if(ja == 1){
-                                document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347926/%e3%82%b8%e3%83%a3%e3%82%b1%e3%83%83%e3%83%88%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%902_axoaz6.png";
-                            }
-                            
-                            document.getElementById("out2").alt="out2";
-    
-                            if(pa ==0){
-                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203400_qrbsrb.png";
-                            }
-                            else if(pa == 1){
-                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%91%e3%83%bc%e3%82%ab%e3%83%bc%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_vl1pu3.png";
-                            } 
+if(sy ==0){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850800/4_g_xoy3op.png";
+}
+else if(sy == 1){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850801/4_w_xqezhd.png";
+}
+
+document.getElementById("top2").alt="top2";
+
+
+if(pa ==0){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/14_g_k9dwem.png";
+}
+else if(pa == 1){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/14_w_imlxid.png";
+} 
                            
-                            document.getElementById("top3").alt="top3";
+document.getElementById("top3").alt="top3";
     
-                            if(nz ==0){
-                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
-                            }
-                            else if(nz == 1){
-                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
-                            }
-                            
-                            document.getElementById("botom1").alt="botom1";
+if(ka ==0){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850796/8_g_dxphgc.png";
+}
+else if(ka == 1){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850796/8_w_fodsba.png";
+}
 
+document.getElementById("out1").alt="out1";
+    
+if(ja ==0){
+    document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850799/2_g_nj4rd1.png";
+}
+else if(ja == 1){
+    document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850799/2_w_zsfafv.png";
+}
+
+document.getElementById("out2").alt="out2";
+    
+
+    
+if(nz ==0){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_g_nt4qz0.png";
+}
+else if(nz == 1){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_w_gbczg1.png";
+}
+
+document.getElementById("botom1").alt="botom1";
+
+
+document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top4").alt="top4";
+
+document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("botom2").alt="botom2";
 
                         }
 
     //64～75　　快い 
     else if(fukai >= 65 && fukai <= 75 ){
-     _delete_element('top4');
-      _delete_element('out2');
+
                             if(na == 0){
-                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203347_loibhu.png";
-                            }
-                            else if(na == 1){
-                                document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/%e3%83%ad%e3%83%b3%e3%82%b0t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b32_tall3d.png";
-                            }
-                            
-                            document.getElementById("top1").alt="top1";
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_g_hdppf0.png";
+}
+else if(na == 1){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_w_hxmyty.png";
+}
+
+document.getElementById("top1").alt="top1";
     
-                            if(sy ==0){
-                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203351_r0cbgl.png";
-                            }
-                            else if(sy == 1){
-                                document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/y%e3%82%b7%e3%83%a3%e3%83%84%e3%81%ae%e3%82%a4%e3%83%a9%e3%82%b9%e3%83%88%e7%b4%a0%e6%9d%905_scezds.png";
-                            }
-                            
-                            document.getElementById("top2").alt="top2";
+if(sy ==0){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850800/4_g_xoy3op.png";
+}
+else if(sy == 1){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850801/4_w_xqezhd.png";
+}
+
+document.getElementById("top2").alt="top2";
     
-                            if(ha ==0){
-                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
-                            }
-                            else if(ha == 1){
-                                document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                            }
-                            
-                            document.getElementById("top3").alt="top3";
+if(ha ==0){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/5_g_ll1lji.png";
+}
+else if(ha == 1){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/5_w_k4kmcf.png";
+}
+
+document.getElementById("top3").alt="top3";
     
-                            if(nz ==0){
-                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203356_d9p0lg.png";
-                            }
-                            else if(nz == 1){
-                                document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0285_kuszgu.png";
-                            }
-                            
-                            document.getElementById("botom1").alt="botom1";
+if(nz ==0){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_g_nt4qz0.png";
+}
+else if(nz == 1){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_w_gbczg1.png";
+}
+
+document.getElementById("botom1").alt="botom1";
     
-                            if(su == 0){
-                                document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                            }
-                            else if(su == 1){
-                                document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                            }
-                            
-                            document.getElementById("botom2").alt="botom2";
+if(su ==0){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_g_biwcu6.png";
+}
+else if(su == 1){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_w_v0lmk7.png";
+}
+
+document.getElementById("botom2").alt="botom2";
     
-                            if(wa ==0){
-                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                            }
-                            else if(wa == 1){
-                                document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0290_ststiv.png";
-                            }
-                            
-                            document.getElementById("out1").alt="out1";
+if(wa ==0){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_g_iyv0nk.png";
+}
+else if(wa == 1){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_w_uloywe.png";
+}
+
+document.getElementById("out1").alt="out1";
+
+
+document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top4").alt="top4";
+
+document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("out2").alt="out2";
 
                         }
 
 //70～85　　暑い 
 else if(fukai >= 75 && fukai <= 85 ){
- _delete_element('top2');
-  _delete_element('top3');
-   _delete_element('top4');
-    _delete_element('out2');
+
      
                          
                          if(ha ==0){
-                             document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
-                         }
-                         else if(ha == 1){
-                             document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                         }
-                         
-                         document.getElementById("top1").alt="top1";
- 
-                         if(hz ==0){
-                             document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
-                         }
-                         else if(hz == 1){
-                             document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
-                         }
-                         document.getElementById("botom1").alt="botom1";
- 
-                         if(su ==0){
-                             document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                         }
-                         else if(su == 1){
-                             document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                         }
-                         
-                         document.getElementById("botom2").alt="botom2";
- 
-                         if(wa ==0){
-                             document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                         }
-                         else if(wa == 1){
-                             document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
-                         }
-                         
-                         document.getElementById("out1").alt="out1";
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/5_g_ll1lji.png";
+}
+else if(ha == 1){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/5_w_k4kmcf.png";
+}
 
+document.getElementById("top1").alt="top1";
+ 
+if(hz ==0){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850803/11_g_dysagq.png";
+}
+else if(hz == 1){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850803/11_w_ouiu8j.png";
+}
+document.getElementById("botom1").alt="botom1";
+ 
+if(su ==0){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_g_biwcu6.png";
+}
+else if(su == 1){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_w_v0lmk7.png";
+}
+
+document.getElementById("botom2").alt="botom2";
+ 
+if(wa ==0){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_g_iyv0nk.png";
+}
+else if(wa == 1){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_w_uloywe.png";
+}
+
+document.getElementById("out1").alt="out1";
+
+
+document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top2").alt="top2";
+
+
+document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top3").alt="top3";
+
+
+document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top4").alt="top4";
+
+document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("out2").alt="out2";
                         }
 
 
 //84～　　　暑くてたまらない 
 else if(fukai >= 86){
- _delete_element('top4');
-    _delete_element('out2');
+
                         
                         if(ky ==0){
-                            document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203326_s3xmu4.png";
-                        }
-                        else if(ky == 1){
-                            document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702433037/%E7%84%A1%E9%A1%8C287_20231213101833_skqbru.png";
-                        }
-                        
-                        document.getElementById("top1").alt="top1";
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850799/3_g_g7e8di.png";
+}
+else if(ky == 1){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850800/3_w_jwwoq6.png";
+}
 
-                        if(no ==0){
-                            document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203412_r6sovt.png";
-                        }
-                        else if(no == 1){
-                            document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0294_ziqwci.png";
-                        }
-                        
-                        document.getElementById("top2").alt="top2";
+document.getElementById("top1").alt="top1";
 
-                        if(ha ==0){
-                            document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203334_aithlb.png";
-                        }
-                        else if(ha == 1){
-                            document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/t%e3%82%b7%e3%83%a3%e3%83%84%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b39_zsyouc.png";
-                        }
-                        
-                        document.getElementById("top3").alt="top3";
+if(no ==0){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/7_g_un1ngt.png";
+}
+else if(no == 1){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/7_w_alpwni.png";
+}
 
-                        if(hz ==0){
-                            document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427289/%E7%84%A1%E9%A1%8C287_20231212203311_pcjnsw.png";
-                        }
-                        else if(hz == 1){
-                            document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0286_gtidl0.png";
-                        }
-                        
-                        document.getElementById("botom1").alt="botom1";
+document.getElementById("top2").alt="top2";
 
-                        if(su ==0){
-                            document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203330_nqc7ht.png";
-                        }
-                        else if(su == 1){
-                            document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_R_0295_yzvvwv.png";
-                        }
-                        
-                        document.getElementById("botom2").alt="botom2";
+if(ha ==0){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/5_g_ll1lji.png";
+}
+else if(ha == 1){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/5_w_k4kmcf.png";
+}
 
-                        if(wa ==0){
-                            document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702427288/%E7%84%A1%E9%A1%8C287_20231212203342_ctknrq.png";
-                        }
-                        else if(wa == 1){
-                            document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1702347922/icon_r_0290_ststiv.png";
-                        }
-                        
-                        document.getElementById("out1").alt="out1";
+document.getElementById("top3").alt="top3";
+
+if(hz ==0){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850803/11_g_dysagq.png";
+}
+else if(hz == 1){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850803/11_w_ouiu8j.png";
+}
+
+document.getElementById("botom1").alt="botom1";
+
+if(su ==0){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_g_biwcu6.png";
+}
+else if(su == 1){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_w_v0lmk7.png";
+}
+
+document.getElementById("botom2").alt="botom2";
+
+if(wa ==0){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_g_iyv0nk.png";
+}
+else if(wa == 1){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_w_uloywe.png";
+}
+
+document.getElementById("out1").alt="out1";
+
+
+document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top4").alt="top4";
+
+
+document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("out2").alt="out2";
 
                     }
 
