@@ -67,12 +67,13 @@
                                         </button>
                                     </x-slot>
                                     <x-slot name="content">
+                                        {{--
                                         <x-dropdown-link :href="route('images.create')">
                                             {{ __(' + 服追加') }}
                                         </x-dropdown-link>
                                         <x-dropdown-link :href="route('profile.edit')">
                                             {{ __('プロフィール') }}
-                                        </x-dropdown-link>
+                                        </x-dropdown-link>--}}
                                         
                                         <!-- Authentication -->
                                         <form method="POST" action="{{ route('logout') }}">
