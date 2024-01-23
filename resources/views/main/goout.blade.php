@@ -109,7 +109,7 @@
                                     
                                 
                                 <img  id = "areaobi" class="rounded-lg" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704450028/%E5%8C%97%E6%B5%B7%E9%81%93%E5%85%A8%E4%BD%93_hrcsg1.png" style="max-width: 20%">
-                            
+                             
                             </div>
                             <!---お天気アイコン-->
 				            <div>
@@ -277,7 +277,7 @@
 
                                                     console.log(lat2+"です！");
                                                     console.log(long2+"です！");
-                                                    
+                                             document.getElementById("areaobi").src="{{ $area->path }}";
 
                                               
                                              const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat01+'&longitude='+long01+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
