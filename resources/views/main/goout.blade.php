@@ -78,6 +78,7 @@
                                         <!-- Authentication -->
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
+                                            
                 
                                             <x-dropdown-link :href="route('logout')"
                                                     onclick="event.preventDefault();
@@ -103,13 +104,24 @@
                                 <p>
                                 
                                 </p>-->
-                                <p id = "areaname">
+                                <p>
+                                    <div  id = "areaname" style="margin-left: 9%;">
                                       {{ $area->name }}・{{$finelyarea->name }}({{ $finelyarea->id }})
+                                    </div>
                                 </p>
-                                    
                                 
-                                <img  id = "areaobi" class="rounded-lg" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704450028/%E5%8C%97%E6%B5%B7%E9%81%93%E5%85%A8%E4%BD%93_hrcsg1.png" style="max-width: 20%">
-                             
+                                <div style="margin-left: 9%;">
+                                 
+                                </div >
+                                    
+
+                                <img  id = "areaobi" class="rounded-lg"  style="max-width: 20%">
+                                <script>
+                                  document.getElementById("areaobi").src="{{ $area->path }}";
+                                 </script>
+                                       
+                                  
+                    
                             </div>
                             <!---お天気アイコン-->
 				            <div>
@@ -255,7 +267,7 @@
                                 　　</select>　　
                                   <span class="cp_sl06_highlight"></span>
                                   <span class="cp_sl06_selectbar"></span>
-                                  <label class="cp_sl06_selectlabel">地域を選択してください</label>
+                                  <label class="cp_sl06_selectlabel"><font size="4">お出かけする地域を選択してください</font></label>
                                   </div>
                                 </form>
                           
@@ -277,7 +289,7 @@
 
                                                     console.log(lat2+"です！");
                                                     console.log(long2+"です！");
-                                             document.getElementById("areaobi").src="{{ $area->path }}";
+
 
                                               
                                              const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat01+'&longitude='+long01+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
@@ -299,340 +311,551 @@
                                                 const fukai00 = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;   //不快指数
                                                 
                                             
+                        //↓天気コード分岐(現在の天気：ヘッダー用)
                                             //天気コード分岐
                                             //晴れ
                                             if(weather === 0 || weather === 1){
-                                              sampleweather.innerHTML = "☀"+temperature + "°C";
+                                             // sampleweather.innerHTML = "☀"+temperature + "°C";
+                                              document.getElementById("sampleweather").innerHTML
                                             }
                                             //一部くもり
                                             else if(weather === 2){
-                                                sampleweather.innerHTML = "🌤  "+temperature + "°C";
+                                                document.getElementById("sampleweather").innerHTML = "🌤  "+temperature + "°C";
                                             }
                                             //曇り
                                             else if(weather === 3){
-                                              sampleweather.innerHTML =  "☁  "+temperature + "°C";
+                                              document.getElementById("sampleweather").innerHTML =  "☁  "+temperature + "°C";
                                             }
                                             //雨
                                             else if(weather <= 69){
-                                              sampleweather.innerHTML =  "☂ "+temperature + "°C";
+                                              document.getElementById("sampleweather").innerHTML =  "☂ "+temperature + "°C";
                                             }
                                             //雪
                                             else if(weather <=  79){
-                                                sampleweather.innerHTML = "☃ "+temperature + "°C";
+                                                document.getElementById("sampleweather").innerHTML = "☃ "+temperature + "°C";
                                             }
                                             else{
-                                              sampleweather.innerHTML = " ★"+temperature + "°C";
+                                              document.getElementById("sampleweather").innerHTML = " ★"+temperature + "°C";
                                             }
-                                            
-                                            //↓不快指数分岐（ヘッダー用）
-                                            //寒い 画像：とても寒い
-                                            if(fukai00 <= 54){
-                                            
-                                                hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%8B%E3%82%93_hkfi0w.png';    
-                                            }
-                                            //肌寒い 画像；寒い
-                                            else if(fukai00 >= 55 && fukai00 <= 65 ){
-                                                hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%95%E3%82%80%E3%81%84_jbbyyb.png';
-                                            }
-                                            //快い 画像：快適
-                                            else if(fukai00 > 65 && fukai00 <= 75 ){
-                                                hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%8B%E3%81%84%E3%81%A6%E3%81%8D_o2qa7h.png';
-                                            }
-                                            //暑い 画像：やや暑い
-                                            else if(fukai00 > 75 && fukai00 <= 85 ){
-                                                hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%84_rkd08t.png';
-                                            }
-                                            //暑くてたまらない 画像：とても暑い
-                                            else if(fukai00 >= 86){
-                                                hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%99%E3%81%8E_ltpfdk.png';
-                                            }
-                                            
-                                    //↓朝・昼・夜の天気の画像を表示
-                                        //朝の天気
-                                        //快晴
-                                        if(weather2[7] === 0 ){
-                                          morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
-                                        }
-                                        //晴れだけど雲がでてる
-                                        else if(weather2[7] === 1){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                                        }
-                                        //一部曇り
-                                        else if(weather2[7] === 2){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                                        }            
-                                        //曇り
-                                        else if( weather2[7] === 3){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                                        }
-                                         //霧（曇りアイコン使用）
-                                         else if (weather2[7] <= 49){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                                        }
-                
-                                        //雨
-                                        else if(weather2[7] <= 69  ){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                                        }
-                                        //雪
-                                        else if (weather2[7] <= 79){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                                        }
-                                        //にわか雨(晴れのち雨アイコン使用)
-                                        else if(weather2[7] <= 84){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                                        }
-                                        //雪（雪のアイコン使用）
-                                        else if(weather2[7] <= 94){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                                        }
-                                        //雷雨（雨のアイコン使用）
-                                        else if(weather2[7] <= 99){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                                        }                           
-                                        //曇りのち晴れ
-                                        else if (weather2[7] === 210){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                                        }
-                                        //晴れのち曇り
-                                        else if (weather2[7] === 211){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                                        }
-                                        //曇りのち雨
-                                        else if (weather2[7] === 212){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
-                                        }
-                                        //雪のち雨
-                                        else if (weather2[7] === 213){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
-                                        }
-                                        //晴れのち雨
-                                        else if (weather2[7] === 411){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                                        }
-                                        //雨のち晴れ
-                                        else if (weather2[7] === 311){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
-                                        }
-                                        //晴れのち雪
-                                        else if (weather2[7] === 311){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
-                                        }
-                                        //雨のち曇り
-                                        else if (weather2[7] === 214){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
-                                        }
-                                         //雪のち曇り
-                                         else if (weather2[7] === 217){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
-                                        }
-                
-                                    //不明
-                                        else{
-                                            morning_OTENKI.innerHTML = "★";
-                                        }
-                                    
-                                        //朝7時の気温出力
-                                        temperature_morning.innerHTML =  "🌡  "+temperature2[7] + "°C";
-                                        //朝7時の降水確率を出力
-                                        rainypercent_morning.innerHTML  = "⛆   "+ probability[7] + "%";
-                                    
-                                    
-                                        
-                                        
-                                        //昼の天気
-                                        //快晴
-                                        if(weather2[13] === 0 ){
-                                          noon_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
-                                        }
-                                        //晴れだけど雲がでてる
-                                        else if(weather2[13] === 1){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                                        }
-                                        //一部曇り
-                                        else if(weather2[13] === 2){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                                        }            
-                                        //曇り
-                                        else if( weather2[13] === 3){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                                        }
-                                         //霧（曇りアイコン使用）
-                                         else if (weather2[13] <= 49){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                                        }
-                
-                                        //雨
-                                        else if(weather2[13] <= 69  ){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                                        }
-                                        //雪
-                                        else if (weather2[13] <= 79){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                                        }
-                                        //にわか雨(晴れのち雨アイコン使用)
-                                        else if(weather2[13] <= 84){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                                        }
-                                        //雪（雪のアイコン使用）
-                                        else if(weather2[13] <= 94){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                                        }
-                                        //雷雨（雨のアイコン使用）
-                                        else if(weather2[13] <= 99){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                                        }                           
-                                        //曇りのち晴れ
-                                        else if (weather2[13] === 210){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                                        }
-                                        //晴れのち曇り
-                                        else if (weather2[13] === 211){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                                        }
-                                        //曇りのち雨
-                                        else if (weather2[13] === 212){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
-                                        }
-                                        //雪のち雨
-                                        else if (weather2[13] === 213){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
-                                        }
-                                        //晴れのち雨
-                                        else if (weather2[13] === 411){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                                        }
-                                        //雨のち晴れ
-                                        else if (weather2[13] === 311){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
-                                        }
-                                        //晴れのち雪
-                                        else if (weather2[13] === 311){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
-                                        }
-                                        //雨のち曇り
-                                        else if (weather2[13] === 214){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
-                                        }
-                                         //雪のち曇り
-                                         else if (weather2[13] === 217){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
-                                        }
-                
-                                    //不明
-                                        else{
-                                            noon_OTENKI.innerHTML = "★";
-                                        }
-                
-                                    
-                                        //昼13時の気温出力
-                                        temperature_noon.innerHTML =  temperature2[13] + "°C";
-                                        //昼13時の降水確率を出力
-                                        rainypercent_noon.innerHTML  =  probability[13] + "%";
-                                    
-                                    
-                                    
-                                    
-                                    //夜の天気
-                                        //快晴
-                                        if(weather2[19] === 0 ){
-                                          night_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
-                                        }
-                                        //晴れだけど雲がでてる
-                                        else if(weather2[19] === 1){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                                        }
-                                        //一部曇り
-                                        else if(weather2[19] === 2){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                                        }            
-                                        //曇り
-                                        else if( weather2[19] === 3){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                                        }
-                                         //霧（曇りアイコン使用）
-                                         else if (weather2[19] <= 49){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                                        }
-                
-                                        //雨
-                                        else if(weather2[19] <= 69  ){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                                        }
-                                        //雪
-                                        else if (weather2[19] <= 79){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                                        }
-                                        //にわか雨(晴れのち雨アイコン使用)
-                                        else if(weather2[19] <= 84){
-                                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                                        }
-                                        //雪（雪のアイコン使用）
-                                        else if(weather2[19] <= 94){
-                                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                                        }
-                                        //雷雨（雨のアイコン使用）
-                                        else if(weather2[19] <= 99){
-                                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                                        }                           
-                                        //曇りのち晴れ
-                                        else if (weather2[19] === 210){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                                        }
-                                        //晴れのち曇り
-                                        else if (weather2[19] === 211){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                                        }
-                                        //曇りのち雨
-                                        else if (weather2[19] === 212){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
-                                        }
-                                        //雪のち雨
-                                        else if (weather2[19] === 213){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
-                                        }
-                                        //晴れのち雨
-                                        else if (weather2[19] === 411){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                                        }
-                                        //雨のち晴れ
-                                        else if (weather2[19] === 311){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
-                                        }
-                                        //晴れのち雪
-                                        else if (weather2[19] === 311){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
-                                        }
-                                        //雨のち曇り
-                                        else if (weather2[19] === 214){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
-                                        }
-                                         //雪のち曇り
-                                         else if (weather2[19] === 217){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
-                                        }
-                
-                                    //不明
-                                        else{
-                                            night_OTENKI.innerHTML = "★";
-                                        }
-                                    
-                                        //夜19時の気温出力
-                                        temperature_night.innerHTML =  temperature2[19] + "°C";
-                                        //夜19時の降水確率を出力
-                                        rainypercent_night.innerHTML  =  probability[19] + "%"
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            })
-                                            
-                                            
-                                            .catch(error => {
-                                            console.error('データ取得に失敗しました',error)
-                                            });
+                        //↓不快指数分岐（ヘッダー用）
+                        //寒い 画像：とても寒い
+                        if(fukai00 <= 54){
+                        
+                            //hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%8B%E3%82%93_hkfi0w.png';
+                       
+                             document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%8B%E3%82%93_hkfi0w.png';
+
+                        }
+                        //肌寒い 画像；寒い
+                        else if(fukai00 >= 55 && fukai00 <= 65 ){
+                           // hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%95%E3%82%80%E3%81%84_jbbyyb.png';
+                              document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%95%E3%82%80%E3%81%84_jbbyyb.png';
+
+                        }
+                        //快い 画像：快適
+                        else if(fukai00 > 65 && fukai00 <= 75 ){
+                            //hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%8B%E3%81%84%E3%81%A6%E3%81%8D_o2qa7h.png';
+                             document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%8B%E3%81%84%E3%81%A6%E3%81%8D_o2qa7h.png';
+
+                            
+                        }
+                        //暑い 画像：やや暑い
+                        else if(fukai00 > 75 && fukai00 <= 85 ){
+                          //  hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%84_rkd08t.png';
+                            document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%84_rkd08t.png';
+
+                        }
+                        
+                        //暑くてたまらない 画像：とても暑い
+                        else if(fukai00 >= 86){
+                            ///hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%99%E3%81%8E_ltpfdk.png';
+                            document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%99%E3%81%8E_ltpfdk.png';
+                        }
+                    //↓朝・昼・夜の天気の画像を表示
+                        //朝の天気
+                        //快晴
+                        if(weather2[13] === 0 ){
+                          //morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';      
+                       document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+
+                          
+                        }
+                        //晴れだけど雲がでてる
+                        else if(weather2[7] === 1){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //一部曇り
+                        else if(weather2[7] === 2){
+                            //morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }            
+                        //曇り
+                        else if( weather2[7] === 3){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+
+                        }
+                         //霧（曇りアイコン使用）
+                         else if (weather2[7] <= 49){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                        }
+
+                        //雨
+                        else if(weather2[7] <= 69  ){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }
+                        //雪
+                        else if (weather2[7] <= 79){
+                            //morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                        }
+                        //にわか雨(晴れのち雨アイコン使用)
+                        else if(weather2[7] <= 84){
+                            //morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                        }
+                        //雪（雪のアイコン使用）
+                        else if(weather2[7] <= 94){
+                          //  morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            
+                        }
+                        //雷雨（雨のアイコン使用）
+                        else if(weather2[7] <= 99){
+                         //   morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }                           
+                        //曇りのち晴れ
+                        else if (weather2[7] === 210){
+                          //  morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //晴れのち曇り
+                        else if (weather2[7] === 211){
+                            //morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }
+                        //曇りのち雨
+                        else if (weather2[7] === 212){
+                        //    morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                        }
+                        
+                        //雪のち雨
+                        else if (weather2[7] === 213){
+                          //  morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                        }
+                        //晴れのち雨
+                        else if (weather2[7] === 411){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            
+                        }
+                        //雨のち晴れ
+                        else if (weather2[7] === 311){
+                          //  morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                        }
+                        //晴れのち雪
+                        else if (weather2[7] === 311){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            
+                        }
+                        //雨のち曇り
+                        else if (weather2[7] === 214){
+                         //   morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                             document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+    
+                        }
+                         //雪のち曇り
+                         else if (weather2[7] === 217){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+
+                        }
+
+                    //不明
+                        else{
+                            morning_OTENKI.innerHTML = "★";
+                        }
+                    
+                        //朝7時の気温出力
+                        temperature_morning.innerHTML =  "🌡  "+temperature2[7] + "°C";
+                        //朝7時の降水確率を出力
+                        rainypercent_morning.innerHTML  = "⛆   " + probability[7] + "%";
+                    
+                    
+                        
+                        
+                        //昼の天気
+                        //快晴
+                        if(weather2[13] === 0 ){
+                          //morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';      
+                       document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+
+                          
+                        }
+                        //晴れだけど雲がでてる
+                        else if(weather2[13] === 1){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //一部曇り
+                        else if(weather2[13] === 2){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }            
+                        //曇り
+                        else if( weather2[13] === 3){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+
+                        }
+                         //霧（曇りアイコン使用）
+                         else if (weather2[13] <= 49){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                        }
+
+                        //雨
+                        else if(weather2[13] <= 69  ){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }
+                        //雪
+                        else if (weather2[13] <= 79){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                        }
+                        //にわか雨(晴れのち雨アイコン使用)
+                        else if(weather2[13] <= 84){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                        }
+                        //雪（雪のアイコン使用）
+                        else if(weather2[13] <= 94){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            
+                        }
+                        //雷雨（雨のアイコン使用）
+                        else if(weather2[13] <= 99){
+                         //   night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }                           
+                        //曇りのち晴れ
+                        else if (weather2[13] === 210){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //晴れのち曇り
+                        else if (weather2[13] === 211){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }
+                        //曇りのち雨
+                        else if (weather2[13] === 212){
+                        //    night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                        }
+                        
+                        //雪のち雨
+                        else if (weather2[13] === 213){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                        }
+                        //晴れのち雨
+                        else if (weather2[13] === 411){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            
+                        }
+                        //雨のち晴れ
+                        else if (weather2[13] === 311){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                        }
+                        //晴れのち雪
+                        else if (weather2[13] === 311){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            
+                        }
+                        //雨のち曇り
+                        else if (weather2[13] === 214){
+                         //   noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                             document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+    
+                        }
+                         //雪のち曇り
+                         else if (weather2[13] === 217){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+
+                        }
+
+                    //不明
+                        else{
+                            morning_OTENKI.innerHTML = "★";
+                        }
+
+                    
+                        //昼13時の気温出力
+                        temperature_noon.innerHTML =  temperature2[13] + "°C";
+                        //昼13時の降水確率を出力
+                        rainypercent_noon.innerHTML  =  probability[13] + "%";
+                    
+                    
+                    
+                    
+                    //昼の天気
+                        //快晴
+                        if(weather2[13] === 0 ){
+                          //morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';      
+                       document.getElementById("").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+
+                          
+                        }
+                        //晴れだけど雲がでてる
+                        else if(weather2[13] === 1){
+                           // .src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //一部曇り
+                        else if(weather2[13] === 2){
+                            //noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }            
+                        //曇り
+                        else if( weather2[7] === 3){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+
+                        }
+                         //霧（曇りアイコン使用）
+                         else if (weather2[13] <= 49){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                        }
+
+                        //雨
+                        else if(weather2[13] <= 69  ){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }
+                        //雪
+                        else if (weather2[13] <= 79){
+                            //noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                        }
+                        //にわか雨(晴れのち雨アイコン使用)
+                        else if(weather2[13] <= 84){
+                            //noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                        }
+                        //雪（雪のアイコン使用）
+                        else if(weather2[13] <= 94){
+                          //  noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            
+                        }
+                        //雷雨（雨のアイコン使用）
+                        else if(weather2[13] <= 99){
+                         //   noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }                           
+                        //曇りのち晴れ
+                        else if (weather2[13] === 210){
+                          //  noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //晴れのち曇り
+                        else if (weather2[13] === 211){
+                            //noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }
+                        //曇りのち雨
+                        else if (weather2[13] === 212){
+                        //    noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                        }
+                        
+                        //雪のち雨
+                        else if (weather2[13] === 213){
+                          //  noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                        }
+                        //晴れのち雨
+                        else if (weather2[13] === 411){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            
+                        }
+                        //雨のち晴れ
+                        else if (weather2[13] === 311){
+                          //  noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                        }
+                        //晴れのち雪
+                        else if (weather2[13] === 311){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            
+                        }
+                        //雨のち曇り
+                        else if (weather2[13] === 214){
+                         //   noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                             document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+    
+                        }
+                         //雪のち曇り
+                         else if (weather2[13] === 217){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+
+                        }
+
+                    //不明
+                        else{
+                            night_OTENKI.innerHTML = "★";
+                        }
+                        
+                        
+                        
+                        
+                        
+                        
+                         //夜の天気
+                        //快晴
+                        if(weather2[19] === 0 ){
+                          //morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';      
+                       document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+
+                          
+                        }
+                        //晴れだけど雲がでてる
+                        else if(weather2[19] === 1){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //一部曇り
+                        else if(weather2[19] === 2){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }            
+                        //曇り
+                        else if( weather2[19] === 3){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+
+                        }
+                         //霧（曇りアイコン使用）
+                         else if (weather2[19] <= 49){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                        }
+
+                        //雨
+                        else if(weather2[19] <= 69  ){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }
+                        //雪
+                        else if (weather2[19] <= 79){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                        }
+                        //にわか雨(晴れのち雨アイコン使用)
+                        else if(weather2[19] <= 84){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                        }
+                        //雪（雪のアイコン使用）
+                        else if(weather2[19] <= 94){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            
+                        }
+                        //雷雨（雨のアイコン使用）
+                        else if(weather2[19] <= 99){
+                         //   night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }                           
+                        //曇りのち晴れ
+                        else if (weather2[19] === 210){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //晴れのち曇り
+                        else if (weather2[19] === 211){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }
+                        //曇りのち雨
+                        else if (weather2[19] === 212){
+                        //    night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                        }
+                        
+                        //雪のち雨
+                        else if (weather2[19] === 213){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                        }
+                        //晴れのち雨
+                        else if (weather2[19] === 411){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            
+                        }
+                        //雨のち晴れ
+                        else if (weather2[19] === 311){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                        }
+                        //晴れのち雪
+                        else if (weather2[19] === 311){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            
+                        }
+                        //雨のち曇り
+                        else if (weather2[19] === 214){
+                         //   noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                             document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+    
+                        }
+                         //雪のち曇り
+                         else if (weather2[19] === 217){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+
+                        }
+
+                    //不明
+                        else{
+                            morning_OTENKI.innerHTML = "★";
+                        }
+
+                    
+                        //夜19時の気温出力
+                        temperature_night.innerHTML =  temperature2[19] + "°C";
+                        //夜19時の降水確率を出力
+                        rainypercent_night.innerHTML  =  probability[19] + "%"
+                            
+                            console.log(weather2);
+                        
+                        })
+                        
+                        
+                        .catch(error => {
+                        console.error('データ取得に失敗しました',error)
+                        });
         //ワンポイント用コード
             /*
         UR:①'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=1';
@@ -703,88 +926,89 @@
                     
                      
                         
-                    //3行目
-                    if(uvmax => 3){
-                        recommend_items.innerHTML = "今日は日差しが強いワン!日焼け対策を<br>しっかりしよう。日焼け止めや日傘などを使おう。";
-                    }
-                    else if(uvmax => 6){
-                        recommend_items.innerHTML = "今日は日差しがすごく強いワン!<br>できるだけ屋外での活動は控えよう。";
-                    }
-                     if(result == true){
-                        recommend_items.innerHTML = "今日は雪だワン!!滑らないようにしてね。<br>傘やブーツ、マフラー、手袋などを使おう。";
-                    }
-                    else if(rainmax <= 20){
-                        recommend_items.innerHTML = "雨の心配は無さそうだワン！洗濯物を乾かすのも👌";
-                    }
-                    else if(rainmax <= 29){
-                        recommend_items.innerHTML = "折り畳み傘が助けてくれるかもだワン！ ";
-                    }
-                    else if(rainmax => 30){
-                        recommend_items.innerHTML = "今日は雨が降るかもしれないワン!<br>折り畳み傘が便利だよ。 ";
-                    }
-                    else if(rainmax => 70){
-                        recommend_items.innerHTML = "今日は雨降りだワン!雨具をしっかり用意しよう。<br>傘やレインブーツを使おう。";
-                    }
                    
-                       
-                            //出力
-                            //if文はelseなしにする　→　選択されていなければ共通の文とグッズのみ出力0110
-                            //不快指数分岐
+                                                    //3行目
+                                                    if(uvmax => 3){
+                                                        document.getElementById("recommend_items").innerHTML = "今日は日差しが強いワン!日焼け対策を<br>しっかりしよう。日焼け止めや日傘などを使おう。";
+                                                      
+                                                    }
+                                                    else if(uvmax => 6){
+                                                         document.getElementById("recommend_items").innerHTML = "今日は日差しがすごく強いワン!<br>できるだけ屋外での活動は控えよう。";
+                                                    }
+                                                     if(result == true){
+                                                         document.getElementById("recommend_items").innerHTML = "今日は雪だワン!!滑らないようにしてね。<br>傘やブーツ、マフラー、手袋などを使おう。";
+                                                    }
+                                                    else if(rainmax <= 20){
+                                                         document.getElementById("recommend_items").innerHTML = "雨の心配は無さそうだワン！洗濯物を乾かすのも👌";
+                                                    }
+                                                    else if(rainmax <= 29){
+                                                         document.getElementById("recommend_items").innerHTML = "折り畳み傘が助けてくれるかもだワン！ ";
+                                                    }
+                                                    else if(rainmax => 30){
+                                                         document.getElementById("recommend_items").innerHTML = "今日は雨が降るかもしれないワン!<br>折り畳み傘が便利だよ。 ";
+                                                    }
+                                                    else if(rainmax => 70){
+                                                         document.getElementById("recommend_items").innerHTML = "今日は雨降りだワン!雨具をしっかり用意しよう。<br>傘やレインブーツを使おう。";
+                                                    }
+                                                   
+                                                       
+                                                            
+                                                            //不快指数分岐(ワンポイント)
+                                                         //寒い
+                                                         if(fukai2 <= 54){
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
+                                                            //1:寒がり
+                                                            if(samatu == 1){
+                                                            document.getElementById("advicesamuatu").innerHTML="防寒具があるといいね。カイロもgood!<br>裏起毛の服がおすすめだワン!";
 
-                         //寒い
-                         if(fukai2 <= 54){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                            //1:寒がり
-                            if(samatu == 1){
-                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!<br>裏起毛の服がおすすめだワン!";
-
-                           }
-                           //0:暑がり
-                           else{
-                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!<br>今日は暑がりさんも寒さに注意だワン! ";
-                           }
-                         }
-                         //肌寒い
-                         else if(fukai2 >= 55 && fukai2 <= 65 ){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                             if(samatu == 1){
-                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>厚手の靴下やブーツも選んでみよう。";
-                             }
-                             else{
-                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>暖房に対応できるアウターを選ぼう。 ";
-                             }
-                         }
-                         //快い
-                         else if(fukai2 >= 65 && fukai2 <= 75 ){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                            advicesamuatu.innerHTML= "今日は過ごしやすいワンダフルな一日‼<br>好きなオシャレが楽しめそうだワン。";
-
- 
-                           }
-                         //暑い
-                         else if(fukai2 >= 75 && fukai2 <= 85 ){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                             if(samatu == 1){
-                                advicesamuatu.innerHTML = "薄手の素材がおすすめだワン。<br>冷房に注意してね。七分丈もよいかも？ ";
-                             }
-                             else{
-                                advicesamuatu.innerHTML =" 薄手の素材がおすすめだワン。<br>通気性の良い半袖や半ズボンがおすすめだよ。 ";
-                             }
-                           }
-                         //暑くてたまらない
-                         else if(fukai2 >= 86){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                             if(samatu == 1){
-                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。冷房に注意するワン!　 ";
-                             }
-                             else{
-                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。汗拭きシートで快適だワン。 ";
-                             }
+                                
+                                                           }
+                                                           //0:暑がり
+                                                           else{
+                                                            document.getElementById("advicesamuatu").innerHTML="防寒具があるといいね。カイロもgood!<br>今日は暑がりさんも寒さに注意だワン! ";
+                                                           }
+                                                         }
+                                                         //肌寒い
+                                                         else if(fukai2 >= 55 && fukai2 <= 65 ){
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
+                                                             if(samatu == 1){
+                                                                document.getElementById("advicesamuatu").innerHTML="アウターやインナーを上手に活用するワン!<br>厚手の靴下やブーツも選んでみよう。";
+                                                             }
+                                                             else{
+                                                                document.getElementById("advicesamuatu").innerHTML="アウターやインナーを上手に活用するワン!<br>暖房に対応できるアウターを選ぼう。 ";
+                                                             }
+                                                         }
+                                                         //快い
+                                                         else if(fukai2 >= 65 && fukai2 <= 75 ){
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
+                                                            document.getElementById("advicesamuatu").innerHTML= "今日は過ごしやすいワンダフルな一日‼<br>好きなオシャレが楽しめそうだワン。";
+                                
+                                 
+                                                           }
+                                                         //暑い
+                                                         else if(fukai2 >= 75 && fukai2 <= 85 ){
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
+                                                             if(samatu == 1){
+                                                                document.getElementById("advicesamuatu").innerHTML = "薄手の素材がおすすめだワン。<br>冷房に注意してね。七分丈もよいかも？ ";
+                                                             }
+                                                             else{
+                                                                document.getElementById("advicesamuatu").innerHTML =" 薄手の素材がおすすめだワン。<br>通気性の良い半袖や半ズボンがおすすめだよ。 ";
+                                                             }
+                                                           }
+                                                         //暑くてたまらない
+                                                         else if(fukai2 >= 86){
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
+                                                             if(samatu == 1){
+                                                                document.getElementById("advicesamuatu").innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。冷房に注意するワン!　 ";
+                                                             }
+                                                             else{
+                                                                document.getElementById("advicesamuatu").innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。汗拭きシートで快適だワン。 ";
+                                                             }         
                             
                          
 
@@ -815,7 +1039,7 @@
                           
                           <!---地域詳細--->
                           <font size="5">
-                          <strong>地域詳細</strong>
+                          <strong><font size="7">地域詳細</font></strong>
                           
                           
                           <table align="center" border="1">		
@@ -829,6 +1053,12 @@
                           				                    <!--選択-->
                                                             <td><div class="selectdiv" style="margin: 30% 0% -300% 0%;">
                             <label>
+
+
+<script>                                       document.getElementById("todohuken").src="{{ $area->path }}";
+</script>
+
+
 
                          
                             <select id="children" class="form">
@@ -1349,11 +1579,14 @@
                                 </button>
                             </div>
                         </center>
+                        
+                        <!---隙間-->
+	                    <div class="sukima_box"></div>
                     
                     
                         <!--ワンポイントアドバイス-->
-                        <table align="center" class="sample_test">
-                            <tr>
+                        <table align="center">
+                            <tr  class="sample_test">
                                 <td>
                                     <p class="kaiwa-text ">
                                                 <font size="7" >
@@ -1392,13 +1625,65 @@
                                         </center>
                                     </div>
                                 </td>
-                                 <td>
-                                    <div class="kaiwa">
+                                 
+                                 
+                                 {{--<td>
+                                    <div class="kaiwa">    
                                         <figure class="kaiwa-img-right">
-                                               <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
+                                               <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" width="200px" height="200px">
                                          </figure>
                                      </div>
+                                 </td>--}}
+                                
+                                <td>
+                                    <div class="kaiwa">
+                                        <a
+                                            x-data=""
+                                            x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
+                                        >
+                                            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
+                                        </a>
+                                        <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
+                                            <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+                                                @csrf
+                                                @method('delete')
+                                                    
+                                                    
+                                                <h2 class="text-5xl font-medium text-gray-900 mb-6">
+                                                    {{ __('悲壮犬とは？') }}
+                                                </h2>
+                                                <div class="flex">
+                                                    <img class="w-50" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png">
+                                                    <div class="text-xl font-medium text-gray-900 ml-10 mt-6"><p>名前：悲壮犬</p>
+                                                                                               <p>英語表記：Hiso Ken</p>
+                                                                                                   <p>原産：日本</p><p>サイズ：小型犬</p>
+                                                                                                   </div>
+                                                                                                   </div>
+                                                                                                 <div class="text-lg font-medium text-gray-900">
+                                                                                                <p> ＜悲壮犬の性格＞</p>
+                                                                                                 悲壮犬は他人や他犬に対して懐疑心が強く、信頼関係を築くのが苦手です。
+                                                                                                
+                                                                                                自立心がなく順応性も低いため、家族に対しての依存心が強い傾向があります。
+                                                                                                最初の頃はしつけに苦労します。
+                                                                                                
+                                                                                                しかし、飼い主に愛されている実感を持つと徐々にしつけを聞くようになります
+                                                                                                </div>
+                                                            </div>
+                                                            <div class="mt-6 flex justify-end">
+                                                        <x-secondary-button x-on:click="$dispatch('close')">
+                                                            {{ __('戻る') }}
+                                                        </x-secondary-button>
+                                                    </div>
+                                                    </div>
+                                                    
+                                                </form>
+                                            </x-modal>
+                                     </div>
                                  </td>
+                                 
+                                 
+                                 
+                                 
                             </tr>
                         </table>
                      </div>
@@ -1707,7 +1992,7 @@
                                                                                       
                                           
                                           
-                                        // 選択されているオプションのテキストを取得
+                                                // 選択されているオプションのテキストを取得
                                                  selectedText = document.getElementById('children').options[document.getElementById('children').selectedIndex].text;
                                                  selectedValue = childrenDate.value;
                                                 console.log(selectedValue);
@@ -1718,126 +2003,126 @@
                                                                  lat01  = {{$finelyarea1 -> latitude}};
                                                                  long01 = {{$finelyarea1 -> longitude}};
                                                                  document.getElementById("areaobi").src="{{ $area1->path }}";
-                                                                 areaname.innerHTML ="　北海道・"+" {{ $finelyarea1->name }}"+"（{{ $finelyarea1->id }}）";
+                                                                 document.getElementById("areaname").innerHTML ="北海道・"+" {{ $finelyarea1->name }}"+"（{{ $finelyarea1->id }}）";
                                                           }
                                                       //2
                                                         else if (selectedValue == 2) {
                                                                  lat01  = {{$finelyarea2 -> latitude}};
                                                                  long01 = {{$finelyarea2-> longitude}};
                                                                  document.getElementById("areaobi").src="{{ $area1->path }}";
-                                                                 areaname.innerHTML ="　北海道・"+" {{ $finelyarea2->name }}"+"（{{ $finelyarea2->id }}）";
+                                                                 document.getElementById("areaname").innerHTML ="北海道・"+" {{ $finelyarea2->name }}"+"（{{ $finelyarea2->id }}）";
                                                         }
                                                         //3
                                                         else if (selectedValue == 3) {
                                                                  lat01  = {{$finelyarea3-> latitude}};
                                                                  long01 = {{$finelyarea3-> longitude}};
                                                                  document.getElementById("areaobi").src="{{ $area1->path }}";
-                                                                 areaname.innerHTML ="　北海道・"+" {{ $finelyarea3->name }}"+"（{{ $finelyarea3->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="北海道・"+" {{ $finelyarea3->name }}"+"（{{ $finelyarea3->id }}）";
                                                         }
                                                           //4
                                                         else if (selectedValue == 4) {                                                         
                                                                  lat01  = {{$finelyarea4-> latitude}};
                                                                  long01 = {{$finelyarea4-> longitude}};        
                                                                  document.getElementById("areaobi").src="{{ $area1->path }}";
-                                                                 areaname.innerHTML ="　北海道・"+" {{ $finelyarea4->name }}"+"（{{ $finelyarea4->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="北海道・"+" {{ $finelyarea4->name }}"+"（{{ $finelyarea4->id }}）";
                                                         }
                                                           //5
                                                         else if (selectedValue == 5) {                                                         
                                                                  lat01  = {{$finelyarea5-> latitude}};
                                                                  long01 = {{$finelyarea5-> longitude}}                
                                                                  document.getElementById("areaobi").src="{{ $area2->path }}";
-                                                                 areaname.innerHTML ="青森・"+" {{ $finelyarea5->name }}"+"（{{ $finelyarea5->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="青森・"+" {{ $finelyarea5->name }}"+"（{{ $finelyarea5->id }}）";
                                                         }
                                                         //6
                                                         else if (selectedValue == 6) {                                                         
                                                                  lat01  = {{$finelyarea6-> latitude}};
                                                                  long01 = {{$finelyarea6-> longitude}};       
                                                                  document.getElementById("areaobi").src="{{ $area2->path }}";
-                                                                 areaname.innerHTML ="　　青森・"+" {{ $finelyarea6->name }}"+"（{{ $finelyarea6->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="青森・"+" {{ $finelyarea6->name }}"+"（{{ $finelyarea6->id }}）";
                                                         }
                                                           //7
                                                         else if (selectedValue == 7) {                                                         
                                                                  lat01  = {{$finelyarea7-> latitude}};
                                                                  long01 = {{$finelyarea7-> longitude}};                       
                                                                  document.getElementById("areaobi").src="{{ $area3->path }}";
-                                                                 areaname.innerHTML ="岩手・"+" {{ $finelyarea7->name }}"+"（{{ $finelyarea7->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="岩手・"+" {{ $finelyarea7->name }}"+"（{{ $finelyarea7->id }}）";
                                                         }
                                                           //8
                                                         else if (selectedValue == 8) {                                                         
                                                                  lat01  = {{$finelyarea8-> latitude}};
                                                                  long01 = {{$finelyarea8-> longitude}};    
                                                                  document.getElementById("areaobi").src="{{ $area3->path }}";
-                                                                 areaname.innerHTML ="岩手・"+" {{ $finelyarea8->name }}"+"（{{ $finelyarea8->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="岩手・"+" {{ $finelyarea8->name }}"+"（{{ $finelyarea8->id }}）";
                                                         }
                                                           //9
                                                         else if (selectedValue == 9 ) {                                                         
                                                                  lat01  = {{$finelyarea9-> latitude}};
                                                                  long01 = {{$finelyarea9-> longitude}};           
                                                                  document.getElementById("areaobi").src="{{ $area4->path }}";
-                                                                 areaname.innerHTML ="宮城・"+" {{ $finelyarea9->name }}"+"（{{ $finelyarea9->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="宮城・"+" {{ $finelyarea9->name }}"+"（{{ $finelyarea9->id }}）";
                                                         }
                                                         //10～19
                                                         else if (selectedValue == 10) {                                                         
                                                                  lat01  = {{$finelyarea10-> latitude}};
                                                                  long01 = {{$finelyarea10-> longitude}};              
                                                                  document.getElementById("areaobi").src="{{ $area4->path }}";
-                                                                 areaname.innerHTML ="宮城・"+" {{ $finelyarea10->name }}"+"（{{ $finelyarea10->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="宮城・"+" {{ $finelyarea10->name }}"+"（{{ $finelyarea10->id }}）";
                                                         }
                                                       //11
                                                         else if (selectedValue == 11) {                                                         
                                                                  lat01  = {{$finelyarea11-> latitude}};
                                                                  long01 = {{$finelyarea11-> longitude}};         
                                                                  document.getElementById("areaobi").src="{{ $area5->path }}";
-                                                                 areaname.innerHTML ="　　秋田・"+" {{ $finelyarea11->name }}"+"（{{ $finelyarea11->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="秋田・"+" {{ $finelyarea11->name }}"+"（{{ $finelyarea11->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 12) {                                                        
                                                                  lat01  = {{$finelyarea12-> latitude}};
                                                                  long01 = {{$finelyarea12-> longitude}};                    
                                                                  document.getElementById("areaobi").src="{{ $area5->path }}";
-                                                                 areaname.innerHTML ="秋田・"+" {{ $finelyarea12->name }}"+"（{{ $finelyarea12->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="秋田・"+" {{ $finelyarea12->name }}"+"（{{ $finelyarea12->id }}）";
                                                         }
                                                         else if (selectedValue == 13) {                                                        
                                                                  lat01  = {{$finelyarea13-> latitude}};
                                                                  long01 = {{$finelyarea13-> longitude}};                     
                                                                  document.getElementById("areaobi").src="{{ $area6->path }}";
-                                                                 areaname.innerHTML ="　　山形・"+" {{ $finelyarea13->name }}"+"（{{ $finelyarea13->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="山形・"+" {{ $finelyarea13->name }}"+"（{{ $finelyarea13->id }}）";
                                                         }  
                                                         else if (selectedValue == 14) {                                                        
                                                                  lat01  = {{$finelyarea14-> latitude}};
                                                                  long01 = {{$finelyarea14-> longitude}};               
                                                                  document.getElementById("areaobi").src="{{ $area6->path }}";
-                                                                 areaname.innerHTML ="山形・"+" {{ $finelyarea14->name }}"+"（{{ $finelyarea14->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="山形・"+" {{ $finelyarea14->name }}"+"（{{ $finelyarea14->id }}）";
                                                         }  
                                                         else if (selectedValue == 15) {                                                        
                                                                  lat01  = {{$finelyarea15-> latitude}};
                                                                  long01 = {{$finelyarea15-> longitude}};   
                                                                  document.getElementById("areaobi").src="{{ $area7->path }}";
-                                                                 areaname.innerHTML ="　　福島・"+" {{ $finelyarea15->name }}"+"（{{ $finelyarea15->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="福島・"+" {{ $finelyarea15->name }}"+"（{{ $finelyarea15->id }}）";
                                                         } 
                                                         else if (selectedValue == 16){                                                        
                                                                  lat01  = {{$finelyarea16-> latitude}};
                                                                  long01 = {{$finelyarea16-> longitude}};                         
                                                                  document.getElementById("areaobi").src="{{ $area7->path }}";
-                                                                 areaname.innerHTML ="福島・"+" {{ $finelyarea16->name }}"+"（{{ $finelyarea16->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="福島・"+" {{ $finelyarea16->name }}"+"（{{ $finelyarea16->id }}）";
                                                         }  
                                                         else if (selectedValue == 17) {                                                        
                                                                  lat01  = {{$finelyarea17-> latitude}};
                                                                  long01 = {{$finelyarea17-> longitude}};             
                                                                  document.getElementById("areaobi").src="{{ $area8->path }}";
-                                                                 areaname.innerHTML ="　茨城・"+" {{ $finelyarea17->name }}"+"（{{ $finelyarea17->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="茨城・"+" {{ $finelyarea17->name }}"+"（{{ $finelyarea17->id }}）";
                                                         }  
                                                         else if (selectedValue == 18) {                                                        
                                                                  lat01  = {{$finelyarea18-> latitude}};
                                                                  long01 = {{$finelyarea18-> longitude}};     
                                                                  document.getElementById("areaobi").src="{{ $area8->path }}";
-                                                                 areaname.innerHTML ="　茨城・"+" {{ $finelyarea18->name }}"+"（{{ $finelyarea18->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="茨城・"+" {{ $finelyarea18->name }}"+"（{{ $finelyarea18->id }}）";
                                                         }  
                                                         else if (selectedValue == 19) {                                                        
                                                                  lat01  = {{$finelyarea19-> latitude}};
                                                                  long01 = {{$finelyarea19-> longitude}};                   
                                                                  document.getElementById("areaobi").src="{{ $area9->path }}";
-                                                                 areaname.innerHTML ="　　栃木・"+" {{ $finelyarea19->name }}"+"（{{ $finelyarea19->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="栃木・"+" {{ $finelyarea19->name }}"+"（{{ $finelyarea19->id }}）";
                                                         }  
                                                         
                                                         //20～29
@@ -1845,62 +2130,62 @@
                                                                  lat01  = {{$finelyarea20-> latitude}};
                                                                  long01 = {{$finelyarea20-> longitude}};     
                                                                  document.getElementById("areaobi").src="{{ $area9->path }}";
-                                                                 areaname.innerHTML ="　　栃木・"+" {{ $finelyarea20->name }}"+"（{{ $finelyarea20->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="栃木・"+" {{ $finelyarea20->name }}"+"（{{ $finelyarea20->id }}）";
                                                         }
                                                         else if (selectedValue ==21) {                                                                
                                                                  lat01  = {{$finelyarea21-> latitude}};
                                                                  long01 = {{$finelyarea21-> longitude}};   
                                                                  document.getElementById("areaobi").src="{{ $area10->path }}";
-                                                                 areaname.innerHTML ="群馬・"+" {{ $finelyarea21->name }}"+"（{{ $finelyarea21->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="群馬・"+" {{ $finelyarea21->name }}"+"（{{ $finelyarea21->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 22) {                                                        
                                                                  lat01  = {{$finelyarea22-> latitude}};
                                                                  long01 = {{$finelyarea22-> longitude}};   
                                                                  document.getElementById("areaobi").src="{{ $area10->path }}";
-                                                                 areaname.innerHTML ="群馬・"+" {{ $finelyarea22->name }}"+"（{{ $finelyarea22->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="群馬・"+" {{ $finelyarea22->name }}"+"（{{ $finelyarea22->id }}）";
                                                         }
                                                         else if (selectedValue == 23) {                                                        
                                                                  lat01  = {{$finelyarea23-> latitude}};
                                                                  long01 = {{$finelyarea23-> longitude}};    
                                                                  document.getElementById("areaobi").src="{{ $area11->path }}";
-                                                                 areaname.innerHTML ="埼玉・"+" {{ $finelyarea23->name }}"+"（{{ $finelyarea23->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="埼玉・"+" {{ $finelyarea23->name }}"+"（{{ $finelyarea23->id }}）";
                                                         }  
                                                         else if (selectedValue == 24) {                                                        
                                                                  lat01  = {{$finelyarea24-> latitude}};
                                                                  long01 = {{$finelyarea24-> longitude}};        
                                                                  document.getElementById("areaobi").src="{{ $area11->path }}";
-                                                                 areaname.innerHTML ="埼玉・"+" {{ $finelyarea24->name }}"+"（{{ $finelyarea24->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="埼玉・"+" {{ $finelyarea24->name }}"+"（{{ $finelyarea24->id }}）";
                                                         }  
                                                         else if (selectedValue == 25) {                                                        
                                                                  lat01  = {{$finelyarea25-> latitude}};
                                                                  long01 = {{$finelyarea25-> longitude}};    
                                                                  document.getElementById("areaobi").src="{{ $area12->path }}";
-                                                                 areaname.innerHTML ="千葉・"+" {{ $finelyarea25->name }}"+"（{{ $finelyarea25->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="千葉・"+" {{ $finelyarea25->name }}"+"（{{ $finelyarea25->id }}）";
                                                         } 
                                                         else if (selectedValue == 26){                                                        
                                                                  lat01  = {{$finelyarea26-> latitude}};
                                                                  long01 = {{$finelyarea26-> longitude}};         
                                                                  document.getElementById("areaobi").src="{{ $area12->path }}";
-                                                                 areaname.innerHTML ="千葉・"+" {{ $finelyarea26->name }}"+"（{{ $finelyarea26->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="千葉・"+" {{ $finelyarea26->name }}"+"（{{ $finelyarea26->id }}）";
                                                         }  
                                                         else if (selectedValue == 27) {                                                        
                                                                  lat01  = {{$finelyarea27-> latitude}};
                                                                  long01 = {{$finelyarea27-> longitude}};   
                                                                  document.getElementById("areaobi").src="{{ $area13->path }}";
-                                                                 areaname.innerHTML ="東京・"+" {{ $finelyarea27->name }}"+"（{{ $finelyarea27->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="東京・"+" {{ $finelyarea27->name }}"+"（{{ $finelyarea27->id }}）";
                                                         }  
                                                         else if (selectedValue == 28) {                                                        
                                                                  lat01  = {{$finelyarea28-> latitude}};
                                                                  long01 = {{$finelyarea28-> longitude}};             
                                                                  document.getElementById("areaobi").src="{{ $area13->path }}";
-                                                                 areaname.innerHTML ="東京・"+" {{ $finelyarea28->name }}"+"（{{ $finelyarea28->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="東京・"+" {{ $finelyarea28->name }}"+"（{{ $finelyarea28->id }}）";
                                                         }  
                                                         else if (selectedValue == 29) {                                                        
                                                                  lat01  = {{$finelyarea29-> latitude}};
                                                                  long01 = {{$finelyarea29-> longitude}};                
                                                                  document.getElementById("areaobi").src="{{ $area14->path }}";
-                                                                 areaname.innerHTML ="神奈川・"+" {{ $finelyarea29->name }}"+"（{{ $finelyarea29->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="神奈川・"+" {{ $finelyarea29->name }}"+"（{{ $finelyarea29->id }}）";
                                                         }  
                                                         
                                                          //30～39
@@ -1908,62 +2193,62 @@
                                                                  lat01  = {{$finelyarea30-> latitude}};
                                                                  long01 = {{$finelyarea30-> longitude}};              
                                                                  document.getElementById("areaobi").src="{{ $area14->path }}";
-                                                                 areaname.innerHTML ="神奈川・"+" {{ $finelyarea30->name }}"+"（{{ $finelyarea30->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="神奈川・"+" {{ $finelyarea30->name }}"+"（{{ $finelyarea30->id }}）";
                                                         }
                                                         else if (selectedValue ==31) {                                                                
                                                                  lat01  = {{$finelyarea31-> latitude}};
                                                                  long01 = {{$finelyarea31-> longitude}};   
                                                                  document.getElementById("areaobi").src="{{ $area15->path }}";
-                                                                 areaname.innerHTML ="新潟・"+" {{ $finelyarea31->name }}"+"（{{ $finelyarea31->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="新潟・"+" {{ $finelyarea31->name }}"+"（{{ $finelyarea31->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 32) {                                                        
                                                                  lat01  = {{$finelyarea32-> latitude}};
                                                                  long01 = {{$finelyarea32-> longitude}};   
                                                                  document.getElementById("areaobi").src="{{ $area15->path }}";
-                                                                 areaname.innerHTML ="新潟・"+" {{ $finelyarea32->name }}"+"（{{ $finelyarea32->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="新潟・"+" {{ $finelyarea32->name }}"+"（{{ $finelyarea32->id }}）";
                                                         }
                                                         else if (selectedValue == 33) {                                                        
                                                                  lat01  = {{$finelyarea33-> latitude}};
                                                                  long01 = {{$finelyarea33-> longitude}};            
                                                                  document.getElementById("areaobi").src="{{ $area16->path }}";
-                                                                 areaname.innerHTML ="富山・"+" {{ $finelyarea33->name }}"+"（{{ $finelyarea33->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="富山・"+" {{ $finelyarea33->name }}"+"（{{ $finelyarea33->id }}）";
                                                         }  
                                                         else if (selectedValue == 34) {                                                        
                                                                  lat01  = {{$finelyarea34-> latitude}};
                                                                  long01 = {{$finelyarea34-> longitude}};         
                                                                  document.getElementById("areaobi").src="{{ $area16->path }}";
-                                                                 areaname.innerHTML ="富山・"+" {{ $finelyarea34->name }}"+"（{{ $finelyarea34->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="富山・"+" {{ $finelyarea34->name }}"+"（{{ $finelyarea34->id }}）";
                                                         }  
                                                         else if (selectedValue == 35) {                                                        
                                                                  lat01  = {{$finelyarea35-> latitude}};
                                                                  long01 = {{$finelyarea35-> longitude}};    
                                                                  document.getElementById("areaobi").src="{{ $area17->path }}";
-                                                                 areaname.innerHTML ="石川・"+" {{ $finelyarea35->name }}"+"（{{ $finelyarea35->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="石川・"+" {{ $finelyarea35->name }}"+"（{{ $finelyarea35->id }}）";
                                                         } 
                                                         else if (selectedValue == 36){                                                        
                                                                  lat01  = {{$finelyarea36-> latitude}};
                                                                  long01 = {{$finelyarea36-> longitude}};              
                                                                  document.getElementById("areaobi").src="{{ $area17->path }}";
-                                                                 areaname.innerHTML ="石川・"+" {{ $finelyarea36->name }}"+"（{{ $finelyarea36->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="石川・"+" {{ $finelyarea36->name }}"+"（{{ $finelyarea36->id }}）";
                                                         }  
                                                         else if (selectedValue == 37) {                                                        
                                                                  lat01  = {{$finelyarea37-> latitude}};
                                                                  long01 = {{$finelyarea37-> longitude}};                       
                                                                  document.getElementById("areaobi").src="{{ $area18->path }}";
-                                                                 areaname.innerHTML ="福井・"+" {{ $finelyarea37->name }}"+"（{{ $finelyarea37->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="福井・"+" {{ $finelyarea37->name }}"+"（{{ $finelyarea37->id }}）";
                                                         }  
                                                         else if (selectedValue == 38) {                                                        
                                                                  lat01  = {{$finelyarea38-> latitude}};
                                                                  long01 = {{$finelyarea38-> longitude}};             
                                                                  document.getElementById("areaobi").src="{{ $area18->path }}";
-                                                                 areaname.innerHTML ="福井・"+" {{ $finelyarea38->name }}"+"（{{ $finelyarea38->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="福井・"+" {{ $finelyarea38->name }}"+"（{{ $finelyarea38->id }}）";
                                                         }  
                                                         else if (selectedValue == 39) {                                                        
                                                                  lat01  = {{$finelyarea39-> latitude}};
                                                                  long01 = {{$finelyarea39-> longitude}};                
                                                                  document.getElementById("areaobi").src="{{ $area19->path }}";
-                                                                 areaname.innerHTML ="山梨・"+" {{ $finelyarea39->name }}"+"（{{ $finelyarea39->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="山梨・"+" {{ $finelyarea39->name }}"+"（{{ $finelyarea39->id }}）";
                                                         }
                                                         
                                                          //40～49
@@ -1971,124 +2256,124 @@
                                                                  lat01  = {{$finelyarea40-> latitude}};
                                                                  long01 = {{$finelyarea40-> longitude}};                 
                                                                  document.getElementById("areaobi").src="{{ $area19->path }}";
-                                                                 areaname.innerHTML ="山梨・"+" {{ $finelyarea40->name }}"+"（{{ $finelyarea40->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="山梨・"+" {{ $finelyarea40->name }}"+"（{{ $finelyarea40->id }}）";
                                                         }
                                                         else if (selectedValue ==41) {                                                                
                                                                  lat01  = {{$finelyarea41-> latitude}};
                                                                  long01 = {{$finelyarea41-> longitude}};                
                                                                  document.getElementById("areaobi").src="{{ $area20->path }}";
-                                                                 areaname.innerHTML ="長野・"+" {{ $finelyarea41->name }}"+"（{{ $finelyarea41->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="長野・"+" {{ $finelyarea41->name }}"+"（{{ $finelyarea41->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 42) {                                                        
                                                                  lat01  = {{$finelyarea42-> latitude}};
                                                                  long01 = {{$finelyarea42-> longitude}};        
                                                                  document.getElementById("areaobi").src="{{ $area20->path }}";
-                                                                 areaname.innerHTML ="長野・"+" {{ $finelyarea42->name }}"+"（{{ $finelyarea42->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="長野・"+" {{ $finelyarea42->name }}"+"（{{ $finelyarea42->id }}）";
                                                         }
                                                         else if (selectedValue == 43) {                                                        
                                                                  lat01  = {{$finelyarea43-> latitude}};
                                                                  long01 = {{$finelyarea43-> longitude}};    
                                                                  document.getElementById("areaobi").src="{{ $area21->path }}";
-                                                                 areaname.innerHTML ="岐阜・"+" {{ $finelyarea43->name }}"+"（{{ $finelyarea43->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="岐阜・"+" {{ $finelyarea43->name }}"+"（{{ $finelyarea43->id }}）";
                                                         }  
                                                         else if (selectedValue == 44) {                                                        
                                                                  lat01  = {{$finelyarea44-> latitude}};
                                                                  long01 = {{$finelyarea44-> longitude}};          
                                                                  document.getElementById("areaobi").src="{{ $area21->path }}";
-                                                                 areaname.innerHTML ="岐阜・"+" {{ $finelyarea44->name }}"+"（{{ $finelyarea44->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="岐阜・"+" {{ $finelyarea44->name }}"+"（{{ $finelyarea44->id }}）";
                                                         }  
                                                         else if (selectedValue == 45) {                                                        
                                                                  lat01  = {{$finelyarea45-> latitude}};
                                                                  long01 = {{$finelyarea45-> longitude}};                   
                                                                  document.getElementById("areaobi").src="{{ $area22->path }}";
-                                                                 areaname.innerHTML ="静岡・"+" {{ $finelyarea45->name }}"+"（{{ $finelyarea45->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="静岡・"+" {{ $finelyarea45->name }}"+"（{{ $finelyarea45->id }}）";
                                                         } 
                                                         else if (selectedValue == 46){                                                        
                                                                  lat01  = {{$finelyarea46-> latitude}};
                                                                  long01 = {{$finelyarea46-> longitude}};     
                                                                  document.getElementById("areaobi").src="{{ $area22->path }}";
-                                                                 areaname.innerHTML ="静岡・"+" {{ $finelyarea46->name }}"+"（{{ $finelyarea46->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="静岡・"+" {{ $finelyarea46->name }}"+"（{{ $finelyarea46->id }}）";
                                                         }  
                                                         else if (selectedValue == 47) {                                                        
                                                                  lat01  = {{$finelyarea47-> latitude}};
                                                                  long01 = {{$finelyarea47-> longitude}};      
                                                                  document.getElementById("areaobi").src="{{ $area23->path }}";
-                                                                 areaname.innerHTML ="　　愛知・"+" {{ $finelyarea47->name }}"+"（{{ $finelyarea47->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="愛知・"+" {{ $finelyarea47->name }}"+"（{{ $finelyarea47->id }}）";
                                                         }  
                                                         else if (selectedValue == 48) {                                                        
                                                                  lat01  = {{$finelyarea48-> latitude}};
                                                                  long01 = {{$finelyarea48-> longitude}};                 
                                                                  document.getElementById("areaobi").src="{{ $area23->path }}";
-                                                                 areaname.innerHTML ="愛知・"+" {{ $finelyarea48->name }}"+"（{{ $finelyarea48->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="愛知・"+" {{ $finelyarea48->name }}"+"（{{ $finelyarea48->id }}）";
                                                         }  
                                                         else if (selectedValue == 49) {                                                        
                                                                  lat01  = {{$finelyarea49-> latitude}};
                                                                  long01 = {{$finelyarea49-> longitude}};      
                                                                  document.getElementById("areaobi").src="{{ $area24->path }}";
-                                                                 areaname.innerHTML ="三重・"+" {{ $finelyarea49->name }}"+"（{{ $finelyarea49->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="三重・"+" {{ $finelyarea49->name }}"+"（{{ $finelyarea49->id }}）";
                                                         }
                                                          //50～59
                                                         else if (selectedValue == 50) {                                                         
                                                                  lat01  = {{$finelyarea50-> latitude}};
                                                                  long01 = {{$finelyarea50-> longitude}};          
                                                                  document.getElementById("areaobi").src="{{ $area24->path }}";
-                                                                 areaname.innerHTML ="三重・"+" {{ $finelyarea50->name }}"+"（{{ $finelyarea50->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="三重・"+" {{ $finelyarea50->name }}"+"（{{ $finelyarea50->id }}）";
                                                         }
                                                         else if (selectedValue ==51) {                                                                
                                                                  lat01  = {{$finelyarea51-> latitude}};
                                                                  long01 = {{$finelyarea51-> longitude}};  
                                                                  document.getElementById("areaobi").src="{{ $area25->path }}";
-                                                                 areaname.innerHTML ="滋賀・"+" {{ $finelyarea51->name }}"+"（{{ $finelyarea51->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="滋賀・"+" {{ $finelyarea51->name }}"+"（{{ $finelyarea51->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 52) {                                                        
                                                                  lat01  = {{$finelyarea52-> latitude}};
                                                                  long01 = {{$finelyarea52-> longitude}};        
                                                                  document.getElementById("areaobi").src="{{ $area25->path }}";
-                                                                 areaname.innerHTML ="滋賀・"+" {{ $finelyarea52->name }}"+"（{{ $finelyarea52->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="滋賀・"+" {{ $finelyarea52->name }}"+"（{{ $finelyarea52->id }}）";
                                                         }
                                                         else if (selectedValue == 53) {                                                        
                                                                  lat01  = {{$finelyarea53-> latitude}};
                                                                  long01 = {{$finelyarea53-> longitude}};   
                                                                  document.getElementById("areaobi").src="{{ $area26->path }}";
-                                                                 areaname.innerHTML ="京都・"+" {{ $finelyarea53->name }}"+"（{{ $finelyarea53->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="京都・"+" {{ $finelyarea53->name }}"+"（{{ $finelyarea53->id }}）";
                                                         }  
                                                         else if (selectedValue == 54) {                                                        
                                                                  lat01  = {{$finelyarea54-> latitude}};
                                                                  long01 = {{$finelyarea54-> longitude}};        
                                                                  document.getElementById("areaobi").src="{{ $area26->path }}";
-                                                                 areaname.innerHTML ="京都・"+" {{ $finelyarea54->name }}"+"（{{ $finelyarea54->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="京都・"+" {{ $finelyarea54->name }}"+"（{{ $finelyarea54->id }}）";
                                                         }  
                                                         else if (selectedValue == 55) {                                                        
                                                                  lat01  = {{$finelyarea55-> latitude}};
                                                                  long01 = {{$finelyarea55-> longitude}};    
                                                                  document.getElementById("areaobi").src="{{ $area27->path }}";
-                                                                 areaname.innerHTML ="大阪・"+" {{ $finelyarea55->name }}"+"（{{ $finelyarea55->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="大阪・"+" {{ $finelyarea55->name }}"+"（{{ $finelyarea55->id }}）";
                                                         } 
                                                         else if (selectedValue == 56){                                                        
                                                                  lat01  = {{$finelyarea56-> latitude}};
                                                                  long01 = {{$finelyarea56-> longitude}};     
                                                                  document.getElementById("areaobi").src="{{ $area27->path }}";
-                                                                 areaname.innerHTML ="　　大阪・"+" {{ $finelyarea56->name }}"+"（{{ $finelyarea56->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="大阪・"+" {{ $finelyarea56->name }}"+"（{{ $finelyarea56->id }}）";
                                                         }  
                                                         else if (selectedValue == 57) {                                                        
                                                                  lat01  = {{$finelyarea57-> latitude}};
                                                                  long01 = {{$finelyarea57-> longitude}};      
                                                                  document.getElementById("areaobi").src="{{ $area28->path }}";
-                                                                 areaname.innerHTML ="兵庫・"+" {{ $finelyarea57->name }}"+"（{{ $finelyarea57->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="兵庫・"+" {{ $finelyarea57->name }}"+"（{{ $finelyarea57->id }}）";
                                                         }  
                                                         else if (selectedValue == 58) {                                                        
                                                                  lat01  = {{$finelyarea58-> latitude}};
                                                                  long01 = {{$finelyarea58-> longitude}};            
                                                                  document.getElementById("areaobi").src="{{ $area28->path }}";
-                                                                 areaname.innerHTML ="兵庫・"+" {{ $finelyarea58->name }}"+"（{{ $finelyarea58->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="兵庫・"+" {{ $finelyarea58->name }}"+"（{{ $finelyarea58->id }}）";
                                                         }  
                                                         else if (selectedValue == 59) {                                                        
                                                                  lat01  = {{$finelyarea59-> latitude}};
                                                                  long01 = {{$finelyarea59-> longitude}};         
                                                                  document.getElementById("areaobi").src="{{ $area28->path }}";
-                                                                 areaname.innerHTML ="　　兵庫・"+" {{ $finelyarea59->name }}"+"（{{ $finelyarea59->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="兵庫・"+" {{ $finelyarea59->name }}"+"（{{ $finelyarea59->id }}）";
                                                         }
                                                         
                                                          //60～69
@@ -2096,62 +2381,62 @@
                                                                  lat01  = {{$finelyarea60-> latitude}};
                                                                  long01 = {{$finelyarea60-> longitude}};             
                                                                  document.getElementById("areaobi").src="{{ $area29->path }}";
-                                                                 areaname.innerHTML ="奈良・"+" {{ $finelyarea60->name }}"+"（{{ $finelyarea60->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="奈良・"+" {{ $finelyarea60->name }}"+"（{{ $finelyarea60->id }}）";
                                                         }
                                                         else if (selectedValue ==61) {                                                                
                                                                  lat01  = {{$finelyarea61-> latitude}};
                                                                  long01 = {{$finelyarea61-> longitude}};  
                                                                  document.getElementById("areaobi").src="{{ $area29->path }}";
-                                                                 areaname.innerHTML ="　　奈良・"+" {{ $finelyarea61->name }}"+"（{{ $finelyarea61->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="奈良・"+" {{ $finelyarea61->name }}"+"（{{ $finelyarea61->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 62) {                                                        
                                                                  lat01  = {{$finelyarea62-> latitude}};
                                                                  long01 = {{$finelyarea62-> longitude}};     
                                                                  document.getElementById("areaobi").src="{{ $area30->path }}";
-                                                                 areaname.innerHTML ="　　和歌山・"+" {{ $finelyarea62->name }}"+"（{{ $finelyarea62->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="和歌山・"+" {{ $finelyarea62->name }}"+"（{{ $finelyarea62->id }}）";
                                                         }
                                                         else if (selectedValue == 63) {                                                        
                                                                  lat01  = {{$finelyarea63-> latitude}};
                                                                  long01 = {{$finelyarea63-> longitude}};           
                                                                  document.getElementById("areaobi").src="{{ $area30->path }}";
-                                                                 areaname.innerHTML ="　和歌山・"+" {{ $finelyarea63->name }}"+"（{{ $finelyarea63->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="和歌山・"+" {{ $finelyarea63->name }}"+"（{{ $finelyarea63->id }}）";
                                                         }  
                                                         else if (selectedValue == 64) {                                                        
                                                                  lat01  = {{$finelyarea64-> latitude}};
                                                                  long01 = {{$finelyarea64-> longitude}};        
                                                                  document.getElementById("areaobi").src="{{ $area31->path }}";
-                                                                 areaname.innerHTML ="鳥取・"+" {{ $finelyarea64->name }}"+"（{{ $finelyarea64->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="鳥取・"+" {{ $finelyarea64->name }}"+"（{{ $finelyarea64->id }}）";
                                                         }  
                                                         else if (selectedValue == 65) {                                                        
                                                                  lat01  = {{$finelyarea65-> latitude}};
                                                                  long01 = {{$finelyarea65-> longitude}};        
                                                                  document.getElementById("areaobi").src="{{ $area31->path }}";
-                                                                 areaname.innerHTML ="鳥取・"+" {{ $finelyarea65->name }}"+"（{{ $finelyarea65->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="鳥取・"+" {{ $finelyarea65->name }}"+"（{{ $finelyarea65->id }}）";
                                                         } 
                                                         else if (selectedValue == 66){                                                        
                                                                  lat01  = {{$finelyarea66-> latitude}};
                                                                  long01 = {{$finelyarea66-> longitude}}; 
                                                                  document.getElementById("areaobi").src="{{ $area32->path }}";
-                                                                 areaname.innerHTML ="岡山・"+" {{ $finelyarea66->name }}"+"（{{ $finelyarea66->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="岡山・"+" {{ $finelyarea66->name }}"+"（{{ $finelyarea66->id }}）";
                                                         }  
                                                         else if (selectedValue == 67) {                                                        
                                                                  lat01  = {{$finelyarea67-> latitude}};
                                                                  long01 = {{$finelyarea67-> longitude}};      
                                                                  document.getElementById("areaobi").src="{{ $area32->path }}";
-                                                                 areaname.innerHTML ="岡山・"+" {{ $finelyarea67->name }}"+"（{{ $finelyarea67->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="岡山・"+" {{ $finelyarea67->name }}"+"（{{ $finelyarea67->id }}）";
                                                         }  
                                                         else if (selectedValue == 68) {                                                        
                                                                  lat01  = {{$finelyarea68-> latitude}};
                                                                  long01 = {{$finelyarea68-> longitude}};               
                                                                  document.getElementById("areaobi").src="{{ $area33->path }}";
-                                                                 areaname.innerHTML ="島根・"+" {{ $finelyarea68->name }}"+"（{{ $finelyarea68->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="島根・"+" {{ $finelyarea68->name }}"+"（{{ $finelyarea68->id }}）";
                                                         }  
                                                         else if (selectedValue == 69) {                                                        
                                                                  lat01  = {{$finelyarea69-> latitude}};
                                                                  long01 = {{$finelyarea69-> longitude}}; 
                                                                  document.getElementById("areaobi").src="{{ $area33->path }}";
-                                                                 areaname.innerHTML ="島根・"+" {{ $finelyarea69->name }}"+"（{{ $finelyarea69->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="島根・"+" {{ $finelyarea69->name }}"+"（{{ $finelyarea69->id }}）";
                                                         }
                                                         
                                                          //70～79
@@ -2159,62 +2444,62 @@
                                                                  lat01  = {{$finelyarea70-> latitude}};
                                                                  long01 = {{$finelyarea70-> longitude}};                 
                                                                  document.getElementById("areaobi").src="{{ $area34->path }}";
-                                                                 areaname.innerHTML ="広島・"+" {{ $finelyarea70->name }}"+"（{{ $finelyarea70->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="広島・"+" {{ $finelyarea70->name }}"+"（{{ $finelyarea70->id }}）";
                                                         }
                                                         else if (selectedValue ==71) {                                                                
                                                                  lat01  = {{$finelyarea71-> latitude}};
                                                                  long01 = {{$finelyarea71-> longitude}};     
                                                                  document.getElementById("areaobi").src="{{ $area34->path }}";
-                                                                 areaname.innerHTML ="広島・"+" {{ $finelyarea71->name }}"+"（{{ $finelyarea71->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="広島・"+" {{ $finelyarea71->name }}"+"（{{ $finelyarea71->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 72) {                                                        
                                                                  lat01  = {{$finelyarea72-> latitude}};
                                                                  long01 = {{$finelyarea72-> longitude}};                  
                                                                  document.getElementById("areaobi").src="{{ $area35->path }}";
-                                                                 areaname.innerHTML ="山口・"+" {{ $finelyarea72->name }}"+"（{{ $finelyarea72->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="山口・"+" {{ $finelyarea72->name }}"+"（{{ $finelyarea72->id }}）";
                                                         }
                                                         else if (selectedValue == 73) {                                                        
                                                                  lat01  = {{$finelyarea73-> latitude}};
                                                                  long01 = {{$finelyarea73-> longitude}};     
                                                                  document.getElementById("areaobi").src="{{ $area35->path }}";
-                                                                 areaname.innerHTML ="山口・"+" {{ $finelyarea73->name }}"+"（{{ $finelyarea73->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="山口・"+" {{ $finelyarea73->name }}"+"（{{ $finelyarea73->id }}）";
                                                         }  
                                                         else if (selectedValue == 74) {                                                        
                                                                  lat01  = {{$finelyarea74-> latitude}};
                                                                  long01 = {{$finelyarea74-> longitude}};    
                                                                  document.getElementById("areaobi").src="{{ $area36->path }}";
-                                                                 areaname.innerHTML ="徳島・"+" {{ $finelyarea74->name }}"+"（{{ $finelyarea74->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="徳島・"+" {{ $finelyarea74->name }}"+"（{{ $finelyarea74->id }}）";
                                                         }  
                                                         else if (selectedValue == 75) {                                                        
                                                                  lat01  = {{$finelyarea75-> latitude}};
                                                                  long01 = {{$finelyarea75-> longitude}};            
                                                                  document.getElementById("areaobi").src="{{ $area36->path }}";
-                                                                 areaname.innerHTML ="徳島・"+" {{ $finelyarea75->name }}"+"（{{ $finelyarea75->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="徳島・"+" {{ $finelyarea75->name }}"+"（{{ $finelyarea75->id }}）";
                                                         } 
                                                         else if (selectedValue == 76){                                                        
                                                                  lat01  = {{$finelyarea76-> latitude}};
                                                                  long01 = {{$finelyarea76-> longitude}};   
                                                                  document.getElementById("areaobi").src="{{ $area37->path }}";
-                                                                 areaname.innerHTML ="香川・"+" {{ $finelyarea76->name }}"+"（{{ $finelyarea76->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="香川・"+" {{ $finelyarea76->name }}"+"（{{ $finelyarea76->id }}）";
                                                         }  
                                                         else if (selectedValue == 77) {                                                        
                                                                  lat01  = {{$finelyarea77-> latitude}};
                                                                  long01 = {{$finelyarea77-> longitude}};        
                                                                  document.getElementById("areaobi").src="{{ $area37->path }}";
-                                                                 areaname.innerHTML ="香川・"+" {{ $finelyarea77->name }}"+"（{{ $finelyarea77->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="香川・"+" {{ $finelyarea77->name }}"+"（{{ $finelyarea77->id }}）";
                                                         }  
                                                         else if (selectedValue == 78) {                                                        
                                                                  lat01  = {{$finelyarea78-> latitude}};
                                                                  long01 = {{$finelyarea78-> longitude}};       
                                                                  document.getElementById("areaobi").src="{{ $area38->path }}";
-                                                                 areaname.innerHTML ="愛媛・"+" {{ $finelyarea78->name }}"+"（{{ $finelyarea78->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="愛媛・"+" {{ $finelyarea78->name }}"+"（{{ $finelyarea78->id }}）";
                                                         }  
                                                         else if (selectedValue == 79) {                                                        
                                                                  lat01  = {{$finelyarea79-> latitude}};
                                                                  long01 = {{$finelyarea79-> longitude}}; 
                                                                  document.getElementById("areaobi").src="{{ $area38->path }}";
-                                                                 areaname.innerHTML ="愛媛・"+" {{ $finelyarea79->name }}"+"（{{ $finelyarea79->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="愛媛・"+" {{ $finelyarea79->name }}"+"（{{ $finelyarea79->id }}）";
                                                         }  
                                                         
                                                          //80～89
@@ -2222,62 +2507,62 @@
                                                                  lat01  = {{$finelyarea80-> latitude}};
                                                                  long01 = {{$finelyarea80-> longitude}};          
                                                                  document.getElementById("areaobi").src="{{ $area39->path }}";
-                                                                 areaname.innerHTML ="　　高知・"+" {{ $finelyarea80->name }}"+"（{{ $finelyarea80->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="高知・"+" {{ $finelyarea80->name }}"+"（{{ $finelyarea80->id }}）";
                                                         }
                                                         else if (selectedValue ==81) {                                                                
                                                                  lat01  = {{$finelyarea81-> latitude}};
                                                                  long01 = {{$finelyarea81-> longitude}};          
                                                                  document.getElementById("areaobi").src="{{ $area39->path }}";
-                                                                 areaname.innerHTML ="高知・"+" {{ $finelyarea81->name }}"+"（{{ $finelyarea81->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="高知・"+" {{ $finelyarea81->name }}"+"（{{ $finelyarea81->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 82) {                                                        
                                                                  lat01  = {{$finelyarea82-> latitude}};
                                                                  long01 = {{$finelyarea82-> longitude}};          
                                                                  document.getElementById("areaobi").src="{{ $area40->path }}";
-                                                                 areaname.innerHTML ="　　福岡・"+" {{ $finelyarea82->name }}"+"（{{ $finelyarea82->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="福岡・"+" {{ $finelyarea82->name }}"+"（{{ $finelyarea82->id }}）";
                                                         }
                                                         else if (selectedValue == 83) {                                                        
                                                                  lat01  = {{$finelyarea83-> latitude}};
                                                                  long01 = {{$finelyarea83-> longitude}};                           
                                                                  document.getElementById("areaobi").src="{{ $area40->path }}";
-                                                                 areaname.innerHTML ="　　福岡・"+" {{ $finelyarea83->name }}"+"（{{ $finelyarea83->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="福岡・"+" {{ $finelyarea83->name }}"+"（{{ $finelyarea83->id }}）";
                                                         }  
                                                         else if (selectedValue == 84) {                                                        
                                                                  lat01  = {{$finelyarea84-> latitude}};
                                                                  long01 = {{$finelyarea84-> longitude}};                    
                                                                  document.getElementById("areaobi").src="{{ $area41->path }}";
-                                                                 areaname.innerHTML ="　　佐賀・"+" {{ $finelyarea84->name }}"+"（{{ $finelyarea84->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="佐賀・"+" {{ $finelyarea84->name }}"+"（{{ $finelyarea84->id }}）";
                                                         }  
                                                         else if (selectedValue == 85) {                                                        
                                                                  lat01  = {{$finelyarea85-> latitude}};
                                                                  long01 = {{$finelyarea85-> longitude}};            
                                                                  document.getElementById("areaobi").src="{{ $area41->path }}";
-                                                                 areaname.innerHTML ="佐賀・"+" {{ $finelyarea85->name }}"+"（{{ $finelyarea85->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="佐賀・"+" {{ $finelyarea85->name }}"+"（{{ $finelyarea85->id }}）";
                                                         } 
                                                         else if (selectedValue == 86){                                                        
                                                                  lat01  = {{$finelyarea86-> latitude}};
                                                                  long01 = {{$finelyarea86-> longitude}};                 
                                                                  document.getElementById("areaobi").src="{{ $area42->path }}";
-                                                                 areaname.innerHTML ="　　　長崎・"+" {{ $finelyarea86->name }}"+"（{{ $finelyarea86->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="長崎・"+" {{ $finelyarea86->name }}"+"（{{ $finelyarea86->id }}）";
                                                         }  
                                                         else if (selectedValue == 87) {                                                        
                                                                  lat01  = {{$finelyarea87-> latitude}};
                                                                  long01 = {{$finelyarea87-> longitude}};                      
                                                                  document.getElementById("areaobi").src="{{ $area42->path }}";
-                                                                 areaname.innerHTML ="長崎・"+" {{ $finelyarea87->name }}"+"（{{ $finelyarea87->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="長崎・"+" {{ $finelyarea87->name }}"+"（{{ $finelyarea87->id }}）";
                                                         }  
                                                         else if (selectedValue == 88) {                                                        
                                                                  lat01  = {{$finelyarea88-> latitude}};
                                                                  long01 = {{$finelyarea88-> longitude}};      
                                                                  document.getElementById("areaobi").src="{{ $area43->path }}";
-                                                                 areaname.innerHTML ="熊本・"+" {{ $finelyarea88->name }}"+"（{{ $finelyarea88->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="熊本・"+" {{ $finelyarea88->name }}"+"（{{ $finelyarea88->id }}）";
                                                         }  
                                                         else if (selectedValue == 89) {                                                        
                                                                  lat01  = {{$finelyarea89-> latitude}};
                                                                  long01 = {{$finelyarea89-> longitude}};                 
                                                                  document.getElementById("areaobi").src="{{ $area43->path }}";
-                                                                 areaname.innerHTML ="熊本・"+" {{ $finelyarea89->name }}"+"（{{ $finelyarea89->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="熊本・"+" {{ $finelyarea89->name }}"+"（{{ $finelyarea89->id }}）";
                                                         }  
                                                         
                                                          //90～97
@@ -2285,54 +2570,57 @@
                                                                  lat01  = {{$finelyarea90-> latitude}};
                                                                  long01 = {{$finelyarea90-> longitude}};
                                                                  document.getElementById("areaobi").src="{{ $area44->path }}";
-                                                                 areaname.innerHTML ="大分・"+" {{ $finelyarea90->name }}"+"（{{ $finelyarea90->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="大分・"+" {{ $finelyarea90->name }}"+"（{{ $finelyarea90->id }}）";
                                                         }
                                                         else if (selectedValue ==91) {                                                                
                                                                  lat01  = {{$finelyarea91-> latitude}};
                                                                  long01 = {{$finelyarea91-> longitude}};   
                                                                  document.getElementById("areaobi").src="{{ $area44->path }}";
-                                                                 areaname.innerHTML ="大分・"+" {{ $finelyarea91->name }}"+"（{{ $finelyarea91->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="大分・"+" {{ $finelyarea91->name }}"+"（{{ $finelyarea91->id }}）";
                                                         }
                                                         //12
                                                         else if (selectedValue == 92) {                                                        
                                                                  lat01  = {{$finelyarea92-> latitude}};
                                                                  long01 = {{$finelyarea92-> longitude}};                    
                                                                  document.getElementById("areaobi").src="{{ $area45->path }}";
-                                                                  areaname.innerHTML ="宮崎・"+" {{ $finelyarea92->name }}"+"（{{ $finelyarea92->id }}）";
+                                                                document.getElementById("areaname").innerHTML ="宮崎・"+" {{ $finelyarea92->name }}"+"（{{ $finelyarea92->id }}）";
                                                         }
                                                         else if (selectedValue == 93) {                                                        
                                                                  lat01  = {{$finelyarea93-> latitude}};
                                                                  long01 = {{$finelyarea93-> longitude}};                   
                                                                  document.getElementById("areaobi").src="{{ $area45->path }}";
-                                                                  areaname.innerHTML ="宮崎・"+" {{ $finelyarea93->name }}"+"（{{ $finelyarea93->id }}）";
+                                                                document.getElementById("areaname").innerHTML ="宮崎・"+" {{ $finelyarea93->name }}"+"（{{ $finelyarea93->id }}）";
                                                         }  
                                                         else if (selectedValue == 94) {                                                        
                                                                  lat01  = {{$finelyarea94-> latitude}};
                                                                  long01 = {{$finelyarea94-> longitude}}; 
                                                                  document.getElementById("areaobi").src="{{ $area46->path }}";
-                                                                  areaname.innerHTML ="　　鹿児島・"+" {{ $finelyarea94->name }}"+"（{{ $finelyarea94->id }}）";
+                                                                document.getElementById("areaname").innerHTML ="鹿児島・"+" {{ $finelyarea94->name }}"+"（{{ $finelyarea94->id }}）";
                                                         }  
                                                         else if (selectedValue == 95) {                                                        
                                                                  lat01  = {{$finelyarea95-> latitude}};
                                                                  long01 = {{$finelyarea95-> longitude}};
                                                                  document.getElementById("areaobi").src="{{ $area46->path }}";
-                                                                 areaname.innerHTML ="　鹿児島・"+" {{ $finelyarea95->name }}"+"（{{ $finelyarea95->id }}）";
+                                                               document.getElementById("areaname").innerHTML ="鹿児島・"+" {{ $finelyarea95->name }}"+"（{{ $finelyarea95->id }}）";
                                                         } 
                                                         else if (selectedValue == 96){                                                        
                                                                  lat01  = {{$finelyarea96-> latitude}};
                                                                  long01 = {{$finelyarea96-> longitude}};       
                                                                    //↓文字と画像変更
                                                                   document.getElementById("areaobi").src="{{ $area47->path }}";
-                                                                  areaname.innerHTML ="沖縄・"+" {{ $finelyarea96->name }}"+"（{{ $finelyarea96->id }}）";
+                                                                document.getElementById("areaname").innerHTML ="沖縄・"+" {{ $finelyarea96->name }}"+"（{{ $finelyarea96->id }}）";
                                                         }  
                                                         else if (selectedValue == 97) {                                                        
                                                                  lat01  = {{$finelyarea97-> latitude}};
                                                                  long01 = {{$finelyarea97-> longitude}}; 
                                                                  //↓文字と画像変更
                                                                   document.getElementById("areaobi").src="{{ $area47->path }}";
-                                                                  areaname.innerHTML ="沖縄・"+" {{ $finelyarea97->name }}"+"（{{ $finelyarea97->id }}）";
+                                                                document.getElementById("areaname").innerHTML ="沖縄・"+" {{ $finelyarea97->name }}"+"（{{ $finelyarea97->id }}）";
                                                                
                                                         }  
+
+
+                                        
 
 
 
@@ -2370,330 +2658,425 @@
                                                 
                                                 
                                             
+                        //↓天気コード分岐(現在の天気：ヘッダー用)
                                             //天気コード分岐
                                             //晴れ
                                             if(weather === 0 || weather === 1){
-                                              sampleweather.innerHTML = "☀"+temperature + "°C";
+                                             // sampleweather.innerHTML = "☀"+temperature + "°C";
+                                              document.getElementById("sampleweather").innerHTML
                                             }
                                             //一部くもり
                                             else if(weather === 2){
-                                                sampleweather.innerHTML = "🌤  "+temperature + "°C";
+                                                document.getElementById("sampleweather").innerHTML = "🌤  "+temperature + "°C";
                                             }
                                             //曇り
                                             else if(weather === 3){
-                                              sampleweather.innerHTML =  "☁  "+temperature + "°C";
+                                              document.getElementById("sampleweather").innerHTML =  "☁  "+temperature + "°C";
                                             }
                                             //雨
                                             else if(weather <= 69){
-                                              sampleweather.innerHTML =  "☂ "+temperature + "°C";
+                                              document.getElementById("sampleweather").innerHTML =  "☂ "+temperature + "°C";
                                             }
                                             //雪
                                             else if(weather <=  79){
-                                                sampleweather.innerHTML = "☃ "+temperature + "°C";
+                                                document.getElementById("sampleweather").innerHTML = "☃ "+temperature + "°C";
                                             }
                                             else{
-                                              sampleweather.innerHTML = " ★"+temperature + "°C";
+                                              document.getElementById("sampleweather").innerHTML = " ★"+temperature + "°C";
                                             }
+                        //↓不快指数分岐（ヘッダー用）
+                        //寒い 画像：とても寒い
+                        if(fukai01 <= 54){
+                        
+                            //hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%8B%E3%82%93_hkfi0w.png';
+                       
+                             document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%8B%E3%82%93_hkfi0w.png';
+
+                        }
+                        //肌寒い 画像；寒い
+                        else if(fukai01 >= 55 && fukai01 <= 65 ){
+                           // hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%95%E3%82%80%E3%81%84_jbbyyb.png';
+                              document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%95%E3%82%80%E3%81%84_jbbyyb.png';
+
+                        }
+                        //快い 画像：快適
+                        else if(fukai01 > 65 && fukai01 <= 75 ){
+                            //hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%8B%E3%81%84%E3%81%A6%E3%81%8D_o2qa7h.png';
+                             document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%8B%E3%81%84%E3%81%A6%E3%81%8D_o2qa7h.png';
+
+                            
+                        }
+                        //暑い 画像：やや暑い
+                        else if(fukai01 > 75 && fukai01 <= 85 ){
+                          //  hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%84_rkd08t.png';
+                            document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%84_rkd08t.png';
+
+                        }
+                        
+                        //暑くてたまらない 画像：とても暑い
+                        else if(fukai01 >= 86){
+                            ///hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%99%E3%81%8E_ltpfdk.png';
+                            document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%99%E3%81%8E_ltpfdk.png';
+                        }
                                             
-                                            //不快指数分岐
-                                            
-                                    console.log(fukai01+"です！！！！");
-                                        //寒い
-                                            if(fukai01 <　55){
-                                                hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%8B%E3%82%93_hkfi0w.png';
-                                            }
-                                            //肌寒い
-                                            else if(fukai01 >= 55 && fukai01 <= 65 ){
-                                                hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%95%E3%82%80%E3%81%84_jbbyyb.png';
-                                            }
-                                            //快い
-                                            else if(fukai01 > 65 && fukai01 <= 75 ){
-                                                hukaiSisuu.src  = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%84_rkd08t.png';
-                                            }
-                                                //暑い
-                                            else if(fukai01 > 75 && fukai01 <= 85 ){
-                                                hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E6%99%AE%E9%80%9A_ekdgqe.png';
-                                            }
-                                            //暑くてたまらない
-                                            else if(fukai01 >= 86){
-                                                hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867812/%E3%81%82%E3%81%8B%E3%82%93_v4stef.png';
-                                            }
-                                            
-                                    //↓朝・昼・夜の天気の画像を表示
-                                        //朝の天気
-                                        //快晴
-                                        if(weather2[7] === 0 ){
-                                          morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
-                                        }
-                                        //晴れだけど雲がでてる
-                                        else if(weather2[7] === 1){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                                        }
-                                        //一部曇り
-                                        else if(weather2[7] === 2){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                                        }            
-                                        //曇り
-                                        else if( weather2[7] === 3){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                                        }
-                                         //霧（曇りアイコン使用）
-                                         else if (weather2[7] <= 49){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                                        }
-                
-                                        //雨
-                                        else if(weather2[7] <= 69  ){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                                        }
-                                        //雪
-                                        else if (weather2[7] <= 79){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                                        }
-                                        //にわか雨(晴れのち雨アイコン使用)
-                                        else if(weather2[7] <= 84){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                                        }
-                                        //雪（雪のアイコン使用）
-                                        else if(weather2[7] <= 94){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                                        }
-                                        //雷雨（雨のアイコン使用）
-                                        else if(weather2[7] <= 99){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                                        }                           
-                                        //曇りのち晴れ
-                                        else if (weather2[7] === 210){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                                        }
-                                        //晴れのち曇り
-                                        else if (weather2[7] === 211){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                                        }
-                                        //曇りのち雨
-                                        else if (weather2[7] === 212){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
-                                        }
-                                        //雪のち雨
-                                        else if (weather2[7] === 213){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
-                                        }
-                                        //晴れのち雨
-                                        else if (weather2[7] === 411){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                                        }
-                                        //雨のち晴れ
-                                        else if (weather2[7] === 311){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
-                                        }
-                                        //晴れのち雪
-                                        else if (weather2[7] === 311){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
-                                        }
-                                        //雨のち曇り
-                                        else if (weather2[7] === 214){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
-                                        }
-                                         //雪のち曇り
-                                         else if (weather2[7] === 217){
-                                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
-                                        }
-                
-                                    //不明
-                                        else{
-                                            morning_OTENKI.innerHTML = "★";
-                                        }
-                                    
-                                        //朝7時の気温出力
-                                        temperature_morning.innerHTML =  "🌡  "+temperature2[7] + "°C";
-                                        //朝7時の降水確率を出力
-                                        rainypercent_morning.innerHTML  = "⛆   "+ probability[7] + "%";
-                                    
-                                    
-                                        
-                                        
-                                        //昼の天気
-                                        //快晴
-                                        if(weather2[13] === 0 ){
-                                          noon_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
-                                        }
-                                        //晴れだけど雲がでてる
-                                        else if(weather2[13] === 1){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                                        }
-                                        //一部曇り
-                                        else if(weather2[13] === 2){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                                        }            
-                                        //曇り
-                                        else if( weather2[13] === 3){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                                        }
-                                         //霧（曇りアイコン使用）
-                                         else if (weather2[13] <= 49){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                                        }
-                
-                                        //雨
-                                        else if(weather2[13] <= 69  ){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                                        }
-                                        //雪
-                                        else if (weather2[13] <= 79){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                                        }
-                                        //にわか雨(晴れのち雨アイコン使用)
-                                        else if(weather2[13] <= 84){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                                        }
-                                        //雪（雪のアイコン使用）
-                                        else if(weather2[13] <= 94){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                                        }
-                                        //雷雨（雨のアイコン使用）
-                                        else if(weather2[13] <= 99){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                                        }                           
-                                        //曇りのち晴れ
-                                        else if (weather2[13] === 210){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                                        }
-                                        //晴れのち曇り
-                                        else if (weather2[13] === 211){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                                        }
-                                        //曇りのち雨
-                                        else if (weather2[13] === 212){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
-                                        }
-                                        //雪のち雨
-                                        else if (weather2[13] === 213){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
-                                        }
-                                        //晴れのち雨
-                                        else if (weather2[13] === 411){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                                        }
-                                        //雨のち晴れ
-                                        else if (weather2[13] === 311){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
-                                        }
-                                        //晴れのち雪
-                                        else if (weather2[13] === 311){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
-                                        }
-                                        //雨のち曇り
-                                        else if (weather2[13] === 214){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
-                                        }
-                                         //雪のち曇り
-                                         else if (weather2[13] === 217){
-                                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
-                                        }
-                
-                                    //不明
-                                        else{
-                                            noon_OTENKI.innerHTML = "★";
-                                        }
-                
-                                    
-                                        //昼13時の気温出力
-                                        temperature_noon.innerHTML =  temperature2[13] + "°C";
-                                        //昼13時の降水確率を出力
-                                        rainypercent_noon.innerHTML  =  probability[13] + "%";
-                                    
-                                    
-                                    
-                                    
-                                    //夜の天気
-                                        //快晴
-                                        if(weather2[19] === 0 ){
-                                          night_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
-                                        }
-                                        //晴れだけど雲がでてる
-                                        else if(weather2[19] === 1){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                                        }
-                                        //一部曇り
-                                        else if(weather2[19] === 2){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                                        }            
-                                        //曇り
-                                        else if( weather2[19] === 3){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                                        }
-                                         //霧（曇りアイコン使用）
-                                         else if (weather2[19] <= 49){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                                        }
-                
-                                        //雨
-                                        else if(weather2[19] <= 69  ){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                                        }
-                                        //雪
-                                        else if (weather2[19] <= 79){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                                        }
-                                        //にわか雨(晴れのち雨アイコン使用)
-                                        else if(weather2[19] <= 84){
-                                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                                        }
-                                        //雪（雪のアイコン使用）
-                                        else if(weather2[19] <= 94){
-                                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                                        }
-                                        //雷雨（雨のアイコン使用）
-                                        else if(weather2[19] <= 99){
-                                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                                        }                           
-                                        //曇りのち晴れ
-                                        else if (weather2[19] === 210){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                                        }
-                                        //晴れのち曇り
-                                        else if (weather2[19] === 211){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                                        }
-                                        //曇りのち雨
-                                        else if (weather2[19] === 212){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
-                                        }
-                                        //雪のち雨
-                                        else if (weather2[19] === 213){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
-                                        }
-                                        //晴れのち雨
-                                        else if (weather2[19] === 411){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                                        }
-                                        //雨のち晴れ
-                                        else if (weather2[19] === 311){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
-                                        }
-                                        //晴れのち雪
-                                        else if (weather2[19] === 311){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
-                                        }
-                                        //雨のち曇り
-                                        else if (weather2[19] === 214){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
-                                        }
-                                         //雪のち曇り
-                                         else if (weather2[19] === 217){
-                                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
-                                        }
-                
-                                    //不明
-                                        else{
-                                            night_OTENKI.innerHTML = "★";
-                                        }
-                                    
-                                        //夜19時の気温出力
-                                        temperature_night.innerHTML =  temperature2[19] + "°C";
-                                        //夜19時の降水確率を出力
-                                        rainypercent_night.innerHTML  =  probability[19] + "%"
-                                            
+                    //↓朝・昼・夜の天気の画像を表示
+                        //朝の天気
+                        //快晴
+                        if(weather2[7] === 0 ){
+                          //morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';      
+                       document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+
+                          
+                        }
+                        //晴れだけど雲がでてる
+                        else if(weather2[7] === 1){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //一部曇り
+                        else if(weather2[7] === 2){
+                            //morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }            
+                        //曇り
+                        else if( weather2[7] === 3){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+
+                        }
+                         //霧（曇りアイコン使用）
+                         else if (weather2[7] <= 49){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                        }
+
+                        //雨
+                        else if(weather2[7] <= 69  ){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }
+                        //雪
+                        else if (weather2[7] <= 79){
+                            //morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                        }
+                        //にわか雨(晴れのち雨アイコン使用)
+                        else if(weather2[7] <= 84){
+                            //morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                        }
+                        //雪（雪のアイコン使用）
+                        else if(weather2[7] <= 94){
+                          //  morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            
+                        }
+                        //雷雨（雨のアイコン使用）
+                        else if(weather2[7] <= 99){
+                         //   morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }                           
+                        //曇りのち晴れ
+                        else if (weather2[7] === 210){
+                          //  morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //晴れのち曇り
+                        else if (weather2[7] === 211){
+                            //morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }
+                        //曇りのち雨
+                        else if (weather2[7] === 212){
+                        //    morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                        }
+                        
+                        //雪のち雨
+                        else if (weather2[7] === 213){
+                          //  morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                        }
+                        //晴れのち雨
+                        else if (weather2[7] === 411){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            
+                        }
+                        //雨のち晴れ
+                        else if (weather2[7] === 311){
+                          //  morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                        }
+                        //晴れのち雪
+                        else if (weather2[7] === 311){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            
+                        }
+                        //雨のち曇り
+                        else if (weather2[7] === 214){
+                         //   morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                             document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+    
+                        }
+                         //雪のち曇り
+                         else if (weather2[7] === 217){
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+
+                        }
+
+                    //不明
+                        else{
+                            morning_OTENKI.innerHTML = "★";
+                        }
+                    
+                        //朝7時の気温出力
+                        document.getElementById("temperature_morning").innerHTML = "🌡  "+temperature2[7] + "°C";
+                        //temperature_morning.innerHTML =  "🌡  "+temperature2[7] + "°C";
+                        //朝7時の降水確率を出力
+                        document.getElementById("rainypercent_morning").innerHTML ="⛆   " + probability[7] + "%";
+                         
+       
+                        
+                        
+                        //昼の天気
+                    //快晴
+                        if(weather2[13] === 0 ){
+                          //morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';      
+                       document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+
+                          
+                        }
+                        //晴れだけど雲がでてる
+                        else if(weather2[13] === 1){
+                           // .src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //一部曇り
+                        else if(weather2[13] === 2){
+                            //noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }            
+                        //曇り
+                        else if( weather2[13] === 3){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+
+                        }
+                         //霧（曇りアイコン使用）
+                         else if (weather2[13] <= 49){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                        }
+
+                        //雨
+                        else if(weather2[13] <= 69  ){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }
+                        //雪
+                        else if (weather2[13] <= 79){
+                            //noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                        }
+                        //にわか雨(晴れのち雨アイコン使用)
+                        else if(weather2[13] <= 84){
+                            //noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                        }
+                        //雪（雪のアイコン使用）
+                        else if(weather2[13] <= 94){
+                          //  noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            
+                        }
+                        //雷雨（雨のアイコン使用）
+                        else if(weather2[13] <= 99){
+                         //   noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }                           
+                        //曇りのち晴れ
+                        else if (weather2[13] === 210){
+                          //  noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //晴れのち曇り
+                        else if (weather2[13] === 211){
+                            //noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }
+                        //曇りのち雨
+                        else if (weather2[13] === 212){
+                        //    noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                        }
+                        
+                        //雪のち雨
+                        else if (weather2[13] === 213){
+                          //  noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                        }
+                        //晴れのち雨
+                        else if (weather2[13] === 411){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            
+                        }
+                        //雨のち晴れ
+                        else if (weather2[13] === 311){
+                          //  noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                        }
+                        //晴れのち雪
+                        else if (weather2[13] === 311){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            
+                        }
+                        //雨のち曇り
+                        else if (weather2[13] === 214){
+                         //   noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                             document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+    
+                        }
+                         //雪のち曇り
+                         else if (weather2[13] === 217){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+
+                        }
+
+                    //不明
+                        else{
+                            night_OTENKI.innerHTML = "★";
+                        }
+            document.getElementById("temperature_noon").innerHTML =  temperature2[13] + "°C";
+            document.getElementById("rainypercent_noon").innerHTML  =  probability[13] + "%";
+
+                        
+                        
+                        
+                        
+                        
+                         //夜の天気
+                        //快晴
+                        if(weather2[19] === 0 ){
+                          //morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';      
+                       document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+
+                          
+                        }
+                        //晴れだけど雲がでてる
+                        else if(weather2[19] === 1){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //一部曇り
+                        else if(weather2[19] === 2){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }            
+                        //曇り
+                        else if( weather2[19] === 3){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+
+                        }
+                         //霧（曇りアイコン使用）
+                         else if (weather2[19] <= 49){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                        }
+
+                        //雨
+                        else if(weather2[19] <= 69  ){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }
+                        //雪
+                        else if (weather2[19] <= 79){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                        }
+                        //にわか雨(晴れのち雨アイコン使用)
+                        else if(weather2[19] <= 84){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                        }
+                        //雪（雪のアイコン使用）
+                        else if(weather2[19] <= 94){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            
+                        }
+                        //雷雨（雨のアイコン使用）
+                        else if(weather2[19] <= 99){
+                         //   night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }                           
+                        //曇りのち晴れ
+                        else if (weather2[19] === 210){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //晴れのち曇り
+                        else if (weather2[19] === 211){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }
+                        //曇りのち雨
+                        else if (weather2[19] === 212){
+                        //    night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                        }
+                        
+                        //雪のち雨
+                        else if (weather2[19] === 213){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                        }
+                        //晴れのち雨
+                        else if (weather2[19] === 411){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            
+                        }
+                        //雨のち晴れ
+                        else if (weather2[19] === 311){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                        }
+                        //晴れのち雪
+                        else if (weather2[19] === 311){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            
+                        }
+                        //雨のち曇り
+                        else if (weather2[19] === 214){
+                         //   noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                             document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+    
+                        }
+                         //雪のち曇り
+                         else if (weather2[19] === 217){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+
+                        }
+
+                    //不明
+                        else{
+                            morning_OTENKI.innerHTML = "★";
+                        }
+
+                    
+                        //夜19時の気温出力
+                        //夜19時の降水確率を出力
+                        document.getElementById("temperature_night").innerHTML =  temperature2[19] + "°C";
+                        document.getElementById("rainypercent_night").innerHTML  =  probability[19] + "%";
                                             
                                             
                                             
@@ -2774,25 +3157,26 @@
                                                         
                                                     //3行目
                                                     if(uvmax => 3){
-                                                        recommend_items.innerHTML = "今日は日差しが強いワン!日焼け対策を<br>しっかりしよう。日焼け止めや日傘などを使おう。";
+                                                        document.getElementById("recommend_items").innerHTML = "今日は日差しが強いワン!日焼け対策を<br>しっかりしよう。日焼け止めや日傘などを使おう。";
+                                                      
                                                     }
                                                     else if(uvmax => 6){
-                                                        recommend_items.innerHTML = "今日は日差しがすごく強いワン!<br>できるだけ屋外での活動は控えよう。";
+                                                         document.getElementById("recommend_items").innerHTML = "今日は日差しがすごく強いワン!<br>できるだけ屋外での活動は控えよう。";
                                                     }
                                                      if(result == true){
-                                                        recommend_items.innerHTML = "今日は雪だワン!!滑らないようにしてね。<br>傘やブーツ、マフラー、手袋などを使おう。";
+                                                         document.getElementById("recommend_items").innerHTML = "今日は雪だワン!!滑らないようにしてね。<br>傘やブーツ、マフラー、手袋などを使おう。";
                                                     }
                                                     else if(rainmax <= 20){
-                                                        recommend_items.innerHTML = "雨の心配は無さそうだワン！洗濯物を乾かすのも👌";
+                                                         document.getElementById("recommend_items").innerHTML = "雨の心配は無さそうだワン！洗濯物を乾かすのも👌";
                                                     }
                                                     else if(rainmax <= 29){
-                                                        recommend_items.innerHTML = "折り畳み傘が助けてくれるかもだワン！ ";
+                                                         document.getElementById("recommend_items").innerHTML = "折り畳み傘が助けてくれるかもだワン！ ";
                                                     }
                                                     else if(rainmax => 30){
-                                                        recommend_items.innerHTML = "今日は雨が降るかもしれないワン!<br>折り畳み傘が便利だよ。 ";
+                                                         document.getElementById("recommend_items").innerHTML = "今日は雨が降るかもしれないワン!<br>折り畳み傘が便利だよ。 ";
                                                     }
                                                     else if(rainmax => 70){
-                                                        recommend_items.innerHTML = "今日は雨降りだワン!雨具をしっかり用意しよう。<br>傘やレインブーツを使おう。";
+                                                         document.getElementById("recommend_items").innerHTML = "今日は雨降りだワン!雨具をしっかり用意しよう。<br>傘やレインブーツを使おう。";
                                                     }
                                                    
                                                        
@@ -2800,58 +3184,59 @@
                                                             //不快指数分岐(ワンポイント)
                                                          //寒い
                                                          if(fukai2 <= 54){
-                                                            advice.innerHTML = tmax+"℃　";
-                                                            advicetwo.innerHTML = tmin+"℃　　　　";
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
                                                             //1:寒がり
                                                             if(samatu == 1){
-                                                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!<br>裏起毛の服がおすすめだワン!";
+                                                            document.getElementById("advicesamuatu").innerHTML="防寒具があるといいね。カイロもgood!<br>裏起毛の服がおすすめだワン!";
+
                                 
                                                            }
                                                            //0:暑がり
                                                            else{
-                                                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!<br>今日は暑がりさんも寒さに注意だワン! ";
+                                                            document.getElementById("advicesamuatu").innerHTML="防寒具があるといいね。カイロもgood!<br>今日は暑がりさんも寒さに注意だワン! ";
                                                            }
                                                          }
                                                          //肌寒い
                                                          else if(fukai2 >= 55 && fukai2 <= 65 ){
-                                                            advice.innerHTML = tmax+"℃　";
-                                                            advicetwo.innerHTML = tmin+"℃　　　　";
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
                                                              if(samatu == 1){
-                                                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>厚手の靴下やブーツも選んでみよう。";
+                                                                document.getElementById("advicesamuatu").innerHTML="アウターやインナーを上手に活用するワン!<br>厚手の靴下やブーツも選んでみよう。";
                                                              }
                                                              else{
-                                                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>暖房に対応できるアウターを選ぼう。 ";
+                                                                document.getElementById("advicesamuatu").innerHTML="アウターやインナーを上手に活用するワン!<br>暖房に対応できるアウターを選ぼう。 ";
                                                              }
                                                          }
                                                          //快い
                                                          else if(fukai2 >= 65 && fukai2 <= 75 ){
-                                                            advice.innerHTML = tmax+"℃　";
-                                                            advicetwo.innerHTML = tmin+"℃　　　　";
-                                                            advicesamuatu.innerHTML= "今日は過ごしやすいワンダフルな一日‼<br>好きなオシャレが楽しめそうだワン。";
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
+                                                            document.getElementById("advicesamuatu").innerHTML= "今日は過ごしやすいワンダフルな一日‼<br>好きなオシャレが楽しめそうだワン。";
                                 
                                  
                                                            }
                                                          //暑い
                                                          else if(fukai2 >= 75 && fukai2 <= 85 ){
-                                                            advice.innerHTML = tmax+"℃　";
-                                                            advicetwo.innerHTML = tmin+"℃　　　　";
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
                                                              if(samatu == 1){
-                                                                advicesamuatu.innerHTML = "薄手の素材がおすすめだワン。<br>冷房に注意してね。七分丈もよいかも？ ";
+                                                                document.getElementById("advicesamuatu").innerHTML = "薄手の素材がおすすめだワン。<br>冷房に注意してね。七分丈もよいかも？ ";
                                                              }
                                                              else{
-                                                                advicesamuatu.innerHTML =" 薄手の素材がおすすめだワン。<br>通気性の良い半袖や半ズボンがおすすめだよ。 ";
+                                                                document.getElementById("advicesamuatu").innerHTML =" 薄手の素材がおすすめだワン。<br>通気性の良い半袖や半ズボンがおすすめだよ。 ";
                                                              }
                                                            }
                                                          //暑くてたまらない
                                                          else if(fukai2 >= 86){
-                                                            advice.innerHTML = tmax+"℃　";
-                                                            advicetwo.innerHTML = tmin+"℃　　　　";
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
                                                              if(samatu == 1){
-                                                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。冷房に注意するワン!　 ";
+                                                                document.getElementById("advicesamuatu").innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。冷房に注意するワン!　 ";
                                                              }
                                                              else{
-                                                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。汗拭きシートで快適だワン。 ";
-                                                             }
+                                                                document.getElementById("advicesamuatu").innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。汗拭きシートで快適だワン。 ";
+                                                             }                            
                                     }})
                                                             
                                 
@@ -3255,10 +3640,391 @@ document.getElementById("out2").alt="out2";
                         
 
 
+//↓地域変更前のアイテム表示
+                            　lat3  =lat01;
+                            long3 = long01;  
+                            //open-meteoからURLを取得
+                            //const apiUrl = ' https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
+                            const apiUrl3 = 'https://api.open-meteo.com/v1/forecast?latitude='+lat3+'&longitude='+long3+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';      
+                          
+                                    fetch(apiUrl3)
+          .then(response => {
+              return response.json();
+          })
+          .then(data =>{
+              const jsonData = data;                              //
+              const humidity = jsonData.current.relative_humidity_2m;      //現在の湿度を取得
+              const temperature = jsonData.current.temperature_2m;//現在の気温を取得
+               let fukai = 0.81*temperature + 0.01*humidity * (0.99*temperature - 14.3) + 46.3;
+ 
 
-                                
+                var ky = {{ $icon1 }};
+                   var no = {{ $icon2 }};
+                   var ha = {{ $icon3 }};
+                   var na = {{ $icon4 }};
+                   var sy = {{ $icon5 }};
+                   var ka = {{ $icon6 }};
+                   var ja = {{ $icon7 }};
+                   var ta = {{ $icon8 }};
+                   var ni = {{ $icon9 }};
+                   var pa = {{ $icon10 }};
+                   var da = {{ $icon11 }};
+                   var hz = {{ $icon12 }};
+                   var nz = {{ $icon13 }};
+                   var su = {{ $icon14 }};
+                   var wa = {{ $icon15 }};
+                   
+
+                  //不快指数分岐
+                       //～55 	　寒い
+                       
+                    
+
+     if(fukai <= 54){
+                       if(na == 0){
+        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_g_hdppf0.png";
+    }
+    else if(na == 1){
+        document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_w_hxmyty.png";
+    }
+    document.getElementById("top1").alt="top1";
+    
+    if(sy ==0){
+        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850800/4_g_xoy3op.png";
+    }
+    else if(sy == 1){
+        document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850801/4_w_xqezhd.png";
+    }
+   
+    document.getElementById("top2").alt="top2";
+
+    if(ta ==0){
+        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/1_g_gjpyfc.png";
+    }
+    else if(ta == 1){
+        document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850798/1_w_lcj0em.png";
+    }
+if(pa ==0){
+        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/14_g_k9dwem.png";
+    }
+    else if(pa == 1){
+        document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/14_w_imlxid.png";
+    }    
+
+if(ni ==0){
+        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/10_g_ipaiuo.png";
+    }
+    else if(sy == 1){
+        document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/10_w_ivzohz.png";
+    }    
+    
+    document.getElementById("out1").alt="out1";
+
+
+    if(da ==0){
+        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/15_g_isdqhd.png";
+    }
+    else if(da == 1){
+        document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/15_w_res7s4.png";
+    }    
+    
+    document.getElementById("out2").alt="out2";
+    if(nz ==0){
+         document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_g_nt4qz0.png";
+    }
+    else if(nz == 1){
+        document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_w_gbczg1.png";
+    } 
+    document.getElementById("botom1").alt="botom1";
+
+document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("botom2").alt="botom2";
+    
+    
+}
+
+
+ //54～65　　肌寒い 
+ else if(fukai >= 55 && fukai <= 65 ){
+  if(na == 0){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_g_hdppf0.png";
+}
+else if(na == 1){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_w_hxmyty.png";
+}
+    
+document.getElementById("top1").alt="top1";
+
+if(sy ==0){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850800/4_g_xoy3op.png";
+}
+else if(sy == 1){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850801/4_w_xqezhd.png";
+}
+
+document.getElementById("top2").alt="top2";
+
+
+if(pa ==0){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/14_g_k9dwem.png";
+}
+else if(pa == 1){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/14_w_imlxid.png";
+} 
+                           
+document.getElementById("top3").alt="top3";
+    
+if(ka ==0){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850796/8_g_dxphgc.png";
+}
+else if(ka == 1){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850796/8_w_fodsba.png";
+}
+
+document.getElementById("out1").alt="out1";
+    
+if(ja ==0){
+    document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850799/2_g_nj4rd1.png";
+}
+else if(ja == 1){
+    document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850799/2_w_zsfafv.png";
+}
+
+document.getElementById("out2").alt="out2";
+    
+
+    
+if(nz ==0){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_g_nt4qz0.png";
+}
+else if(nz == 1){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_w_gbczg1.png";
+}
+
+document.getElementById("botom1").alt="botom1";
+
+
+document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top4").alt="top4";
+
+document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("botom2").alt="botom2";
+
+                        }
+
+    //64～75　　快い 
+    else if(fukai >= 65 && fukai <= 75 ){
+
+                            if(na == 0){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_g_hdppf0.png";
+}
+else if(na == 1){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850792/13_w_hxmyty.png";
+}
+
+document.getElementById("top1").alt="top1";
+    
+if(sy ==0){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850800/4_g_xoy3op.png";
+}
+else if(sy == 1){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850801/4_w_xqezhd.png";
+}
+
+document.getElementById("top2").alt="top2";
+    
+if(ha ==0){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/5_g_ll1lji.png";
+}
+else if(ha == 1){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/5_w_k4kmcf.png";
+}
+
+document.getElementById("top3").alt="top3";
+    
+if(nz ==0){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_g_nt4qz0.png";
+}
+else if(nz == 1){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850805/12_w_gbczg1.png";
+}
+
+document.getElementById("botom1").alt="botom1";
+    
+if(su ==0){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_g_biwcu6.png";
+}
+else if(su == 1){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_w_v0lmk7.png";
+}
+
+document.getElementById("botom2").alt="botom2";
+    
+if(wa ==0){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_g_iyv0nk.png";
+}
+else if(wa == 1){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_w_uloywe.png";
+}
+
+document.getElementById("out1").alt="out1";
+
+
+document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top4").alt="top4";
+
+document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("out2").alt="out2";
+
+                        }
+
+//70～85　　暑い 
+else if(fukai >= 75 && fukai <= 85 ){
+
+     
+                         
+                         if(ha ==0){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/5_g_ll1lji.png";
+}
+else if(ha == 1){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/5_w_k4kmcf.png";
+}
+
+document.getElementById("top1").alt="top1";
+ 
+if(hz ==0){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850803/11_g_dysagq.png";
+}
+else if(hz == 1){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850803/11_w_ouiu8j.png";
+}
+document.getElementById("botom1").alt="botom1";
+ 
+if(su ==0){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_g_biwcu6.png";
+}
+else if(su == 1){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_w_v0lmk7.png";
+}
+
+document.getElementById("botom2").alt="botom2";
+ 
+if(wa ==0){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_g_iyv0nk.png";
+}
+else if(wa == 1){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_w_uloywe.png";
+}
+
+document.getElementById("out1").alt="out1";
+
+
+document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top2").alt="top2";
+
+
+document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top3").alt="top3";
+
+
+document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top4").alt="top4";
+
+document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("out2").alt="out2";
+                        }
+
+
+//84～　　　暑くてたまらない 
+else if(fukai >= 86){
+
+                        
+                        if(ky ==0){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850799/3_g_g7e8di.png";
+}
+else if(ky == 1){
+    document.getElementById("top1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850800/3_w_jwwoq6.png";
+}
+
+document.getElementById("top1").alt="top1";
+
+if(no ==0){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/7_g_un1ngt.png";
+}
+else if(no == 1){
+    document.getElementById("top2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/7_w_alpwni.png";
+}
+
+document.getElementById("top2").alt="top2";
+
+if(ha ==0){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850802/5_g_ll1lji.png";
+}
+else if(ha == 1){
+    document.getElementById("top3").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/5_w_k4kmcf.png";
+}
+
+document.getElementById("top3").alt="top3";
+
+if(hz ==0){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850803/11_g_dysagq.png";
+}
+else if(hz == 1){
+    document.getElementById("botom1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850803/11_w_ouiu8j.png";
+}
+
+document.getElementById("botom1").alt="botom1";
+
+if(su ==0){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_g_biwcu6.png";
+}
+else if(su == 1){
+    document.getElementById("botom2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850793/6_w_v0lmk7.png";
+}
+
+document.getElementById("botom2").alt="botom2";
+
+if(wa ==0){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_g_iyv0nk.png";
+}
+else if(wa == 1){
+    document.getElementById("out1").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705850797/9_w_uloywe.png";
+}
+
+document.getElementById("out1").alt="out1";
+
+
+document.getElementById("top4").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("top4").alt="top4";
+
+
+document.getElementById("out2").src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705851767/MicrosoftTeams-image_3_okgg2y.png";
+
+document.getElementById("out2").alt="out2";
+
+                    }
+                    
+
+
+                })
+            //json形式で情報取得失敗した時
+            .catch(error => {
+                console.error('データ取得に失敗しました',error)
+            });
+    
                                
                            </script>
+                           
 
 
     </html>

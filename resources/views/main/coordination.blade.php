@@ -34,9 +34,13 @@
         
        
          <!---コーディネート枠-->
-       
+        
      <div class="coord_box">
-     
+      <a href="javascript:void(0)"onclick="buttonClick();" class="btn btn-flat">
+                <span>
+                 reset!
+                </span>
+            </a>  
             
         <div class="manekin">
             <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705280542/%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%81%AA%E4%BA%BA%E7%89%A9%E3%83%94%E3%82%AF%E3%83%88%E3%82%B0%E3%83%A9%E3%83%A0_%E4%BD%99%E7%99%BD%E3%82%AB%E3%83%83%E3%83%88_z6oq0y.png"class="manekinsize">
@@ -229,7 +233,9 @@
             <div>
                 @foreach($n_4categories as $n_4category )
                 @foreach($n_4category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -246,7 +252,9 @@
             <div >
                 @foreach($n_5categories as $n_5category )
                 @foreach($n_5category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -262,7 +270,9 @@
             <div>
                 @foreach($n_8categories as $n_8category )
                 @foreach($n_8category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -278,12 +288,14 @@
             <div>
                 @foreach($n_10categories as $n_10category )
                 @foreach($n_10category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach 
             </div>
         </div>
-
+        
         <!---5番目--->
         <div class="icon">
             <img id="five" name="five"class="fukuiconsize" >
@@ -293,7 +305,9 @@
             <div>
                 @foreach($n_1categories as $n_1category )
                 @foreach($n_1category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -309,7 +323,9 @@
             <div>
                 @foreach($n_2categories as $n_2category )
                 @foreach($n_2category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -325,7 +341,9 @@
             <div>
                 @foreach($n_3categories as $n_3category )
                 @foreach($n_3category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -341,7 +359,9 @@
             <div>
                 @foreach($n_9categories as $n_9category )
                 @foreach($n_9category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -357,7 +377,9 @@
             <div>
                 @foreach($n_11categories as $n_11category )
                 @foreach($n_11category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -373,7 +395,9 @@
             <div>
                 @foreach($n_6categories as $n_6category )
                 @foreach($n_6category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -389,7 +413,9 @@
             <div>
                 @foreach($n_7categories as $n_7category )
                 @foreach($n_7category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -405,7 +431,9 @@
             <div>
                 @foreach($n_15categories as $n_15category )
                 @foreach($n_15category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -421,7 +449,9 @@
             <div>
                 @foreach($n_13categories as $n_13category )
                 @foreach($n_13category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -435,7 +465,9 @@
             <div>
                 @foreach($n_12categories as $n_12category )
                 @foreach($n_12category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -451,7 +483,9 @@
             <div>
                 @foreach($n_14categories as $n_14category )
                 @foreach($n_14category->images()->latest()->get() as $image)
+                @if($image->user_id == Auth::id())
                 <img id = {{ $image->id }}   src={{ $image->path }} class="fukusize">
+                @endif
                 @endforeach
                 @endforeach
             </div>
@@ -750,7 +784,16 @@
             @endforeach
 				
 				
-				
+			//リセット用
+                function ChangeImage2( imgid , newimg ) {
+                    document.getElementById(imgid).src = newimg;
+                }
+                function buttonClick(){
+                    ChangeImage2( 'out', "https://res.cloudinary.com/dlfimibcq/image/upload/v1703848138/%E3%81%97%E3%81%8B%E3%81%8F%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3_di4zbl.png")
+                    ChangeImage2( 'top', "https://res.cloudinary.com/dlfimibcq/image/upload/v1703848138/%E3%81%97%E3%81%8B%E3%81%8F%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3_di4zbl.png")
+                    ChangeImage2( 'botom', "https://res.cloudinary.com/dlfimibcq/image/upload/v1703848138/%E3%81%97%E3%81%8B%E3%81%8F%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3_di4zbl.png")
+                
+                }
 
 		
         

@@ -172,6 +172,22 @@ class ProfileController extends Controller
         $fiinelyarea95 = Finelyarea::find(95);
         $fiinelyarea96 = Finelyarea::find(96);
         $fiinelyarea97 = Finelyarea::find(97);
+        $n_1categories = \Auth::user()->fashon_categories()->where('category_id',1)->get();
+        $n_2categories = \Auth::user()->fashon_categories()->where('category_id',2)->get();
+        $n_3categories = \Auth::user()->fashon_categories()->where('category_id',3)->get();
+        $n_4categories = \Auth::user()->fashon_categories()->where('category_id',4)->get();
+        $n_5categories = \Auth::user()->fashon_categories()->where('category_id',5)->get();
+        $n_6categories = \Auth::user()->fashon_categories()->where('category_id',6)->get();
+        $n_7categories = \Auth::user()->fashon_categories()->where('category_id',7)->get();
+        $n_8categories = \Auth::user()->fashon_categories()->where('category_id',8)->get();
+        $n_9categories = \Auth::user()->fashon_categories()->where('category_id',9)->get();
+        $n_10categories = \Auth::user()->fashon_categories()->where('category_id',10)->get();
+        $n_11categories = \Auth::user()->fashon_categories()->where('category_id',11)->get();
+        $n_12categories = \Auth::user()->fashon_categories()->where('category_id',12)->get();
+        $n_13categories = \Auth::user()->fashon_categories()->where('category_id',13)->get();
+        $n_14categories = \Auth::user()->fashon_categories()->where('category_id',14)->get();
+        $n_15categories = \Auth::user()->fashon_categories()->where('category_id',15)->get();
+      
         
         return view('profile.edit', [
             'user' => $request->user(),
@@ -324,6 +340,21 @@ class ProfileController extends Controller
             'finelyarea95' => $fiinelyarea95,
             'finelyarea96' => $fiinelyarea96,
             'finelyarea97' => $fiinelyarea97,
+            'n_1categories' => $n_1categories,
+            'n_2categories' => $n_2categories,
+            'n_3categories' => $n_3categories,
+            'n_4categories' => $n_4categories,
+            'n_5categories' => $n_5categories,
+            'n_6categories' => $n_6categories,
+            'n_7categories' => $n_7categories,
+            'n_8categories' => $n_8categories,
+            'n_9categories' => $n_9categories,
+            'n_10categories' => $n_10categories,
+            'n_11categories' => $n_11categories,
+            'n_12categories' => $n_12categories,
+            'n_13categories' => $n_13categories,
+            'n_14categories' => $n_14categories,
+            'n_15categories' => $n_15categories,
              //'areas' => $areas,
         ]);
     }
@@ -361,6 +392,8 @@ class ProfileController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        
+        
 
         return Redirect::to('/');
     }

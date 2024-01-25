@@ -92,10 +92,30 @@ class ImageController extends Controller
     return redirect()->route('images.create')->with('success', 'Images uploaded successfully');
 }
     
-    public function index()
+    /*public function index()
     {
         $images = Image::all();
         return view('images.index', compact('images'));
+    }*/
+    
+    
+    //画像の削除
+    public function destroy($id)
+    {
+        $image = Image::findOrFail($id);
+
+        // ユーザーが画像の所有者であることを確認
+        if (Auth::id() !== $image->user_id) {
+            abort(403, '権限がありません');
+        }
+
+        // Cloudinaryで画像を削除
+        Cloudinary::destroy($image->public_id);
+
+        // データベースからも画像情報を削除
+        $image->delete();
+
+        return redirect()->back()->with('success', '画像が削除されました');
     }
            
 }
