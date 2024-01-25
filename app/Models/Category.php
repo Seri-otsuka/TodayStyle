@@ -30,5 +30,15 @@ class Category extends Model
     {
         return $this->hasMany(Image::class);
     }
+    
+    public function fashon_categories()
+    {
+        return $this->belongsToMany(User::class, 'fashons', 'category_id', 'user_id');
+    }
+    
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'fashons', 'category_id', 'user_id');
+    }
 
 }

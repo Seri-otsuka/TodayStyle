@@ -98,17 +98,18 @@
                                         </button>
                                     </x-slot>
                                     <x-slot name="content">
-                                         {{--<x-dropdown-link :href="route('images.create')">
+                                         <x-dropdown-link :href="route('images.create')">
                                             {{ __(' + 服追加') }}
                                         </x-dropdown-link>
                                         
                                         <x-dropdown-link :href="route('profile.edit')">
                                             {{ __('プロフィール') }}
-                                        </x-dropdown-link>--}}
+                                        </x-dropdown-link>
                                         
                                         <!-- Authentication -->
                                         <form method="POST" action="{{ route('logout') }}">
-                                            @csrf
+                                           @csrf{{--<a class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" href="https://f092243dabda4fd1899859ac547d778f.vfs.cloud9.ap-northeast-1.amazonaws.com/logout" onclick="event.preventDefault();
+                                                                this.closest('form').submit();">ログアウト</a>--}}
                 
                                             <x-dropdown-link :href="route('logout')"
                                                     onclick="event.preventDefault();
@@ -126,7 +127,10 @@
                         <div class="weather_box wrapper weather-contents weather-social-text">
                             <!---->                            
                             <div style="margin: 0% -28% 0%;" class="maru_box">
-                                {{ $area->name }}・{{ $finelyarea->name }}({{ $finelyarea->id }})
+                                <div style="margin-left: 9%;">
+                                    {{ $area->name }}・{{ $finelyarea->name }}({{ $finelyarea->id }})
+                                </div >
+                                
                                 <!--↓↓サイズ調整お願いします-->
                                 <img class="rounded-lg" src="{{ $area->path}}" style="max-width: 20%">
                             
@@ -214,133 +218,173 @@
                         
                         
                         //↓天気コード分岐(現在の天気：ヘッダー用)
-                        //晴れ
-                        if(weather === 0 || weather === 1){
-                          sampleweather.innerHTML = "☀"+temperature + "°C";
-                        }
-                        //一部くもり
-                        else if(weather === 2){
-                            sampleweather.innerHTML = "🌤  "+temperature + "°C";
-                        }
-                        //曇り
-                        else if(weather === 3){
-                          sampleweather.innerHTML =  "☁  "+temperature + "°C";
-                        }
-                        //雨
-                        else if(weather <= 69){
-                          sampleweather.innerHTML =  "☂ "+temperature + "°C";
-                        }
-                        //雪
-                        else if(weather <=  79){
-                            sampleweather.innerHTML = "☃ "+temperature + "°C";
-                        }
-                        else{
-                          sampleweather.innerHTML = " ★"+temperature + "°C";
-                        }
-                        
-                        console.log();
+                                            //天気コード分岐
+                                            //晴れ
+                                            if(weather === 0 || weather === 1){
+                                             // sampleweather.innerHTML = "☀"+temperature + "°C";
+                                              document.getElementById("sampleweather").innerHTML
+                                            }
+                                            //一部くもり
+                                            else if(weather === 2){
+                                                document.getElementById("sampleweather").innerHTML = "🌤  "+temperature + "°C";
+                                            }
+                                            //曇り
+                                            else if(weather === 3){
+                                              document.getElementById("sampleweather").innerHTML =  "☁  "+temperature + "°C";
+                                            }
+                                            //雨
+                                            else if(weather <= 69){
+                                              document.getElementById("sampleweather").innerHTML =  "☂ "+temperature + "°C";
+                                            }
+                                            //雪
+                                            else if(weather <=  79){
+                                                document.getElementById("sampleweather").innerHTML = "☃ "+temperature + "°C";
+                                            }
+                                            else{
+                                              document.getElementById("sampleweather").innerHTML = " ★"+temperature + "°C";
+                                            }
 
                         //↓不快指数分岐（ヘッダー用）
                         //寒い 画像：とても寒い
                         if(fukai <= 54){
                         
-                            hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%8B%E3%82%93_hkfi0w.png';    
+                            //hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%8B%E3%82%93_hkfi0w.png';
+                       
+                             document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%8B%E3%82%93_hkfi0w.png';
+
                         }
                         //肌寒い 画像；寒い
                         else if(fukai >= 55 && fukai <= 65 ){
-                            hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%95%E3%82%80%E3%81%84_jbbyyb.png';
+                           // hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%95%E3%82%80%E3%81%84_jbbyyb.png';
+                              document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%95%E3%82%80%E3%81%84_jbbyyb.png';
+
                         }
                         //快い 画像：快適
                         else if(fukai > 65 && fukai <= 75 ){
-                            hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%8B%E3%81%84%E3%81%A6%E3%81%8D_o2qa7h.png';
+                            //hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%8B%E3%81%84%E3%81%A6%E3%81%8D_o2qa7h.png';
+                             document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%8B%E3%81%84%E3%81%A6%E3%81%8D_o2qa7h.png';
+
+                            
                         }
                         //暑い 画像：やや暑い
                         else if(fukai > 75 && fukai <= 85 ){
-                            hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%84_rkd08t.png';
+                          //  hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%84_rkd08t.png';
+                            document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%84_rkd08t.png';
+
                         }
+                        
                         //暑くてたまらない 画像：とても暑い
                         else if(fukai >= 86){
-                            hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%99%E3%81%8E_ltpfdk.png';
+                            ///hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%99%E3%81%8E_ltpfdk.png';
+                            document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%99%E3%81%8E_ltpfdk.png';
                         }
                         
                     //↓朝・昼・夜の天気の画像を表示
                         //朝の天気
                         //快晴
                         if(weather2[7] === 0 ){
-                          morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
+                          //morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';      
+                       document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+
+                          
                         }
                         //晴れだけど雲がでてる
                         else if(weather2[7] === 1){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
                         }
                         //一部曇り
                         else if(weather2[7] === 2){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            //morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
                         }            
                         //曇り
                         else if( weather2[7] === 3){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+
                         }
                          //霧（曇りアイコン使用）
                          else if (weather2[7] <= 49){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
                         }
 
                         //雨
                         else if(weather2[7] <= 69  ){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
                         }
                         //雪
                         else if (weather2[7] <= 79){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            //morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
                         }
                         //にわか雨(晴れのち雨アイコン使用)
                         else if(weather2[7] <= 84){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            //morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
                         }
                         //雪（雪のアイコン使用）
                         else if(weather2[7] <= 94){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                          //  morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            
                         }
                         //雷雨（雨のアイコン使用）
                         else if(weather2[7] <= 99){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                         //   morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
                         }                           
                         //曇りのち晴れ
                         else if (weather2[7] === 210){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                          //  morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
                         }
                         //晴れのち曇り
                         else if (weather2[7] === 211){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            //morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
                         }
                         //曇りのち雨
                         else if (weather2[7] === 212){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                        //    morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
                         }
+                        
                         //雪のち雨
                         else if (weather2[7] === 213){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                          //  morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
                         }
                         //晴れのち雨
                         else if (weather2[7] === 411){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            
                         }
                         //雨のち晴れ
                         else if (weather2[7] === 311){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                          //  morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
                         }
                         //晴れのち雪
                         else if (weather2[7] === 311){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            
                         }
                         //雨のち曇り
                         else if (weather2[7] === 214){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                         //   morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                             document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+    
                         }
                          //雪のち曇り
                          else if (weather2[7] === 217){
-                            morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                           // morning_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                            document.getElementById("morning_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+
                         }
 
                     //不明
@@ -349,194 +393,253 @@
                         }
                     
                         //朝7時の気温出力
-                        temperature_morning.innerHTML =  "🌡  "+temperature2[7] + "°C";
+                        document.getElementById("temperature_morning").innerHTML = "🌡  "+temperature2[7] + "°C";
+                        //temperature_morning.innerHTML =  "🌡  "+temperature2[7] + "°C";
                         //朝7時の降水確率を出力
-                        rainypercent_morning.innerHTML  = "⛆   " + probability[7] + "%";
-                    
-                    
+                        document.getElementById("rainypercent_morning").innerHTML ="⛆   " + probability[7] + "%";
+                         
+       
                         
                         
                         //昼の天気
-                        //快晴
+                    //快晴
                         if(weather2[13] === 0 ){
-                          noon_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
+                          //morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';      
+                       document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+
+                          
                         }
                         //晴れだけど雲がでてる
                         else if(weather2[13] === 1){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                           // .src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
                         }
                         //一部曇り
                         else if(weather2[13] === 2){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            //noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
                         }            
                         //曇り
                         else if( weather2[13] === 3){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+
                         }
                          //霧（曇りアイコン使用）
                          else if (weather2[13] <= 49){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
                         }
 
                         //雨
                         else if(weather2[13] <= 69  ){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
                         }
                         //雪
                         else if (weather2[13] <= 79){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            //noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
                         }
                         //にわか雨(晴れのち雨アイコン使用)
                         else if(weather2[13] <= 84){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            //noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
                         }
                         //雪（雪のアイコン使用）
                         else if(weather2[13] <= 94){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                          //  noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            
                         }
                         //雷雨（雨のアイコン使用）
                         else if(weather2[13] <= 99){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                         //   noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
                         }                           
                         //曇りのち晴れ
                         else if (weather2[13] === 210){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                          //  noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
                         }
                         //晴れのち曇り
                         else if (weather2[13] === 211){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            //noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
                         }
                         //曇りのち雨
                         else if (weather2[13] === 212){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                        //    noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
                         }
+                        
                         //雪のち雨
                         else if (weather2[13] === 213){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                          //  noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
                         }
                         //晴れのち雨
                         else if (weather2[13] === 411){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            
                         }
                         //雨のち晴れ
                         else if (weather2[13] === 311){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                          //  noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
                         }
                         //晴れのち雪
                         else if (weather2[13] === 311){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            
                         }
                         //雨のち曇り
                         else if (weather2[13] === 214){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                         //   noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                             document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+    
                         }
                          //雪のち曇り
                          else if (weather2[13] === 217){
-                            noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
-                        }
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
 
-                    //不明
-                        else{
-                            noon_OTENKI.innerHTML = "★";
-                        }
-
-                    
-                        //昼13時の気温出力
-                        temperature_noon.innerHTML =  temperature2[13] + "°C";
-                        //昼13時の降水確率を出力
-                        rainypercent_noon.innerHTML  =  probability[13] + "%";
-                    
-                    
-                    
-                    
-                    //夜の天気
-                        //快晴
-                        if(weather2[19] === 0 ){
-                          night_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';                
-                        }
-                        //晴れだけど雲がでてる
-                        else if(weather2[19] === 1){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                        }
-                        //一部曇り
-                        else if(weather2[19] === 2){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                        }            
-                        //曇り
-                        else if( weather2[19] === 3){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                        }
-                         //霧（曇りアイコン使用）
-                         else if (weather2[19] <= 49){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                        }
-
-                        //雨
-                        else if(weather2[19] <= 69  ){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                        }
-                        //雪
-                        else if (weather2[19] <= 79){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                        }
-                        //にわか雨(晴れのち雨アイコン使用)
-                        else if(weather2[19] <= 84){
-                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                        }
-                        //雪（雪のアイコン使用）
-                        else if(weather2[19] <= 94){
-                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                        }
-                        //雷雨（雨のアイコン使用）
-                        else if(weather2[19] <= 99){
-                             night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                        }                           
-                        //曇りのち晴れ
-                        else if (weather2[19] === 210){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                        }
-                        //晴れのち曇り
-                        else if (weather2[19] === 211){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                        }
-                        //曇りのち雨
-                        else if (weather2[19] === 212){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
-                        }
-                        //雪のち雨
-                        else if (weather2[19] === 213){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
-                        }
-                        //晴れのち雨
-                        else if (weather2[19] === 411){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                        }
-                        //雨のち晴れ
-                        else if (weather2[19] === 311){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
-                        }
-                        //晴れのち雪
-                        else if (weather2[19] === 311){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
-                        }
-                        //雨のち曇り
-                        else if (weather2[19] === 214){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
-                        }
-                         //雪のち曇り
-                         else if (weather2[19] === 217){
-                            night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
                         }
 
                     //不明
                         else{
                             night_OTENKI.innerHTML = "★";
                         }
+            document.getElementById("temperature_noon").innerHTML =  temperature2[13] + "°C";
+            document.getElementById("rainypercent_noon").innerHTML  =  probability[13] + "%";
+
+                        
+                        
+                        
+                        
+                        
+                         //夜の天気
+                        //快晴
+                        if(weather2[19] === 0 ){
+                          //morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';      
+                       document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+
+                          
+                        }
+                        //晴れだけど雲がでてる
+                        else if(weather2[19] === 1){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //一部曇り
+                        else if(weather2[19] === 2){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }            
+                        //曇り
+                        else if( weather2[19] === 3){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+
+                        }
+                         //霧（曇りアイコン使用）
+                         else if (weather2[19] <= 49){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
+                        }
+
+                        //雨
+                        else if(weather2[19] <= 69  ){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }
+                        //雪
+                        else if (weather2[19] <= 79){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                        }
+                        //にわか雨(晴れのち雨アイコン使用)
+                        else if(weather2[19] <= 84){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                        }
+                        //雪（雪のアイコン使用）
+                        else if(weather2[19] <= 94){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
+                            
+                        }
+                        //雷雨（雨のアイコン使用）
+                        else if(weather2[19] <= 99){
+                         //   night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
+                        }                           
+                        //曇りのち晴れ
+                        else if (weather2[19] === 210){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                        }
+                        //晴れのち曇り
+                        else if (weather2[19] === 211){
+                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
+                        }
+                        //曇りのち雨
+                        else if (weather2[19] === 212){
+                        //    night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
+                        }
+                        
+                        //雪のち雨
+                        else if (weather2[19] === 213){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
+                        }
+                        //晴れのち雨
+                        else if (weather2[19] === 411){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
+                            
+                        }
+                        //雨のち晴れ
+                        else if (weather2[19] === 311){
+                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
+                        }
+                        //晴れのち雪
+                        else if (weather2[19] === 311){
+                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
+                            
+                        }
+                        //雨のち曇り
+                        else if (weather2[19] === 214){
+                         //   noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+                             document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
+    
+                        }
+                         //雪のち曇り
+                         else if (weather2[19] === 217){
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
+
+                        }
+
+                    //不明
+                        else{
+                            morning_OTENKI.innerHTML = "★";
+                        }
+
                     
                         //夜19時の気温出力
-                        temperature_night.innerHTML =  temperature2[19] + "°C";
                         //夜19時の降水確率を出力
-                        rainypercent_night.innerHTML  =  probability[19] + "%"
+                        document.getElementById("temperature_night").innerHTML =  temperature2[19] + "°C";
+                        document.getElementById("rainypercent_night").innerHTML  =  probability[19] + "%";
+                    
+                    
+
                             
                             console.log(weather2);
                         
@@ -557,7 +660,7 @@
                             <button onclick="">
                                 <a href="{{ route('goout') }}">
                                  <img class="mr-2 return_btn" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1704939146/bag1_giuxki.png" width=150px height=150px;/>
-                                 <p style="margin: 0% 0% 5%;">お出かけモード→</p>
+                                 <p style="margin: 0% 0% 5%;"><font size="5">お出かけモード→</font></p>
                                  </a>
                             </button>
                         </div>
@@ -866,13 +969,16 @@
                             </div>
                         </center>
                         <div></div>
+                        
+                        <!---隙間-->
+	                    <div class="sukima_box"></div>
                     
                     
                         <!--ワンポイントアドバイス-->
-                        <table align="center" class="sample_test">
-                            <tr>
+                        <table align="center">
+                            <tr class="sample_test">
                                 <td>
-                                    <p class="kaiwa-text ">
+                                    <p class="kaiwa-text">
                                                 <font size="7" >
                                                     　ワンポイントアドバイス
                                                 </font>
@@ -1031,89 +1137,88 @@
                      console.log(samatu);
                      console.log(rainmax);
                         
-                    //3行目
-                    if(uvmax => 3){
-                        recommend_items.innerHTML = "今日は日差しが強いワン!日焼け対策を<br>しっかりしよう。日焼け止めや日傘などを使おう。";
-                    }
-                    else if(uvmax => 6){
-                        recommend_items.innerHTML = "今日は日差しがすごく強いワン!<br>できるだけ屋外での活動は控えよう。";
-                    }
-                     if(result == true){
-                        recommend_items.innerHTML = "今日は雪だワン!!滑らないようにしてね。<br>傘やブーツ、マフラー、手袋などを使おう。";
-                    }
-                    else if(rainmax <= 20){
-                        recommend_items.innerHTML = "雨の心配は無さそうだワン！洗濯物を乾かすのも👌";
-                    }
-                    else if(rainmax <= 29){
-                        recommend_items.innerHTML = "折り畳み傘が助けてくれるかもだワン！ ";
-                    }
-                    else if(rainmax => 30){
-                        recommend_items.innerHTML = "今日は雨が降るかもしれないワン!<br>折り畳み傘が便利だよ。 ";
-                    }
-                    else if(rainmax => 70){
-                        recommend_items.innerHTML = "今日は雨降りだワン!雨具をしっかり用意しよう。<br>傘やレインブーツを使おう。";
-                    }
-                   
-                       
-                            //出力
-                            //if文はelseなしにする　→　選択されていなければ共通の文とグッズのみ出力0110
-                            //不快指数分岐
+                                                    //3行目
+                                                    if(uvmax => 3){
+                                                        document.getElementById("recommend_items").innerHTML = "今日は日差しが強いワン!日焼け対策を<br>しっかりしよう。日焼け止めや日傘などを使おう。";
+                                                      
+                                                    }
+                                                    else if(uvmax => 6){
+                                                         document.getElementById("recommend_items").innerHTML = "今日は日差しがすごく強いワン!<br>できるだけ屋外での活動は控えよう。";
+                                                    }
+                                                     if(result == true){
+                                                         document.getElementById("recommend_items").innerHTML = "今日は雪だワン!!滑らないようにしてね。<br>傘やブーツ、マフラー、手袋などを使おう。";
+                                                    }
+                                                    else if(rainmax <= 20){
+                                                         document.getElementById("recommend_items").innerHTML = "雨の心配は無さそうだワン！洗濯物を乾かすのも👌";
+                                                    }
+                                                    else if(rainmax <= 29){
+                                                         document.getElementById("recommend_items").innerHTML = "折り畳み傘が助けてくれるかもだワン！ ";
+                                                    }
+                                                    else if(rainmax => 30){
+                                                         document.getElementById("recommend_items").innerHTML = "今日は雨が降るかもしれないワン!<br>折り畳み傘が便利だよ。 ";
+                                                    }
+                                                    else if(rainmax => 70){
+                                                         document.getElementById("recommend_items").innerHTML = "今日は雨降りだワン!雨具をしっかり用意しよう。<br>傘やレインブーツを使おう。";
+                                                    }
+                                                   
+                                                       
+                                                            
+                                                            //不快指数分岐(ワンポイント)
+                                                         //寒い
+                                                         if(fukai2 <= 54){
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
+                                                            //1:寒がり
+                                                            if(samatu == 1){
+                                                            document.getElementById("advicesamuatu").innerHTML="防寒具があるといいね。カイロもgood!<br>裏起毛の服がおすすめだワン!";
 
-                         //寒い
-                         if(fukai2 <= 54){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                            //1:寒がり
-                            if(samatu == 1){
-                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!<br>裏起毛の服がおすすめだワン!";
-
-                           }
-                           //0:暑がり
-                           else{
-                            advicesamuatu.innerHTML="防寒具があるといいね。カイロもgood!<br>今日は暑がりさんも寒さに注意だワン! ";
-                           }
-                         }
-                         //肌寒い
-                         else if(fukai2 >= 55 && fukai2 <= 65 ){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                             if(samatu == 1){
-                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>厚手の靴下やブーツも選んでみよう。";
-                             }
-                             else{
-                                advicesamuatu.innerHTML="アウターやインナーを上手に活用するワン!<br>暖房に対応できるアウターを選ぼう。 ";
-                             }
-                         }
-                         //快い
-                         else if(fukai2 >= 65 && fukai2 <= 75 ){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                            advicesamuatu.innerHTML= "今日は過ごしやすいワンダフルな一日‼<br>好きなオシャレが楽しめそうだワン。";
-
- 
-                           }
-                         //暑い
-                         else if(fukai2 >= 75 && fukai2 <= 85 ){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                             if(samatu == 1){
-                                advicesamuatu.innerHTML = "薄手の素材がおすすめだワン。<br>冷房に注意してね。七分丈もよいかも？ ";
-                             }
-                             else{
-                                advicesamuatu.innerHTML =" 薄手の素材がおすすめだワン。<br>通気性の良い半袖や半ズボンがおすすめだよ。 ";
-                             }
-                           }
-                         //暑くてたまらない
-                         else if(fukai2 >= 86){
-                            advice.innerHTML = tmax+"℃　";
-                            advicetwo.innerHTML = tmin+"℃　　　　";
-                             if(samatu == 1){
-                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。冷房に注意するワン!　 ";
-                             }
-                             else{
-                                advicesamuatu.innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。汗拭きシートで快適だワン。 ";
-                             }
-                            
+                                
+                                                           }
+                                                           //0:暑がり
+                                                           else{
+                                                            document.getElementById("advicesamuatu").innerHTML="防寒具があるといいね。カイロもgood!<br>今日は暑がりさんも寒さに注意だワン! ";
+                                                           }
+                                                         }
+                                                         //肌寒い
+                                                         else if(fukai2 >= 55 && fukai2 <= 65 ){
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
+                                                             if(samatu == 1){
+                                                                document.getElementById("advicesamuatu").innerHTML="アウターやインナーを上手に活用するワン!<br>厚手の靴下やブーツも選んでみよう。";
+                                                             }
+                                                             else{
+                                                                document.getElementById("advicesamuatu").innerHTML="アウターやインナーを上手に活用するワン!<br>暖房に対応できるアウターを選ぼう。 ";
+                                                             }
+                                                         }
+                                                         //快い
+                                                         else if(fukai2 >= 65 && fukai2 <= 75 ){
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
+                                                            document.getElementById("advicesamuatu").innerHTML= "今日は過ごしやすいワンダフルな一日‼<br>好きなオシャレが楽しめそうだワン。";
+                                
+                                 
+                                                           }
+                                                         //暑い
+                                                         else if(fukai2 >= 75 && fukai2 <= 85 ){
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
+                                                             if(samatu == 1){
+                                                                document.getElementById("advicesamuatu").innerHTML = "薄手の素材がおすすめだワン。<br>冷房に注意してね。七分丈もよいかも？ ";
+                                                             }
+                                                             else{
+                                                                document.getElementById("advicesamuatu").innerHTML =" 薄手の素材がおすすめだワン。<br>通気性の良い半袖や半ズボンがおすすめだよ。 ";
+                                                             }
+                                                           }
+                                                         //暑くてたまらない
+                                                         else if(fukai2 >= 86){
+                                                            document.getElementById("advice").innerHTML = tmax+"℃　";
+                                                            document.getElementById("advicetwo").innerHTML = tmin+"℃　　　　";
+                                                             if(samatu == 1){
+                                                                document.getElementById("advicesamuatu").innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。冷房に注意するワン!　 ";
+                                                             }
+                                                             else{
+                                                                document.getElementById("advicesamuatu").innerHTML="熱中症に気を付けて!!接触冷感や吸水速乾の素材が<br>おすすめ。汗拭きシートで快適だワン。 ";
+                                                             }                            
                          
 
 

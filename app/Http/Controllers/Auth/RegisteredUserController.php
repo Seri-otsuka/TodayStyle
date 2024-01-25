@@ -26,7 +26,7 @@ class RegisteredUserController extends Controller
      * Display the registration view.
      */
      
-
+        
     
         public function __construct()
         {
@@ -373,7 +373,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME) 
+        return redirect()->route('images.create') 
             ->with([
                 
             ]);

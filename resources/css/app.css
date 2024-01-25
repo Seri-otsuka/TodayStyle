@@ -203,7 +203,7 @@
 .cp_ipselect select::-ms-expand {
 	display: none;
 }
-/*.cp_ipselect:after {
+.cp_ipselect:after {
 	position: absolute;
 	top: 18px;
 	right: 10px;
@@ -215,15 +215,15 @@
 	border-right: 6px solid transparent;
 	border-top: 6px solid rgba(0, 0, 0, 0.3);
 	pointer-events: none;
-}*/
+}
 .cp_sl06_selectlabel {
 	color: rgba(0,0,0, 0.5);
-	font-size: 18px;
+	font-size: 25px;
 	font-weight: normal;
 	position: absolute;
 	pointer-events: none;
 	left: 0;
-	top: 10px;
+	top: 15px;
 	transition: 0.2s ease all;
 }
 .cp_sl06:focus ~ .cp_sl06_selectlabel, .cp_sl06:valid ~ .cp_sl06_selectlabel {
@@ -285,10 +285,10 @@ display: none;
   content: '<>';
   font: 17px "Consolas", monospace;
   color: #333;
-  -webkit-transform: rotate(90deg);
+  /*-webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
+  transform: rotate(90deg);*/
   right: 11px;
   /*Adjust for position however you want*/
   
