@@ -67,12 +67,13 @@
                                         </button>
                                     </x-slot>
                                     <x-slot name="content">
+                                        {{--
                                         <x-dropdown-link :href="route('images.create')">
                                             {{ __(' + 服追加') }}
                                         </x-dropdown-link>
                                         <x-dropdown-link :href="route('profile.edit')">
                                             {{ __('プロフィール') }}
-                                        </x-dropdown-link>
+                                        </x-dropdown-link>--}}
                                         
                                         <!-- Authentication -->
                                         <form method="POST" action="{{ route('logout') }}">
@@ -113,14 +114,14 @@
                                  
                                 </div >
                                     
-                                
+
                                 <img  id = "areaobi" class="rounded-lg"  style="max-width: 20%">
                                 <script>
                                   document.getElementById("areaobi").src="{{ $area->path }}";
                                  </script>
                                        
                                   
-                            
+                    
                             </div>
                             <!---お天気アイコン-->
 				            <div>
@@ -288,8 +289,7 @@
 
                                                     console.log(lat2+"です！");
                                                     console.log(long2+"です！");
-                                            
-                                                    
+
 
                                               
                                              const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude='+lat01+'&longitude='+long01+'&current=temperature_2m,relative_humidity_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1';
