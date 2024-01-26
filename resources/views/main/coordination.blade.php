@@ -36,11 +36,11 @@
          <!---コーディネート枠-->
         
      <div class="coord_box">
-      <a href="javascript:void(0)"onclick="buttonClick();" class="btn btn-flat">
+       <a href="javascript:void(0)"onclick="buttonClick();" class="btn btn-flat">
                 <span>
                  reset!
                 </span>
-            </a>  
+            </a> 
             
         <div class="manekin">
             <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705280542/%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%81%AA%E4%BA%BA%E7%89%A9%E3%83%94%E3%82%AF%E3%83%88%E3%82%B0%E3%83%A9%E3%83%A0_%E4%BD%99%E7%99%BD%E3%82%AB%E3%83%83%E3%83%88_z6oq0y.png"class="manekinsize">
@@ -496,7 +496,9 @@
             <font size="40">操作説明</font>
             <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705816776/MicrosoftTeams-image_2_rigrll.png">
             </p>
-     
+            <p class="under2_box">
+            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" class="keyframe7 animation">
+            </p>
         
     
     
