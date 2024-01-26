@@ -153,6 +153,39 @@
 /* 黒おびの地図 */
 .maru_box {
     border-radius: 20px;
+    margin: 0% -28% 0%; 
+}
+
+/* 都道府県を良い感じに右に寄せる */
+.ken_yose{
+    margin-left: 9%;
+}
+/* 地図のサイズ調整 */
+.ken_size{
+    max-width: 20%;
+}
+
+/*お天気アイコンのサイズ調整*/
+.otenki_size{
+  width: 120px;
+}
+/*温度の位置調整*/
+.temperature_iti{
+  margin: -2% 0% -10%;
+}
+/*降水確率の位置調整*/
+.rainypercent_iti{
+  margin: -14% 0% -10%;
+}
+/*不快指数の説明画像のサイズ調整*/
+.hukai_wait{
+  height: 27%;
+}
+/*現在の天気・温度表示用style*/
+.header_text{
+  position: relative;
+  font-family: ravie,fantasy, serif;
+  font-size: 450%;
 }
 
 
@@ -214,9 +247,10 @@
 	height: 0;
 	padding: 0;
 	content: '';
-	border-left: 6px solid transparent;
-	border-right: 6px solid transparent;
-	border-top: 6px solid rgba(0, 0, 0, 0.3);
+	/*
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid rgba(0, 0, 0, 0.3);*/
 	pointer-events: none;
 }
 .cp_sl06_selectlabel {
@@ -263,7 +297,7 @@
 	top: 25%;
 	left: 0;
 	pointer-events: none;
-	opacity: 0.5;
+	opacity: 1;
 }
 
 /* 地域詳細 */

@@ -48,7 +48,7 @@
                             
                             
                             <!-- 現在の天気・温度表示用 表示分けないなら一個でいいかも-->
-                            <p id="sampleweather" style="position: relative;font-family: ravie,fantasy, serif;font-size: 450%;">
+                            <p class="header_text" id="sampleweather">
                              
                             </p>
                             
@@ -124,23 +124,22 @@
                         </div>
                         
                         <!---天気表示（黒おび）-->
-                        <div class="weather_box wrapper weather-contents weather-social-text">
+                        <!-- wrapper意味ないので削除 -->
+                        <div class="weather_box weather-contents weather-social-text">
                             <!---->                            
-                            <div style="margin: 0% -28% 0%;" class="maru_box">
-                                <div style="margin-left: 9%;">
+                            <div class="maru_box">
+                                <div class="ken_yose">
                                     {{ $area->name }}・{{ $finelyarea->name }}({{ $finelyarea->id }})
                                 </div >
-                                
                                 <!--↓↓サイズ調整お願いします-->
-                                <img class="rounded-lg" src="{{ $area->path}}" style="max-width: 20%">
-                            
+                                <img class="rounded-lg ken_size" src="{{ $area->path}}">
                             </div>
                             <!---お天気アイコン-->
 				            <div>
 				                朝
-                                <img id="morning_OTENKI"  style="width: 120px;"/>
-                            	<!-- 湿度 -->
-                            	<p id="temperature_morning" style="margin: -2% 0% -10%;">
+                                <img class="otenki_size" id="morning_OTENKI"/>
+                            	<!-- 温度 -->
+                            	<p class="temperature_iti" id="temperature_morning">
                             	    
                             	</p>
                             	<p id="rainypercent_morning">
@@ -149,23 +148,23 @@
 				            </div>
 				            <div>
 				                昼
-                                <img id="noon_OTENKI"   style="width: 120px;" />
-                                <!-- 湿度 -->
-                                <p id="temperature_noon" style="margin: -2% 0% -10%;">
+                                <img  class="otenki_size" id="noon_OTENKI" />
+                                <!-- 温度 -->
+                                <p class="temperature_iti" id="temperature_noon">
                             	    
                             	</p>
-                                <p id="rainypercent_noon" style="margin: -14% 0% -10%;">
+                                <p class="rainypercent_iti" id="rainypercent_noon">
                                     
                                 </p>
 				            </div>
 				            <div class="night-otenki-right">
                             	 夜
-                                <img  id="night_OTENKI" style="width: 120px;"/>
-                            	<!-- 湿度 -->
-                            	<p id="temperature_night" style="margin: -2% 0% -10%;">
+                                <img  class="otenki_size" id="night_OTENKI" />
+                            	<!-- 温度 -->
+                            	<p class="temperature_iti" id="temperature_night">
                             	   
                             	</p>
-                            	<p id="rainypercent_night" style="margin: -14% 0% -10%;">
+                            	<p class="rainypercent_iti" id="rainypercent_night">
                             	    
                             	</p>
 				            </div>
@@ -174,7 +173,7 @@
                             <!---不快指数-->
                             <div class="hukaisisuu-right">
                                 <img id="hukaiSisuu" class="weather-social"/>
-                                <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705790906/%E7%92%B0%E5%A2%83%E6%8C%87%E6%95%B0%E6%94%B9%E8%A8%82%E7%89%88_eos4rt.png" style="height: 27%;"/>
+                                <img class="hukai_wait" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705790906/%E7%92%B0%E5%A2%83%E6%8C%87%E6%95%B0%E6%94%B9%E8%A8%82%E7%89%88_eos4rt.png"/>
                             </div>
             			    
 <script>
