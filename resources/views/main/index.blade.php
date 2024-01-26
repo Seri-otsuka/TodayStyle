@@ -171,7 +171,7 @@
 
 
                             <!---不快指数-->
-                            <div class="hukaisisuu-right">
+                            <div>
                                 <img id="hukaiSisuu" class="weather-social"/>
                                 <img class="hukai_wait" src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705790906/%E7%92%B0%E5%A2%83%E6%8C%87%E6%95%B0%E6%94%B9%E8%A8%82%E7%89%88_eos4rt.png"/>
                             </div>
