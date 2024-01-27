@@ -7,6 +7,8 @@
 他の部分がおかしくなったので書き換えさせていただきました。classで指定しています。
 サイズ指定したい時などは極力タグ指定ではなく、クラス名を指定していただくとありがたいです。　by小島 */
 
+
+
 .sample_test {
   border-collapse: separate;
   border-spacing: 100px;
@@ -744,3 +746,109 @@ body {
       position: absolute;
       top: 1330px;
     }
+    
+    
+     .under2_box {
+      width: 1400px;
+      height: 190px;
+      background: #d5d5d5;
+      position: absolute;
+      top: 2530px;
+    }
+
+    *,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+.btn,
+a.btn,
+button.btn {
+    position: absolute;
+        top: 900px;
+        right:80px;
+    border: 5px solid #000;      /* わかりやすくボーダーを引く */
+      border-radius: 10px;
+  font-size: 2.0rem;
+  font-weight: 700;
+  line-height: 1.5;
+  position: relative;
+  display: inline-block;
+  padding: 1rem 4rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #212529;
+  border-radius: 0.5rem;
+}
+
+a.btn-flat {
+  overflow: hidden;
+
+  padding: 1.5rem 6rem;
+
+  color: #fff;
+  border-radius: 0;
+  background: #ADADAD;
+}
+
+a.btn-flat span {
+  position: relative;
+}
+
+a.btn-flat:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 150%;
+  height: 500%;
+
+  content: "";
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+
+  background: #000;
+}
+
+a.btn-flat:hover:before {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+
+.animation{
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-duration: 1.5s;
+  width: 128px;
+}
+
+.keyframe7 {
+  animation-name: jump;
+  animation-duration: .6s;
+}
+
+@keyframes jump{
+  0%   { transform:translate(0%, 60px) rotateX(50deg); }
+  100% { transform:translate(0%, 0%); }
+}

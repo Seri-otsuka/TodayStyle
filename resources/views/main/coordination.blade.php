@@ -36,7 +36,7 @@
          <!---コーディネート枠-->
         
      <div class="coord_box">
-      <a href="javascript:void(0)"onclick="buttonClick();" class="btn btn-flat">
+       <a href="javascript:void(0)"onclick="buttonClick();" class="btn btn-flat">
                 <span>
                  reset!
                 </span>
@@ -495,6 +495,9 @@
             <p class="under_box">
             <font size="40">操作説明</font>
             <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1705816776/MicrosoftTeams-image_2_rigrll.png">
+            </p>
+                  <p class="under2_box">
+            <img src="https://res.cloudinary.com/dlfimibcq/image/upload/v1700613658/1696480649456_rvyzkj.png" class="keyframe7 animation">
             </p>
      
         
