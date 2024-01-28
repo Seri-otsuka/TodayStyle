@@ -15,7 +15,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans bg-gray-300 antialiased">
+    <body class="font-sans bg-gray-300 antialiased mt-28 hiritu_top">
         <div>
             <center>
               <a href="/">

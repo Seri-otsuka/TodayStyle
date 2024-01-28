@@ -43,6 +43,13 @@
   -moz-transform: scale(0.7);
 }
 
+/*トップ画面を大きく*/
+.hiritu_top{
+  zoom: 1.8;
+  -moz-transform: scale(1.8);
+}
+
+
 
 /* メニュー画面 */
 .header {
@@ -139,10 +146,6 @@
   left: 0;/* メニューを画面に入れる */
 }
 
-/*  黒おびの位置調整  */
-.kuroobi_iti{
-  
-}
 
 /* 天気表示画面の黒おび*/
 .weather_box {
@@ -187,7 +190,7 @@
 .header_text{
   position: relative;
   font-family: ravie,fantasy, serif;
-  font-size: 450%;
+  font-size: 650%;
 }
 
 
@@ -558,7 +561,7 @@ p.kaiwa-text:last-child {
 }
 
 .weather-social-text{
-	font-size: 250%;
+	font-size: 370%;
 	font-family: 'Hattori Hanzo',monospace;
 	color: white;
 }

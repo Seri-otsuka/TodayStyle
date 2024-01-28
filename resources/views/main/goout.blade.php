@@ -43,7 +43,7 @@
                             <p id="sampleweather" style="position: relative;font-family: 'Hattori Hanzo', serif;font-size: 500%;">
                              
                             </p>-->
-                             <p id="sampleweather" style="position: relative;font-family: ravie,fantasy, serif;font-size: 450%;">
+                             <p class="header_text" id="sampleweather">
                              
                             </p>
                            
@@ -67,18 +67,18 @@
                                         </button>
                                     </x-slot>
                                     <x-slot name="content">
-                                        {{--
-                                        <x-dropdown-link :href="route('images.create')">
+                                         <x-dropdown-link :href="route('images.create')">
                                             {{ __(' + 服追加') }}
                                         </x-dropdown-link>
+                                        
                                         <x-dropdown-link :href="route('profile.edit')">
                                             {{ __('プロフィール') }}
-                                        </x-dropdown-link>--}}
+                                        </x-dropdown-link>
                                         
                                         <!-- Authentication -->
                                         <form method="POST" action="{{ route('logout') }}">
-                                            @csrf
-                                            
+                                           @csrf{{--<a class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" href="https://f092243dabda4fd1899859ac547d778f.vfs.cloud9.ap-northeast-1.amazonaws.com/logout" onclick="event.preventDefault();
+                                                                this.closest('form').submit();">ログアウト</a>--}}
                 
                                             <x-dropdown-link :href="route('logout')"
                                                     onclick="event.preventDefault();
@@ -371,6 +371,8 @@
                             ///hukaiSisuu.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%99%E3%81%8E_ltpfdk.png';
                             document.getElementById("hukaiSisuu").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705675669/%E3%81%82%E3%81%A4%E3%81%99%E3%81%8E_ltpfdk.png';
                         }
+                        
+                        
                     //↓朝・昼・夜の天気の画像を表示
                         //朝の天気
                         //快晴
@@ -490,7 +492,6 @@
                         rainypercent_morning.innerHTML  = "⛆   " + probability[7] + "%";
                     
                     
-                        
                         
                         //昼の天気
                         //快晴
@@ -617,14 +618,14 @@
                         //快晴
                         if(weather2[13] === 0 ){
                           //morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';      
-                       document.getElementById("").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
+                       document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
 
                           
                         }
                         //晴れだけど雲がでてる
                         else if(weather2[13] === 1){
                            // .src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                            document.getElementById("").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                            document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
                         }
                         //一部曇り
                         else if(weather2[13] === 2){

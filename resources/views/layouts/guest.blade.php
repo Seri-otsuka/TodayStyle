@@ -16,9 +16,9 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <!--全体の背景の範囲-->
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-300">
-            <div>
+        <!--全体の背景の範囲 sm:justify-centerを削除しました -->
+        <div class="min-h-screen flex flex-col items-center pt-6 sm:pt-0 bg-gray-300 hiritu_top">
+            <div class="mt-12">
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
                 </a>
