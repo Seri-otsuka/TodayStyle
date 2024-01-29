@@ -98,24 +98,19 @@
                                         </button>
                                     </x-slot>
                                     <x-slot name="content">
-                                         <x-dropdown-link :href="route('images.create')">
+                                        {{-- <x-dropdown-link :href="route('images.create')">
                                             {{ __(' + 服追加') }}
                                         </x-dropdown-link>
                                         
                                         <x-dropdown-link :href="route('profile.edit')">
                                             {{ __('プロフィール') }}
-                                        </x-dropdown-link>
+                                        </x-dropdown-link>--}}
                                         
                                         <!-- Authentication -->
                                         <form method="POST" action="{{ route('logout') }}">
-                                           @csrf{{--<a class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" href="https://f092243dabda4fd1899859ac547d778f.vfs.cloud9.ap-northeast-1.amazonaws.com/logout" onclick="event.preventDefault();
-                                                                this.closest('form').submit();">ログアウト</a>--}}
+                                           @csrf<a class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" href="https://f092243dabda4fd1899859ac547d778f.vfs.cloud9.ap-northeast-1.amazonaws.com/logout" onclick="event.preventDefault();
+                                                                this.closest('form').submit();">ログアウト</a>
                 
-                                            <x-dropdown-link :href="route('logout')"
-                                                    onclick="event.preventDefault();
-                                                                this.closest('form').submit();">
-                                                {{ __('ログアウト') }}
-                                            </x-dropdown-link>
                                         </form>
                                     </x-slot>
                                 </x-dropdown>
@@ -221,7 +216,7 @@
                                             //晴れ
                                             if(weather === 0 || weather === 1){
                                              // sampleweather.innerHTML = "☀"+temperature + "°C";
-                                              document.getElementById("sampleweather").innerHTML
+                                              document.getElementById("sampleweather").innerHTML = "☀　"+temperature +"°C";
                                             }
                                             //一部くもり
                                             else if(weather === 2){
@@ -513,6 +508,8 @@
                         }
             document.getElementById("temperature_noon").innerHTML =  temperature2[13] + "°C";
             document.getElementById("rainypercent_noon").innerHTML  =  probability[13] + "%";
+            
+            console.log(probability);
 
                         
                         

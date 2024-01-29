@@ -50,6 +50,7 @@
                             
                             <!-- Settings Dropdown 
                                  メニュー表示用    -->
+                            
                             <div class="hidden sm:flex sm:items-center sm:ml-6 dropdown" style="margin-right: 2%;">
                                 <!--ここからのやつはcomponentから持ってきてます-->
                                 <x-dropdown align="right" width="48">
@@ -67,24 +68,18 @@
                                         </button>
                                     </x-slot>
                                     <x-slot name="content">
-                                         <x-dropdown-link :href="route('images.create')">
+                                        {{-- <x-dropdown-link :href="route('images.create')">
                                             {{ __(' + 服追加') }}
                                         </x-dropdown-link>
                                         
                                         <x-dropdown-link :href="route('profile.edit')">
                                             {{ __('プロフィール') }}
-                                        </x-dropdown-link>
+                                        </x-dropdown-link>--}}
                                         
                                         <!-- Authentication -->
                                         <form method="POST" action="{{ route('logout') }}">
-                                           @csrf{{--<a class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" href="https://f092243dabda4fd1899859ac547d778f.vfs.cloud9.ap-northeast-1.amazonaws.com/logout" onclick="event.preventDefault();
-                                                                this.closest('form').submit();">ログアウト</a>--}}
-                
-                                            <x-dropdown-link :href="route('logout')"
-                                                    onclick="event.preventDefault();
-                                                                this.closest('form').submit();">
-                                                {{ __('ログアウト') }}
-                                            </x-dropdown-link>
+                                           @csrf<a class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" href="https://f092243dabda4fd1899859ac547d778f.vfs.cloud9.ap-northeast-1.amazonaws.com/logout" onclick="event.preventDefault();
+                                                                this.closest('form').submit();">ログアウト</a>
                                         </form>
                                     </x-slot>
                                 </x-dropdown>
@@ -315,8 +310,8 @@
                                             //天気コード分岐
                                             //晴れ
                                             if(weather === 0 || weather === 1){
-                                             // sampleweather.innerHTML = "☀"+temperature + "°C";
-                                              document.getElementById("sampleweather").innerHTML
+                                            
+                                              document.getElementById("sampleweather").innerHTML = "☀　"+temperature +"°C";
                                             }
                                             //一部くもり
                                             else if(weather === 2){
@@ -497,134 +492,13 @@
                         //快晴
                         if(weather2[13] === 0 ){
                           //morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';      
-                       document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
-
-                          
-                        }
-                        //晴れだけど雲がでてる
-                        else if(weather2[13] === 1){
-                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                        }
-                        //一部曇り
-                        else if(weather2[13] === 2){
-                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                        }            
-                        //曇り
-                        else if( weather2[13] === 3){
-                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-
-                        }
-                         //霧（曇りアイコン使用）
-                         else if (weather2[13] <= 49){
-                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
-                        }
-
-                        //雨
-                        else if(weather2[13] <= 69  ){
-                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                        }
-                        //雪
-                        else if (weather2[13] <= 79){
-                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                        }
-                        //にわか雨(晴れのち雨アイコン使用)
-                        else if(weather2[13] <= 84){
-                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                        }
-                        //雪（雪のアイコン使用）
-                        else if(weather2[13] <= 94){
-                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_mbhqfu.png';
-                            
-                        }
-                        //雷雨（雨のアイコン使用）
-                        else if(weather2[13] <= 99){
-                         //   night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867041/%E9%9B%A8_tmewee.png';
-                        }                           
-                        //曇りのち晴れ
-                        else if (weather2[13] === 210){
-                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
-                        }
-                        //晴れのち曇り
-                        else if (weather2[13] === 211){
-                            //night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
-                        }
-                        //曇りのち雨
-                        else if (weather2[13] === 212){
-                        //    night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%9B%87%E3%82%8A%E3%81%AE%E3%81%A1%E9%9B%A8_jyzcjp.png';
-                        }
-                        
-                        //雪のち雨
-                        else if (weather2[13] === 213){
-                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E9%9B%AA_%E9%9B%A8_xtxefh.png';
-                        }
-                        //晴れのち雨
-                        else if (weather2[13] === 411){
-                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%A8_mqp0gr.png';
-                            
-                        }
-                        //雨のち晴れ
-                        else if (weather2[13] === 311){
-                          //  night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8_%E6%99%B4%E3%82%8C_tosclf.png';
-                        }
-                        //晴れのち雪
-                        else if (weather2[13] === 311){
-                           // night_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024355/%E6%99%B4%E3%82%8C_%E9%9B%AA_isdy6q.png';
-                            
-                        }
-                        //雨のち曇り
-                        else if (weather2[13] === 214){
-                         //   noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
-                             document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87%E3%82%8A_jjnxbj.png';
-    
-                        }
-                         //雪のち曇り
-                         else if (weather2[13] === 217){
-                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
-                            document.getElementById("night_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1705024354/%E9%9B%AA_%E6%9B%87%E3%82%8A_bbuaqo.png';
-
-                        }
-
-                    //不明
-                        else{
-                            morning_OTENKI.innerHTML = "★";
-                        }
-
-                    
-                        //昼13時の気温出力
-                        temperature_noon.innerHTML =  temperature2[13] + "°C";
-                        //昼13時の降水確率を出力
-                        rainypercent_noon.innerHTML  =  probability[13] + "%";
-                    
-                    
-                    
-                    
-                    //昼の天気
-                        //快晴
-                        if(weather2[13] === 0 ){
-                          //morning_OTENKI.src =   'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';      
                        document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C_vhx0sw.png';
 
                           
                         }
                         //晴れだけど雲がでてる
                         else if(weather2[13] === 1){
-                           // .src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
+                           // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
                             document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867044/kumorinotihare_f29z7h.png';
                         }
                         //一部曇り
@@ -633,7 +507,7 @@
                             document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867042/%E6%99%B4%E3%82%8C%E3%81%AE%E3%81%A1%E3%81%8F%E3%82%82%E3%82%8A_e45q4m.png';
                         }            
                         //曇り
-                        else if( weather2[7] === 3){
+                        else if( weather2[13] === 3){
                            // noon_OTENKI.src = 'https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
                             document.getElementById("noon_OTENKI").src='https://res.cloudinary.com/dlfimibcq/image/upload/v1702867043/%E6%9B%87%E3%82%8A_wiwzvs.png';
 
@@ -723,10 +597,17 @@
 
                     //不明
                         else{
-                            night_OTENKI.innerHTML = "★";
+                            morning_OTENKI.innerHTML = "★";
                         }
-                        
-                        
+
+                    
+                        //昼13時の気温出力
+                        temperature_noon.innerHTML =  temperature2[13] + "°C";
+                        //昼13時の降水確率を出力
+                        rainypercent_noon.innerHTML  =  probability[13] + "%";
+                    
+                    
+            
                         
                         
                         
