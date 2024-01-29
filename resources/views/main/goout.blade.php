@@ -2545,7 +2545,9 @@
                                             //晴れ
                                             if(weather === 0 || weather === 1){
                                              // sampleweather.innerHTML = "☀"+temperature + "°C";
-                                              document.getElementById("sampleweather").innerHTML
+                                             {
+                                                document.getElementById("sampleweather").innerHTML = "☀  "+temperature + "°C";
+                                            }
                                             }
                                             //一部くもり
                                             else if(weather === 2){
